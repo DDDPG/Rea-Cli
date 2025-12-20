@@ -168,7 +168,7 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "SEL", values: "0", sectionId: "item" },
             { key: "IGUID", values: "{455A7CC8-0CE8-D049-9BEC-44911C9736A2}", sectionId: "item" },
             { key: "COMP", values: "1 1 0", sectionId: "item" },
-            { key: "NAME", values: "test_VAE_pross.mp3", sectionId: "item" },
+            { key: "NAME", values: "test_audio.mp3", sectionId: "item" },
             { key: "VOLPAN", values: "1 0 1 1", sectionId: "item" },
             { key: "SOFFS", values: "0", sectionId: "item" },
             { key: "PLAYRATE", values: "1.000 1 33 -65536 0 0.0023", sectionId: "item" },
@@ -180,7 +180,7 @@ export const RPP_STRUCTURE: RPPNode = {
               values: "MP3", 
               sectionId: "source",
               children: [
-                 { key: "FILE", values: "\"/path/to/project/audio/test_VAE_pross.mp3\" 1", sectionId: "source" }
+                 { key: "FILE", values: "\"/path/to/project/audio/test_audio.mp3\" 1", sectionId: "source" }
               ]
             },
             {
@@ -194,7 +194,7 @@ export const RPP_STRUCTURE: RPPNode = {
               ]
             },
             { key: "TAKE", values: "SEL", sectionId: "take" },
-            { key: "NAME", values: "\"test_VAE_pross reversed 001.wav\"", sectionId: "take" },
+            { key: "NAME", values: "\"test_audio.wav\"", sectionId: "take" },
             { key: "TAKEVOLPAN", values: "0 1 0", sectionId: "take" },
             { key: "SOFFS", values: "0", sectionId: "take" },
             { key: "PLAYRATE", values: "2 1 0 -1 0 0.0025", sectionId: "take" },
@@ -205,7 +205,7 @@ export const RPP_STRUCTURE: RPPNode = {
               values: "WAVE", 
               sectionId: "source",
               children: [
-                { key: "FILE", values: "\"Audio files/test_VAE_pross reversed 001.wav\"", sectionId: "source" }
+                { key: "FILE", values: "\"Audio files/test_audio.wav\"", sectionId: "source" }
               ]
             }
           ]

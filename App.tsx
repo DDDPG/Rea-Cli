@@ -320,7 +320,7 @@ const RPPNodeViewer: React.FC<{
           {/* Key */}
           <span 
             className={`${keyColorClass} font-bold ${node.sectionId ? 'hover:underline decoration-dotted cursor-pointer' : 'cursor-default opacity-80'}`}
-            onClick={handleKeyClick}
+            onClick={node.sectionId ? handleKeyClick : undefined}
             title={node.sectionId ? `Go to definition` : "Definition not found in API Reference"}
           >
             {node.key}
@@ -480,8 +480,8 @@ export default function App() {
             R
           </div>
           <div>
-            <h1 className="font-bold tracking-tight text-white">Reaper Parser</h1>
-            <p className="text-xs text-gray-500 font-mono">v1.1.0 Ref</p>
+            <h1 className="font-bold tracking-tight text-white">ReaperDoc</h1>
+            <p className="text-xs text-gray-500 font-mono">v0.1 dev</p>
           </div>
         </div>
         
@@ -533,7 +533,7 @@ export default function App() {
         <header className="md:hidden flex items-center justify-between p-4 border-b border-gray-800 bg-[#181818] z-20 sticky top-0">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-reaper-accent rounded flex items-center justify-center text-black font-bold text-sm">R</div>
-            <span className="font-bold">Reaper Parser</span>
+            <span className="font-bold">ReaperDoc</span>
           </div>
           <button onClick={() => setMobileMenuOpen(true)} className="p-2 text-gray-400">
             <Menu size={24} />
@@ -565,17 +565,29 @@ export default function App() {
           {activeTab === 'docs' && (
             <div className="h-full overflow-y-auto custom-scrollbar p-4 md:p-8 lg:px-12 max-w-7xl mx-auto w-full relative animate-in fade-in zoom-in-95 duration-200">
                {/* Controls Bar */}
-              <div className="sticky top-0 z-10 mb-8 -mx-4 px-4 py-3 bg-reaper-dark/95 backdrop-blur border-b border-gray-800 flex justify-between items-center shadow-lg">
-                 <div className="text-sm text-gray-400 hidden sm:block">
-                   Showing <span className="text-white font-mono">{filteredSections.reduce((acc, s) => acc + s.entries.length, 0)}</span> parameters
+              <div className="sticky top-0 z-20 mb-8 -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 bg-[#1e1e1e]/85 backdrop-blur-xl border-b border-white/5 flex justify-between items-center shadow-2xl transition-all">
+                 <div className="flex items-center gap-3">
+                   <div className="p-2 bg-reaper-accent/10 rounded-md text-reaper-accent">
+                     <Layers size={18} />
+                   </div>
+                   <div className="flex flex-col">
+                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Parameters</span>
+                     <span className="text-xl font-mono font-bold text-white leading-none">
+                       {filteredSections.reduce((acc, s) => acc + s.entries.length, 0)}
+                     </span>
+                   </div>
                  </div>
                  
                  <button 
                    onClick={() => setShowTodos(!showTodos)}
-                   className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-medium border transition-colors ${showTodos ? 'bg-reaper-panel text-reaper-accent border-reaper-accent' : 'bg-transparent text-gray-500 border-gray-700 hover:border-gray-500'}`}
+                   className={`group flex items-center gap-3 px-4 py-2 rounded-md text-xs font-bold uppercase tracking-wider border transition-all duration-300 ${
+                     showTodos 
+                       ? 'bg-reaper-accent/10 text-reaper-accent border-reaper-accent/50 shadow-[0_0_15px_rgba(0,179,134,0.2)]' 
+                       : 'bg-gray-800/50 text-gray-500 border-gray-700 hover:bg-gray-800 hover:text-gray-300'
+                   }`}
                  >
-                   <Filter size={12} />
-                   {showTodos ? 'Hide TODOs' : 'Show TODOs'}
+                   <div className={`w-2 h-2 rounded-full transition-all duration-300 ${showTodos ? 'bg-reaper-accent shadow-[0_0_8px_#00b386]' : 'bg-gray-600'}`} />
+                   {showTodos ? 'TODOs Visible' : 'TODOs Hidden'}
                  </button>
               </div>
 

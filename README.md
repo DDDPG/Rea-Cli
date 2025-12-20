@@ -1,20 +1,22 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ReaperDoc
 
-# Run and deploy your AI Studio app
+ReaperDoc is a personal compilation of the REAPER .RPP project file parameter mapping table. It aims to provide a comprehensive and interactive reference for understanding the structure and parameters of REAPER project files. You could visit github page of this repo for searching: [Online Demo]()
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Z2ElLkQ423CogY32NPD-aFtQvugHDBiM
+- **Interactive Project Structure**: Visualize the hierarchy of a .RPP file.
+- **Parameter Documentation**: Detailed explanations of various chunks and parameters.
+- **Search & Filter**: Quickly find specific parameters or sections.
 
-## Run Locally
+## Acknowledgements
 
-**Prerequisites:**  Node.js
+Special thanks to the **ReaTeam** for their extensive documentation, which provided significant support for this project:
+- [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions)
 
+## Contributing
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+This project is a work in progress. There are still some parameters whose specific meanings have not been fully documented or verified.
+
+If you have knowledge about these missing parameters or find any errors, your help is greatly appreciated!
+- **Issues**: Please submit an issue if you find a bug or have a question.
+- **Pull Requests**: PRs are welcome to add missing documentation or improve the app.

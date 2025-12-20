@@ -1,21 +1,21 @@
 import { DocSection } from './types';
 
 export const DOC_DATA: DocSection[] = [
-  {
-    id: "entry-point",
-    title: "Entry Point",
-    subtitle: "Python Usage",
-    description: "Basic usage of the reaper_parser library.",
-    entries: [
-      {
-        name: "Usage",
-        fields: [
-          { label: "Code", description: "from reaper_parser import parse_project, Project, Track, Item, Take\nproject = parse_project('path/to/file.RPP')" }
-        ],
-        tags: []
-      }
-    ]
-  },
+  // {
+  //   id: "entry-point",
+  //   title: "Entry Point",
+  //   subtitle: "Python Usage",
+  //   description: "Basic usage of the reaper_parser library.",
+  //   entries: [
+  //     {
+  //       name: "Usage",
+  //       fields: [
+  //         { label: "Code", description: "from reaper_parser import parse_project, Project, Track, Item, Take\nproject = parse_project('path/to/file.RPP')" }
+  //       ],
+  //       tags: []
+  //     }
+  //   ]
+  // },
   {
     id: "project",
     title: "<REAPER_PROJECT>",
@@ -98,9 +98,9 @@ export const DOC_DATA: DocSection[] = [
       { name: "INQ", fields: [{ label: "field 1", type: "int (bool)", description: "quantize midi" }, { label: "field 2", type: "int", description: "quantize to pos (-1=prev, 0=nearest, 1=next)" }, { label: "field 4", type: "float", description: "quantize to (fraction of beat)" }], tags: [], sourceFile: "reaper_parser/track.py" },
       { name: "NCHAN", fields: [{ label: "field 1", type: "int", description: "Number of track channels" }], tags: [], sourceFile: "reaper_parser/track.py" },
       { name: "FX", fields: [{ label: "field 1", type: "int", description: "track FX chain state", subFields: ["0 = bypassed", "1 = active"] }], tags: [], sourceFile: "reaper_parser/track.py" },
-      { name: "PERF", fields: [{ label: "field 1", type: "int (bitwise)", description: "Performance options", subFields: ["& 1 = prevent media buffering", "& 2 = prevent anticipative fx"] }], tags: [], sourceFile: "reaper_parser/track.py" },
-      { name: "AUXRECV", fields: [{ label: "field 1", type: "int", description: "source track index" }, { label: "field 2", type: "int", description: "mode (0=Post Fader, 1=Pre FX, 3=Pre Fader)" }, { label: "field 3", type: "float", description: "volume" }, { label: "field 4", type: "float", description: "pan" }, { label: "field 11", type: "int", description: "midi channels (source = val & 0x1F, dest = val // 32)" }], tags: [], sourceFile: "reaper_parser/track.py" },
-      { name: "MIDIOUT", fields: [{ label: "field 1", type: "int (bitwise)", description: "MIDI hardware output settings", subFields: ["device = floor(val / 32)", "channel = val & 0x1F"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "PERF", fields: [{ label: "field 1", type: "int (bitwise)", description: "Performance options", subFields: ["&1 = prevent media buffering", "&2 = prevent anticipative fx"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "AUXRECV", fields: [{ label: "field 1", type: "int", description: "source track index" }, { label: "field 2", type: "int", description: "mode (0=Post Fader, 1=Pre FX, 3=Pre Fader)" }, { label: "field 3", type: "float", description: "volume" }, { label: "field 4", type: "float", description: "pan" }, { label: "field 11", type: "int", description: "midi channels (source = val &0x1F, dest = val // 32)" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "MIDIOUT", fields: [{ label: "field 1", type: "int (bitwise)", description: "MIDI hardware output settings", subFields: ["device = floor(val / 32)", "channel = val &0x1F"] }], tags: [], sourceFile: "reaper_parser/track.py" },
       { name: "MAINSEND", fields: [{ label: "field 1", type: "int (bool)", description: "Master/Parent send enabled" }], tags: [], sourceFile: "reaper_parser/track.py" },
       { name: "HWOUT", fields: [{ label: "field 1", type: "int", description: "output index (bitfield)" }, { label: "field 3", type: "float", description: "volume" }, { label: "field 4", type: "float", description: "pan" }, { label: "field 9", type: "int", description: "automation mode" }], tags: [], sourceFile: "reaper_parser/track.py" },
       { name: "LOCK", fields: [{ label: "field 1", type: "int (bool)", description: "if locked track control" }], tags: [], sourceFile: "reaper_parser/track.py" },
@@ -124,7 +124,7 @@ export const DOC_DATA: DocSection[] = [
       { name: "LENGTH", fields: [{ label: "field 1", type: "float", description: "Item length, in seconds" }], tags: [], sourceFile: "reaper_parser/item.py" },
       { name: "LOOP", fields: [{ label: "field 1", type: "int (bool)", description: "Loop source" }], tags: [], sourceFile: "reaper_parser/item.py" },
       { name: "ALLTAKES", fields: [{ label: "field 1", type: "int (bool)", description: "Play all takes" }], tags: [], sourceFile: "reaper_parser/item.py" },
-      { name: "FADEIN", fields: [{ label: "field 1", type: "float", description: "fade envelope shape", subFields: ["single fade: 0-5 & 5.1", "crossfade: 0, 1.1, 2-5, 5.1"] }, { label: "field 2", type: "float", description: "fade length in seconds" }, { label: "field 6", type: "float", description: "fade curve (-1.0 to 1.0)" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "FADEIN", fields: [{ label: "field 1", type: "float", description: "fade envelope shape", subFields: ["single_fade: 0-5, 5.1", "crossfade: 0, 1.1, 2-5, 5.1"] }, { label: "field 2", type: "float", description: "fade length in seconds" }, { label: "field 6", type: "float", description: "fade curve (-1.0 to 1.0)" }], tags: [], sourceFile: "reaper_parser/item.py" },
       { name: "FADEOUT", fields: [{ label: "field 1", type: "float", description: "fade envelope shape" }, { label: "field 2", type: "float", description: "fade length in seconds" }, { label: "field 6", type: "float", description: "fade curve (-1.0 to 1.0)" }], tags: [], sourceFile: "reaper_parser/item.py" },
       { name: "MUTE", fields: [{ label: "field 1", type: "int (bool)", description: "item itself mute state" }, { label: "field 2", type: "int", description: "item project-scale solo state flag", subFields: ["0 - item is not soloed", "-1 - item is soloed with action", "1 - Another item in 'Solo exclusive' mode"] }], tags: [], sourceFile: "reaper_parser/item.py" },
       { name: "BEAT", fields: [{ label: "field 1", type: "int", description: "Item timebase", subFields: ["-1 = use track timebase", "0 = time", "1 = beats (position, length, rate)", "2 = beats (position only)", "3 = beats (auto-stretch)"] }], tags: [], sourceFile: "reaper_parser/item.py" },
