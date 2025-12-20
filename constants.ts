@@ -1,0 +1,241 @@
+import { DocSection } from './types';
+
+export const DOC_DATA: DocSection[] = [
+  {
+    id: "entry-point",
+    title: "Entry Point",
+    subtitle: "Python Usage",
+    description: "Basic usage of the reaper_parser library.",
+    entries: [
+      {
+        name: "Usage",
+        fields: [
+          { label: "Code", description: "from reaper_parser import parse_project, Project, Track, Item, Take\nproject = parse_project('path/to/file.RPP')" }
+        ],
+        tags: []
+      }
+    ]
+  },
+  {
+    id: "project",
+    title: "<REAPER_PROJECT>",
+    subtitle: "Project Settings",
+    description: "Source file: reaper_parser/project.py",
+    entries: [
+      { name: "<REAPER_PROJECT>", fields: [{ label: "Header", description: "Project root element containing version info" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "TITLE", fields: [{ label: "field 1", type: "string", description: "Project title" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "AUTHOR", fields: [{ label: "field 1", type: "string", description: "Project author" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "<NOTES>", isChunk: true, fields: [{ label: "chunk", description: "Project notes (multi-line text)" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "RIPPLE", fields: [{ label: "field 1", type: "int", description: "ripple mode", subFields: ["0 = off", "1 = per-track", "2 = all-tracks"] }, { label: "field 2", type: "int", description: "ripple additional flags", subFields: ["0 = per-track", "1 = all-tracks", "+2 = Enable 'Ripple edit per-track affects each track lane separately'", "+4 = Enable 'Ripple edit when editing media item edges'"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "AUTOXFADE", fields: [{ label: "field 1", type: "int", description: "auto crossfade mode (default 192)", subFields: ["+1 = Enable 'Auto-crossfade media items when editing'", "+2 = Enable 'Trim content behind media items when editing'", "-64 = Enable 'Always trim content behind razor edits'"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MIXERUIFLAGS", fields: [{ label: "field 1", type: "int", description: "mixer cross-track UI flags", subFields: ["+1 = Enable 'Show normal top level tracks'", "+2 = Enable 'Show folders'", "+4 = Enable 'Group folders to left'", "+8 = Enable 'Show tracks that have receives'", "+16 = Enable 'Group tracks that have receives to left'", "+32 = DISABLE 'Show tracks that are in folders'", "+64 = DISABLE 'Auto-arrange tracks in Mixer'"] }, { label: "field 2", type: "int", description: "mixer in-track UI flags (0 default)", subFields: ["+1 = DISABLE 'Show multiple rows of tracks'", "+2 = Enable 'Show maximum rows even when tracks would fit in fewer rows'", "+4 = Enable 'Show on right side of mixer' for master track", "+16 = Enable 'Show FX inserts'", "+32 = Enable 'Show sends'", "+64 = Enable 'Show track icons in mixer'", "+128 = Enable 'Show FX parameters'", "+256 = DISABLE 'Show in mixer' for master track"] }], tags: ["TODO"], sourceFile: "reaper_parser/project.py" },
+      { name: "PEAKGAIN", fields: [{ label: "field 1", type: "float", description: "waveform scaling ratio (1.0 = normal)" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "PANLAW", fields: [{ label: "field 1", type: "float", description: "project default pan law gain (1.0 = 0dB)" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "PANMODE", fields: [{ label: "field 1", type: "int", description: "project default pan mode", subFields: ["0 = stereo balance", "3 = stereo pan", "5 = dual pan", "6 = REAPER 3.x balance"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "CURSOR", fields: [{ label: "field 1", type: "float", description: "cursor vertical position in seconds" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "VZOOMEX", fields: [{ label: "field 1", type: "float", description: "main window vertical zoom level (1.0 = normal)" }, { label: "field 2", type: "int", description: "main window start offset (NOT CLEAR for units, maybe pixels?)" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "RECMODE", fields: [{ label: "field 1", type: "int", description: "record mode", subFields: ["1 - normal", "2 - time selection auto punch", "0 - auto-punch selected items"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "SMPTESYNC", fields: [
+          { label: "field 1", type: "int", description: "time sync state (default 0)", subFields: ["+1 - enable 'Enable synchronization to timecode'", "+4 - enable 'Start playback on valid timecode when stopped'", "+8 - DISABLE 'Display flashing notification window when waiting for sync for recording'", "+16 - DISABLE 'Playback'", "+32 - DISABLE 'Record'", "+64 - Choose 'Resync recording' mode for field 10", "+128 - Choose 'Stop recording' mode for field 11", "+256 - When choose 'MTC: All Inputs(4159)' for field 7, enable preset '24/30 fps MTC is 23.976ND/29.97ND'", "+512 - When choose 'MTC: All Inputs(4159)' for field 7, enable preset '24/30 fps MTC is 24/30 fps'"] },
+          { label: "field 2", type: "float", description: "LTC framerate" },
+          { label: "field 3", type: "int", description: "Re-synchronize if drift exceeds N ms (0 = never)" },
+          { label: "field 4", type: "int", description: "Skip/drop frames if drift exceeds N ms (0 = never)" },
+          { label: "field 5", type: "int", description: "Synchronize by seeking ahead: N ms (1000 = default)" },
+          { label: "field 6", type: "int", description: "Freewheel on missing time code for up to: N ms (0 = forever)" },
+          { label: "field 7", type: "int", description: "Time sync use input: <input_id>", subFields: ["0 - LTC:Loopback Left", "1 - LTC:Loopback Right", "4223 - SPP:All Inputs", "4159 - MTC: All Inputs"] },
+          { label: "field 8", type: "float", description: "Offset incoming timecode by: N seconds (can be negative)" },
+          { label: "field 10", type: "int", description: "{Stop/Resync recording} if drift exceeds: N ms (0 = never)" },
+          { label: "field 11", type: "int", description: "{Stop/Resync recording} on lack of time code after: N ms (0 = never)" }
+      ], tags: ["TODO"], sourceFile: "reaper_parser/project.py" },
+      { name: "LOOP", fields: [{ label: "field 1", type: "int (bool)", description: "if looping is enabled" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "RECORD_PATH", fields: [{ label: "field 1", type: "string", description: "Record audio storage path (if outside, use absolute path)" }, { label: "field 2", type: "string", description: "Secondary recording path (blank for none)" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "RENDER_PATTERN", fields: [{ label: "field 1", type: "string", description: "'File name' in project render menu, including '$' aliases" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "COMP", fields: [{ label: "field 1", type: "int", description: "comp unique ID" }, { label: "field 2", type: "string", description: "comp alias name" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "TEMPO", fields: [{ label: "field 1", type: "float", description: "tempo in BPM" }, { label: "field 2", type: "int", description: "time signature numerator" }, { label: "field 3", type: "int", description: "time signature denominator" }, { label: "field 4", type: "int", description: "bpm basis (1=1/8, 0=1/4, 2=1/2, 3=1/4 dotted, 4=1/8 dotted, 5=1/2 dotted)" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "PLAYRATE", fields: [{ label: "field 1", type: "float", description: "playback rate (1.0 = normal)" }, { label: "field 2", type: "int (bool)", description: "preserve pitch" }, { label: "field 3", type: "float", description: "minimum rate" }, { label: "field 4", type: "float", description: "maximum rate" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "SELECTION", fields: [{ label: "field 1", type: "float", description: "time selection start in seconds" }, { label: "field 2", type: "float", description: "time selection end in seconds" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "SELECTION2", fields: [{ label: "field 1", type: "float", description: "loop start in seconds" }, { label: "field 2", type: "float", description: "loop end in seconds" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTERAUTOMODE", fields: [{ label: "field 1", type: "int", description: "Automation mode", subFields: ["0 = Trim/Read", "1 = Read", "2 = Touch", "3 = Write", "4 = Latch", "5 = Latch Preview"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTERTRACKHEIGHT", fields: [{ label: "field 1", type: "int", description: "height in pixels" }, { label: "field 2", type: "int", description: "additional height info" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTERMUTESOLO", fields: [{ label: "field 1", type: "int (bool)", description: "mute/solo state", subFields: ["0 = normal", "1 = muted", "2 = soloed", "3 = muted+soloed", "when MONO activated, +4 to the value (e.g. muted+mono = 5)"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTER_VOLUME", fields: [{ label: "field 1", type: "float", description: "volume trim (20*log_10(x))" }, { label: "field 2", type: "float", description: "pan (-1.0L to 1.0R)" }, { label: "field 3", type: "float", description: "override track pan law gain" }, { label: "field 4", type: "float", description: "pan(L) when PANMODE = 6" }, { label: "field 5", type: "float", description: "pan(R) when PANMODE = 6" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTER_PANMODE", fields: [{ label: "field 1", type: "int", description: "master track pan mode", subFields: ["-1 = project default", "3 = mono pan", "5 = stereo pan", "6 = dual pan"] }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTER_FX", fields: [{ label: "field 1", type: "int (bool)", description: "FX active" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MASTER_SEL", fields: [{ label: "field 1", type: "int (bool)", description: "Is the master track selected" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "MARKER", fields: [{ label: "field 1", type: "int", description: "marker index" }, { label: "field 2", type: "float", description: "position in seconds" }, { label: "field 3", type: "string", description: "name" }, { label: "field 4", type: "int", description: "sel status", subFields: ["0 = unselected marker", "1 = unselected region", "+8 = selected"] }, { label: "field 8", type: "GUID", description: "marker GUID" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "<MASTERFXLIST>", isChunk: true, fields: [{ label: "chunk", description: "Master track FX chain container" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "<MASTERPLAYSPEEDENV>", isChunk: true, fields: [{ label: "chunk", description: "Master playrate envelope" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "<TEMPOENVEX>", isChunk: true, fields: [{ label: "chunk", description: "Master Tempo envelope" }], tags: [], sourceFile: "reaper_parser/project.py" },
+      { name: "<PROJBAY>", isChunk: true, fields: [{ label: "chunk", description: "NOT CLEAR" }], tags: ["TODO"], sourceFile: "reaper_parser/project.py" },
+      { name: "<EXTENSIONS>", isChunk: true, fields: [{ label: "chunk", description: "Extension data" }], tags: ["TODO"], sourceFile: "reaper_parser/project.py" }
+    ]
+  },
+  {
+    id: "track",
+    title: "<TRACK>",
+    subtitle: "Track Definition",
+    description: "Source file: reaper_parser/track.py",
+    entries: [
+      { name: "TRACK", fields: [{ label: "field 1", type: "string", description: "Track unique identifier" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "NAME", fields: [{ label: "field 1", type: "string", description: "Track name" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "PEAKCOL", fields: [{ label: "field 1", type: "int", description: "Peak colour (RGB integer)" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "BEAT", fields: [{ label: "field 1", type: "int", description: "Track timebase", subFields: ["-1 = project default"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "AUTOMODE", fields: [{ label: "field 1", type: "int", description: "Automation mode", subFields: ["0 = Trim/Read", "1 = Read", "2 = Touch", "3 = Write", "4 = Latch"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "PANMODE", fields: [{ label: "field 1", type: "int", description: "track pan mode", subFields: ["-1 = project default", "3 = mono pan", "5 = stereo pan", "6 = dual pan"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "PANLAWFLAGS", fields: [{ label: "field 1", type: "int", description: "Pan law mode", subFields: ["1 = Sine", "2 = Linear", "3 = Hybrid"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "VOLPAN", fields: [{ label: "field 1", type: "float", description: "volume trim" }, { label: "field 2", type: "float", description: "pan" }, { label: "field 3", type: "float", description: "override track pan law gain" }, { label: "field 4", type: "float", description: "pan(L) dual" }, { label: "field 5", type: "float", description: "pan(R) dual" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "MUTESOLO", fields: [{ label: "field 1", type: "int (bool)", description: "mute" }, { label: "field 2", type: "int", description: "solo", subFields: ["0 = no", "1 = solo", "2 = solo-in-place"] }, { label: "field 3", type: "int (bool)", description: "solo defeat" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "IPHASE", fields: [{ label: "field 1", type: "int (bool)", description: "Invert phase" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "PLAYOFFS", fields: [{ label: "field 1", type: "float", description: "play offset length (unit depends on field 2)" }, { label: "field 2", type: "int", description: "play offset mode", subFields: ["0 = ms", "1 = off", "2 = samples"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "ISBUS", fields: [{ label: "field 1", type: "int", description: "folder state", subFields: ["0 = regular track", "1 = folder parent", "2 = last in folder"] }, { label: "field 2", type: "int", description: "track 'indentation' increase" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "BUSCOMP", fields: [{ label: "field 1", type: "int", description: "collapse state in Arrange" }, { label: "field 2", type: "int", description: "collapse state in Mixer" }, { label: "field 3", type: "int", description: "collapse state in track wiring" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "SHOWINMIX", fields: [{ label: "field 1", type: "int (bool)", description: "show in mixer" }, { label: "field 2", type: "float", description: "relative vertical position for 'Sends'-'Fader'" }, { label: "field 3", type: "float", description: "relative vertical position for 'FX'-'Sends'" }, { label: "field 4", type: "int (bool)", description: "show in track list" }, { label: "field 9", type: "int (bool)", description: "pin track" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "FIXEDLANES", fields: [{ label: "field 1", type: "int", description: "bitfield flags", subFields: ["&2 = 'Create comp areas...' DISABLED", "&8 = 'Big lanes' enabled", "&32 = 'Hide all buttons' enabled"] }, { label: "field 2", type: "int (bool)", description: "Allow editing source media while comping" }, { label: "field 5", type: "int (bitfield)", description: "recording behavior" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "SEL", fields: [{ label: "field 1", type: "int (bool)", description: "Is the track selected" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "REC", fields: [{ label: "field 1", type: "int (bool)", description: "armed" }, { label: "field 3", type: "int", description: "monitor", subFields: ["0 = off", "1 = on", "2 = auto"] }, { label: "field 4", type: "int", description: "record mode", subFields: ["0 = input", "1 = output (stereo)", "2 = disable(monitor)", "3 = output (stereo, latency comp)", "4 = output (MIDI)", "5 = output (mono)", "6 = output (mono latency comp)", "7 = MIDI overdub", "8 = MIDI replace", "9 = MIDI touch replace"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "VU", fields: [{ label: "field 1", type: "int", description: "Track VU meter settings", subFields: ["0 = Stereo peaks", "2 = Multichannel peaks", "4 = Stereo RMS", "8 = Combined RMS", "12 = LUFS-M", "16 = LUFS-S (max)", "20 = LUFS-S (current)"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "TRACKHEIGHT", fields: [{ label: "field 1", type: "int", description: "height in pixels" }, { label: "field 3", type: "int (bool)", description: "if locked height" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "INQ", fields: [{ label: "field 1", type: "int (bool)", description: "quantize midi" }, { label: "field 2", type: "int", description: "quantize to pos (-1=prev, 0=nearest, 1=next)" }, { label: "field 4", type: "float", description: "quantize to (fraction of beat)" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "NCHAN", fields: [{ label: "field 1", type: "int", description: "Number of track channels" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "FX", fields: [{ label: "field 1", type: "int", description: "track FX chain state", subFields: ["0 = bypassed", "1 = active"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "PERF", fields: [{ label: "field 1", type: "int (bitwise)", description: "Performance options", subFields: ["& 1 = prevent media buffering", "& 2 = prevent anticipative fx"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "AUXRECV", fields: [{ label: "field 1", type: "int", description: "source track index" }, { label: "field 2", type: "int", description: "mode (0=Post Fader, 1=Pre FX, 3=Pre Fader)" }, { label: "field 3", type: "float", description: "volume" }, { label: "field 4", type: "float", description: "pan" }, { label: "field 11", type: "int", description: "midi channels (source = val & 0x1F, dest = val // 32)" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "MIDIOUT", fields: [{ label: "field 1", type: "int (bitwise)", description: "MIDI hardware output settings", subFields: ["device = floor(val / 32)", "channel = val & 0x1F"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "MAINSEND", fields: [{ label: "field 1", type: "int (bool)", description: "Master/Parent send enabled" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "HWOUT", fields: [{ label: "field 1", type: "int", description: "output index (bitfield)" }, { label: "field 3", type: "float", description: "volume" }, { label: "field 4", type: "float", description: "pan" }, { label: "field 9", type: "int", description: "automation mode" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "LOCK", fields: [{ label: "field 1", type: "int (bool)", description: "if locked track control" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "FREEMODE", fields: [{ label: "field 1", type: "int", description: "Free positioning mode", subFields: ["0 = disabled", "1 = FIP", "2 = FIL"] }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "ITEMLANES", fields: [{ label: "field 1", type: "int", description: "lane count in current track" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "<FXCHAIN>", isChunk: true, fields: [{ label: "chunk", description: "Track FX chain" }], tags: [], sourceFile: "reaper_parser/track.py" },
+      { name: "<MIDINOTENAMES>", isChunk: true, fields: [{ label: "chunk", description: "MIDI note name mappings" }], tags: [], sourceFile: "reaper_parser/extras.py" },
+      { name: "<FREEZE>", isChunk: true, fields: [{ label: "chunk", description: "Freeze state" }], tags: [], sourceFile: "reaper_parser/extras.py" },
+      { name: "<ITEM>", isChunk: true, fields: [{ label: "chunk", description: "Media items on track" }], tags: [], sourceFile: "reaper_parser/track.py" }
+    ]
+  },
+  {
+    id: "item",
+    title: "<ITEM>",
+    subtitle: "Media Item",
+    description: "Source file: reaper_parser/item.py",
+    entries: [
+      { name: "Item Properties", fields: [{ label: "is_midi_item", type: "bool", description: "True if this is a MIDI item" }, { label: "is_audio_item", type: "bool", description: "True if this is an audio item" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "POSITION", fields: [{ label: "field 1", type: "float", description: "Position on the timeline, in seconds" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "SNAPOFFS", fields: [{ label: "field 1", type: "float", description: "Snap offset, in seconds" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "LENGTH", fields: [{ label: "field 1", type: "float", description: "Item length, in seconds" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "LOOP", fields: [{ label: "field 1", type: "int (bool)", description: "Loop source" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "ALLTAKES", fields: [{ label: "field 1", type: "int (bool)", description: "Play all takes" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "FADEIN", fields: [{ label: "field 1", type: "float", description: "fade envelope shape", subFields: ["single fade: 0-5 & 5.1", "crossfade: 0, 1.1, 2-5, 5.1"] }, { label: "field 2", type: "float", description: "fade length in seconds" }, { label: "field 6", type: "float", description: "fade curve (-1.0 to 1.0)" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "FADEOUT", fields: [{ label: "field 1", type: "float", description: "fade envelope shape" }, { label: "field 2", type: "float", description: "fade length in seconds" }, { label: "field 6", type: "float", description: "fade curve (-1.0 to 1.0)" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "MUTE", fields: [{ label: "field 1", type: "int (bool)", description: "item itself mute state" }, { label: "field 2", type: "int", description: "item project-scale solo state flag", subFields: ["0 - item is not soloed", "-1 - item is soloed with action", "1 - Another item in 'Solo exclusive' mode"] }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "BEAT", fields: [{ label: "field 1", type: "int", description: "Item timebase", subFields: ["-1 = use track timebase", "0 = time", "1 = beats (position, length, rate)", "2 = beats (position only)", "3 = beats (auto-stretch)"] }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "SEL", fields: [{ label: "field 1", type: "int (bool)", description: "Is the item selected" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "YPOS", fields: [{ label: "field 1", type: "float", description: "Item lane relative position" }, { label: "field 2", type: "float", description: "Item lane height" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "IGUID", fields: [{ label: "field 1", type: "GUID", description: "Item unique identifier" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "IID", fields: [{ label: "field 1", type: "int", description: "Deprecated item ID (pre-v6.54)" }], tags: ["DEPRECATED"], sourceFile: "reaper_parser/item.py" },
+      { name: "COMP", fields: [{ label: "field 1", type: "int", description: "comp global index" }, { label: "field 2", type: "int", description: "active part index for take within the comp" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "NAME", fields: [{ label: "field 1", type: "string", description: "First take name" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "VOLPAN", fields: [{ label: "field 1", type: "float", description: "item trim/volume (gain, 1.0=0dB)" }, { label: "field 2", type: "float", description: "pan (-1.0 to 1.0)" }, { label: "field 3", type: "float", description: "take volume" }, { label: "field 4", type: "float", description: "pan law" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "SOFFS", fields: [{ label: "field 1", type: "float", description: "Take slip offset (source start time)" }, { label: "field 2", type: "float", description: "Doubled slip offset", tags: ["MIDI"] }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "PLAYRATE", fields: [{ label: "field 1", type: "float", description: "playback rate" }, { label: "field 2", type: "int", description: "preserve pitch" }, { label: "field 4", type: "int", description: "pitch shift mode" }, { label: "field 5", type: "int", description: "stretch marker fade mode" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "CHANMODE", fields: [{ label: "field 1", type: "int", description: "channel mode", subFields: ["0 = normal", "1 = rev stereo", "3 = mono(L)", "4 = mono(R)", "5-194 = Mono (3-128)", "67-257 = Stereo (1-128)"] }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "GUID", fields: [{ label: "field 1", type: "GUID", description: "Take unique identifier" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "TKM", fields: [{ label: "field 1", type: "float", description: "position within take" }, { label: "field 2", type: "string", description: "name" }, { label: "field 3", type: "int", description: "color code" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "SM", fields: [{ label: "Multiple", description: "Stretch marker data (position/timing)" }], tags: ["AUDIO"], sourceFile: "reaper_parser/item.py" },
+      { name: "TMINFO", fields: [{ label: "field 1", type: "int", description: "Item source sample rate for transient markers" }], tags: ["AUDIO"], sourceFile: "reaper_parser/item.py" },
+      { name: "TM", fields: [{ label: "field 1", type: "int", description: "Distance in samples to first transient guide" }], tags: ["AUDIO"], sourceFile: "reaper_parser/item.py" },
+      { name: "<SOURCE>", isChunk: true, fields: [{ label: "chunk", description: "Media source information" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "COLOR", fields: [{ label: "field 1", type: "int", description: "Item color (RGB integer)" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "RESOURCEFN", fields: [{ label: "field 1", type: "string", description: "Resource file name" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "IMGRESOURCEFLAGS", fields: [{ label: "field 1", type: "int", description: "Image resource flags", subFields: ["0 - Do not display image", "1 - Center/tile image", "3 - Stretch image/text", "5 - Full height image", "+8 - Word wrap text"] }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "GROUP", fields: [{ label: "field 1", type: "int", description: "Group ID" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "FADEFLAG", fields: [{ label: "field 1", type: "int", description: "if item enables 'No autofades'" }], tags: [], sourceFile: "reaper_parser/item.py" },
+      { name: "FADELPF", fields: [{ label: "field 1", type: "int (bool)", description: "if enable fade low pass filter" }], tags: [], sourceFile: "reaper_parser/item.py" }
+    ]
+  },
+  {
+    id: "take",
+    title: "Take",
+    subtitle: "Take Definition",
+    description: "Definition for Takes within an Item. Source file: reaper_parser/take.py",
+    entries: [
+      { name: "TAKE", fields: [{ label: "params", description: "SEL (if selected), NULL (if null take)" }], tags: [] },
+      { name: "NAME", fields: [{ label: "field 1", type: "string", description: "Take name" }], tags: [] },
+      { name: "TAKEVOLPAN", fields: [{ label: "field 1", type: "float", description: "pan (-1.0 to 1.0)" }, { label: "field 2", type: "float", description: "take volume" }, { label: "field 3", type: "float", description: "override track pan law gain" }], tags: [] },
+      { name: "SOFFS", fields: [{ label: "field 1", type: "float", description: "slip offset (source start time)" }], tags: [] },
+      { name: "GUID", fields: [{ label: "field 1", type: "GUID", description: "Take unique identifier" }], tags: [] },
+      { name: "<SOURCE>", isChunk: true, fields: [{ label: "chunk", description: "Media source information" }], tags: [] },
+      { name: "<TAKEFX>", isChunk: true, fields: [{ label: "chunk", description: "Take FX chain" }], tags: [] }
+    ]
+  },
+  {
+    id: "source",
+    title: "<SOURCE>",
+    subtitle: "Media Source",
+    description: "Item Source and MIDI Source definitions. Source file: reaper_parser/take.py",
+    entries: [
+      { name: "SOURCE", fields: [{ label: "field 1", type: "string", description: "Media type (WAVE, MP3, MIDI, etc.)" }], tags: [] },
+      { name: "FILE", fields: [{ label: "field 1", type: "string", description: "File path" }], tags: ["AUDIO"] },
+      { name: "HASDATA", fields: [{ label: "field 1", type: "int (bool)", description: "Does the item have any MIDI data" }, { label: "field 2", type: "int", description: "PPQ resolution in ticks" }], tags: ["MIDI"] },
+      { name: "IGNTEMPO", fields: [{ label: "field 1", type: "int (bool)", description: "Ignore project tempo on/off" }, { label: "field 2", type: "float", description: "Tempo used to override project tempo" }], tags: ["MIDI"] },
+      { name: "VELLANE", fields: [{ label: "field 1", type: "int", description: "Lane type", subFields: ["-1 = velocity", "0-119 = CC #0 - CC #119", "128 = pitch bend", "129 = program", "133 = sysex"] }, { label: "field 2", type: "int", description: "Height in MIDI editor" }], tags: ["MIDI"] },
+      { name: "BANKPROGRAMFILE", fields: [{ label: "field 1", type: "string", description: "Path to ReaBank file" }], tags: ["MIDI"] },
+      { name: "GUID", fields: [{ label: "field 1", type: "GUID", description: "Take unique identifier (within SOURCE block)" }], tags: ["MIDI"] },
+      { name: "e/E", fields: [{ label: "Tag", description: "e = selected, E = not selected" }, { label: "field 1", type: "hex", description: "Offset (ticks)" }, { label: "field 2", type: "hex", description: "MIDI status byte" }, { label: "field 3", type: "hex", description: "Data1" }, { label: "field 4", type: "hex", description: "Data2" }], tags: ["MIDI"] },
+      { name: "<X>/<x>", isChunk: true, fields: [{ label: "Tag", description: "x = selected, X = not selected" }, { label: "children", description: "Base64 encoded SysEx data" }], tags: ["MIDI"] },
+      { name: "EVTFILTER", fields: [{ label: "field 1", type: "int", description: "Channel checkbox mask" }, { label: "field 2", type: "int", description: "Event type" }], tags: ["MIDI"] },
+      { name: "CFGEDITVIEW", fields: [{ label: "field 1", type: "list", description: "MIDI editor view configuration" }], tags: ["MIDI"] },
+      { name: "CFGEDIT", fields: [{ label: "field 2", type: "int (bool)", description: "Sync editor transport" }, { label: "field 6", type: "int", description: "MIDI editor view mode" }], tags: ["MIDI"] }
+    ]
+  },
+  {
+    id: "fx",
+    title: "FX Chains",
+    subtitle: "Plugins",
+    description: "Definitions for FX Chains (Track/Take/Master) and Plugins.",
+    entries: [
+      { name: "SHOW", fields: [{ label: "field 1", type: "int", description: "index of an FX currently open in the chain (1-based)" }], tags: [], sourceFile: "reaper_parser/fx.py" },
+      { name: "LASTSEL", fields: [{ label: "field 1", type: "int", description: "Index of selected plugin (zero based)" }], tags: [], sourceFile: "reaper_parser/fx.py" },
+      { name: "DOCKED", fields: [{ label: "field 1", type: "int (bool)", description: "if FX chain window is docked" }], tags: [], sourceFile: "reaper_parser/fx.py" },
+      { name: "BYPASS", fields: [{ label: "field 1", type: "int (bool)", description: "bypassed", subFields: ["0 = active", "1 = bypassed"] }], tags: [], sourceFile: "reaper_parser/fx.py" },
+      { name: "<VST>/<AU>/etc", isChunk: true, fields: [{ label: "param 0", type: "string", description: "plugin display name" }, { label: "param 1", type: "string", description: "plugin file name" }], tags: [], sourceFile: "reaper_parser/fx.py" },
+      { name: "WET", fields: [{ label: "field 1", type: "float", description: "wet amount (0.0 to 1.0)" }, { label: "field 2", type: "int (bool)", description: "delta solo" }], tags: [], sourceFile: "reaper_parser/fx.py" },
+      { name: "FXID", fields: [{ label: "field 1", type: "GUID", description: "FX unique identifier" }], tags: [], sourceFile: "reaper_parser/fx.py" }
+    ]
+  },
+  {
+    id: "envelope",
+    title: "Envelopes",
+    subtitle: "Automation",
+    description: "Automation Envelope definitions.",
+    introList: {
+      title: "Supported Envelope Types",
+      items: [
+        { label: "VOLENV", description: "Track (pre FX)/Take volume (0.0 to 2.0)" },
+        { label: "VOLENV2", description: "Track (post FX) volume (0.0 to 2.0)" },
+        { label: "VOLENV3", description: "Track trim volume (0 to 2)" },
+        { label: "PANENV", description: "Track (pre FX)/Take pan (-1.0 to 1.0)" },
+        { label: "PANENV2", description: "Track (post FX) pan (-1.0 to 1.0)" },
+        { label: "DUALPANENVL", description: "Track pan (left) (pre-FX) (-1 to 1) in 'Dual pan' pan mode" },
+        { label: "DUALPANENV", description: "Track pan (right) (pre-FX) (-1 to 1) in 'Dual pan' pan mode" },
+        { label: "DUALPANENVL2", description: "Track pan (left) (-1 to 1) in 'Dual pan' pan mode" },
+        { label: "DUALPANENV2", description: "Track pan (right) (-1 to 1) in 'Dual pan' pan mode" },
+        { label: "WIDTHENV", description: "Track (pre FX) stereo width (-1 to 1) in 'Stereo pan' pan mode" },
+        { label: "WIDTHENV2", description: "Track stereo width (-1 to 1) in 'Stereo pan' pan mode" },
+        { label: "MUTEENV", description: "Track mute (0.0 to 1.0)" },
+        { label: "AUXVOLENV", description: "Track send volume (0.0 to 2.0)" },
+        { label: "AUXPANENV", description: "Track sendpan (-1.0 to 1.0)" },
+        { label: "AUXMUTEENV", description: "Track send mute (0.0 to 1.0)" },
+        { label: "PARMENV", description: "Parameter modulation envelope" }
+      ]
+    },
+    entries: [
+      { name: "EGUID", fields: [{ label: "field 1", type: "GUID", description: "Envelope unique identifier" }], tags: [], sourceFile: "reaper_parser/envelope.py" },
+      { name: "ACT", fields: [{ label: "field 1", type: "int (bool)", description: "active/bypass" }], tags: [], sourceFile: "reaper_parser/envelope.py" },
+      { name: "VIS", fields: [{ label: "field 1", type: "int (bool)", description: "visible in arrange" }, { label: "field 2", type: "int (bool)", description: "visible in envelope lane" }], tags: [], sourceFile: "reaper_parser/envelope.py" },
+      { name: "LANEHEIGHT", fields: [{ label: "field 1", type: "int", description: "envelope lane height in pixels" }], tags: [], sourceFile: "reaper_parser/envelope.py" },
+      { name: "ARM", fields: [{ label: "field 1", type: "int (bool)", description: "armed for recording" }], tags: [], sourceFile: "reaper_parser/envelope.py" },
+      { name: "DEFSHAPE", fields: [{ label: "field 1", type: "int", description: "default point shape", subFields: ["0 = linear", "1 = square", "5 = bezier"] }, { label: "field 2", type: "float", description: "default tension" }], tags: [], sourceFile: "reaper_parser/envelope.py" },
+      { name: "PT", fields: [{ label: "field 1", type: "float", description: "time position in seconds" }, { label: "field 2", type: "float", description: "value" }, { label: "field 3", type: "int", description: "point shape" }, { label: "field 4", type: "float", description: "tension" }], tags: [], sourceFile: "reaper_parser/envelope.py" }
+    ]
+  }
+];
