@@ -20,3 +20,11 @@ This project is a work in progress. There are still some parameters whose specif
 If you have knowledge about these missing parameters or find any errors, your help is greatly appreciated!
 - **Issues**: Please submit an issue if you find a bug or have a question.
 - **Pull Requests**: PRs are welcome to add missing documentation or improve the app.
+
+## Reviewed parameter updates
+
+The reference includes 16 corrected entries and 34 supplemental entries. Field notes distinguish REAPER 7.48/macOS API and save checks from structural evidence; unresolved meanings remain marked as unknown. Supporting source material and experimental records are kept locally and are not part of this repository.
+
+The online demo uses the same definitions as the source. Pushes to `main` build and deploy through GitHub Pages.
+
+Validation: `npm run check`, then `npm run build`.

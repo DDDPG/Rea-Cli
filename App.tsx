@@ -21,9 +21,13 @@ import {
   Code2, 
   Activity 
 } from 'lucide-react';
-import { DOC_DATA } from './constants';
+import { DOC_DATA as BASELINE_DOC_DATA } from './constants';
+import { SUPPLEMENT_DATA } from './supplementData';
 import { RPP_STRUCTURE } from './rppStructure';
 import { DocEntry, DocSection, RPPNode, InfoBlockItem } from './types';
+
+// Reviewed corrections live in constants.ts; supplemental entries retain separate sections.
+const DOC_DATA: DocSection[] = [...BASELINE_DOC_DATA, ...SUPPLEMENT_DATA];
 
 // --- Components ---
 
@@ -180,7 +184,7 @@ const EntryCard: React.FC<{ entry: DocEntry; showTodos: boolean; highlight?: boo
   useEffect(() => {
     if (highlight) {
       if (cardRef.current) {
-         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+         cardRef.current.scrollIntoView({ behavior: 'auto', block: 'start' });
          // Optional: temporary highlight animation
          const timer = setTimeout(() => {
             onHighlightEnd && onHighlightEnd();
@@ -200,6 +204,7 @@ const EntryCard: React.FC<{ entry: DocEntry; showTodos: boolean; highlight?: boo
   return (
     <div 
       ref={cardRef}
+      style={{ scrollMarginTop: 110 }}
       className={`mb-4 border rounded-lg transition-all duration-300 ${highlight ? 'ring-2 ring-reaper-accent shadow-[0_0_20px_rgba(0,179,134,0.2)]' : ''} bg-reaper-panel/40 border-gray-800`}
     >
       <div 
@@ -383,6 +388,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showTodos, setShowTodos] = useState(true);
   const [highlightedParam, setHighlightedParam] = useState<string | null>(null);
+  const docsScrollRef = useRef<HTMLDivElement>(null);
 
   // Calculate documented keys for lookup
   const documentedKeys = useMemo(() => {
@@ -443,7 +449,17 @@ export default function App() {
 
   const handleStructureNavigation = (key: string, contextId: string) => {
     setActiveTab('docs');
-    setActiveSection(contextId);
+    setSearchQuery('');
+    const hasKey = (section: DocSection) => section.entries.some(entry =>
+      entry.name.split('/').some(part => part.trim().replace(/[<>]/g, '') === key)
+    );
+    const baselineSection = BASELINE_DOC_DATA.find(section => section.id === contextId);
+    const supplementSection = SUPPLEMENT_DATA.find(section =>
+      section.id === `supplement-${contextId}` && hasKey(section)
+    );
+    const targetId = baselineSection && hasKey(baselineSection)
+      ? contextId : supplementSection?.id ?? contextId;
+    setActiveSection(targetId);
     
     // Check if exact key exists or if we should just go to the section
     // If it's an envelope type (e.g. PANENV), and we have a generic entry for it, try to find match
@@ -493,7 +509,10 @@ export default function App() {
                 type="text" 
                 placeholder="Search anything (names, tags, fields)..." 
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  docsScrollRef.current?.scrollTo({ top: 0 });
+                }}
                 className="w-full bg-reaper-panel border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-reaper-accent focus:ring-1 focus:ring-reaper-accent transition-all placeholder-gray-600"
               />
             </div>
@@ -563,7 +582,7 @@ export default function App() {
           
           {/* View: DOCS */}
           {activeTab === 'docs' && (
-            <div className="h-full overflow-y-auto custom-scrollbar p-4 md:p-8 lg:px-12 max-w-7xl mx-auto w-full relative animate-in fade-in zoom-in-95 duration-200">
+            <div ref={docsScrollRef} className="h-full overflow-y-auto custom-scrollbar p-4 md:p-8 lg:px-12 max-w-7xl mx-auto w-full relative animate-in fade-in zoom-in-95 duration-200">
                {/* Controls Bar */}
               <div className="sticky top-0 z-20 mb-8 -mx-4 sm:-mx-8 px-4 sm:px-8 py-4 bg-[#1e1e1e]/85 backdrop-blur-xl border-b border-white/5 flex justify-between items-center shadow-2xl transition-all">
                  <div className="flex items-center gap-3">
@@ -591,6 +610,11 @@ export default function App() {
                  </button>
               </div>
 
+              <p className="mb-6 text-sm text-gray-400 leading-relaxed">
+                Updated with 16 reviewed corrections and 34 supplemental entries. Field notes distinguish
+                REAPER 7.48/macOS behavior checks from structural evidence and unresolved definitions.
+              </p>
+
               {filteredSections.map(section => (
                 <div key={section.id} id={section.id} className="mb-16 scroll-mt-24">
                   <div className="mb-6 pb-4 border-b border-gray-800">
@@ -616,7 +640,7 @@ export default function App() {
                         showTodos={showTodos} 
                         searchQuery={searchQuery}
                         highlight={
-                          !!highlightedParam && (
+                          section.id === activeSection && !!highlightedParam && (
                             highlightedParam === entry.name || 
                             highlightedParam === entry.name.replace(/[<>]/g, '') || 
                             (entry.name.includes('/') && entry.name.includes(highlightedParam))
