@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "source": "reaper.fm JSFX Programming Reference (fetched 2026-07-31, REAPER 7.78)",
+    "language": "EEL2",
+    "scope": "JSFX 源码层参考 (写/改 .jsfx 效果器)",
+    "not_covered": "gfx_* 图形函数 (gfx.html), 用户自定义函数 (userfunc.html), EEL2 预处理器 (preproc.html) — 官方页面不在本次抓取范围",
+    "max_sliders": 256,
+    "max_spl_channels": 64,
+    "evidence": "Historical source snapshot; documentation summaries and reported host observations were not individually revalidated for this release."
+  },
+  "sections": {
+    "@init": {
+      "when": "效果加载、采样率变化、播放开始时执行",
+      "notes": "调用前所有变量/内存重新清零; 定义非空 @serialize 段可阻止清零; ext_noinit=1 禁止播放开始时重跑 (此时 srate 可能不准, 应在 @block/@slider 监测); 也是设置 ext_nodenorm/ext_midi_bus 的地方"
+    },
+    "@slider": {
+      "when": "@init 之后、任一 slider 参数变化时执行",
+      "notes": "在此做参数->系数换算 (避免 @sample 每样本重算); 官方建议适应新参数时避免 clicks/glitches; 用 sliderX 读取参数"
+    },
+    "@block": {
+      "when": "处理每个采样块之前执行 (典型块长 128-2048 或声卡定义)",
+      "notes": "samplesblock 在此段有效; MIDI 事件处理推荐在此进行; pdc_* 在此可写"
+    },
+    "@sample": {
+      "when": "每个 PCM 音频采样执行一次",
+      "notes": "读写 spl0..spl63 进行分析/处理/合成; 不修改的 splX 原样直通; 重计算不要放这里"
+    },
+    "@serialize": {
+      "when": "插件需要加载或保存扩展状态时执行",
+      "notes": "sliderX 由宿主自动保存; 内部状态用 file_var(0,x)/file_mem(0,offs,len); file_avail(0)<0 表示写模式; 状态以 32-bit 紧凑格式存储 (有精度损失); 不要在 @init 里清 @serialize 恢复的变量 (@init 可能在 @serialize 之后被调用)"
+    },
+    "@gfx": {
+      "when": "GUI 打开时约 30 次/秒; 可带可选宽高参数 @gfx [width] [height]",
+      "notes": "独立于音频的线程, 共享变量状态不可预测; 宽高只是 hint, 实际尺寸用 gfx_w/gfx_h; 不绘制则不刷新; options:gfx_idle/gfx_idle_only/gfx_hz 控制空闲行为 (6.44+); gfx_* 函数族本次未抓取"
+    }
+  },
+  "description_lines": {
+    "desc:": "效果显示名, 只出现一次, 建议首行",
+    "tags:": "空格分隔标签; 含 instrument 进 Instruments 列表 (6.74+)",
+    "sliderN:": "slider1:5<0,10,1>desc = 默认5/最小0/最大10/步进1; 最多256个; 扩展: varname= 前缀命名访问(5.0+); {a,b,c}枚举(0起步步进1); /path:def: 文件选择器; 描述前加-隐藏; :log/:sqr shaping(6.74+, 加!不影响自动化)",
+    "in_pin:/out_pin:": "pin 命名; 唯一命名为 none 表示无音频输入/输出 (host 优化); MIDI-only FX 应写 in_pin:none + out_pin:none",
+    "filename:": "filename:idx,name 声明数据文件 (REAPER\\Data) 或 .png (gfx_blit); 索引从0连续",
+    "options:": "gmem=命名空间(私有8M) / want_all_kb / maxmem=(5.10+, 上限128M) / prealloc=(7.02+) / no_meter / gfx_idle / gfx_idle_only / gfx_hz= (6.44+)",
+    "import": "import filename (4.25+); 导入 JS effect directory 中的文件; 其 @init 函数可用; 库文件命名 xyz.jsfx-inc 不进 FX 列表"
+  },
+  "special_vars": {
+    "spl0..spl63": "@sample only, RW. 当前各声道采样; +0dB = -1.0..1.0, 允许 overs; 不修改即直通",
+    "spl(channelindex)": "@sample only, RW. 可编程下标访问 (2.018+), 略慢于 splX",
+    "slider1..sliderN": "所有段, RW. 用户参数 (最多256); 在 @slider 之外改写须调 sliderchange() 刷新控件",
+    "slider(sliderindex)": "所有段, RW. 可编程下标访问 (3.11+)",
+    "slider_next_chg(sliderindex,nextval)": "@block/@sample. 采样级自动化: 返回变化点的块内采样偏移并写 nextval; 无变化返回非正值; 整块线性过渡返回 samplesblock-1",
+    "trigger": "@block/@sample, RW. 位掩码触发器, UI 显示10个按钮; 建议只在 @block 使用",
+    "srate": "所有段, RO. 当前采样率 (通常 44100-192000)",
+    "num_ch": "多数段, RO. 可用声道数 (通常2); splXX 始终可访问, 超出的输入输出被忽略",
+    "samplesblock": "@block 中有效, RO. 即将处理的块采样数; 其他段可能无效, 代码需容错",
+    "tempo": "@block/@sample, RO. 工程 BPM",
+    "play_state": "@block/@sample, RO. 0=stopped <0=error 1=playing 2=paused 5=recording 6=record paused",
+    "play_position": "@block/@sample, RO. 播放位置秒 (以上次 @block 计)",
+    "beat_position": "@block/@sample, RO. 播放位置拍 (四分音符计)",
+    "ts_num": "@block/@sample, RO. 拍号分子 (3/4 时为 3.0)",
+    "ts_denom": "@block/@sample, RO. 拍号分母 (3/4 时为 4.0)",
+    "ext_noinit": "@init only. 置1禁止播放开始时重跑 @init; srate 此时可能不准",
+    "ext_nodenorm": "@init only. 置1不加抗 denormal 噪声",
+    "ext_tail_size": "@init/@slider (6.71+). >0=尾音采样数; -1=自动输出静音检测; -2=无尾音无状态",
+    "ext_gr_meter": "@init/@block (7.0+). @init 置0, @block 写负值上报增益衰减; 10000 关闭",
+    "reg00..reg99": "所有段, RW. 100个跨效果共享变量; _global.regXX 别名; 用法须在 desc 文档化防冲突",
+    "_global.*": "所有段, RW (4.5+). 跨全部实例共享命名变量",
+    "pdc_delay": "@block/@slider, RW. 插件延迟采样数; 不宜频繁改",
+    "pdc_bot_ch/pdc_top_ch": "@block/@slider, RW. 被 PDC 补偿的声道区间 (如 0..2 补偿 spl0/spl1)",
+    "pdc_midi": "@block/@slider, RW. 置1则 MIDI 也做延迟补偿",
+    "ext_midi_bus": "@init (4.16+). 置1启用16条 MIDI bus (默认非0 bus 直通)",
+    "midi_bus": "(4.16+). ext_midi_bus 启用后, midirecv 写入事件 bus / midisend 读它路由; 0..15",
+    "gfx_* / mouse_*": "@gfx 段专用变量族 (gfx.html 本次未抓取)"
+  },
+  "builtin_functions": {
+    "sin(angle)": "正弦 (弧度; 度转弧度乘 $pi/180 ≈ 0.017453)",
+    "cos(angle)": "余弦 (弧度)",
+    "tan(angle)": "正切 (弧度)",
+    "asin(x)": "反正弦, 返回弧度",
+    "acos(x)": "反余弦, 返回弧度",
+    "atan(x)": "反正切, 返回弧度",
+    "atan2(x,y)": "x/y 的反正切, 返回弧度",
+    "sqr(x)": "平方 (类似 x*x 但只求值一次)",
+    "sqrt(x)": "平方根",
+    "pow(x,y)": "x 的 y 次幂; 与 ^ 运算符行为性能相同",
+    "exp(x)": "e 的 x 次幂; 显著快于 pow/^",
+    "log(x)": "自然对数 (base e)",
+    "log10(x)": "对数 (base 10)",
+    "abs(x)": "绝对值",
+    "min(x,y)": "较小值",
+    "max(x,y)": "较大值",
+    "sign(x)": "符号 (-1, 0, 1)",
+    "rand(x)": "0..x 伪随机数",
+    "floor(x)": "向下取整 (floor(-3.1)=-4)",
+    "ceil(x)": "向上取整 (ceil(-3.9)=-3)",
+    "invsqrt(x)": "快速 1/sqrt(x) 近似",
+    "loop(count,code)": "count 只求值一次, 执行 code count 次; 上限约100万次",
+    "while(code)": "重复执行直到末语句为0; 上限约100万次",
+    "while(condition)(code)": "C 风格 while (4.59+); 上限约100万次",
+    "time([v])": "1970-01-01 起秒数, 1秒粒度 (4.60+)",
+    "time_precise([v])": "系统高精度时间戳秒, 一般远小于1ms, 适合 benchmark (4.60+)"
+  },
+  "memory_fft_functions": {
+    "buf[i]": "本地内存约 8,388,608 slots; 下标 = 左值+括号值; 取整规则 value+0.00001 截断, 小数下标写 x[y|0]",
+    "gmem[i]": "全局共享缓冲默认约 1,048,576 slots; options:gmem=name 换私有 8M 命名空间 (4.6+)",
+    "freembuf(top)": "通知内存管理器 top 之后不再使用 (只是 hint)",
+    "memcpy(dest,source,length)": "快速内存拷贝; 重叠且跨65536边界结果未定义",
+    "memset(dest,value,length)": "快速填充",
+    "mem_set_values(buf,...)": "批量写内存 (5.28+); 变量少时比逐写慢; >32767 个变量未定义",
+    "mem_get_values(buf,...)": "批量读内存 (5.28+); 同上",
+    "mem_multiply_sum(buf1,buf2,length)": "逐位积之和 (6.74+); buf1=-1 求平方和, -2 绝对值和, -3 直接求和",
+    "mem_insert_shuffle(buf,len,value)": "右移一格插入 buf[0], 返回原 buf[len-1] (6.74+)",
+    "__memtop()": "返回可用内存 slots 总数",
+    "stack_push(value)/stack_pop([value])/stack_peek(index)/stack_exch(value)": "约4096项用户栈 (4.25+); pop 不做空检查",
+    "atomic_setifequal/atomic_exch/atomic_add/atomic_set/atomic_get": "跨上下文 (@gfx 与音频) 原子访问 (4.5+)",
+    "fft(index,size)/ifft(index,size)": "复数 FFT; size 须 16..32768 的2的幂; 输出是 permuted 需 fft_permute/fft_ipermute; 输入输出需按 1/size 缩放; re/im 成对; 不得跨65536边界",
+    "fft_real(index,size)/ifft_real(index,size)": "实数 FFT; size 实输入产 size/2 复输出; 首对是 DC,nyquist; 常配 fft_permute(buf,size/2)",
+    "fft_permute(index,size)/fft_ipermute(index,size)": "FFT 输出重排/还原",
+    "mdct(start,size)/imdct(start,size)": "MDCT; size 限 64..4096 的2的幂; 自带窗; 不得跨65536边界",
+    "convolve_c(dest,src,size)": "复数卷积 (通常 FFT 后); 不得跨65536边界"
+  },
+  "midi_functions": {
+    "midisend(offset,msg1,msg2,msg3)": "发送2/3字节 MIDI (4.60+ 四参); 三参形式第三参打包 msg2+msg3*256; offset=块内采样偏移; 失败返回0",
+    "midisend_buf(offset,buf,len)": "发送变长消息/SysEx (4.60+); 自动补 F0/F7 (存疑时自带); 返回发送长度",
+    "midisend_str(offset,string)": "从字符串发送变长消息 (4.60+)",
+    "midirecv(offset,msg1,msg2,msg3)": "接收 MIDI (4.60+ 四参); 三参形式第三参收 msg2+msg3*256; SysEx 自动透传; 调用后必须 drain 全部事件并透传不消费的",
+    "midirecv_buf(offset,buf,maxlen)": "接收到缓冲含 SysEx (4.60+); 消息超长自动透传",
+    "midirecv_str(offset,string)": "接收到字符串 (4.60+); 返回长度, 0=无更多",
+    "midisyx(offset,msgptr,len)": "发送 SysEx; 已废弃 (4.60+), 用 midisend_buf",
+    "_note": "官方强烈推荐 @block 做 MIDI 处理; MIDI-only FX 声明 in_pin:none + out_pin:none; 标准范式: while(midirecv(...)) ( 消费或透传 )"
+  },
+  "file_functions": {
+    "file_open(index_or_slider_or_string)": "打开文件: filename: 索引 / 文件滑参 / 字符串路径 (4.59+, 6.17+ 支持绝对路径); 失败返回 <0 (通常-1); 搜索路径: 效果同目录 -> JS Data/",
+    "file_close(handle)": "关闭 file_open 的句柄",
+    "file_rewind(handle)": "回到文件开头",
+    "file_var(handle,variable)": "读/写一个变量; @serialize 中 handle=0, 读写同写法",
+    "file_mem(handle,offset,length)": "读/写一段本地内存; 返回实际读/写条数",
+    "file_avail(handle)": "读模式返回剩余条数; 写模式返回<0; 文本模式返回 0=EOF/1=非EOF",
+    "file_riff(handle,nch,srate)": "媒体文件(.wav/.ogg)取声道数与采样率; 6.29+ 可请求重采样 (nch 置 'rqsr', 须在首次 file_var/file_mem 前)",
+    "file_text(handle)": "文件是 .txt 文本则返回1; 文本按行/逗号分隔 token 读取, 支持 ; 和 # 注释",
+    "file_string(handle,str)": "读/写字符串 (4.59+); @serialize 中按带长度 blob 存储 (二进制安全)",
+    "_serialize_note": "@serialize 用法: handle 传 0, 不调 file_open/file_close; file_avail(0)>=0 为读模式; 存储为 32-bit 紧凑格式 (有精度损失)"
+  },
+  "string_functions": {
+    "_model": "字符串以数字引用 (4.59+); 字面量不可变; 可变: 槽位0-1023 / 临时 # / 命名 #name (加载时为空随脚本存活); 软上限约16KB",
+    "strlen(str)": "长度",
+    "strcpy(str,src)/strcat(str,src)": "拷贝/追加, 返回 str",
+    "strcmp/stricmp/strncmp/strnicmp(str,str2[,maxlen])": "比较, 返回 -1/0/1",
+    "strncpy/strncat(str,src,maxlen)": "限长拷贝/追加",
+    "strcpy_from(str,src,offset)": "从 src 的 offset 起拷贝",
+    "strcpy_substr(str,src,offset,maxlen)": "子串拷贝; offset<0 从尾部计, maxlen<0 缩短输出",
+    "str_getchar(str,offset[,type])": "按字节读; type: 'c' 'cu' 's' 'S' 'su' 'Su' 'i' 'I' 'iu' 'Iu' 'f' 'F' 'd' 'D' (大写=大端)",
+    "str_setchar(str,offset,value[,type])": "按字节写; offset==长度时追加",
+    "strcpy_fromslider(str,slider)": "取文件滑参文件名或枚举滑参串",
+    "sprintf(str,format,...)": "格式化; %d %i %u %x %X %c %f %e %E %g %G %s %%; 支持宽度/精度修饰; 可用 %{varname}d 内嵌全局变量",
+    "match/matchi(needle,haystack,...)": "通配匹配 (* + ? 及 lazy 变体, %s %d %x %f 等类型捕获, 大写=lazy); 捕获写入额外参数或 {var}"
+  },
+  "host_functions": {
+    "sliderchange(mask_or_sliderX)": "代码改 sliderX 后通知刷新控件; @gfx 中以 -1.0 调用可加 undo 点; 不发自动化",
+    "slider_automate(mask_or_sliderX[,end_touch])": "改 sliderX 并记为自动化; @slider 内无需调用; 6.74+ 第二参=1 结束 touch",
+    "slider_show(mask_or_sliderX[,value])": "查询/设置滑参可见性 (6.30+); value -1=切换 0=隐藏 1=显示",
+    "export_buffer_to_project(buffer,length_samples,nch,srate,track_index[,flags,tempo,planar_pitch])": "缓冲写音频文件并插入工程 (6.05+); 仅限 @gfx 调用",
+    "get_host_numchan()/set_host_numchan(n)": "读/写 track/take 声道数 (6.27+); 写仅限 @gfx",
+    "get_pin_mapping(inout,pin,startchan,chanmask)/set_pin_mapping(...)": "读写 pin 映射位域 (6.27+); 写仅限 @gfx",
+    "get_pinmapper_flags()/set_pinmapper_flags(flags)": "pinmapper 标志 (6.27+); &1=未映射输出清零, !&1=直通; 写仅限 @gfx",
+    "get_host_placement([chain_pos,flags])": "返回 track 索引 (6.74+); -1=master, -2=hardware output FX; flags: 1=takeFX 2=record input 4=inactive project"
+  },
+  "language_notes": [
+    "变量无需声明, 默认全局于本效果, 全是 double; 名字不区分大小写; 最长127字符",
+    "常量 $pi $phi $e; 十六进制 $x90 (4.25+ 也支持 0x90); 字符 $'c'; 位掩码 $~7=127 $~8=255 $~16=65535",
+    "注释 // 与 /* */",
+    "多语句块用圆括号 ( ), 值取最后一条; 没有花括号块",
+    "条件分支 cond ? a : b; ?: 可作 lvalue; 无 if/else 关键字",
+    "| & ~ (异或是~) 同优先级左结合, || && 同优先级左结合 — 混用必须加括号",
+    "== 带 epsilon (|差|<0.00001); != 同理; 精确比较 === !== (4.53+)",
+    "位运算与 % 先转整数 (32或64位依平台); << >> 转32位, 移位 >=32 或 <0 未定义",
+    "本地内存约8M slots; gmem[] 约1M (options:gmem=name 后 8M 私有命名空间)",
+    "循环上限约100万次防挂死",
+    "赋值族: = *= /= %= ^= += -= |= &= ~="
+  ],
+  "rpp_js_chunk": {
+    "format": "<JS <path_relative_to_Effects_dir> \"<preset_name_or_empty>\" 换行 <slider值行> [可选 @serialize 扩展状态行] >; 实机例: <JS synthesis/tonegenerator \"\" 换行 6 -120 1000 0 0 0 0 - - - ... >",
+    "slider_line_format": "源样本中有 64 个空格分隔槽位: 数字=slider值, 减号=未用槽; sliderX 由宿主自动保存。样本行宽不是所有版本/效果器的保证。",
+    "notes": "@serialize 扩展状态行族语义未验证 (ReaperDoc 未覆盖); 按不透明块规则整体保留/删除/替换; 验证结构、预期块变化和宿主加载行为。语义 diff 不等价于整文件字节相等。",
+    "denylist_ref": "../../rpp/blob_denylist.md",
+    "ground_truth": "Source-project host observation of a synthesis/tonegenerator RPP instance, 2026-07-31; original probe artifacts are not included."
+  }
+}

@@ -1,0 +1,4109 @@
+{
+  "meta": {
+    "source": "ReaperDoc constants.ts @ 32047bb",
+    "generated": "2026-07-30",
+    "generator": "rac/knowledge/extract_reaperdoc.py",
+    "verified_default": "human-source",
+    "verified_levels": "human-source(源人工验证) < live(本框架实机复核) < human(本框架人工复核)",
+    "section_count": 7,
+    "key_count": 147,
+    "key_format": "<section>:<KEY> — RPP KEY 上下文敏感, 同名不同义 (如 track:VOLPAN 与 item:VOLPAN 字段语义不同), 查询必须带 section",
+    "colliding_names": [
+      "<NOTES>",
+      "<SOURCE>",
+      "BEAT",
+      "COMP",
+      "GUID",
+      "LOOP",
+      "NAME",
+      "PANMODE",
+      "PLAYRATE",
+      "SEL",
+      "SOFFS",
+      "VOLPAN"
+    ],
+    "note": "enum_candidates 为 subFields 原文 ('0 = off'/'+2 = ...'), 语义需按上下文解读; operation-grade 元数据(defaults/range/write_contract)按 P6 §2.1a 逐步人工/实机补充"
+  },
+  "sections": [
+    {
+      "id": "project",
+      "title": "<REAPER_PROJECT>",
+      "subtitle": "Project Settings",
+      "entry_count": 39
+    },
+    {
+      "id": "track",
+      "title": "<TRACK>",
+      "subtitle": "Track Definition",
+      "entry_count": 38
+    },
+    {
+      "id": "item",
+      "title": "<ITEM>",
+      "subtitle": "Media Item",
+      "entry_count": 33
+    },
+    {
+      "id": "take",
+      "title": "Take",
+      "subtitle": "Take Definition",
+      "entry_count": 7
+    },
+    {
+      "id": "source",
+      "title": "<SOURCE>",
+      "subtitle": "Media Source",
+      "entry_count": 12
+    },
+    {
+      "id": "fx",
+      "title": "FX Chains",
+      "subtitle": "Plugins",
+      "entry_count": 11
+    },
+    {
+      "id": "envelope",
+      "title": "Envelopes",
+      "subtitle": "Automation",
+      "entry_count": 7
+    }
+  ],
+  "keys": {
+    "project:<REAPER_PROJECT>": {
+      "name": "<REAPER_PROJECT>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "Header",
+          "type": null,
+          "description": "Project root element containing version info",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:TITLE": {
+      "name": "TITLE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Project title",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:AUTHOR": {
+      "name": "AUTHOR",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Project author",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:<NOTES>": {
+      "name": "<NOTES>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Project notes (multi-line text)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:RIPPLE": {
+      "name": "RIPPLE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "ripple mode",
+          "enum_candidates": [
+            "0 = off",
+            "1 = per-track",
+            "2 = all-tracks"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "ripple additional flags",
+          "enum_candidates": [
+            "0 = per-track",
+            "1 = all-tracks",
+            "+2 = Enable 'Ripple edit per-track affects each track lane separately'",
+            "+4 = Enable 'Ripple edit when editing media item edges'"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:AUTOXFADE": {
+      "name": "AUTOXFADE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "auto crossfade mode (default 192)",
+          "enum_candidates": [
+            "+1 = Enable 'Auto-crossfade media items when editing'",
+            "+2 = Enable 'Trim content behind media items when editing'",
+            "-64 = Enable 'Always trim content behind razor edits'"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MIXERUIFLAGS": {
+      "name": "MIXERUIFLAGS",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "mixer cross-track UI flags",
+          "enum_candidates": [
+            "+1 = Enable 'Show normal top level tracks'",
+            "+2 = Enable 'Show folders'",
+            "+4 = Enable 'Group folders to left'",
+            "+8 = Enable 'Show tracks that have receives'",
+            "+16 = Enable 'Group tracks that have receives to left'",
+            "+32 = DISABLE 'Show tracks that are in folders'",
+            "+64 = DISABLE 'Auto-arrange tracks in Mixer'"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "mixer in-track UI flags (0 default)",
+          "enum_candidates": [
+            "+1 = DISABLE 'Show multiple rows of tracks'",
+            "+2 = Enable 'Show maximum rows even when tracks would fit in fewer rows'",
+            "+4 = Enable 'Show on right side of mixer' for master track",
+            "+16 = Enable 'Show FX inserts'",
+            "+32 = Enable 'Show sends'",
+            "+64 = Enable 'Show track icons in mixer'",
+            "+128 = Enable 'Show FX parameters'",
+            "+256 = DISABLE 'Show in mixer' for master track"
+          ]
+        }
+      ],
+      "tags": [
+        "TODO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:PEAKGAIN": {
+      "name": "PEAKGAIN",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "waveform scaling ratio (1.0 = normal)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:PANLAW": {
+      "name": "PANLAW",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "project default pan law gain (1.0 = 0dB)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:PANMODE": {
+      "name": "PANMODE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "project default pan mode",
+          "enum_candidates": [
+            "0 = stereo balance",
+            "3 = stereo pan",
+            "5 = dual pan",
+            "6 = REAPER 3.x balance"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:CURSOR": {
+      "name": "CURSOR",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "cursor vertical position in seconds",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:VZOOMEX": {
+      "name": "VZOOMEX",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "main window vertical zoom level (1.0 = normal)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "main window start offset (NOT CLEAR for units, maybe pixels?)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:RECMODE": {
+      "name": "RECMODE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "record mode",
+          "enum_candidates": [
+            "1 - normal",
+            "2 - time selection auto punch",
+            "0 - auto-punch selected items"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:SMPTESYNC": {
+      "name": "SMPTESYNC",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "time sync state (default 0)",
+          "enum_candidates": [
+            "+1 - enable 'Enable synchronization to timecode'",
+            "+4 - enable 'Start playback on valid timecode when stopped'",
+            "+8 - DISABLE 'Display flashing notification window when waiting for sync for recording'",
+            "+16 - DISABLE 'Playback'",
+            "+32 - DISABLE 'Record'",
+            "+64 - Choose 'Resync recording' mode for field 10",
+            "+128 - Choose 'Stop recording' mode for field 11",
+            "+256 - When choose 'MTC: All Inputs(4159)' for field 7, enable preset '24/30 fps MTC is 23.976ND/29.97ND'",
+            "+512 - When choose 'MTC: All Inputs(4159)' for field 7, enable preset '24/30 fps MTC is 24/30 fps'"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "LTC framerate",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "Re-synchronize if drift exceeds N ms (0 = never)",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "Skip/drop frames if drift exceeds N ms (0 = never)",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int",
+          "description": "Synchronize by seeking ahead: N ms (1000 = default)",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int",
+          "description": "Freewheel on missing time code for up to: N ms (0 = forever)",
+          "enum_candidates": null
+        },
+        {
+          "index": 7,
+          "index_end": null,
+          "label": "field 7",
+          "type": "int",
+          "description": "Time sync use input: <input_id>",
+          "enum_candidates": [
+            "0 - LTC:Loopback Left",
+            "1 - LTC:Loopback Right",
+            "4223 - SPP:All Inputs",
+            "4159 - MTC: All Inputs"
+          ]
+        },
+        {
+          "index": 8,
+          "index_end": null,
+          "label": "field 8",
+          "type": "float",
+          "description": "Offset incoming timecode by: N seconds (can be negative)",
+          "enum_candidates": null
+        },
+        {
+          "index": 9,
+          "index_end": null,
+          "label": "field 9",
+          "type": "int",
+          "description": "NOT CLEAR",
+          "enum_candidates": null
+        },
+        {
+          "index": 10,
+          "index_end": null,
+          "label": "field 10",
+          "type": "int",
+          "description": "{Stop/Resync recording} if drift exceeds: N ms (0 = never)",
+          "enum_candidates": null
+        },
+        {
+          "index": 11,
+          "index_end": null,
+          "label": "field 11",
+          "type": "int",
+          "description": "{Stop/Resync recording} on lack of time code after: N ms (0 = never)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "TODO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:LOOP": {
+      "name": "LOOP",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "if looping is enabled",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:RECORD_PATH": {
+      "name": "RECORD_PATH",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Record audio storage path (if outside, use absolute path)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "string",
+          "description": "Secondary recording path (blank for none)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:RENDER_PATTERN": {
+      "name": "RENDER_PATTERN",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "'File name' in project render menu, including '$' aliases",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:COMP": {
+      "name": "COMP",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "comp unique ID",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "string",
+          "description": "comp alias name",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:TEMPO": {
+      "name": "TEMPO",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "tempo in BPM",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "time signature numerator",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "time signature denominator",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "bpm basis (1=1/8, 0=1/4, 2=1/2, 3=1/4 dotted, 4=1/8 dotted, 5=1/2 dotted)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:PLAYRATE": {
+      "name": "PLAYRATE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "playback rate (1.0 = normal)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int (bool)",
+          "description": "preserve pitch",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "minimum rate",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "maximum rate",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:SELECTION": {
+      "name": "SELECTION",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "time selection start in seconds",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "time selection end in seconds",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:SELECTION2": {
+      "name": "SELECTION2",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "loop start in seconds",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "loop end in seconds",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTERAUTOMODE": {
+      "name": "MASTERAUTOMODE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Automation mode",
+          "enum_candidates": [
+            "0 = Trim/Read",
+            "1 = Read",
+            "2 = Touch",
+            "3 = Write",
+            "4 = Latch",
+            "5 = Latch Preview"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTERTRACKHEIGHT": {
+      "name": "MASTERTRACKHEIGHT",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "height in pixels",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "additional height info",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTERPEAKCOL": {
+      "name": "MASTERPEAKCOL",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "NOT CLEAR",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTERMUTESOLO": {
+      "name": "MASTERMUTESOLO",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "mute/solo state",
+          "enum_candidates": [
+            "0 = normal",
+            "1 = muted",
+            "2 = soloed",
+            "3 = muted+soloed",
+            "when MONO activated, +4 to the value (e.g. muted+mono = 5)"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTERTRACKVIEW": {
+      "name": "MASTERTRACKVIEW",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "show in mixer",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "relative vertical position for 'Sends'-'Fader' region separator",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "relative vertical position for 'FX'-'Sends' region separator",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "relative vertical position for 'FX'-'FX Params' region separator",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": 14,
+          "label": "field 5-14",
+          "type": null,
+          "description": "various settings (NOT CLEAR)",
+          "enum_candidates": null
+        },
+        {
+          "index": 15,
+          "index_end": null,
+          "label": "field 15",
+          "type": "int (bool)",
+          "description": "pin track",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "TODO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTERHWOUT": {
+      "name": "MASTERHWOUT",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "output index (bitfield)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "send mode",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "volume (1 = 0 dB)",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "pan (-1 to +1)",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int (bool)",
+          "description": "mute (1=On, 0=Off)",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int (bool)",
+          "description": "invert polarity (1=On, 0=Off)",
+          "enum_candidates": null
+        },
+        {
+          "index": 7,
+          "index_end": null,
+          "label": "field 7",
+          "type": "int",
+          "description": "send source channel (bitfield)",
+          "enum_candidates": null
+        },
+        {
+          "index": 9,
+          "index_end": null,
+          "label": "field 9",
+          "type": "int",
+          "description": "automation mode",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTER_NCH": {
+      "name": "MASTER_NCH",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Number of channels",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "NOT CLEAR",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTER_VOLUME": {
+      "name": "MASTER_VOLUME",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "volume trim (20*log_10(x))",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "pan (-1.0L to 1.0R)",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "override track pan law gain",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "pan(L) when PANMODE = 6",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "float",
+          "description": "pan(R) when PANMODE = 6",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTER_PANMODE": {
+      "name": "MASTER_PANMODE",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "master track pan mode",
+          "enum_candidates": [
+            "-1 = project default",
+            "3 = mono pan",
+            "5 = stereo pan",
+            "6 = dual pan"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTER_FX": {
+      "name": "MASTER_FX",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "FX active",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MASTER_SEL": {
+      "name": "MASTER_SEL",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Is the master track selected",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:MARKER": {
+      "name": "MARKER",
+      "section": "project",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "marker index",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "position in seconds",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "string",
+          "description": "name",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "sel status",
+          "enum_candidates": [
+            "0 = unselected marker",
+            "1 = unselected region",
+            "+8 = selected"
+          ]
+        },
+        {
+          "index": 8,
+          "index_end": null,
+          "label": "field 8",
+          "type": "GUID",
+          "description": "marker GUID",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:<MASTERFXLIST>": {
+      "name": "<MASTERFXLIST>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Master track FX chain container",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:<MASTERPLAYSPEEDENV>": {
+      "name": "<MASTERPLAYSPEEDENV>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Master playrate envelope",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:<TEMPOENVEX>": {
+      "name": "<TEMPOENVEX>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Master Tempo envelope",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:<PROJBAY>": {
+      "name": "<PROJBAY>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "NOT CLEAR",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "TODO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "project:<EXTENSIONS>": {
+      "name": "<EXTENSIONS>",
+      "section": "project",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Extension data",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "TODO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:TRACK": {
+      "name": "TRACK",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Track unique identifier",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:NAME": {
+      "name": "NAME",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Track name",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:PEAKCOL": {
+      "name": "PEAKCOL",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Peak colour (RGB integer)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:BEAT": {
+      "name": "BEAT",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Track timebase",
+          "enum_candidates": [
+            "-1 = project default"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:AUTOMODE": {
+      "name": "AUTOMODE",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Automation mode",
+          "enum_candidates": [
+            "0 = Trim/Read",
+            "1 = Read",
+            "2 = Touch",
+            "3 = Write",
+            "4 = Latch"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:PANMODE": {
+      "name": "PANMODE",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "track pan mode",
+          "enum_candidates": [
+            "-1 = project default",
+            "3 = mono pan",
+            "5 = stereo pan",
+            "6 = dual pan"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:PANLAWFLAGS": {
+      "name": "PANLAWFLAGS",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Pan law mode",
+          "enum_candidates": [
+            "1 = Sine",
+            "2 = Linear",
+            "3 = Hybrid"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:VOLPAN": {
+      "name": "VOLPAN",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "volume trim",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "pan",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "override track pan law gain",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "pan(L) dual",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "float",
+          "description": "pan(R) dual",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:MUTESOLO": {
+      "name": "MUTESOLO",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "mute",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "solo",
+          "enum_candidates": [
+            "0 = no",
+            "1 = solo",
+            "2 = solo-in-place"
+          ]
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int (bool)",
+          "description": "solo defeat",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:IPHASE": {
+      "name": "IPHASE",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Invert phase",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:PLAYOFFS": {
+      "name": "PLAYOFFS",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "play offset length (unit depends on field 2)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "play offset mode",
+          "enum_candidates": [
+            "0 = ms",
+            "1 = off",
+            "2 = samples"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:ISBUS": {
+      "name": "ISBUS",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "folder state",
+          "enum_candidates": [
+            "0 = regular track",
+            "1 = folder parent",
+            "2 = last in folder"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "track 'indentation' increase",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:BUSCOMP": {
+      "name": "BUSCOMP",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "collapse state in Arrange",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "collapse state in Mixer",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "collapse state in track wiring",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:SHOWINMIX": {
+      "name": "SHOWINMIX",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "show in mixer",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "relative vertical position for 'Sends'-'Fader' region separator",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "relative vertical position for 'FX'-'Sends' region separator",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int (bool)",
+          "description": "show in track list",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "float",
+          "description": "relative vertical position for 'FX'-'FX Params' region separator",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": 8,
+          "label": "field 6-8",
+          "type": "int",
+          "description": "unknown",
+          "enum_candidates": null
+        },
+        {
+          "index": 9,
+          "index_end": null,
+          "label": "field 9",
+          "type": "int (bool)",
+          "description": "pin track",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:FIXEDLANES": {
+      "name": "FIXEDLANES",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "bitfield flags",
+          "enum_candidates": [
+            "&2 = 'Create comp areas...' DISABLED",
+            "&8 = 'Big lanes' enabled",
+            "&32 = 'Hide all buttons' enabled"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int (bool)",
+          "description": "Allow editing source media while comping",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int (bitfield)",
+          "description": "recording behavior",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:SEL": {
+      "name": "SEL",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Is the track selected",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:REC": {
+      "name": "REC",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "armed",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "input index (0=mono left, 1=mono right, 1024=stereo, etc.)",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "monitor",
+          "enum_candidates": [
+            "0 = off",
+            "1 = on",
+            "2 = auto"
+          ]
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "record mode",
+          "enum_candidates": [
+            "0 = input",
+            "1 = output (stereo)",
+            "2 = disable(monitor)",
+            "3 = output (stereo, latency comp)",
+            "4 = output (MIDI)",
+            "5 = output (mono)",
+            "6 = output (mono latency comp)",
+            "7 = MIDI overdub",
+            "8 = MIDI replace",
+            "9 = MIDI touch replace",
+            "10 = output (multichannel)",
+            "11 = output (multichannel latency comp)"
+          ]
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int (bool)",
+          "description": "monitor track media while recording",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int (bool)",
+          "description": "preserve PDC delayed monitoring",
+          "enum_candidates": null
+        },
+        {
+          "index": 7,
+          "index_end": null,
+          "label": "field 7",
+          "type": "int",
+          "description": "record path (0=primary, 1=secondary, 2=both)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:VU": {
+      "name": "VU",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Track VU meter settings",
+          "enum_candidates": [
+            "0 = Stereo peaks",
+            "2 = Multichannel peaks",
+            "4 = Stereo RMS",
+            "8 = Combined RMS",
+            "12 = LUFS-M",
+            "16 = LUFS-S (max)",
+            "20 = LUFS-S (current)",
+            "+32 = Enable 'LUFS measures first two channels only (ignore sidechain)'"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:TRACKHEIGHT": {
+      "name": "TRACKHEIGHT",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "height in pixels",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int (bool)",
+          "description": "if locked height",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:INQ": {
+      "name": "INQ",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "quantize midi",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "quantize to pos (-1=prev, 0=nearest, 1=next)",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int (bool)",
+          "description": "quantize note-offs",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "quantize to (fraction of beat)",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int (%)",
+          "description": "quantize strength",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int (%)",
+          "description": "swing strength",
+          "enum_candidates": null
+        },
+        {
+          "index": 7,
+          "index_end": null,
+          "label": "field 7",
+          "type": "int (%)",
+          "description": "quantize range min",
+          "enum_candidates": null
+        },
+        {
+          "index": 8,
+          "index_end": null,
+          "label": "field 8",
+          "type": "int (%)",
+          "description": "quantize range max",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:NCHAN": {
+      "name": "NCHAN",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Number of track channels",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:<RECCFG>": {
+      "name": "<RECCFG>",
+      "section": "track",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Recording format data. Not present if not changed.",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:FX": {
+      "name": "FX",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "track FX chain state",
+          "enum_candidates": [
+            "0 = bypassed",
+            "1 = active"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:TRACKID": {
+      "name": "TRACKID",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Track unique identifier (same as TRACK params)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:PERF": {
+      "name": "PERF",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bitwise)",
+          "description": "Performance options",
+          "enum_candidates": [
+            "&1 = prevent media buffering",
+            "&2 = prevent anticipative fx"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:AUXRECV": {
+      "name": "AUXRECV",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "source track index (zero based)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "mode (0=Post Fader (Post Pan), 1=Pre FX, 3=Pre Fader (Post FX))",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "volume",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "pan",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int (bool)",
+          "description": "mute",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int (bool)",
+          "description": "mono sum",
+          "enum_candidates": null
+        },
+        {
+          "index": 7,
+          "index_end": null,
+          "label": "field 7",
+          "type": "int (bool)",
+          "description": "invert polarity",
+          "enum_candidates": null
+        },
+        {
+          "index": 8,
+          "index_end": null,
+          "label": "field 8",
+          "type": "int",
+          "description": "source audio channels (-1=none, 0=1+2, 1=2+3, etc.)",
+          "enum_candidates": null
+        },
+        {
+          "index": 9,
+          "index_end": null,
+          "label": "field 9",
+          "type": "int",
+          "description": "dest audio channels (same as source but no -1)",
+          "enum_candidates": null
+        },
+        {
+          "index": 10,
+          "index_end": null,
+          "label": "field 10",
+          "type": "float",
+          "description": "panlaw",
+          "enum_candidates": null
+        },
+        {
+          "index": 11,
+          "index_end": null,
+          "label": "field 11",
+          "type": "int",
+          "description": "midi channels (source = val & 0x1F (0=None), dest = val // 32)",
+          "enum_candidates": null
+        },
+        {
+          "index": 12,
+          "index_end": null,
+          "label": "field 12",
+          "type": "int",
+          "description": "automation mode (-1 = use track mode)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:MIDIOUT": {
+      "name": "MIDIOUT",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bitwise)",
+          "description": "MIDI hardware output settings",
+          "enum_candidates": [
+            "device = floor(val / 32), -1 for no MIDI hardware output",
+            "channel = val & 0x1F, 0 for 'use original'"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:MAINSEND": {
+      "name": "MAINSEND",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Master/Parent send enabled",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "flags (exact meaning unclear)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:HWOUT": {
+      "name": "HWOUT",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "output index (bitfield)",
+          "enum_candidates": [
+            "0-511: stereo output",
+            "512-1023: mono output",
+            "1024-1535: aux/rearoute loopback stereo output",
+            "1536-2047: aux/rearoute loopback mono output"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "send mode",
+          "enum_candidates": [
+            "0: Post-Fader (Post-Pan)",
+            "1: Pre-FX",
+            "3: Pre-Fader (Post-FX)"
+          ]
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "volume (1 = 0 dB)",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "pan (-1 to +1)",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int (bool)",
+          "description": "mute (1=On, 0=Off)",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int (bool)",
+          "description": "invert polarity (1=On, 0=Off)",
+          "enum_candidates": null
+        },
+        {
+          "index": 7,
+          "index_end": null,
+          "label": "field 7",
+          "type": "int",
+          "description": "send source channel (bitfield)",
+          "enum_candidates": [
+            "-1: None",
+            "0-1023: multichannel 1ch",
+            "1024-2047: multichannel 2ch",
+            "2048-3071: multichannel 4ch",
+            "3072-4095: multichannel 6ch"
+          ]
+        },
+        {
+          "index": 9,
+          "index_end": null,
+          "label": "field 9",
+          "type": "int",
+          "description": "automation mode",
+          "enum_candidates": [
+            "-1: Track automation mode",
+            "0: Trim/read",
+            "1: Read",
+            "2: Touch",
+            "3: Write",
+            "4: Latch",
+            "5: Latch Preview"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:LOCK": {
+      "name": "LOCK",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "if locked track control",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:FREEMODE": {
+      "name": "FREEMODE",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Free positioning mode",
+          "enum_candidates": [
+            "0 = disabled",
+            "1 = free item positioning (FIP)",
+            "2 = fixed item lanes (FIL)"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:LANEREC": {
+      "name": "LANEREC",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "record lane",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "comp lane",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "last active lane",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:ITEMLANES": {
+      "name": "ITEMLANES",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "lane count in current track",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:<FXCHAIN>": {
+      "name": "<FXCHAIN>",
+      "section": "track",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Track FX chain",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:<MIDINOTENAMES>": {
+      "name": "<MIDINOTENAMES>",
+      "section": "track",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "MIDI note name mappings",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:<FREEZE>": {
+      "name": "<FREEZE>",
+      "section": "track",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Freeze state",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:<ITEM>": {
+      "name": "<ITEM>",
+      "section": "track",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Media items on track",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "track:VOLENV / PANENV / MUTEENV / etc": {
+      "name": "VOLENV / PANENV / MUTEENV / etc",
+      "section": "track",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "See",
+          "type": null,
+          "description": "Track-level envelope types listed in Envelope section",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "INFO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:Item Properties": {
+      "name": "Item Properties",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "is_midi_item",
+          "type": "bool",
+          "description": "True if this is a MIDI item",
+          "enum_candidates": null
+        },
+        {
+          "index": null,
+          "index_end": null,
+          "label": "is_audio_item",
+          "type": "bool",
+          "description": "True if this is an audio item",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:POSITION": {
+      "name": "POSITION",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "Position on the timeline, in seconds",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:SNAPOFFS": {
+      "name": "SNAPOFFS",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "Snap offset, in seconds",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:LENGTH": {
+      "name": "LENGTH",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "Item length, in seconds",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:LOOP": {
+      "name": "LOOP",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Loop source",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:ALLTAKES": {
+      "name": "ALLTAKES",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Play all takes",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:FADEIN": {
+      "name": "FADEIN",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "fade envelope shape",
+          "enum_candidates": [
+            "single_fade: 0-5, 5.1",
+            "crossfade: 0, 1.1, 2-5, 5.1"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "fade length in seconds",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "float",
+          "description": "fade curve (-1.0 to 1.0)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:FADEOUT": {
+      "name": "FADEOUT",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "fade envelope shape",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "fade length in seconds",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "float",
+          "description": "fade curve (-1.0 to 1.0)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:MUTE": {
+      "name": "MUTE",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "item itself mute state",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "item project-scale solo state flag",
+          "enum_candidates": [
+            "0 - item is not soloed",
+            "-1 - item is soloed with action",
+            "1 - Another item in 'Solo exclusive' mode"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:BEAT": {
+      "name": "BEAT",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Item timebase",
+          "enum_candidates": [
+            "-1 = use track timebase",
+            "0 = time",
+            "1 = beats (position, length, rate)",
+            "2 = beats (position only)",
+            "3 = beats (auto-stretch)"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:SEL": {
+      "name": "SEL",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Is the item selected",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:YPOS": {
+      "name": "YPOS",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "Item lane relative position",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "Item lane height",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:IGUID": {
+      "name": "IGUID",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "GUID",
+          "description": "Item unique identifier",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:IID": {
+      "name": "IID",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Deprecated item ID (pre-v6.54)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "DEPRECATED"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:COMP": {
+      "name": "COMP",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "comp global index",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "active part index for take within the comp",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:NAME": {
+      "name": "NAME",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "First take name",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:VOLPAN": {
+      "name": "VOLPAN",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "item trim/volume (gain, 1.0=0dB)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "pan (-1.0 to 1.0)",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "take volume",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "pan law",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:SOFFS": {
+      "name": "SOFFS",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "Take slip offset (source start time)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "Doubled slip offset",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:PLAYRATE": {
+      "name": "PLAYRATE",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "playback rate",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "preserve pitch",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "pitch shift mode",
+          "enum_candidates": null
+        },
+        {
+          "index": 5,
+          "index_end": null,
+          "label": "field 5",
+          "type": "int",
+          "description": "stretch marker fade mode",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:CHANMODE": {
+      "name": "CHANMODE",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "channel mode",
+          "enum_candidates": [
+            "0 = normal",
+            "1 = rev stereo",
+            "3 = mono(L)",
+            "4 = mono(R)",
+            "5-194 = Mono (3-128)",
+            "67-257 = Stereo (1-128)"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:GUID": {
+      "name": "GUID",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "GUID",
+          "description": "Take unique identifier",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:TKM": {
+      "name": "TKM",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "position within take",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "string",
+          "description": "name",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "color code",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:SM": {
+      "name": "SM",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "Multiple",
+          "type": null,
+          "description": "Stretch marker data (position/timing)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "AUDIO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:TMINFO": {
+      "name": "TMINFO",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Item source sample rate for transient markers",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "AUDIO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:TM": {
+      "name": "TM",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Distance in samples to first transient guide",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "AUDIO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:<SOURCE>": {
+      "name": "<SOURCE>",
+      "section": "item",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Media source information",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:COLOR": {
+      "name": "COLOR",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Item color (RGB integer)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:<NOTES>": {
+      "name": "<NOTES>",
+      "section": "item",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Item notes (multi-line text)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:RESOURCEFN": {
+      "name": "RESOURCEFN",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Resource file name (media file full path)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:IMGRESOURCEFLAGS": {
+      "name": "IMGRESOURCEFLAGS",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Image resource flags",
+          "enum_candidates": [
+            "0 - Do not display image",
+            "1 - Center/tile image",
+            "3 - Stretch image/text",
+            "5 - Full height image",
+            "+8 - Word wrap text"
+          ]
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:GROUP": {
+      "name": "GROUP",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Group ID",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:FADEFLAG": {
+      "name": "FADEFLAG",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "if item enables 'No autofades'",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "item:FADELPF": {
+      "name": "FADELPF",
+      "section": "item",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "if enable fade low pass filter",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:TAKE": {
+      "name": "TAKE",
+      "section": "take",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "params",
+          "type": null,
+          "description": "SEL (if selected), NULL (if null take)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:NAME": {
+      "name": "NAME",
+      "section": "take",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Take name",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:TAKEVOLPAN": {
+      "name": "TAKEVOLPAN",
+      "section": "take",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "pan (-1.0 to 1.0)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "take volume",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "float",
+          "description": "override track pan law gain",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:SOFFS": {
+      "name": "SOFFS",
+      "section": "take",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "slip offset (source start time)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:GUID": {
+      "name": "GUID",
+      "section": "take",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "GUID",
+          "description": "Take unique identifier",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:<SOURCE>": {
+      "name": "<SOURCE>",
+      "section": "take",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Media source information",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "take:<TAKEFX>": {
+      "name": "<TAKEFX>",
+      "section": "take",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "chunk",
+          "type": null,
+          "description": "Take FX chain",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:SOURCE": {
+      "name": "SOURCE",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Media type (WAVE, MP3, MIDI, etc.)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:FILE": {
+      "name": "FILE",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "File path",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "AUDIO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:HASDATA": {
+      "name": "HASDATA",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Does the item have any MIDI data",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "PPQ resolution in ticks",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:IGNTEMPO": {
+      "name": "IGNTEMPO",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Ignore project tempo on/off",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "Tempo used to override project tempo",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:VELLANE": {
+      "name": "VELLANE",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Lane type",
+          "enum_candidates": [
+            "-1 = velocity",
+            "0-119 = CC #0 - CC #119",
+            "128 = pitch bend",
+            "129 = program",
+            "133 = sysex"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "Height in MIDI editor",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:BANKPROGRAMFILE": {
+      "name": "BANKPROGRAMFILE",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Path to ReaBank file",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:GUID": {
+      "name": "GUID",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "GUID",
+          "description": "Take unique identifier (within SOURCE block)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:e/E": {
+      "name": "e/E",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "Tag",
+          "type": null,
+          "description": "e = selected, E = not selected",
+          "enum_candidates": null
+        },
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "hex",
+          "description": "Offset (ticks)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "hex",
+          "description": "MIDI status byte",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "hex",
+          "description": "Data1",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "hex",
+          "description": "Data2",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:<X>/<x>": {
+      "name": "<X>/<x>",
+      "section": "source",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "Tag",
+          "type": null,
+          "description": "x = selected, X = not selected",
+          "enum_candidates": null
+        },
+        {
+          "index": null,
+          "index_end": null,
+          "label": "children",
+          "type": null,
+          "description": "Base64 encoded SysEx data",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:EVTFILTER": {
+      "name": "EVTFILTER",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Channel checkbox mask",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "Event type",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:CFGEDITVIEW": {
+      "name": "CFGEDITVIEW",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "list",
+          "description": "MIDI editor view configuration",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "source:CFGEDIT": {
+      "name": "CFGEDIT",
+      "section": "source",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int (bool)",
+          "description": "Sync editor transport",
+          "enum_candidates": null
+        },
+        {
+          "index": 6,
+          "index_end": null,
+          "label": "field 6",
+          "type": "int",
+          "description": "MIDI editor view mode",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "MIDI"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:SHOW": {
+      "name": "SHOW",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "index of an FX currently open in the chain (1-based)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:LASTSEL": {
+      "name": "LASTSEL",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "Index of selected plugin (zero based)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:DOCKED": {
+      "name": "DOCKED",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "if FX chain window is docked",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:WNDRECT": {
+      "name": "WNDRECT",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "FX window top position",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "FX window left position",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "FX window width",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "FX window height",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:BYPASS": {
+      "name": "BYPASS",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "bypassed",
+          "enum_candidates": [
+            "0 = active",
+            "1 = bypassed"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int (bool)",
+          "description": "offline",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:<VST>/<AU>/etc": {
+      "name": "<VST>/<AU>/etc",
+      "section": "fx",
+      "is_chunk": true,
+      "fields": [
+        {
+          "index": null,
+          "index_end": null,
+          "label": "param 0",
+          "type": "string",
+          "description": "plugin display name",
+          "enum_candidates": null
+        },
+        {
+          "index": null,
+          "index_end": null,
+          "label": "param 1",
+          "type": "string",
+          "description": "plugin file name",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:WET": {
+      "name": "WET",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "wet amount (0.0 to 1.0)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int (bool)",
+          "description": "delta solo",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:PRESETNAME": {
+      "name": "PRESETNAME",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "string",
+          "description": "Preset name",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:FXID": {
+      "name": "FXID",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "GUID",
+          "description": "FX unique identifier",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:FLOATPOS": {
+      "name": "FLOATPOS",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "top",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "left",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "width",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "int",
+          "description": "height",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [
+        "INFO"
+      ],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "fx:WAK": {
+      "name": "WAK",
+      "section": "fx",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "Send all keyboard input to plug-in (0=disabled, 1=enabled)",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int",
+          "description": "Embedded FX UI location (0=not shown, 1=show on TCP, 2=show on MCP)",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:EGUID": {
+      "name": "EGUID",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "GUID",
+          "description": "Envelope unique identifier",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:ACT": {
+      "name": "ACT",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "active/bypass",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:VIS": {
+      "name": "VIS",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "visible in arrange",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "int (bool)",
+          "description": "visible in envelope lane",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:LANEHEIGHT": {
+      "name": "LANEHEIGHT",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "envelope lane height in pixels",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:ARM": {
+      "name": "ARM",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int (bool)",
+          "description": "armed for recording",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:DEFSHAPE": {
+      "name": "DEFSHAPE",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "int",
+          "description": "default point shape",
+          "enum_candidates": [
+            "0 = linear",
+            "1 = square",
+            "5 = bezier"
+          ]
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "default tension",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    },
+    "envelope:PT": {
+      "name": "PT",
+      "section": "envelope",
+      "is_chunk": false,
+      "fields": [
+        {
+          "index": 1,
+          "index_end": null,
+          "label": "field 1",
+          "type": "float",
+          "description": "time position in seconds",
+          "enum_candidates": null
+        },
+        {
+          "index": 2,
+          "index_end": null,
+          "label": "field 2",
+          "type": "float",
+          "description": "value",
+          "enum_candidates": null
+        },
+        {
+          "index": 3,
+          "index_end": null,
+          "label": "field 3",
+          "type": "int",
+          "description": "point shape",
+          "enum_candidates": null
+        },
+        {
+          "index": 4,
+          "index_end": null,
+          "label": "field 4",
+          "type": "float",
+          "description": "tension",
+          "enum_candidates": null
+        }
+      ],
+      "tags": [],
+      "verified": "human-source",
+      "source": "ReaperDoc"
+    }
+  }
+}

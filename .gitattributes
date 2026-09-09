@@ -1,0 +1,15 @@
+* text=auto
+*.py text eol=lf
+*.sh text eol=lf
+*.lua text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+# Parser fixtures intentionally preserve their original line endings and bytes.
+*.rpp -text whitespace=cr-at-eol
+*.RPP -text whitespace=cr-at-eol
+*.wav binary
+
+# Preserve imported Lua snapshots, including their original blank EOF lines.
+src/rac/data/lua/** whitespace=-blank-at-eof

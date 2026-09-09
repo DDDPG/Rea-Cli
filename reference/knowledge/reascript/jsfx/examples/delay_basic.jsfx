@@ -1,0 +1,47 @@
+// delay_basic.jsfx — 立体声环形缓冲延迟
+// 知识点: 本地内存 buf[i] 寻址 / ext_tail_size / 每声道独立缓冲 / 环形读写指针
+desc:Basic Stereo Delay (circular buffer)
+
+slider1:250<0,2000,1>Delay time (ms)
+slider2:0.35<0,0.95,0.01>Feedback
+slider3:0.5<0,1,0.01>Wet mix
+slider4:1<0,1,0.01>Dry mix
+
+@init
+// 环形缓冲: 每声道 400000 slots (192kHz 下 >2 秒)
+// 内存寻址: bufL[rpos] = 地址 (bufL + rpos), 左值与括号值求和作下标
+bufsize = 400000;
+bufL = 0;          // 左声道缓冲起始地址
+bufR = bufsize;    // 右声道缓冲起始地址
+pos = 0;           // 写指针 (两声道共用)
+
+// 告诉宿主: 输入静音后本插件仍有最长 bufsize 采样的输出尾音
+// (不设的话, 宿主可能在输入静音后提前停止处理, 尾音被切掉)
+ext_tail_size = bufsize;
+
+@slider
+// ms → 采样数, 并钳到缓冲范围内; "| 0" 是 EEL2 惯用的取整写法
+// (内存下标按 value+0.00001 截断, 显式取整更稳)
+delay_spl = min(slider1 * 0.001 * srate, bufsize - 1) | 0;
+fb  = slider2;
+wet = slider3;
+dry = slider4;
+
+@sample
+// 读指针 = 写指针 - 延迟量, 负则回绕
+rpos = pos - delay_spl;
+rpos < 0 ? rpos += bufsize;
+
+dl = bufL[rpos];
+dr = bufR[rpos];
+
+// 写入: 当前输入 + 反馈回声
+bufL[pos] = spl0 + dl * fb;
+bufR[pos] = spl1 + dr * fb;
+
+// 干湿混合输出
+spl0 = spl0 * dry + dl * wet;
+spl1 = spl1 * dry + dr * wet;
+
+pos += 1;
+pos >= bufsize ? pos = 0;

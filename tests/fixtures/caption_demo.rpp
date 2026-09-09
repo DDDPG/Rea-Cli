@@ -1,0 +1,449 @@
+<REAPER_PROJECT 0.1 "7.62/macOS-arm64" 1784868643 0
+  <NOTES 0 2
+  >
+  RIPPLE 0 0
+  GROUPOVERRIDE 0 0 0 0
+  AUTOXFADE 129
+  ENVATTACH 3
+  POOLEDENVATTACH 0
+  TCPUIFLAGS 0
+  MIXERUIFLAGS 11 48
+  ENVFADESZ10 40
+  PEAKGAIN 1
+  FEEDBACK 0
+  PANLAW 1
+  PROJOFFS 0 0 0
+  MAXPROJLEN 0 0
+  GRID 3199 8 1 8 1 0 0 0
+  TIMEMODE 1 5 -1 30 0 0 -1 0
+  VIDEO_CONFIG 0 0 65792
+  PANMODE 3
+  PANLAWFLAGS 3
+  CURSOR 0
+  ZOOM 100 0 0
+  VZOOMEX 6 0
+  USE_REC_CFG 0
+  RECMODE 1
+  SMPTESYNC 0 30 100 40 1000 300 0 0 1 0 0
+  LOOP 0
+  LOOPGRAN 0 4
+  RECORD_PATH "Media" ""
+  <RECORD_CFG
+    ZXZhdxgAAQ==
+  >
+  <APPLYFX_CFG
+  >
+  RENDER_FILE ""
+  RENDER_PATTERN ""
+  RENDER_FMT 0 2 0
+  RENDER_1X 0
+  RENDER_RANGE 1 0 0 0 1000
+  RENDER_RESAMPLE 3 0 1
+  RENDER_ADDTOPROJ 0
+  RENDER_STEMS 0
+  RENDER_DITHER 0
+  RENDER_TRIM 0.000001 0.000001 0 0
+  TIMELOCKMODE 1
+  TEMPOENVLOCKMODE 1
+  ITEMMIX 1
+  DEFPITCHMODE 589824 0
+  TAKELANE 1
+  SAMPLERATE 44100 0 0
+  <RENDER_CFG
+    ZXZhdxgAAQ==
+  >
+  LOCK 1
+  <METRONOME 6 2
+    VOL 0.25 0.125
+    BEATLEN 4
+    FREQ 1760 880 1
+    SAMPLES "" "" "" ""
+    SPLIGNORE 0 0
+    SPLDEF 2 660 "" 0 ""
+    SPLDEF 3 440 "" 0 ""
+    PATTERN 0 169
+    PATTERNSTR ABBB
+    MULT 1
+  >
+  GLOBAL_AUTO -1
+  TEMPO 120 4 4 0
+  PLAYRATE 1 0 0.25 4
+  SELECTION 0 0
+  SELECTION2 0 0
+  MASTERAUTOMODE 0
+  MASTERTRACKHEIGHT 0 0
+  MASTERPEAKCOL 16576
+  MASTERMUTESOLO 0
+  MASTERTRACKVIEW 0 0.6667 0.5 0.5 0 0 0 0 0 0 0 0 0 0 1
+  MASTERHWOUT 0 0 1 0 0 0 0 -1
+  MASTER_NCH 2 2
+  MASTER_VOLUME 1 0 -1 -1 1
+  MASTER_PANMODE 3
+  MASTER_PANLAWFLAGS 3
+  MASTER_FX 1
+  MASTER_SEL 0
+  <MASTERPLAYSPEEDENV
+    EGUID {4C2BFC0A-099C-B845-B1BC-6F43068F0270}
+    ACT 0 -1
+    VIS 0 1 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 0 -1 -1
+  >
+  <TEMPOENVEX
+    EGUID {01D129E3-ED90-B34E-BE04-49DDB3C045FE}
+    ACT 1 -1
+    VIS 1 0 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 1 -1 -1
+  >
+  RULERHEIGHT 79 84
+  RULERLANE 1 4 "" 0 -1
+  RULERLANE 2 8 "" 0 -1
+  <PROJBAY
+  >
+  <TRACK {416B5A08-48C8-DC46-A18D-7EDE4B61C123}
+    NAME "demo_zh (audio)"
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 1 1
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    SEL 0
+    REC 0 0 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 0 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {416B5A08-48C8-DC46-A18D-7EDE4B61C123}
+    PERF 0
+    <EXT
+      omnicap '{"sidecar": "Media/demo_zh.wav.captions.json", "digest": "6ddae0d9ee35b7f0", "lanes": ["asr", "emotion", "keyword"], "rev": 4}'
+    >
+    MIDIOUT -1
+    MAINSEND 1 0
+  >
+  <TRACK {4B298235-B631-494F-8D63-3713BFA278EE}
+    NAME cap:asr
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    LANEREC -1 -1 -1 0
+    SEL 1
+    REC 0 0 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 0 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {4B298235-B631-494F-8D63-3713BFA278EE}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 12.02329166666667
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      SEL 1
+      IGUID {99E814CF-FFB8-DA43-A420-67C01AF120B6}
+      IID 168
+      NAME demo_zh.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {5FA40CBB-2CB5-224F-BBEB-4841171E5FF2}
+      TKM 0 asr▸欢迎收听确定性基准测试播客。 0 0
+      TKM 0 emo▸neutral 27304096 0
+      TKM 1.3 kw▸确定性基准测试 0 0
+      TKM 3.8 asr▸今天我们测试静音裁剪和语气词删除。 0 0
+      TKM 4.4 kw▸静音裁剪 0 0
+      TKM 5.9 kw▸语气词删除 0 0
+      TKM 9.6 asr▸这段合成音频用于验证评分器。 0 0
+      TKM 10.5 kw▸验证评分器 0 0
+      <SOURCE WAVE
+        FILE "Media/demo_zh.wav"
+      >
+    >
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 3.8
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {0FF412EF-E366-A443-A775-98B95E950268}
+      IID 169
+      <EXTI
+        capid a5a1503267aa
+      >
+      NAME 欢迎收听确定性基准测试播客。
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {83F1A160-A723-C844-AD97-42716A417B72}
+      <SOURCE EMPTY
+      >
+    >
+    <ITEM
+      POSITION 3.8
+      SNAPOFFS 0
+      LENGTH 3.4
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {09680BC3-61D7-2A42-BE8F-3C0DD4010E7F}
+      IID 170
+      <EXTI
+        capid 005f19f9dc35
+      >
+      NAME 今天我们测试静音裁剪和语气词删除。
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {70B6D838-293B-5246-9205-FF0BCE00AA5F}
+      <SOURCE EMPTY
+      >
+    >
+    <ITEM
+      POSITION 9.6
+      SNAPOFFS 0
+      LENGTH 2.42
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {681F1725-8C04-6E49-B7D1-75E1F37938BE}
+      IID 171
+      <EXTI
+        capid fab74f9498af
+      >
+      NAME 这段合成音频用于验证评分器。
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F2178C7F-175D-7B43-8928-9162A6C80476}
+      <SOURCE EMPTY
+      >
+    >
+  >
+  <TRACK {59B454A7-48E5-584C-85E9-FA7A9244741F}
+    NAME cap:emotion
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    SEL 0
+    REC 0 0 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 0 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {59B454A7-48E5-584C-85E9-FA7A9244741F}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 0
+      SNAPOFFS 0
+      LENGTH 12.02
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 27304096 B
+      SEL 0
+      IGUID {F06C7083-C0DA-BD4C-BCB9-F68021528B2F}
+      IID 172
+      <EXTI
+        capid 902c04f54551
+      >
+      NAME neutral
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {C0200C0D-5CC5-5644-A8FB-9BA560C1BBD0}
+      <SOURCE EMPTY
+      >
+    >
+  >
+  <TRACK {E695FAB1-90F5-2C48-838E-440A91DCBF9F}
+    NAME cap:keyword
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 2 -1
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    SEL 0
+    REC 0 0 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 0 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {E695FAB1-90F5-2C48-838E-440A91DCBF9F}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 1.3
+      SNAPOFFS 0
+      LENGTH 2.2
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {3F8E672D-3737-C74D-86E2-DBFF40C97907}
+      IID 173
+      <EXTI
+        capid ce8f312ac0b8
+      >
+      NAME 确定性基准测试
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {6AAA4ED1-9713-1A47-9018-C9776A061E7B}
+      <SOURCE EMPTY
+      >
+    >
+    <ITEM
+      POSITION 4.4
+      SNAPOFFS 0
+      LENGTH 1.2
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {4A982F76-FEBF-C344-A89F-65B92489DDB6}
+      IID 174
+      <EXTI
+        capid da30fbdf1551
+      >
+      NAME 静音裁剪
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {812E36C6-F521-314A-AA3A-8ABFCC87A6E9}
+      <SOURCE EMPTY
+      >
+    >
+    <ITEM
+      POSITION 5.9
+      SNAPOFFS 0
+      LENGTH 1.2
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {560186FD-0607-5949-A40F-FDAEB94401C5}
+      IID 175
+      <EXTI
+        capid 439ff81b4014
+      >
+      NAME 语气词删除
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {2E08990C-7A15-E64E-8640-3AE07B9694E5}
+      <SOURCE EMPTY
+      >
+    >
+    <ITEM
+      POSITION 10.5
+      SNAPOFFS 0
+      LENGTH 1.3
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0 0
+      FADEOUT 1 0.01 0 1 0 0 0
+      MUTE 0 0
+      COLOR 29935816 B
+      SEL 0
+      IGUID {30CACE29-D5F5-C045-92E1-A57B868DD074}
+      IID 176
+      <EXTI
+        capid 95c7f470d44c
+      >
+      NAME 验证评分器
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {D60D890D-C5E0-D440-A6A6-99E40EB34B26}
+      <SOURCE EMPTY
+      >
+    >
+  >
+  <EXTSTATE
+    <OMNICAP
+      TRACK:0 Media/demo_zh.wav.captions.json
+    >
+  >
+>

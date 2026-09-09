@@ -1,0 +1,21 @@
+name: Feature request
+description: Describe a REAPER workflow that reacli could support better.
+title: "[Feature] "
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow or problem
+      description: Explain the result you need and the current limitation.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Include a command or API example if helpful, and any workaround you use today.
+  - type: textarea
+    id: platform
+    attributes:
+      label: Platform and dependencies
+      description: Note any REAPER version, plugin, operating-system or headless-execution requirement.

@@ -1,0 +1,78 @@
+# Sources and attribution
+
+This collection was imported on 2026-09-09 from the `reaper_agent_cli` source
+project's `README.md`, `docs/knowledge/` and `lua/` directories. The source
+project was not modified. Machine configuration, media, executables and
+internal development history are outside the collection.
+
+[source-manifest.json](source-manifest.json) records source-project-relative
+paths, immutable source hashes, current destination hashes, editorial changes,
+omitted content and resources already bundled in `src/rac/data/`. Original
+version/date labels remain historical evidence. Editorial cleanup removes
+internal milestone names, replaces obsolete paths with local links, and
+distinguishes observed behavior from general guarantees. It is not a new live
+validation of the source's claims.
+
+These files are excluded from wheel and source distributions. That packaging
+boundary does not resolve redistribution rights when publishing the Git
+repository itself. The project license does not relicense third-party text or
+data; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+
+## RPP
+
+- The annotated tree and schema extraction notes derive from
+  [DDDPG/ReaperDoc](https://github.com/DDDPG/ReaperDoc), commit `32047bb`, as
+  recorded by the source project. `annotated_tree.md` derives from
+  `rppStructure.ts`; `extract_report.json` describes the schema extraction.
+  The recorded source has no established redistribution license.
+- Blob-editing guidance, formulas and the gap registry are source-project
+  synthesis. Versioned observations and cited sources remain in the notes.
+- The structured schema has one copy in
+  [the runtime package](../src/rac/data/knowledge/rpp_schema.json).
+- The annotated tree is illustrative text, not an executable project fixture.
+  Its private sample-media path was replaced with a generic example path.
+
+## ReaScript and actions
+
+- The API source is Cockos's
+  [REAPER ReaScript reference](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
+  The [API index](../src/rac/data/knowledge/api_index.json) remains in the
+  runtime package. API pitfalls and CLI notes are source-project summaries
+  and historical observations.
+- `actions_index.json` identifies its source as
+  `ACTIONS_List_of_Reaper_Actions_including_undocumented_ones.txt`,
+  REAPER 5.941 with SWS 2.9.7, from the
+  [Ultraschall API project](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper).
+  It is a historical lookup aid. No separate redistribution grant for this
+  extracted index was established in the import record.
+- `render_internals.md` attributes its underlying `RENDER_*` notes to
+  **Meo-Ada Mespotine / Ultraschall** and labels them **cc-by-nc**. That
+  attribution and restriction are retained. The source did not record a full
+  license version or document URL; no broader permission is asserted here.
+
+## JSFX
+
+The handbook, JSON reference and three source-project examples cite the
+[Cockos JSFX Programming Reference](https://www.reaper.fm/sdk/js/), captured on
+2026-07-31 for REAPER 7.78. Canonical documentation is available for
+[syntax](https://www.reaper.fm/sdk/js/basiccode.php),
+[variables](https://www.reaper.fm/sdk/js/vars.php),
+[MIDI](https://www.reaper.fm/sdk/js/midi.php),
+[files](https://www.reaper.fm/sdk/js/file.php),
+[strings](https://www.reaper.fm/sdk/js/strings.php) and
+[advanced functions](https://www.reaper.fm/sdk/js/advfunc.php).
+
+Raw page copies and the second complete SDK prose copy were not imported.
+The three `.jsfx` files retain their imported bytes. The handbook documents
+known illustrative limits rather than presenting them as production-tested
+DSP. No independent redistribution grant is claimed for upstream descriptions.
+
+## Lua
+
+The source project's `lua/entry.lua` and all 11 `lua/stdlib/*.lua` files were
+identical to the package resources at import. Their existing project notices
+continue to apply; no duplicate template tree is maintained.
+
+The inspector body and builder under [lua/examples/](lua/examples/) were
+authored for this standalone repository and use its project-code license.
+Their source is distinct from the imported knowledge files.

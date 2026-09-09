@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-09-09",
+  "source_workspace": "reaper_agent_cli",
+  "retrieval": "Scoped rsync import from the supplied source project; source files were not modified",
+  "overview_source": {
+    "source": "README.md",
+    "sha256": "fcfb7f513a5ae1afecbd4039ff8ab5802ed34fb014db99e7c0c0037939a5ea71",
+    "handling": "Architecture summarized in reference/README.md; internal progress and pipeline paths omitted"
+  },
+  "imported": [
+    {
+      "source": "docs/knowledge/reascript/actions_index.json",
+      "destination": "reference/knowledge/reascript/actions_index.json",
+      "source_sha256": "6f8620324fa31b8632ec2525390a336525ac9074bbc39a6b083d22f604eb9092",
+      "destination_sha256": "bf570b0c62b85436f4065acf16d8e9a4261dcfc8f6fb1ac015913b41f1ab42f6",
+      "edits": [
+        "Corrected numeric action-ID validation guidance; retained action records and historical version metadata"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/api_pitfalls.json",
+      "destination": "reference/knowledge/reascript/api_pitfalls.json",
+      "source_sha256": "6dae30f60f9ffaabf31fa62a698844338ede443dc4b3f67b967eedf184fe9399",
+      "destination_sha256": "2d510a463d416ca8b9fef538b27d21aef960b55bbf137f16f3086cb9bf7ac7fd",
+      "edits": [
+        "Replaced internal milestone labels with scoped historical evidence descriptions; removed complete-coverage claim and qualified dirty-state behavior"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/cli_behavior.md",
+      "destination": "reference/knowledge/reascript/cli_behavior.md",
+      "source_sha256": "845b85717635a4a9f171dfd04486d3915c2eed152a3d0e970fe5f2f0611f5bb6",
+      "destination_sha256": "5e19177760cf3ee52f3d29d3f49fa46a3f4dd3f940da78ef87bb02ffb78a811b",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Curated version-specific observations; removed obsolete background/kill recipe and internal tracker references; linked maintained runner guidance and clarified limited proof/hash/default behavior"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/render_internals.md",
+      "destination": "reference/knowledge/reascript/render_internals.md",
+      "source_sha256": "a90dccf14781e7cec8d410a1820f9376f1db014265a41bedc0105d59d8dd7e15",
+      "destination_sha256": "282c766019d738626e239374d5662f6d8ed61cebc801c8d4725696efec6d0936",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Retained Ultraschall attribution and cc-by-nc restriction; distinguished RPP fields from API properties and preset files; corrected numeric action-index inference",
+        "Checked RENDER_FORMAT, RENDER_SRATE and RENDER_FILE against the official ReaScript API documentation on 2026-09-09; no live render validation performed"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/README.md",
+      "destination": "reference/knowledge/reascript/jsfx/README.md",
+      "source_sha256": "191656f4b1b4df60982c03288af98262a985dc28b1b330740f285fac5acdd2cb",
+      "destination_sha256": "4466c708226db7e486620831b5f0c5ec7b0a63dbcbb0c682cf7f1743e3dd62e2",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Added source-example limitations for zero-delay buffering, feedback tails and SVF stability; fixed local navigation and limited serialization/diff claims; example file bytes unchanged"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/jsfx_reference.json",
+      "destination": "reference/knowledge/reascript/jsfx/jsfx_reference.json",
+      "source_sha256": "268545f37a48a1bd93295855c0001cc7d00731609ff10675c2ca2b82d4e64864",
+      "destination_sha256": "53115c0a93137296010f2bebb19b9e1cae8f44b9febd524d544cfe8f462528be",
+      "edits": [
+        "Replaced internal probe identity with historical source observation; fixed repository-local denylist path; qualified sample slot-count and validation claims"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/examples/delay_basic.jsfx",
+      "destination": "reference/knowledge/reascript/jsfx/examples/delay_basic.jsfx",
+      "source_sha256": "4c3ad0cb0283c70f21734d35e0e6ef71b736398254532d41f38e3e2ef57bba8f",
+      "destination_sha256": "4c3ad0cb0283c70f21734d35e0e6ef71b736398254532d41f38e3e2ef57bba8f",
+      "edits": []
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/examples/gain_simple.jsfx",
+      "destination": "reference/knowledge/reascript/jsfx/examples/gain_simple.jsfx",
+      "source_sha256": "c460be0060026ec6453a5dd914228af25eaefc9ffc1dbf7e366a76b976ee681d",
+      "destination_sha256": "c460be0060026ec6453a5dd914228af25eaefc9ffc1dbf7e366a76b976ee681d",
+      "edits": []
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/examples/midi_monitor.jsfx",
+      "destination": "reference/knowledge/reascript/jsfx/examples/midi_monitor.jsfx",
+      "source_sha256": "e3bacf93bea6eb0329344f194359a73b92f3fb75192486c50c25144e3aa7e037",
+      "destination_sha256": "e3bacf93bea6eb0329344f194359a73b92f3fb75192486c50c25144e3aa7e037",
+      "edits": []
+    },
+    {
+      "source": "docs/knowledge/rpp/annotated_tree.md",
+      "destination": "reference/knowledge/rpp/annotated_tree.md",
+      "source_sha256": "59190d47eae097ddfda18750e386a3d54599d5c452594859aa87417aa1ace61e",
+      "destination_sha256": "21d2b35d9e9a05eb013a2ddc232db20b4efdeb4cc9684a7ab73d591d492d9c52",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Replaced private sample-media absolute path with /path/to/example.mp3",
+        "Linked canonical schema and clarified illustrative annotations/placeholders are not an executable project fixture"
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/blob_denylist.md",
+      "destination": "reference/knowledge/rpp/blob_denylist.md",
+      "source_sha256": "2d6e27166f58f847467c29f955557101038eecb99f847d4406805292a1b6931d",
+      "destination_sha256": "a4df0488b337aa519b95e7b8d8a731233e3b942fba1d4bf8473c1da66c4d230c",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Rewrote as public opaque-block editing guidance; removed internal milestones; clarified GUID references and limits of semantic diff"
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/gap_registry.md",
+      "destination": "reference/knowledge/rpp/gap_registry.md",
+      "source_sha256": "27822febf993034502ce8656df02c0333318c74548702894da7b8c05f4230cc1",
+      "destination_sha256": "f7445aba177af2b032f9149a4b53e73a3618ed4ce47e8b7bc4a3f9a1bdd4dd33",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Removed internal tracker and missing-file instructions; retained unresolved schema gaps and scoped observations; corrected document-only JSFX evidence label"
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/semantics_formulas.md",
+      "destination": "reference/knowledge/rpp/semantics_formulas.md",
+      "source_sha256": "c92204d35963d09a4bffd2b3458f42b77804417f7ae14d207127bdcb50999461",
+      "destination_sha256": "335e0758a5c8ccd9018882fa73440c882334762a97773d948b09111c060d13e1",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Removed internal milestones; scoped envelope observations to volume, added logarithm domain and fixed constant-source PPQ and playback-rate overgeneralization"
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/extract_report.json",
+      "destination": "reference/knowledge/rpp/extract_report.json",
+      "source_sha256": "3c3ae33fbfb26b4af8cd1281d7630ddaf0fec0cbaa01fd2142ebd94ab322d45f",
+      "destination_sha256": "3c3ae33fbfb26b4af8cd1281d7630ddaf0fec0cbaa01fd2142ebd94ab322d45f",
+      "edits": []
+    }
+  ],
+  "already_bundled": [
+    {
+      "source": "docs/knowledge/reascript/api_index.json",
+      "canonical": "src/rac/data/knowledge/api_index.json",
+      "comparison": "identical at import",
+      "sha256": "bce7d856221555d036d37e68d923357008c3602770c0e7da6286f78c6e25fcc4"
+    },
+    {
+      "source": "docs/knowledge/rpp/rpp_schema.json",
+      "canonical": "src/rac/data/knowledge/rpp_schema.json",
+      "comparison": "identical at import",
+      "sha256": "98b68a21272fa976ef2b0a42e8c022ee614ceb4d96d8d7c26fb7cb077285865f"
+    },
+    {
+      "source": "lua/entry.lua",
+      "canonical": "src/rac/data/lua/entry.lua",
+      "comparison": "identical at import",
+      "sha256": "b2c74e382efa0fc7a86bdf13d3629796848ea39c691f244c506eb4ffd693c9fc"
+    },
+    {
+      "source": "lua/stdlib/env.lua",
+      "canonical": "src/rac/data/lua/stdlib/env.lua",
+      "comparison": "identical at import",
+      "sha256": "e0fd4c6100eeef98a2454f355b4e57a10c0517aa900f1468df693298a66bc387"
+    },
+    {
+      "source": "lua/stdlib/fx.lua",
+      "canonical": "src/rac/data/lua/stdlib/fx.lua",
+      "comparison": "identical at import",
+      "sha256": "3428714f105513042b0a99e992cdc30c86f3420b6e1558a43eee3f9dbbc0e1e6"
+    },
+    {
+      "source": "lua/stdlib/item.lua",
+      "canonical": "src/rac/data/lua/stdlib/item.lua",
+      "comparison": "identical at import",
+      "sha256": "40fc14d339cdf0188c5f1876b173efe4baf9d64781e905c33321616fc8c69817"
+    },
+    {
+      "source": "lua/stdlib/marker.lua",
+      "canonical": "src/rac/data/lua/stdlib/marker.lua",
+      "comparison": "identical at import",
+      "sha256": "618a7c8206e59ecf9a6723aaab60e4adfb3b6af5d2e2b9396f49de67081a4c4c"
+    },
+    {
+      "source": "lua/stdlib/midi.lua",
+      "canonical": "src/rac/data/lua/stdlib/midi.lua",
+      "comparison": "identical at import",
+      "sha256": "481b403c3e42927e657029db989bfe1b2d58e0ef236fb4f38104a1cc45ad99d4"
+    },
+    {
+      "source": "lua/stdlib/project.lua",
+      "canonical": "src/rac/data/lua/stdlib/project.lua",
+      "comparison": "identical at import",
+      "sha256": "481ac6c01d3a0ed83de580ad84221efcfbb6343c6c0025add4d26cd076628748"
+    },
+    {
+      "source": "lua/stdlib/render.lua",
+      "canonical": "src/rac/data/lua/stdlib/render.lua",
+      "comparison": "identical at import",
+      "sha256": "08d6070d50cbe12469555166790f08c14c9c79cf28eb480c0e02271d0517ce80"
+    },
+    {
+      "source": "lua/stdlib/routing.lua",
+      "canonical": "src/rac/data/lua/stdlib/routing.lua",
+      "comparison": "identical at import",
+      "sha256": "30abee34052731c6661de085d51f5daabaf82d2068e533f7df2881f7b1c916f7"
+    },
+    {
+      "source": "lua/stdlib/snapshot.lua",
+      "canonical": "src/rac/data/lua/stdlib/snapshot.lua",
+      "comparison": "identical at import",
+      "sha256": "cf3cb782e36ed2c437cb1b7b3c6a9edf0b680964fae2a9974544281239b4241f"
+    },
+    {
+      "source": "lua/stdlib/take.lua",
+      "canonical": "src/rac/data/lua/stdlib/take.lua",
+      "comparison": "identical at import",
+      "sha256": "b174c85950a837e822a00e596925e7dc5ea262bf4ad52d19cc276db7e78995ea"
+    },
+    {
+      "source": "lua/stdlib/track.lua",
+      "canonical": "src/rac/data/lua/stdlib/track.lua",
+      "comparison": "identical at import",
+      "sha256": "c1f0d7ccfe35a5a83dc4acb346b564046d4052dbb5a71a31a2bb4edb3614b38d"
+    }
+  ],
+  "not_imported": [
+    {
+      "source": "docs/knowledge/jsfx/JSFX_SDK_Reference.md",
+      "reason": "Full copied SDK prose overlaps the compact JSFX handbook; official URL linked in SOURCES.md"
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/raw_official/",
+      "reason": "Raw copies of official pages; canonical URLs retained instead"
+    },
+    {
+      "source": "docs/knowledge/rpp/raw/",
+      "reason": "Raw upstream extraction intermediates overlap the bundled schema and imported annotated tree"
+    },
+    {
+      "source": "docs/knowledge/reascript/extract_api_report.json",
+      "reason": "Generator report adds no knowledge beyond bundled API index"
+    },
+    {
+      "source": "docs/knowledge/mcp_alignment.md",
+      "reason": "Internal integration and development-progress records are outside standalone reacli scope"
+    }
+  ],
+  "editorial_reviewed_on": "2026-09-09",
+  "hash_policy": "source_sha256 is the immutable import baseline; destination_sha256 describes the current curated repository file. Source paths are relative to source_workspace.",
+  "authored": [
+    {
+      "destination": "reference/lua/examples/build_inspector.py",
+      "destination_sha256": "fc2ead3c89737093f95b8f089308d05b4c563998078b633a89f72040834a3704",
+      "description": "Standalone-repository example builder using the installed entry template; syntax validation and exclusive output creation"
+    },
+    {
+      "destination": "reference/lua/examples/inspect_project.body.lua",
+      "destination_sha256": "74fb284ee7ebdd5c38a9b03369ddc2b66aa486169c14328d5c7aac88b3b290c4",
+      "description": "Standalone-repository read-only project inspector body"
+    }
+  ]
+}

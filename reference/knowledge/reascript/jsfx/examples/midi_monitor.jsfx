@@ -1,0 +1,54 @@
+// midi_monitor.jsfx — MIDI 监视器 (note-on 计数 + 最近事件显示)
+// 知识点: in_pin/out_pin none / @block 处理 MIDI / midirecv drain+透传范式 /
+//         sliderchange 刷新控件 / ext_noinit 保状态 / 位运算与 hex 字面量
+desc:MIDI Monitor (note counter)
+
+// 纯 MIDI 效果器: 声明无音频输入输出, 宿主可做处理优化 (官方建议)
+in_pin:none
+out_pin:none
+
+// 监控值通过滑参显示 (不依赖 @gfx; gfx_* 函数族不在本知识包抓取范围)
+slider1:0<0,255,1>Last status byte
+slider2:0<0,255,1>Last data1
+slider3:0<0,255,1>Last data2
+slider4:0<0,1000000,1>Note-on count
+slider5:0<0,15,1>Last channel
+
+@init
+// 置 1: 播放开始/停止不再重跑 @init, 计数器不会被清零
+// 代价: srate 在 @init 可能不准 —— 本效果不用 srate, 无影响
+ext_noinit = 1;
+
+@block
+// 官方强烈推荐: MIDI 事件处理放 @block
+// 铁律: 只要调用了 midirecv*, 就必须收完(drain)所有事件,
+//       不消费的事件要原样 midisend 透传, 否则事件丢失
+while (midirecv(offset, msg1, msg2, msg3)) (
+  // msg1 = 状态字节: 高 4 位类型, 低 4 位通道
+  // $xF0 / $x90 是 EEL2 十六进制字面量写法
+  status = msg1 & $xF0;
+  chan   = msg1 & $x0F;
+
+  // 记录最近一个事件
+  slider1 = msg1;
+  slider2 = msg2;
+  slider3 = msg3;
+  slider5 = chan;
+
+  // note-on: status 0x90 且 velocity != 0
+  // (velocity=0 的 0x90 是通行的 note-off 替代写法, 不计数)
+  status == $x90 && msg3 != 0 ? (
+    slider4 += 1;
+  );
+
+  // 全部事件原样透传 (本效果只观察, 不过滤)
+  midisend(offset, msg1, msg2, msg3);
+);
+
+// 在 @slider 之外改写了 sliderX, 必须调 sliderchange() 通知宿主刷新控件显示
+// (要录成自动化则用 slider_automate(); 这里只是监视, 不该产生自动化)
+sliderchange(slider1);
+sliderchange(slider2);
+sliderchange(slider3);
+sliderchange(slider4);
+sliderchange(slider5);

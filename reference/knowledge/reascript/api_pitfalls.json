@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "generated": "2026-07-31",
+    "note": "Historical source observations: live=source-project host test; doc=official documentation; incident=reported workflow failure. Not individually revalidated for this release.",
+    "coverage": "Selected ReaScript functions used in source-project operations; not a complete API reference."
+  },
+  "pitfalls": {
+    "ScaleFromEnvelopeMode": {
+      "pitfall": "方向: raw->linear (读方向)。用于写入会得到 mode=1 时的 0.0 (-inf dB)",
+      "correct_pair": "写入用 ScaleToEnvelopeMode (linear->raw)",
+      "masking_hazard": "mode=0 时两方向恒等, 写错方向被掩盖 (自洽假绿)",
+      "verified": "live 2026-07-31 (DB2SLIDER 对照)"
+    },
+    "ScaleToEnvelopeMode": {
+      "pitfall": "方向: linear->raw (写方向)",
+      "evidence": "DB2SLIDER(-6) == ScaleToEnvelopeMode(1, 0.501187) == 592.848336",
+      "verified": "live"
+    },
+    "CountEnvelopePoints": {
+      "pitfall": "单返回值; '_, n = CountEnvelopePoints(env)' 得到 nil",
+      "verified": "live (source envelope test)"
+    },
+    "EnumProjectMarkers": {
+      "pitfall": "枚举序号横跨 marker+region 全集; 只遍历 num_markers 会漏 region 之后的 marker",
+      "correct": "遍历 0..(num_markers+num_regions-1)",
+      "verified": "doc + live"
+    },
+    "InsertMedia": {
+      "pitfall": "返回值语义不可靠 (integer); 失败判定应用 item 计数增量",
+      "side_effects": "移动 edit cursor + 改变轨道选中态 (用完应恢复)",
+      "verified": "live"
+    },
+    "Main_OnCommand": {
+      "pitfall": "envelope 显示类 action (40406/40407/40867) 是 toggle 且作用于当前选中轨; 已存在时调用会反向关闭",
+      "correct": "先 GetTrackEnvelopeByName 查存在; 调前 SetOnlyTrackSelected; 用后恢复选中态",
+      "verified": "live (source envelope test)"
+    },
+    "MarkProjectDirty": {
+      "pitfall": "源测试中的部分 API 修改未置 dirty; 显式置位后用 40004 退出可能弹保存确认对话框。不能推广为所有 API 的默认行为。",
+      "correct": "脚本显式存盘后再退出",
+      "verified": "live (REAPER 7.62/macOS, explicit dirty flag before quit)"
+    },
+    "IsProjectDirty": {
+      "pitfall": "部分 API 修改 (插轨/设值/打marker) 不置 dirty 标志",
+      "verified": "live (REAPER 7.62/macOS)"
+    },
+    "TrackFX_AddByName": {
+      "pitfall": "插件缺失返回 -1 静默; instantiate=-1 已存在则返回现有索引 (幂等友好)",
+      "verified": "live"
+    },
+    "TrackFX_GetByName": {
+      "pitfall": "官方标 deprecated 但可用; 友好名 ('ReaEQ') 匹配实例名 ('VST: ReaEQ (Cockos)')",
+      "verified": "live"
+    },
+    "GetSetProjectInfo_String": {
+      "pitfall": "RENDER_PATTERN 某些流程会重置为 $project; 渲染输出落点渲后核对",
+      "verified": "incident (historical source workflow)"
+    },
+    "Main_SaveProjectEx": {
+      "pitfall": "路径必须绝对; 目标目录不存在时报错对话框但脚本继续、保存静默失败 — 必须文件存在性复查; 防 stale 用唯一临时路径+os.rename",
+      "verified": "live (REAPER 7.62/macOS, missing save directory)"
+    },
+    "CountTracks/GetTrack": {
+      "index_base": 0,
+      "pitfall": "越界 GetTrack 返回 nil (不抛错)",
+      "verified": "doc + live"
+    },
+    "get_action_context": {
+      "pitfall": "CLI 位置参数启动的脚本 cmdID=-1 (不在 action list)",
+      "verified": "doc"
+    },
+    "GetSetMediaTrackInfo_String": {
+      "pitfall": "P_NAME 等 string 属性需 b_set=true 才写入",
+      "verified": "live"
+    }
+  }
+}

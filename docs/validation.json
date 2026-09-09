@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-09",
+  "version": "0.1.0",
+  "ci_execution": "not run on GitHub",
+  "test_counts": {
+    "total": 164,
+    "offline": 160,
+    "live": 4
+  },
+  "environments": [
+    {
+      "os": "macOS 15.5",
+      "arch": "arm64",
+      "python": "3.14.6",
+      "reaper": "7.62/macOS-arm64",
+      "lua": "5.4.9",
+      "installation": "editable",
+      "passed": 164,
+      "skipped": 0,
+      "seconds": 44.46
+    },
+    {
+      "os": "macOS 15.5",
+      "arch": "arm64",
+      "python": "3.10.20",
+      "reaper": "7.62/macOS-arm64",
+      "lua": "5.4.9",
+      "installation": "wheel; isolated Python outside checkout",
+      "passed": 164,
+      "skipped": 0,
+      "seconds": 42.36
+    },
+    {
+      "os": "Linux",
+      "arch": "x86_64",
+      "python": "3.13.11",
+      "reaper": "7.77/linux-x86_64",
+      "lua": "5.4.4",
+      "installation": "fresh environment; installed package",
+      "passed": 164,
+      "skipped": 0,
+      "seconds": 18.89
+    }
+  ],
+  "readme_examples": {
+    "offline": true,
+    "lua_generation": true,
+    "live_save_and_state_assertion": true
+  },
+  "native_macos_resource_integrity": {
+    "files_checked": 2390,
+    "changed": 0,
+    "added": 0,
+    "removed": 0
+  },
+  "archive_checks": {
+    "wheel": true,
+    "sdist": true,
+    "reference_excluded": true,
+    "runtime_files_verified": 43
+  },
+  "limitations": [
+    "No Intel Mac hardware or other REAPER versions certified",
+    "Third-party plugins and MP3 not certified",
+    "Legacy copied-app mode timed out",
+    "Dirty MIDI projects can require bounded process teardown after a verified save-copy"
+  ]
+}

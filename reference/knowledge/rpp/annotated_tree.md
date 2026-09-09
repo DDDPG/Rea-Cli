@@ -1,0 +1,350 @@
+> **历史知识快照 / Source snapshot**（整理于 2026-09-09）。下文保留原作者的版本、日期和验证标记，
+> 不代表本次已在当前 macOS 或 Linux 上复验。版本与证据边界见
+> [知识库索引](../../README.md)，当前启动方式见[环境文档](../../../docs/environment.md)。
+
+# RPP 注释树（annotated_tree）
+
+> 来源: ReaperDoc rppStructure.ts @ 32047bb | 生成: 2026-07-30
+> ReaperDoc 注释树样例（上游人工维护的 RPP 结构示例，逐行注释）。
+> 读 RPP 时对照本文件理解结构；字段语义参考
+> [结构化 schema](../../../src/rac/data/knowledge/rpp_schema.json)。
+> 本文含注释、省略/占位插件数据和示意 GUID，不是可以直接打开的工程 fixture。
+
+```
+<REAPER_PROJECT> 0.1 "7.48/macOS-arm64" 1766225573
+  TITLE "Project Title"
+  AUTHOR KDW
+  <NOTES 0 0
+    |This is Project Settings Note
+  >
+  RIPPLE 0 5
+  GROUPOVERRIDE 1 0 0 0
+  AUTOXFADE 192
+  ENVATTACH 1
+  MIXERUIFLAGS 16 3
+  PEAKGAIN 1.21
+  PANLAW 1
+  PANMODE 5
+  CURSOR 16.552
+  VZOOMEX 6.86831951 0
+  RECMODE 1
+  SMPTESYNC 0 30 90 45 1000 300 0 -0.00332 1 23 12
+  LOOP 0
+  RECORD_PATH "Audio files" ""
+  RENDER_PATTERN $project-mix
+  COMP 1 "Comp 1"
+  TEMPO 116 4 4 0
+  PLAYRATE 1 0 0.75 1.5
+  SELECTION 194.486 213.107
+  SELECTION2 194.486 213.107
+  MASTERAUTOMODE 0
+  MASTERTRACKHEIGHT 74 0
+  MASTERPEAKCOL 100
+  MASTERMUTESOLO 0
+  MASTERTRACKVIEW 0 1 0.25 0.647727 0 0 0 0 0 0 0 0 0 0 1
+  MASTERHWOUT 0 0 1 0 0 0 0 -1
+  MASTER_NCH 2 66
+  MASTER_VOLUME 1 0 -1 -1 1
+  MASTER_PANMODE -1
+  MASTER_FX 1
+  MASTER_SEL 0
+  <MASTERFXLIST>
+    WNDRECT 763 1603 981 394
+    SHOW 0
+    LASTSEL 0
+    DOCKED 0
+  >
+  <MASTERPLAYSPEEDENV
+    EGUID {2572283B-9128-E444-84BF-7A8A5EBFF77A}
+    ACT 0 -1
+    VIS 0 1 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 0 -1 -1
+  >
+  <TEMPOENVEX
+    EGUID {B247A57F-9961-BE4C-90A0-D72FFBB10EE0}
+    ACT 0 -1
+    VIS 1 0 1
+    LANEHEIGHT 27 0
+    ARM 0
+    DEFSHAPE 1 -1 -1
+  >
+  MARKER 1 10.344 "" 1 0 1 B {GUID} 0
+  <PROJBAY
+  >
+  <TRACK {CD21E59C-94D9-1F4A-959F-69580F714C49}
+    NAME receive
+    PEAKCOL 33513868
+    BEAT -1
+    AUTOMODE 0
+    PANMODE 6
+    PANLAWFLAGS 3
+    VOLPAN 1 -0.596 1 -1 0.196
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 1 0.314286 1 0.675958 0 0 0 0
+    FIXEDLANES 8 0 0 0 0
+    LANESOLO 1 0 0 0 0 0 0 0
+    LANENAME C1 lane2
+    LANEREC 0 0 0
+    SEL 0
+    REC 1 1024 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 0 0 0 0 0 0 0
+    INQ 0 0 0 0.5 99 0 0 100
+    NCHAN 4
+    <RECCFG 0
+      ZXZhdyEkAQ==
+    >
+    FX 1
+    TRACKID {CD21E59C-94D9-1F4A-959F-69580F714C49}
+    PERF 0
+    AUXRECV 1 0 1 0 0 0 0 0 0 -1:U 0 -1 ''
+    MIDIOUT -1
+    MAINSEND 1 0
+    HWOUT 2 0 1 0 0 0 0 -1:U -1
+    LOCK 0
+    FREEMODE 0
+    ITEMLANES 8
+    <FXCHAIN
+      WNDRECT 488 1146 1181 626
+      SHOW 0
+      LASTSEL 1
+      DOCKED 0
+      BYPASS 1 0 0
+      <VST "VST3: bx_digital V3 (Plugin Alliance)" "bx_digital V3.vst3" 0 "" 1846886468{5653546278643362785F646967697461} ""
+        REAVbu5e7f4CAAAAAQAAAAAAAAACAAAAAAAAAAIAAAABAAAAAAAAAAIAAAAAAAAAIBQAAAEAAAD//wAA
+        CAoAAAEAAABCWENrAAAKAEVmY3QAAAnsUG10cgAACdQAAAncAAAAfQAAAAQAAAAAQnlwYQAAAAAAAAAAAAAAAAAAAABCYW5rAAAAAAAAAAAAAAAAAAAAAEduSW4/AAAA
+        dGhpcyBpcyBqdXN0IG1vY2sgZGF0YS4uLiBwbGVhc2UgaW1hZ2luZSBhIHJlYWwgcGx1Z2luIHN0YXRlIGhlcmU=
+      >
+      WET 0.329946 0
+      FLOATPOS 421 1163 1024 731
+      FXID {33537175-3F37-6E48-9243-5A83ED47FABD}
+      <PARMENV 0:1115254881 0 1 0.5 "Bypass / bx_digital V3"
+        EGUID {4DAEBD23-A6E5-EA41-973A-A17D6336064D}
+        ACT 0 -1
+        VIS 0 1 1
+        LANEHEIGHT 0 0
+        ARM 0
+        DEFSHAPE 1 -1 -1
+        PT 4.138 0 1
+      >
+      WAK 0 0
+      BYPASS 0 0 0
+      <VST "VST3: Pro-Q 4 (FabFilter)" "FabFilter Pro-Q 4.vst3" 0 "" 934538646{ED57BD725C60467EA64DD2F400758B6F} ""
+        lu2zN+5e7f4EAAAAAQAAAAAAAAACAAAAAAAAAAQAAAAAAAAACAAAAAAAAAACAAAAAQAAAAAAAAACAAAAAAAAAMYKAAABAAAAAAAAAA==
+        eAkAAAEAAABGRkJTAQAAAFgCAAAAAIA/AAAAAHia1EAAAAAAAAAAPwAAAAAAAABAAAAAQAAAgD8AAAAAAACAPwAAgD8AAIA/AABIQgAASEIAAAAAAAAAAHia1EDczzhB
+        YW5vdGhlciBwbGFjZWhvbGRlciBmb3IgdGhlIHZzdCBkYXRhIGJsb2NrIHdoaWNoIGlzIHR5cGljYWxseSB2ZXJ5IGxvbmc=
+      >
+      PRESETNAME "Program 1"
+      FLOATPOS 794 1374 950 623
+      FXID {26C746C5-5741-9F41-A20F-1EFB1A52E098}
+      <PARMENV 737:bypass 0 1 0.5 "Bypass / Pro-Q 4"
+        EGUID {F54364D5-ED6E-D84E-BDE0-BFEAA484745E}
+        ACT 0 -1
+        VIS 0 1 1
+        LANEHEIGHT 0 0
+        ARM 0
+        DEFSHAPE 1 -1 -1
+        PT 4.138 0 1
+      >
+      WAK 0 0
+    >
+    <VOLENV2  # Track post-FX volume envelope example
+      EGUID {60736C76-8B79-B04B-B199-74AFC22A6F70}
+      ACT 0 -1
+      VIS 0 1 1
+      LANEHEIGHT 0 0
+      ARM 0
+      DEFSHAPE 0 -1 -1
+      VOLTYPE 1
+      PT 4.138 1 0
+    >
+    <MUTEENV  # Track mute envelope example
+      EGUID {8EA5F0AD-160F-5149-BA05-51A5B0DB1D3C}
+      ACT 0 -1
+      VIS 0 1 1
+      LANEHEIGHT 0 0
+      ARM 0
+      DEFSHAPE 0 -1 -1
+      PT 4.138 0 0
+    >
+    <ITEM
+      POSITION 2.0689
+      SNAPOFFS 0
+      LENGTH 2.0689
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 2 0 0 2 0 1 1
+      FADEOUT 1 0.01 0 3 0 0 0
+      MUTE 0 0
+      BEAT 1
+      SEL 0
+      YPOS 0 1 0
+      IGUID {455A7CC8-0CE8-D049-9BEC-44911C9736A2}
+      IID 4
+      COMP 1 1 0
+      NAME test_audio.mp3
+      VOLPAN 1 0 1 1
+      SOFFS 0
+      PLAYRATE 1.000 1 33 -65536 0 0.0023
+      CHANMODE 0
+      GUID {4BCE0917-FE2F-F24E-8B32-12144D8D0F44}
+      COLOR 0
+      TKM 22.24137931034483 take_marker 0 0
+      RESOURCEFN "/path/to/example.mp3"
+      IMGRESOURCEFLAGS 0
+      GROUP 0
+      FADEFLAG 0
+      FADELPF 0
+      <SOURCE MP3
+        FILE "/path/to/project/audio/test_audio.mp3" 1
+      >
+      <PANENV
+        ACT 0 -1
+        VIS 0 1 1
+        PT 0 0 0
+        PT 2.069 0 0
+      >
+      TAKE SEL
+      NAME "test_audio.wav"
+      TAKEVOLPAN 0 1 0
+      SOFFS 0
+      PLAYRATE 2 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {ADC20F9D-1BBD-1F40-B8C8-461BF438D098}
+      <SOURCE WAVE
+        FILE "Audio files/test_audio.wav"
+      >
+      <PANENV  # Take pan envelope
+        EGUID {46E289C8-073B-AE4C-AA39-DB67D6D38C01}
+        ACT 0 -1
+        VIS 0 1 1
+        LANEHEIGHT 0 0
+        ARM 0
+        DEFSHAPE 0 -1 -1
+        PT 0 0 0
+        PT 4.13793103 0 0
+      >
+    >
+    <ITEM  # MIDI Item Example
+      <NOTES 0 0  # Item notes chunk
+        |This is an item note example
+      >
+      POSITION 4.138
+      SNAPOFFS 0
+      LENGTH 39.311
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0 0 1 0 0 0
+      FADEOUT 1 0 0 1 0 0 0
+      MUTE 0 0
+      BEAT -1
+      SEL 0
+      IGUID {1E260C1A-2185-A747-A250-1D0D4C2F15F9}
+      IID 9
+      NAME 07-MIDI
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {61D9AC0A-84AB-924A-9CAA-9C1E5A65A7BF}
+      <SOURCE MIDI
+        HASDATA 1 960 QN
+        CCINTERP 32
+        POOLEDEVTS {B8B6F3A4-D7F2-014F-980A-6185DA688A2B}
+        e 3840 90 3e 31
+        e 5760 80 3e 00
+        E 960 90 41 66
+        E 7680 80 41 00
+        E 0 90 3c 49
+        E 6720 80 3c 00
+        E 48001 b0 7b 00
+        CCINTERP 32
+        CHASE_CC_TAKEOFFS 1
+        GUID {3EA4022F-E009-BF41-9C78-A1A6097CB1CA}
+        IGNTEMPO 1 116 4 4
+        SRCCOLOR 0
+        EVTFILTER 0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1
+        VELLANE -1 100 0 0 1
+        CFGEDITVIEW 0 0.01065 61 12 0 0 0 0 0 0.5
+        KEYSNAP 0
+        TRACKSEL 0
+        CFGEDIT 1 1 0 1 0 0 1 1 1 1 1 0.125 801 1579 1744 1957 0 0 0 0 0 0 0 0 0 0.5 0 0 1 64
+      >
+    >
+  >
+  <TRACK {26E432D0-CED4-3546-A16C-C4EDA16CB87C}  # Second track with additional envelope examples
+    NAME test_trim
+    PEAKCOL 33513868
+    BEAT -1
+    AUTOMODE 0
+    PANLAWFLAGS 3
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 2 0 0 0 0
+    SHOWINMIX 1 1 0.319149 1 0 0 0 0 0
+    FIXEDLANES 9 0 0 0 0
+    SEL 0
+    REC 0 0 1 0 0 0 0 0
+    VU 64
+    TRACKHEIGHT 0 0 0 0 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {26E432D0-CED4-3546-A16C-C4EDA16CB87C}
+    PERF 0
+    AUXRECV 0 0 1 0 0 0 0 0 0 -1:U 0 -1 ''
+    MIDIOUT -1
+    MAINSEND 1 0
+    <VOLENV2
+      EGUID {60736C76-8B79-B04B-B199-74AFC22A6F70}
+      ACT 0 -1
+      VIS 0 1 1
+      LANEHEIGHT 0 0
+      ARM 0
+      DEFSHAPE 0 -1 -1
+      VOLTYPE 1
+      PT 4.138 1 0
+    >
+    <PANENV2
+      EGUID {8EA5F0AD-160F-5149-BA05-51A5B0DB1D3C}
+      ACT 0 -1
+      VIS 0 1 1
+      LANEHEIGHT 0 0
+      ARM 0
+      DEFSHAPE 0 -1 -1
+      PT 4.138 0 0
+    >
+    <WIDTHENV2
+      EGUID {7DBC4F41-BE24-D64E-A756-3C58AB195720}
+      ACT 0 -1
+      VIS 0 1 1
+      LANEHEIGHT 0 0
+      ARM 0
+      DEFSHAPE 0 -1 -1
+      PT 4.138 1 0
+    >
+    <FXCHAIN
+      WNDRECT 488 1146 1181 626
+      SHOW 0
+      LASTSEL 1
+      DOCKED 0
+    >
+  >
+  <EXTENSIONS
+    <SWSAUTOCOLOR
+      {00000000-0000-0000-0000-000000000000} 0 "" "" ""
+      {CD21E59C-94D9-1F4A-959F-69580F714C49} 59531775 "" "" ""
+      {26E432D0-CED4-3546-A16C-C4EDA16CB87C} 59531775 "" "" ""
+    >
+  >
+>
+```

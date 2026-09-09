@@ -1,0 +1,30 @@
+{
+  "source_commit": "32047bb",
+  "generated": "2026-07-30",
+  "section_count": 7,
+  "sections": {
+    "project": 39,
+    "track": 38,
+    "item": 33,
+    "take": 7,
+    "source": 12,
+    "fx": 11,
+    "envelope": 7
+  },
+  "key_count": 147,
+  "todo_keys": [
+    "project:MIXERUIFLAGS",
+    "project:SMPTESYNC",
+    "project:MASTERTRACKVIEW",
+    "project:<PROJBAY>",
+    "project:<EXTENSIONS>"
+  ],
+  "not_clear_keys": [
+    "project:VZOOMEX",
+    "project:SMPTESYNC",
+    "project:MASTERPEAKCOL",
+    "project:MASTERTRACKVIEW",
+    "project:MASTER_NCH",
+    "project:<PROJBAY>"
+  ]
+}
