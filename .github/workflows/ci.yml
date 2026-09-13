@@ -61,6 +61,16 @@ jobs:
       - run: npm run check --prefix apps/reaperdoc
       - run: npm run build --prefix apps/reaperdoc
       - run: python tools/build_release.py --output dist/candidate
+      - name: Validate candidate wheels in isolated environments
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/parser-only"
+          "$RUNNER_TEMP/parser-only/bin/python" -m pip install dist/candidate/reaper-parser/*.whl
+          (cd "$RUNNER_TEMP" && "$RUNNER_TEMP/parser-only/bin/python" -I -c 'import importlib.util; import reaper_parser; assert all(importlib.util.find_spec(name) is None for name in ("rac", "numpy", "rppxml")); text="<REAPER_PROJECT\r\n>\n"; assert reaper_parser.emit(reaper_parser.parse(text)) == text')
+          python -m venv "$RUNNER_TEMP/wheel-only"
+          "$RUNNER_TEMP/wheel-only/bin/python" -m pip install dist/candidate/reaper-parser/*.whl dist/candidate/reacli/*.whl pytest numpy soundfile
+          "$RUNNER_TEMP/wheel-only/bin/python" -I -m pytest tests/test_distribution.py tests/test_reference_distribution.py tests/conformance/test_document.py tests/test_media.py -q
+          (cd "$RUNNER_TEMP" && "$RUNNER_TEMP/wheel-only/bin/python" -I -m rac doctor --profile offline --json)
       - uses: actions/upload-artifact@v4
         with:
           name: ecosystem-candidate

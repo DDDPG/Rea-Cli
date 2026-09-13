@@ -21,7 +21,7 @@ def test_generated_consumers_are_current_and_deterministic():
 
 def test_all_adopted_fields_have_real_two_value_saved_evidence():
     source = ROOT / "schema/rpp/evidence/live-validation.json"
-    data = json.loads(source.read_text())
+    data = json.loads(source.read_text(encoding="utf-8"))
     assert len(data["probes"]) == 23
     for probe in data["probes"]:
         assert probe["ok"] and probe["values"][0] != probe["values"][1]
