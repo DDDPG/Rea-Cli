@@ -1,0 +1,5 @@
+{
+  "name": "ReaperDoc",
+  "description": "Interactive documentation for the REAPER DAW .RPP project file format parser API.",
+  "requestFramePermissions": []
+}
