@@ -117,9 +117,16 @@ def main():
         raise ValueError("Build ReaperDoc before building a candidate")
     zip_files(
         out / "reaperdoc-site.zip",
-        [(p.relative_to(site).as_posix(), p) for p in site.rglob("*") if p.is_file()],
+        [(p.relative_to(site).as_posix(), p) for p in site.rglob("*") if p.is_file()]
+        + [(name, ROOT / "apps/reaperdoc" / name)
+           for name in ("LICENSE", "THIRD_PARTY_NOTICES.md")],
     )
     shutil.copyfile(ROOT / "schema/rpp/generated/runtime.json", out / "rpp-schema.json")
+    for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
+        shutil.copyfile(ROOT / "schema/rpp" / name, out / ("rpp-schema-" + name))
+    shutil.copyfile(
+        ROOT / "docs/ecosystem/publication-audit.md", out / "publication-audit.md"
+    )
     shutil.copyfile(ROOT / "docs/ecosystem/publication.json", out / "publication.json")
     if (ROOT / "docs/ecosystem/validation.json").exists():
         shutil.copyfile(

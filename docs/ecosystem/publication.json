@@ -2,6 +2,44 @@
   "source_permissions_resolved": false,
   "package_ownership_verified": false,
   "trusted_publishing_configured": false,
-  "status": "local candidate only",
-  "reason": "No new redistribution grant or index ownership was established. Original reference provenance is retained; do not infer permissions from local builds."
+  "status": "private candidate validated; public release prerequisites unresolved",
+  "reason": "No new redistribution grant or index ownership was established. Original reference provenance is retained; do not infer permissions from local builds.",
+  "audit": "publication-audit.md",
+  "checked_date": "2026-09-13",
+  "index_checks": [
+    {
+      "index": "pypi.org",
+      "name": "reacli",
+      "http": 404
+    },
+    {
+      "index": "pypi.org",
+      "name": "reaper-parser",
+      "http": 404
+    },
+    {
+      "index": "test.pypi.org",
+      "name": "reacli",
+      "http": 404
+    },
+    {
+      "index": "test.pypi.org",
+      "name": "reaper-parser",
+      "http": 404
+    }
+  ],
+  "index_check_limit": "HTTP 404 does not prove name availability, ownership or pending publisher configuration",
+  "github": {
+    "repository": "DDDPG/Rea-Cli",
+    "visibility": "private",
+    "environments": [],
+    "workflow": "publish.yml"
+  },
+  "original_reaperdoc_license": {
+    "license": "MIT",
+    "authorized_by": "maintainer in conversation",
+    "date": "2026-09-13",
+    "scope": "maintainer-owned original code and documentation; external material excluded"
+  },
+  "accounts": "Maintainer reports no PyPI or TestPyPI account yet"
 }
