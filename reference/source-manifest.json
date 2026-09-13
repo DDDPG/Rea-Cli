@@ -257,6 +257,107 @@
       "destination": "reference/lua/examples/inspect_project.body.lua",
       "destination_sha256": "74fb284ee7ebdd5c38a9b03369ddc2b66aa486169c14328d5c7aac88b3b290c4",
       "description": "Standalone-repository read-only project inspector body"
+    },
+    {
+      "destination": "reference/README.md",
+      "destination_sha256": "65158c0c00065459088a86f68d6e1479a169009bfc9abd6f61ea72742570729d",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/README.zh-CN.md",
+      "destination_sha256": "359a977c060d771e9822c4b0bf5a20fe0717d0d105b931a94b63a0ddba425308",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/jsfx/README.md",
+      "destination_sha256": "6bd5657050a53694893dc7d0ebf3481eb599b430453d4e088fec7b9232f41ea1",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/jsfx/README.zh-CN.md",
+      "destination_sha256": "0845f06e17e6e467b094b6047915bcaa15392c79f742c72fcb793e781db16da9",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/knowledge/README.md",
+      "destination_sha256": "a5af90ab028622aad302023ccddc9bebc90abcba5edd57208c23a7163184d7fc",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/knowledge/README.zh-CN.md",
+      "destination_sha256": "a8d5781beb64d20ea3de615a4851df7f5027fa0dc75655ba4819c0b18b679aee",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/lua/README.md",
+      "destination_sha256": "ce4ee6259589ee23b552a8bc093515e93210a92042d06fc7c5e3e1d9de68ea61",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/lua/README.zh-CN.md",
+      "destination_sha256": "3563f0d3da44076e79e0e05778362127991fa184e4794473389880a9696123b3",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/reascript/README.md",
+      "destination_sha256": "28e780a5715bfd705722a3eacbb9ea8f41c9be6e9223c318fd1d85bc07ea665a",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/reascript/README.zh-CN.md",
+      "destination_sha256": "318fedb85fb2947260c74e0fb20dbf3676b03fa0f3cd28aa8b0402b5a7fa297a",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/rpp/README.md",
+      "destination_sha256": "89bea534340edafa07fed1c7d281dfc572131ed7cc23307eda6277dd570513f3",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/rpp/README.zh-CN.md",
+      "destination_sha256": "fad21cb112c47a1e593f206a3b0998c8f75b2c7b20cfd4f7f535cb91aac0426f",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/workflow/README.md",
+      "destination_sha256": "e1945ea556bbb7cfeb0196d80e3bdc437872d5910a979686c73a17495c97e926",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/workflow/README.zh-CN.md",
+      "destination_sha256": "56b856ac68276cbfdc7991e7afc64a725bc8547d79c7effb3807eeb6cfb30e9b",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "skills/README.md",
+      "destination_sha256": "28eeee538c691cae2b52c4153e38b10d59d3fa134cdbfd9cffe237e3b925de75",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "skills/reaper-agent-cli/GUIDE.zh-CN.md",
+      "destination_sha256": "93d69aaa23eb091d2340742210fa04578e79af5c9151fe52f40e73b110925127",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "skills/reaper-agent-cli/SKILL.md",
+      "destination_sha256": "f39b5860476a3cb1183504a916dd6a92e6ca287756c93135d1bd09a78fca0ba4",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "skills/reaper-agent-cli/agents/openai.yaml",
+      "destination_sha256": "50c9d4daf13d58e134b6553e5affaaab0aadf5a86ed441d124855c8fb3b9e12b",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
     }
-  ]
+  ],
+  "organization": {
+    "date": "2026-09-09",
+    "guides": "Paired English and Chinese developer contracts under reference/{workflow,rpp,reascript,lua,jsfx}; original imported evidence retained unchanged under knowledge/.",
+    "skill": "skills/reaper-agent-cli/SKILL.md; repository integration using canonical installed rac resources, not a vendored runtime",
+    "prototype_review": {
+      "source_project": "reaper-agent-cli",
+      "source": "SKILL.md",
+      "source_sha256": "d1208f1b639e07c1d31fed3a072d09064066fed2bd9a9605194b1f22760579c0",
+      "handling": "Reviewed as development input; rewritten against current rac contract. Old scripts/rac_lib and duplicate knowledge/assets not imported."
+    }
+  }
 }

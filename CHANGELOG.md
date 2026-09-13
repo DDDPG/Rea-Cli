@@ -31,6 +31,12 @@
 
 ### Reliability
 
+- Dedicated resources default to cached VST discovery; macOS seeds missing VST
+  indexes from the native resource and defaults missing CLAP paths to a local
+  directory. Explicit plugin preferences remain authoritative.
+- macOS automation commands disable Cocoa state restoration with a trailing
+  `-ApplePersistence NO`; a live regression verifies restart after SIGKILL.
+
 - Validate Lua arguments, escaping, module names and finite timeouts.
 - Preserve unrelated INI keys, unknown RPP content and line endings.
 - Use unique run directories, fresh-save checks and structured error results.

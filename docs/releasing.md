@@ -1,7 +1,8 @@
 # Release process
 
-The project is an unreleased alpha. Local build artifacts are available before
-there is a public package index entry or configured GitHub remote. The version
+The project is an unreleased alpha, maintained in the private
+[DDDPG/Rea-Cli](https://github.com/DDDPG/Rea-Cli) repository. Building locally
+does not upload code or publish packages. The version
 has one source of truth: `rac.__version__` in `src/rac/__init__.py`; setuptools
 reads it when building wheel and sdist.
 
@@ -13,10 +14,11 @@ reference collection. The project's MIT license covers project-authored code;
 it does not grant rights to imported descriptions. Archive checks establish
 package contents, not permission to distribute them.
 
-Once a hosting repository and package accounts exist:
+Before enabling package publishing:
 
-1. Add the real source, issue tracker and documentation URLs to `[project.urls]`
-   in `pyproject.toml`. Do not use example owner names in published metadata.
+1. Verify the source, issue tracker and documentation URLs in `[project.urls]`
+   in `pyproject.toml`, including the default branch. Private repository links
+   require access; decide on the intended distribution scope before publishing.
 2. Confirm access to the `reacli` project on both package indexes. Name
    availability is not ownership and is not reserved by this repository.
 3. Configure PyPI Trusted Publishing for the GitHub owner/repository,

@@ -17,6 +17,47 @@ def test_live_lua_save_and_render(tmp_path):
     assert report["status"] == "ok", report
 
 
+@pytest.mark.skipif(sys.platform != "darwin", reason="macOS window restoration regression")
+def test_live_macos_restart_after_sigkill(tmp_path):
+    import signal
+    import subprocess
+    import time
+    from rac.runner import platform, run
+    from rac.luagen import generate
+    from rac.resources import read_text
+    from rac.rpp import parse
+    from rac.verify import expect
+    resource = platform.ensure_resource(tmp_path / "resource")
+    ready = tmp_path / "ready.txt"
+    hold = tmp_path / "hold.lua"
+    hold.write_text(f'local f=assert(io.open({json.dumps(str(ready))},"w"))\n'
+                    'f:write(reaper.GetResourcePath()); f:close()\n'
+                    'local function hold() reaper.defer(hold) end\nhold()\n')
+    command = platform.build_command(platform.find_reaper(), "-nosplash", str(hold), resource=resource)
+    with (tmp_path / "hold.log").open("w") as log:
+        proc = subprocess.Popen(command, stdout=log, stderr=log, start_new_session=True)
+        try:
+            deadline = time.monotonic() + 20
+            while not ready.exists() and proc.poll() is None and time.monotonic() < deadline:
+                time.sleep(0.1)
+            assert ready.exists(), "Lua blocked before forced-stop probe"
+            assert Path(ready.read_text()).resolve() == resource.resolve()
+        finally:
+            if proc.poll() is None:
+                os.killpg(proc.pid, signal.SIGKILL)
+            proc.wait(timeout=5)
+    project = tmp_path / "input.rpp"
+    project.write_text(read_text("examples/minimal.rpp"))
+    script = generate({"ops": [{"op": "track.create", "args": [0, "after SIGKILL"]}]}, tmp_path / "restart.lua")
+    _add_runtime_probe(script)
+    saved = tmp_path / "saved.rpp"
+    proof = run(project, script, resource=resource, save_as=saved,
+                run_root=tmp_path / "runs", timeout=20)
+    assert proof.ok, proof.to_dict()
+    assert Path(proof.result["runtime"]["resource_path"]).resolve() == resource.resolve()
+    expect(parse(saved)).track_count(1).track(0).name("after SIGKILL")
+
+
 def _add_runtime_probe(script, extra=""):
     from rac.luagen import validate
     probe = ('RUN.result = RUN.result or {}\n'

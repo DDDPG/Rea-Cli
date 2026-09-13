@@ -5,6 +5,46 @@ import pytest
 from rac.runner import platform as P
 
 
+def test_native_vst_index_is_seeded_once_without_copying_preferences(monkeypatch, tmp_path):
+    monkeypatch.setattr(P, "IS_MAC", True)
+    monkeypatch.setattr(P, "IS_LINUX", False)
+    monkeypatch.setattr(Path, "home", lambda: tmp_path / "home")
+    native = Path.home() / "Library/Application Support/REAPER"
+    native.mkdir(parents=True)
+    index = native / "reaper-vstplugins_arm64.ini"
+    index.write_text("[vstcache]\nreaeq.vst.dylib=known-index\n")
+    (native / "reaper.ini").write_text("[reaper]\ncoreaudiooutdevnew=Test Output\nsecret=keep-private\n")
+    target = tmp_path / "worker"
+    P.ensure_resource(target)
+    assert (target / index.name).read_bytes() == index.read_bytes()
+    assert "secret" not in (target / "reaper.ini").read_text()
+    (target / index.name).write_text("worker-owned")
+    P.ensure_resource(target)
+    assert (target / index.name).read_text() == "worker-owned"
+
+
+def test_missing_plugin_preferences_are_migrated_without_overwriting_overrides(monkeypatch, tmp_path):
+    import configparser
+    monkeypatch.setattr(P, "IS_MAC", True)
+    monkeypatch.setattr(P, "IS_LINUX", False)
+    ini = tmp_path / "reaper.ini"
+    ini.write_text("[reaper]\naudiocfgopen=0\ncoreaudiooutdevnew=Test Output\n")
+    P.ensure_resource(tmp_path)
+    config = configparser.ConfigParser()
+    config.read(ini)
+    assert config.getint("reaper", "vst_scan") == 2
+    assert config.get("reaper", "clap_path_macos-aarch64") == str(tmp_path / "UserPlugins/CLAP")
+    first = ini.read_bytes()
+    P.ensure_resource(tmp_path)
+    assert ini.read_bytes() == first
+    ini.write_text("[reaper]\naudiocfgopen=0\ncoreaudiooutdevnew=Test Output\n"
+                   "vst_scan=0\nclap_path_macos-aarch64=/custom/plugins\n")
+    P.ensure_resource(tmp_path)
+    config.read(ini)
+    assert config.getint("reaper", "vst_scan") == 0
+    assert config.get("reaper", "clap_path_macos-aarch64") == "/custom/plugins"
+
+
 def test_macos_config_preserves_coreaudio_and_avoids_linux_settings(monkeypatch, tmp_path):
     monkeypatch.setattr(P, "IS_MAC", True)
     monkeypatch.setattr(P, "IS_LINUX", False)

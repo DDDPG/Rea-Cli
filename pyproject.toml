@@ -30,6 +30,12 @@ dependencies = ["audioop-lts>=0.2.1; python_version >= '3.13'"]
 oracle = ["rpp>=0.5"]
 dev = ["pytest>=8", "build>=1.2", "twine>=6", "rpp>=0.5"]
 
+[project.urls]
+Repository = "https://github.com/DDDPG/Rea-Cli"
+Documentation = "https://github.com/DDDPG/Rea-Cli/blob/main/docs/README.md"
+Issues = "https://github.com/DDDPG/Rea-Cli/issues"
+Changelog = "https://github.com/DDDPG/Rea-Cli/blob/main/CHANGELOG.md"
+
 [project.scripts]
 reacli = "rac.__main__:main"
 rac = "rac.__main__:main"

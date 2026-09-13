@@ -62,7 +62,35 @@ REAPER process with `-newinst` and an absolute `-cfgfile` path; it does not use
 Xvfb. Execution in a desktop-less macOS service is not covered by the recorded
 validation.
 
-### CoreAudio initialization
+### Plugin discovery and macOS window restoration
+
+When a dedicated resource has no explicit `vst_scan` preference, initialization
+sets `vst_scan=2` to disable startup scanning for new/updated VSTs. On macOS,
+missing VST indexes (`reaper-vstplugins_arm64.ini` and `reaper-vstplugins64.ini`)
+are copied from the native REAPER resource, without overwriting worker indexes.
+This permits cached plugins, including ReaEQ, to be resolved without rescanning.
+If no index exists, initialize and scan a dedicated resource once before using
+VSTs. New or updated plugins require an explicit rescan; disabling discovery
+does not prevent a plugin used by a project from loading or showing its own UI.
+
+On macOS, missing CLAP path preferences default to `<resource>/UserPlugins/CLAP`,
+rather than the system-wide directories. Existing explicit paths and `vst_scan`
+values are preserved. To prepare plugins, open the **dedicated** configuration
+in REAPER, set the desired paths, and rescan in Preferences > Plug-ins. Disable
+“Scan new/updated plug-ins on startup” again after preparing the VST index.
+Use `Pool(seed_resource_dir=...)` to distribute that prepared resource. Explicit
+CLAP paths can still cause CLAP startup scans; the default isolated path avoids
+system CLAP discovery and does not make system CLAP plugins available.
+
+macOS commands append `-ApplePersistence NO` after all REAPER arguments to
+disable Cocoa state restoration for the automation process. Putting this option
+first can prevent REAPER 7.48 from parsing `-cfgfile`; `ApplePersistenceIgnoreState`
+alone did not prevent the crash/reopen dialog on the tested machine. No global
+`defaults` setting or native saved-window state is deleted. This covers runner,
+pool and render commands. Verified on macOS 26.6.1 / REAPER 7.48 arm64; other
+macOS/REAPER combinations still need live validation.
+
+### CoreAudio settings
 
 The default resource directory is `~/Library/Caches/reacli/reaper`.
 Initialization requires `[reaper] audiocfgopen=0` and a nonempty
@@ -80,8 +108,8 @@ coreaudiobs         coreaudiobsuse
 coreaudioignorereset coreaudioignprojsr
 ```
 
-This step never modifies the native INI and does not copy scripts, plugin caches,
-or general preferences. Existing target settings are preserved. An already
+Audio seeding never modifies the native INI or copies scripts or general
+preferences. VST index seeding is described above. Existing target settings are preserved. An already
 initialized target does not need the native INI. If neither has an output
 selection, initialization reports an error with device-setup instructions.
 Linux dummy-audio settings are not added on macOS.

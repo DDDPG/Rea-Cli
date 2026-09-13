@@ -4,8 +4,23 @@ Validation uses synthetic projects and audio. Live checks run on explicitly
 prepared REAPER installations with dedicated resources; they do not use personal
 projects. CI and local live results are recorded separately.
 
-## Verified environments
+## Current macOS startup validation (2026-09-09)
 
+macOS 26.6.1 / Apple Silicon / REAPER 7.48 / Python 3.12.10 / Lua 5.4.7:
+`RAC_TEST_LIVE=1 python -m pytest -q` passed all 167 tests (162 offline,
+5 live) in 22.36 seconds. One Python `audioop` deprecation warning remained.
+The live suite includes rendering, parallel isolated resources, Unicode paths,
+relative media, ReaEQ, MIDI, colors, sends, and restart after SIGKILL.
+
+Before the startup changes, the original four live tests took 208.03 seconds:
+one passed and three timed out. Plugin scanning and a Cocoa reopen dialog were
+observed. With VST indexes seeded and startup scanning disabled, those four
+tests passed in 12.61 seconds. A separate forced-stop/restart probe completed
+the subsequent Lua edit and save in 1.01 seconds. These are local observations,
+not a guarantee for other machines or plugin sets. Linux execution was not
+retested on this machine.
+
+## Earlier validation baseline
 On 2026-09-09, the complete suite passed **164 tests without failures or skips**
 in each environment. This includes 160 offline cases and four live checks:
 

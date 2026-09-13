@@ -140,3 +140,11 @@ Keep discussion constructive and specific. Explain the behavior or evidence
 behind a concern, respect differing experience levels, and review the change
 rather than the person. Personal attacks and harassment do not belong in issues,
 reviews or other project discussions.
+
+## Developer handbook and repository skill
+
+Maintain the English and Chinese [developer guides](reference/README.md) together. Keep current invocation rules separate from original versioned evidence. Preserve source hashes and update destination hashes in `reference/source-manifest.json` when changing tracked reference content.
+
+The [repository skill](skills/reaper-agent-cli/SKILL.md) uses the installed package and these guides. Update its routing when adding topics, without vendoring rac or Lua templates. Check local links, run affected examples, validate the skill frontmatter, and build distributions to confirm `reference/` and `skills/` remain Git-only. Documentation checks do not establish new live REAPER validation.
+
+同步维护[双语开发规范](reference/README.zh-CN.md)，将当前调用约定与历史证据分开。保留来源哈希，修改纳入清单的资料后更新目标哈希。Skill 共用包内资源；变更后检查链接、相关示例、skill 格式及分发范围，不将文档检查记为实机测试。

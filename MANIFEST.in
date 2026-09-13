@@ -1,10 +1,14 @@
 include README*.md LICENSE* THIRD_PARTY_NOTICES.md CHANGELOG.md CONTRIBUTING.md SECURITY.md
 recursive-include docs *.md *.json
+recursive-include docs/assets *.png *.gif
 recursive-include scripts *.sh
 recursive-include scripts *.py
 include scripts/xvfb-run
 recursive-include examples *.py
+recursive-include examples *.md
+recursive-include examples *.lua
 recursive-include tests *.py *.rpp *.wav *.lua
 recursive-include src/rac *.lua *.ini *.json *.rpp
 prune reference
+prune skills
 global-exclude __pycache__ *.py[cod] .DS_Store

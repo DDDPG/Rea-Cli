@@ -108,4 +108,5 @@ def test_xdg_and_relative_resources(monkeypatch, tmp_path):
 def test_macos_explicit_resource_is_honored(monkeypatch, tmp_path):
     monkeypatch.setattr(P, "IS_MAC", True)
     cmd = P.build_command("REAPER", "test.lua", resource=tmp_path)
-    assert cmd == ["REAPER", "-newinst", "-cfgfile", str(tmp_path / "reaper.ini"), "test.lua"]
+    assert cmd == ["REAPER", "-newinst", "-cfgfile", str(tmp_path / "reaper.ini"), "test.lua",
+                   "-ApplePersistence", "NO"]

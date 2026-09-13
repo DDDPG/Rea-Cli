@@ -1,217 +1,258 @@
-# reacli
+<p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli icon"></p>
+<h1 align="center">Rea-Cli</h1>
 
-**Script REAPER, preserve project files, and verify what changed.**
+<p align="center"><strong>REAPER coding. REAPER executing. REAPER verifying.</strong></p>
+<p align="center">RPP as code · Lua/ReaScript · Agent integration · Project/audio verification</p>
+<p align="center">
+  English · <a href="README.zh-CN.md">简体中文</a> ·
+  <a href="docs/README.md">Documentation</a> ·
+  <a href="examples/create_project.py">Example</a>
+</p>
 
-[中文文档](README.zh-CN.md) · [Environment setup](docs/environment.md) ·
-[API guide](docs/api.md) · [Knowledge and Lua examples](reference/README.md)
+---
 
-reacli is a Python library and command-line toolkit for automating the
-[REAPER](https://www.reaper.fm/) digital audio workstation. It connects project
-editing, standalone Lua ReaScripts, REAPER's official CLI, and checks on the
-resulting project and audio. Use it in scripts, agent workflows, and integration
-tests where an exit code alone is not enough to establish success.
+Rea-Cli is a Python library, CLI, and reference environment that can be plugged
+into mainstream agentic harnesses for [REAPER](https://www.reaper.fm/). Treat RPP
+files as project source: an agent can author or modify them, `rac` can pre-check
+and inspect them, and REAPER remains the authoritative parser and execution
+environment. The library also supports Lua ReaScript authoring, isolated
+execution, and checks of the saved project or rendered audio.
 
-The current version is **0.1.0, an unreleased alpha**. Install from a checkout;
-the commands below do not assume a published PyPI package. APIs may change.
+Rea-Cli is not a complete agent harness or a persistent REAPER control server.
+Use the Python library for code-driven workflows, the CLI for checks and
+isolated execution, and the repository skill to inject Rea-Cli's project-specific
+knowledge into an agent.
 
-## What it does
+**Status:** 0.1.0 alpha. A PyPI release is being prepared; until it is published,
+install from source. The API may evolve. The distribution and CLI are named
+`reacli`; Python imports use `rac`.
 
-- **Inspect and edit `.rpp` files offline.** Parse the project tree, patch track,
-  item, and marker values, preserve untouched text and opaque plugin data, and
-  compare project structure.
-- **Prepare Lua scripts.** Generate self-contained ReaScripts from a bounded set
-  of operations, or write your own using the bundled skeleton and snippets.
-  Generated scripts receive a Lua syntax check before execution.
-- **Run and record jobs.** Launch REAPER with dedicated configuration, save a
-  separate project, and collect JSON results, logs, and input snapshots. A worker
-  pool supports concurrent jobs on Linux and macOS.
-- **Check the outcome.** Assert project state and PCM WAV properties such as
-  duration, non-silence, clipping, and a test tone's frequency.
-- **Look up REAPER knowledge.** Query bundled RPP/API indexes and browse the
-  repository's extended workflow notes and Lua examples.
+## Quick start: build a playable session
 
-REAPER is installed separately. reacli uses its official CLI and embedded Lua;
-it does not bundle REAPER or third-party plugins. Linux and macOS execution are
-supported. Windows execution is not implemented; the offline Python tools do
-not require a REAPER host.
+![From blank to a playable REAPER session, 52 numbered build states](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
 
-## Install from source
-
-Download or clone this repository, open its root directory, and use Python 3.10
-or newer:
+This walkthrough builds a self-contained, playable REAPER session from a blank
+project. After [installing from source](#installation) and configuring REAPER
+with the [environment guide](docs/environment.md), run from the repository root:
 
 ```bash
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install .
-reacli --version
+reacli init
+reacli doctor --json
+python examples/show_session.py ./demo/my-first-session
 ```
 
-On macOS, `python3` can still be the system Python 3.9. In that case, follow
-[Python setup](docs/environment.md) first and create the environment with the
-newer interpreter (for example, `python3.14 -m venv .venv`).
+Open **`demo/my-first-session/Show-Session.rpp`** in REAPER and press Play. The
+project uses embedded MIDI and REAPER's built-in **ReaSynth**, so it needs no
+audio assets or third-party instruments. Use a new output directory on each run.
+Add `--render` when you also want a local WAV preview. If ReaSynth discovery
+fails, prepare the dedicated VST index as described in the
+[environment guide](docs/environment.md#plugin-discovery-and-macos-window-restoration).
 
-The distribution and preferred command are named **`reacli`**; the Python import
-is **`rac`**. `rac` is also installed as a compatibility command, and
-`python -m rac` is equivalent. Use an isolated environment to avoid collisions
-with other packages named `rac`. Python 3.13+ installs `audioop-lts` automatically.
+For the session layout, effect settings, verification boundaries and the 52
+build checkpoints behind the GIF, see the [playable show demo guide](examples/README.md#playable-show-demo).
 
-## Quick start without REAPER
+### Offline quick start
 
-This exports a tiny empty project and the Lua templates, validates the project,
-and queries the bundled knowledge. Neither REAPER nor Lua is needed:
+Without REAPER, you can inspect a bundled empty project:
 
 ```bash
 reacli doctor --profile offline --json
 reacli resources --output ./quickstart
 reacli rpp validate ./quickstart/minimal.rpp
-reacli rpp get ./quickstart/minimal.rpp tracks
-reacli knowledge rpp track:VOLPAN
 reacli knowledge api GetTrack
 ```
 
-Validation returns `{"ok": true, "tracks": 0, "markers": 0}`. Resource export
-refuses to overwrite existing files; choose a new output directory when repeating
-the example.
+Validation reports `ok: true` and zero tracks. Resource export protects existing
+files; use a fresh output directory on reruns.
 
-You can also patch and verify this project entirely in Python:
+## Highlights
+
+| Focus | Rea-Cli | Compared with common alternatives |
+|---|---|---|
+| Turn-based agents | Designed for explicit agent turns: source in, isolated execution, artifacts and verification out | [`reapy`](https://github.com/RomeoDespres/reapy), [`reaper-daemon`](https://github.com/wretcher207/reaper-daemon), OSC and similar projects are better suited to continuous live sessions, which also carry more implicit session state |
+| REAPER API access | Keeps native Lua/ReaScript as the escape hatch. Reference material lets an agent author host-native operations without waiting for every API to become a wrapped tool | High-level wrappers and tool catalogs such as [`reaper-cli`](https://github.com/EmNudge/reaper-cli) offer ready-made commands, but their breadth becomes another maintenance surface |
+| RPP as code | Treats RPP as project source / a declarative project language. `rac` provides pre-checks, queries and diffs; REAPER is the authoritative parser and executor | RPP libraries such as [`rpp`](https://github.com/Perlence/rpp) focus on parsing and emitting files; live-control tools focus on sending host commands |
+| Verification | Connects syntax checks, saved-project assertions, execution proof and rendered-audio checks | In many live-control integrations, command transport and acceptance checks are separate concerns |
+| Harness integration | Python library, CLI and repository skill can be added to an existing agent harness; Rea-Cli does not try to replace that harness | MCP servers, daemons and standalone agents usually provide their own control surface and lifecycle |
+| Execution model | One-shot isolated runs do not require an always-on bridge for each task, while `Pool` supports independent jobs | Persistent bridges and OSC are preferable when low-latency interactive control is the actual requirement |
+
+In this workflow, large-scale RPP changes are authored by the agent or its
+surrounding harness. `rac` is the pre-check and verification layer; it does not
+replace REAPER's parser, project semantics or execution environment.
+
+## What you can do
+
+- **Work with RPP source.** Pre-check, inspect and compare tracks, items and markers;
+  preserve untouched text and opaque plugin data while the agent authors project changes.
+- **Author scripts.** Build standalone Lua from supported operations, including
+  track edits, MIDI notes, effects, sends and markers.
+- **Run REAPER.** Use isolated resources and concurrent workers, save a project
+  copy, and retain input snapshots, logs and execution proofs.
+- **Check the result.** Assert project properties and test PCM WAV duration,
+  silence, clipping and the dominant frequency of a test tone.
+- **Look up APIs and formats.** Query bundled indexes or explore the repository's
+  [developer handbook](reference/README.md).
+
+The workflow is simple:
+
+```text
+Agent / Python / CLI → RPP or Lua source → rac pre-check → REAPER → saved project / audio → verification
+```
+
+## Installation
+
+Use **Python 3.10+** in a virtual environment. From the source directory:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install .
+reacli --version
+```
+
+REAPER is installed separately. Requirements depend on the work:
+
+- **Offline RPP checks:** Python only.
+- **Lua generation:** Lua 5.3 or 5.4 with `luac` for syntax checks.
+- **Live execution:** REAPER 7.x on macOS or Linux. macOS needs a configured
+  CoreAudio output; Linux needs the documented libraries and an X display or Xvfb.
+
+On macOS, check `python3 --version`: the system interpreter may still be 3.9.
+Homebrew users can install a newer Python and `lua@5.4`, then create the environment
+with that Python. See the [environment guide](docs/environment.md) for platform
+setup, executable discovery and troubleshooting.
+
+## A small Python example
+
+This example uses the `quickstart` resources exported above. It creates a **Vocal**
+track at **−6 dB**, saves a copy and checks the saved state:
 
 ```python
 from pathlib import Path
-from rac.rpp import parse, emit, patch
+from rac.luagen import generate
+from rac.rpp import parse
+from rac.runner import run
 from rac.verify import expect
 
-doc = parse(Path("quickstart/minimal.rpp"))
-patch.set_marker(doc, index=1, pos=0.0, name="Start")
-Path("quickstart/marked.rpp").write_bytes(emit(doc).encode("utf-8"))
-
-saved = parse(Path("quickstart/marked.rpp"))
-expect(saved).track_count(0).has_marker(name="Start", pos=0.0)
-```
-
-## Create and save a project in REAPER
-
-First follow the [Linux or macOS setup guide](docs/environment.md). Execution
-needs REAPER 7.x; script generation also needs a **Lua 5.3 or 5.4 `luac` compiler**.
-On macOS, initialize a CoreAudio output in REAPER's preferences before the first
-run. Then check the environment:
-
-```bash
-reacli init
-reacli doctor --json
-reacli doctor --render --work-dir ./smoke-artifacts --json
-```
-
-`doctor --render` executes an isolated Lua/save/render test and checks a 440 Hz
-WAV. Plain `doctor` only checks prerequisites. It does not install software.
-
-Using the `quickstart` directory exported above, generate a script that creates
-a track named **Vocal** at **−6 dB**, then run it and save a new project:
-
-```bash
-python - <<'PY'
-from rac.luagen import generate
-
-generate({"ops": [
+root = Path("quickstart")
+script = generate({"ops": [
     {"op": "track.create", "args": [0, "Vocal"]},
     {"op": "track.set_volume_db", "args": [0, -6.0]},
-]}, "quickstart/create.lua")
-PY
+]}, root / "create.lua")
 
-reacli exec \
-  --project ./quickstart/minimal.rpp \
-  --script ./quickstart/create.lua \
-  --save-as ./quickstart/created.rpp \
-  --run-root ./quickstart/runs
-
-reacli rpp get ./quickstart/created.rpp tracks
+proof = run(
+    root / "minimal.rpp", script,
+    save_as=root / "created.rpp",
+    run_root=root / "runs",
+)
+assert proof.ok, proof.to_dict()
+expect(parse(root / "created.rpp")).track_count(1).track(0) \
+    .name("Vocal").volume(10 ** (-6 / 20))
+print(proof.run_dir)
 ```
 
-Confirm the saved result, including the conversion from decibels to linear
-amplitude:
+Prefer the CLI? The same generated script can be executed with:
 
 ```bash
-python - <<'PY'
-from pathlib import Path
-from rac.rpp import parse
-from rac.verify import expect
-
-doc = parse(Path("quickstart/created.rpp"))
-expect(doc).track_count(1).track(0).name("Vocal").volume(10 ** (-6 / 20))
-print("Saved project verified")
-PY
+reacli exec --project ./quickstart/minimal.rpp \
+  --script ./quickstart/create.lua --save-as ./quickstart/created.rpp \
+  --run-root ./quickstart/runs
 ```
 
-The execution response identifies its `run_dir`, which contains the input
-snapshot, script, stdout/stderr logs, and `proof.json`. The saved project remains
-at the requested `--save-as` path. For an all-Python version, see
-[examples/create_project.py](examples/create_project.py) and the
-[runner API](docs/api.md#run-a-script).
+A complete runnable example is available in
+[examples/create_project.py](examples/create_project.py).
 
-## Behavior to understand
+## Default startup behavior
 
-- **A successful process is only one check.** Generated operations can report a
-  blocked edit in `result` and logs while the script itself completes. Inspect
-  those fields and assert the saved project or audio you actually need.
-- **Scripts execute with your user permissions.** The runner opens the original
-  project path so relative media references work. `save_as` requests a separate
-  save through the bundled skeleton; arbitrary scripts can still write files.
-  Work on copies when testing edits to valuable projects.
-- **Configuration is separate from project data.** Linux uses a dedicated
-  dummy-audio configuration. macOS starts separate `-newinst` processes and
-  initializes missing CoreAudio settings from a narrow, read-only selection of
-  the user's REAPER preferences. Concurrent jobs need separate resources;
-  `Pool` prepares them automatically.
-- **Checks have explicit limits.** Semantic RPP comparison is not a proof of
-  identical sound. Audio checks accept mono/stereo 16/24-bit PCM WAV; loudness
-  is an approximation. See [API behavior and limits](docs/api.md).
+Existing `run()` and `Pool.map()` calls need no additional parameters:
 
-Live validation has covered macOS 15.5 / Apple Silicon / REAPER 7.62 with Python
-3.10 and 3.14, and Linux / REAPER 7.77 with Python 3.13. The
-[validation record](docs/validation.md) describes tested workflows and evidence.
-Other REAPER versions and third-party plugins need local checks. The default
-macOS pool has been validated; legacy `copy_app=True` timed out and remains
-unverified.
+- Missing VST scan preferences default to **no startup rescan**. On macOS, missing
+  VST indexes are seeded from the local REAPER installation.
+- Missing macOS CLAP paths use a directory inside the isolated resource.
+- macOS automation disables window restoration to avoid the reopen dialog after
+  a forced stop.
 
-## Knowledge in the package and repository
+Explicit plugin preferences are preserved. New plugins need an intentional scan;
+custom CLAP paths can still trigger discovery. These defaults do not prevent
+plugins used by a project from loading their own dialogs. See
+[plugin setup](docs/environment.md#plugin-discovery-and-macos-window-restoration).
 
-The installed package contains two JSON knowledge indexes and 12 Lua files
-(one entry skeleton and 11 snippets), plus project fixtures and platform INIs.
-They work independently of the checkout and can be accessed through
-[`rac.resources`](docs/api.md#bundled-resources).
+## Behavior and limits
 
-The broader [reference library](reference/README.md) includes CLI/API notes,
-RPP explanations, and workflow examples. **`reference/` stays in the Git
-repository and is excluded from both wheels and source distributions.** Knowledge
-indexes and Lua templates have one canonical copy under `src/rac/data/`; the
-reference library links to them.
+- A completed process does not prove that every requested operation succeeded.
+  Inspect `proof.result` and logs, then assert the project or audio you need.
+- Scripts run with the current user's permissions. The runner opens the original
+  path to preserve relative media references; generated scripts support saving a
+  copy. Use copies when experimenting with important projects.
+- Execution supports macOS and Linux. Windows execution is not implemented.
+  Third-party plugins and different REAPER versions need local verification.
+- Audio checks support mono/stereo 16/24-bit PCM WAV. Loudness is approximate;
+  project-structure comparison does not prove identical sound.
 
-## Documentation and development
+See [validation evidence](docs/validation.md) for tested systems and boundaries.
 
-- [Environment setup and troubleshooting](docs/environment.md)
-- [Python API, CLI contracts, and concurrent workers](docs/api.md)
-- [Reference knowledge and Lua examples](reference/README.md)
-- [Validation evidence and limitations](docs/validation.md)
-- [Contributing and local checks](CONTRIBUTING.md)
-- [Changelog](CHANGELOG.md) and [release procedure](docs/releasing.md)
-
-For development, activate the virtual environment above and run:
+## Development
 
 ```bash
 python -m pip install -e '.[dev]'
-python -m pytest
+python -m pytest                         # offline suite; live tests opt out
+RAC_TEST_LIVE=1 python -m pytest -m live  # requires the prepared REAPER host
+python -m build
+python -m twine check dist/*
+python scripts/check_dist.py dist
 ```
 
-The default suite requires no REAPER; Lua-dependent cases need a compatible
-compiler. Live integration tests are opt-in. See [CONTRIBUTING.md](CONTRIBUTING.md)
-for the build and live-test commands.
+The repository keeps runtime code, examples and research references separate:
 
-## License and project status
+```text
+src/rac/     Python library, CLI and bundled runtime resources
+examples/    Runnable workflows
+tests/      Offline tests, opt-in live tests and synthetic fixtures
+docs/       Setup, API, validation and release documentation
+reference/   Bilingual developer handbook and historical evidence; Git-only
+skills/      Repository-delivered REAPER agent skill
+scripts/     Host bootstrap and distribution checks
+.github/     CI, issue templates and manual publishing workflow
+```
 
-The project's own code uses the [MIT license](LICENSE). Third-party reference
-descriptions and data retain their own provenance; redistribution permission
-for the bundled indexes still needs to be established before public release.
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the outstanding items.
-REAPER is a Cockos product, provided under its own terms. This project is
-independent of and not endorsed by Cockos.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development conventions.
+Virtual environments, REAPER run artifacts and local configuration are ignored by Git.
+
+## Rea-Cli agent skill
+
+The repository includes [`reaper-agent-cli`](skills/reaper-agent-cli/SKILL.md), a
+repository-integrated knowledge and workflow skill for adding Rea-Cli to an
+existing agent harness and extending it when needed. It routes an agent through
+the maintained RPP, ReaScript, Lua and JSFX contracts; uses `rac` / `reacli` to
+pre-check, inspect and verify project source; composes custom Lua when high-level
+operations are not enough; and runs isolated jobs before checking the saved
+project or rendered audio.
+
+This skill is not a complete agent harness or a general-purpose standalone
+REAPER skill. It expects a full Rea-Cli checkout, `reacli` installed from that
+checkout, and access to the sibling `reference/`, `examples/` and packaged
+resources. It does not install REAPER or require an MCP server.
+
+When the skill is used, its expected response/delivery is the requested project
+or script, any required media or synthesis instructions, and concise verification
+results with relevant REAPER/plugin versions and untested behavior called out.
+See the [skill guide](skills/reaper-agent-cli/SKILL.md) and
+[Chinese guide](skills/reaper-agent-cli/GUIDE.zh-CN.md) for its routing and boundaries.
+
+## Documentation
+
+- [Setup and troubleshooting](docs/environment.md)
+- [Python API and CLI behavior](docs/api.md)
+- [Validation records](docs/validation.md)
+- [Automation developer handbook](reference/README.md): [Invocation](reference/workflow/README.md) · [RPP](reference/rpp/README.md) · [ReaScript](reference/reascript/README.md) · [Lua](reference/lua/README.md) · [JSFX](reference/jsfx/README.md)
+- [REAPER agent skill](skills/reaper-agent-cli/SKILL.md) · [Repository skill usage](skills/README.md)
+- [Changelog](CHANGELOG.md) · [Release process](docs/releasing.md)
+
+## License
+
+Project code is [MIT licensed](LICENSE). Imported reference data has separate
+provenance and redistribution considerations in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). REAPER and third-party plugins
+are not included and remain subject to their own licenses. This project is
+independent of Cockos.

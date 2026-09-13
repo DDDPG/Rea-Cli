@@ -1,89 +1,62 @@
-# Lua templates and composition examples
+# Lua composition contract
 
-The package includes one [entry template](../../src/rac/data/lua/entry.lua) and
-[11 standard-library snippets](../../src/rac/data/lua/stdlib/). These matched
-the original project's `lua/` tree byte for byte at import. This directory
-provides navigation and a runnable composition example, without maintaining a
-second template tree.
+[中文](README.zh-CN.md) · [Handbook](../README.md)
 
-## Export the package resources
+Keep the packaged [entry template](../../src/rac/data/lua/entry.lua) and [stdlib](../../src/rac/data/lua/stdlib/) as the canonical resources. Do not vendor another runtime into an agent skill. Export them with `rac resources --output ./templates` (existing files are not overwritten), or read them through `rac.resources.read_text`.
 
-After installing reacli, export the templates to a new directory:
+## Generated operations
 
-```bash
-reacli resources --output ./reaper-templates
+```python
+from rac.luagen import generate
+script = generate({"ops": [
+    {"op": "track.create", "args": [0, "Vocal"]},
+    {"op": "track.set_volume_db", "args": [0, -6.0]},
+    {"op": "marker.add", "args": [1, 0.0, "Start"]},
+]}, "edit.lua")
 ```
 
-The export includes `entry.lua`, `minimal.rpp` and all 11 snippets. It refuses
-to overwrite existing files. The entry template catches errors in `body()`,
-collects project state, writes `proof.json` and exits the one-shot REAPER
-process. Use it with the runner and an isolated instance configured as described
-in the [environment guide](../../docs/environment.md).
+The parent directory must exist. `generate` overwrites an explicit output, validates operation names/types and runs a compatible `luac -p`. It supports only [OP_REGISTRY](../../src/rac/luagen/generator.py), not every stdlib function or REAPER API. Check returned operation errors even when the body completed.
 
-## Standard-library snippets
+## Custom bodies
 
-- [track.lua](../../src/rac/data/lua/stdlib/track.lua): track creation, names, volume, pan and color.
-- [item.lua](../../src/rac/data/lua/stdlib/item.lua): media insertion, position, length, fades and splits.
-- [take.lua](../../src/rac/data/lua/stdlib/take.lua): playback rate, source offset and pitch.
-- [fx.lua](../../src/rac/data/lua/stdlib/fx.lua): lookup, insertion, parameters and bypass.
-- [env.lua](../../src/rac/data/lua/stdlib/env.lua): envelope lookup, points and scaling conversions.
-- [midi.lua](../../src/rac/data/lua/stdlib/midi.lua): MIDI items, notes and controller events.
-- [marker.lua](../../src/rac/data/lua/stdlib/marker.lua): markers and regions.
-- [routing.lua](../../src/rac/data/lua/stdlib/routing.lua): sends and routing parameters.
-- [project.lua](../../src/rac/data/lua/stdlib/project.lua): tempo, project notes and saving.
-- [render.lua](../../src/rac/data/lua/stdlib/render.lua): render configuration and triggering.
-- [snapshot.lua](../../src/rac/data/lua/stdlib/snapshot.lua): project state inspection.
+For arbitrary APIs, replace `body()` in the exported entry, retaining its error, save, proof and exit protocol. Set `RUN.result` to JSON-compatible values; check helper return values and raise an error when a required edit fails. `pcall` catches body runtime errors, not syntax errors or every possible failure outside the body. Validate hand-written scripts with `rac.luagen.validate` before execution.
 
-These snippets define `std_*` tables through text composition. They are not
-`require()` modules and do not return a module table. Operations commonly
-return `{ok=true, value=..., affected=...}` or `{ok=false, reason=...}`; check
-`ok` before using a result. Track indexes generally start at zero. Read the
-specific function before relying on repeatability: finding a named track can
-be repeatable, while unconditional creation and media insertion are not.
+The snippets define `std_*` tables by text composition; they are not `require()` modules. Compose only the needed snippets before `body`. Lua itself supports modules, but these particular files do not return a module table.
 
-For supported operations, use `rac.luagen.generate()` to validate parameters
-and select the required snippets. See the
-[project creation example](../../examples/create_project.py). The inspector
-below shows how to compose arbitrary ReaScript logic with the same entry
-template.
+| Snippet | Scope | Boundary |
+|---|---|---|
+| `track.lua` | create/name/gain/pan/mute/color | Read creation identity rules; no universal idempotence |
+| `item.lua` | media/time/fades/split | Media path and target item must be resolved |
+| `take.lua` | source/name/rate/offset | Helpers use active take; not all exposed as generator ops |
+| `fx.lua` | add/probe/parameter/preset/bypass | Normalized controls are not Hz or dB; ordinary tracks only |
+| `env.lua` | envelope lookup/points/scaling | Check envelope existence and domain |
+| `midi.lua` | item/notes/CC | Use project-time conversion and sort events |
+| `marker.lua` | markers/regions | IDs differ from enumeration indexes |
+| `routing.lua` | sends | Direction/category and repeated creation matter |
+| `project.lua` | tempo/notes/save | Entry `save_as` is the normal persistence path |
+| `render.lua` | render configuration/trigger | Verify command availability and actual new output |
+| `snapshot.lua` | bounded state summary | Not full project or sound identity |
 
-## Build a project inspector
+Read the relevant file under [stdlib](../../src/rac/data/lua/stdlib/) for exact signatures. Helpers commonly return `{ok=true, value=..., affected=...}` or `{ok=false, reason=...}`; check `ok` before consuming `value`.
 
-Prerequisites: a repository checkout, reacli installed in the active Python
-environment, and a **Lua 5.3 or 5.4** compiler. On macOS, use `brew install
-lua@5.4`; set `RAC_LUAC_BIN` if discovery needs an explicit compiler path.
-REAPER is not needed for this build step.
+## Working inspector and complete examples
 
-Run from the repository root:
+From the repository root with reacli installed and a Lua 5.3/5.4 compiler:
 
 ```bash
 python reference/lua/examples/build_inspector.py ./inspect-project.lua
 ```
 
-[build_inspector.py](examples/build_inspector.py) inserts
-[inspect_project.body.lua](examples/inspect_project.body.lua) into the installed
-entry template, runs syntax validation, then writes the requested output.
-The output's parent directory must exist; an existing output is never
-replaced. The builder exits with an error if the compiler is unavailable,
-validation fails, or the entry template's composition boundary has changed.
-
-The body reads the REAPER version, OS, resource path, track names, linear
-volumes and pan values into `RUN.result`. It does not change the project.
-
-After following the environment guide, run it on a disposable project copy:
+The [builder](examples/build_inspector.py) composes [this body](examples/inspect_project.body.lua), checks its boundary and syntax, and refuses an existing output. It requires no running REAPER to build.
 
 ```python
 from rac.runner import run
-
-proof = run("/absolute/path/to/project-copy.rpp", "inspect-project.lua")
-if proof.status != "ok":
+proof = run("/absolute/path/to/project.rpp", "inspect-project.lua")
+if not proof.ok:
     raise RuntimeError(proof.to_dict())
 print(proof.result)
 ```
 
-No `save_as` is supplied, so this invocation does not save the project. The
-complete entry template exits its REAPER host after inspection; it is intended
-for the runner's one-shot process, not for direct use in a working editor
-session. Lua syntax validation does not validate host APIs or replace a live
-REAPER run. For an operation that should save changes, set `save_as` explicitly
-and check both the proof and the resulting file.
+This reads version, OS, resource path and track attributes. No `save_as` means no requested save. The entry exits its one-shot host; do not run it in a user's working editor tab. See [small creation example](../../examples/create_project.py) and [full native-synthesis showcase](../../examples/README.md).
+
+The synchronous template does not await deferred callbacks. Extending it for asynchronous work requires managing completion, proof and exit together. Syntax success only validates Lua grammar, not host API availability, successful saves or plugin behavior.

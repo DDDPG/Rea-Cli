@@ -28,7 +28,8 @@ def check(name, fn):
 def t_build_command_mac_direct():
     with mock.patch.object(P, "IS_MAC", True), mock.patch.object(P, "IS_LINUX", False):
         cmd = P.build_command("/x/REAPER", "-nosplash", "-ignoreerrors", "p.rpp", "s.lua")
-        assert cmd == ["/x/REAPER", "-newinst", "-nosplash", "-ignoreerrors", "p.rpp", "s.lua"], cmd
+        assert cmd == ["/x/REAPER", "-newinst", "-nosplash", "-ignoreerrors", "p.rpp", "s.lua",
+                       "-ApplePersistence", "NO"], cmd
 
 
 def t_build_command_linux_headless_xvfb_cfgfile():

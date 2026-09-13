@@ -16,11 +16,9 @@ for installation and a working example.
 
 ## Repository knowledge
 
-The [reference collection](../reference/README.md) expands the runtime indexes
-with RPP notes, ReaScript pitfalls, historical action data, JSFX material and Lua
-composition examples. It is available in the Git checkout, not in wheel or sdist.
-Historical notes carry their own version and evidence limits; current setup and
-API documentation take precedence for supported usage.
+The [developer handbook](../reference/README.md) ([中文](../reference/README.zh-CN.md)) defines invocation, RPP, ReaScript, Lua and JSFX development contracts. Each topic has paired English and Chinese guides, with a separate [historical evidence catalog](../reference/knowledge/README.md). Use it to select an implementation path, check units and object identity, and verify results beyond a successful process exit.
+
+The repository [REAPER agent skill](../skills/reaper-agent-cli/SKILL.md) uses these contracts and the installed rac package. See [skill usage](../skills/README.md). Both directories are Git-only deliverables, excluded from wheel and sdist. Current setup/API docs take precedence over historical observations.
 
 [`source-baseline.json`](source-baseline.json) preserves hashes of the original
 project-relative files used to extract the library. It is a provenance snapshot,

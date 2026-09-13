@@ -126,7 +126,27 @@ def ensure_resource(resource: str | os.PathLike) -> Path:
             config.read_string(text)
         except configparser.Error as exc:
             raise EnvironmentError(f"Invalid {ini}: {exc}; repair it or select a fresh resource directory") from exc
-    if resource_ready(resource):
+    if IS_MAC and not IS_LINUX:
+        # Cached VST discovery is needed even for bundled ReaEQ when scanning is
+        # disabled. Copy indexes only; never overwrite a worker's own cache.
+        native = Path.home() / "Library/Application Support/REAPER"
+        for name in ("reaper-vstplugins_arm64.ini", "reaper-vstplugins64.ini"):
+            source, target = native / name, resource / name
+            if source.is_file() and not target.exists():
+                shutil.copyfile(source, target)
+    # Explicit plugin preferences belong to the caller. Missing preferences
+    # must not trigger a machine-wide third-party scan in a fresh worker.
+    wanted.setdefault("reaper", {})
+    if not config.has_option("reaper", "vst_scan"):
+        wanted["reaper"]["vst_scan"] = "2"
+    if IS_MAC and not IS_LINUX:
+        for key in ("clap_path_macos-aarch64", "clap_path_macos-x86_64"):
+            if not config.has_option("reaper", key):
+                wanted["reaper"][key] = str(resource / "UserPlugins" / "CLAP")
+    if resource_ready(resource) and all(
+        config.get(section, key, fallback=None) == value
+        for section, values in wanted.items() for key, value in values.items()
+    ):
         return resource
     if IS_MAC and not IS_LINUX:
         wanted["reaper"].update(_mac_audio_seed(config))
@@ -138,6 +158,8 @@ def ensure_resource(resource: str | os.PathLike) -> Path:
             seed = seed.rstrip() + "\n" + "".join(
                 f"{key}={value}\n" for key, value in wanted["reaper"].items()
                 if key != "audiocfgopen")
+        else:
+            seed = seed.rstrip() + "\nvst_scan=2\n"
         ini.write_text(seed, encoding="utf-8")
     else:
         # Preserve comments, unknown keys and plugin settings. Replace required
@@ -179,6 +201,10 @@ def build_command(reaper_bin: str, *reaper_args: str,
     Linux: [xvfb-run -a]? bin [-cfgfile <res>/reaper.ini]? *args。"""
     args = [str(a) for a in reaper_args]
     if IS_MAC:
+        # Cocoa consumes this through NSArgumentDomain. It must come LAST:
+        # REAPER 7.48 stops parsing its own options at an unknown Cocoa option.
+        # IgnoreState alone still permits the crash/reopen dialog on macOS 26.
+        args += ["-ApplePersistence", "NO"]
         if resource is not None:
             return [reaper_bin, "-newinst", "-cfgfile", str(Path(resource).expanduser().resolve() / "reaper.ini"), *args]
         return [reaper_bin, "-newinst", *args]

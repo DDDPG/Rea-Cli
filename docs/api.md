@@ -1,7 +1,7 @@
 # API and CLI guide
 
 [Documentation](README.md) · [Quick start](../README.md) ·
-[Environment setup](environment.md)
+[Environment setup](environment.md) · [Developer handbook](../reference/README.md)
 
 The distribution is `reacli`; Python code imports `rac`. This is an alpha API.
 The examples below describe the current implementation and its boundaries.
