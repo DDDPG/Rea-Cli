@@ -1,0 +1,7 @@
+{
+  "source_permissions_resolved": false,
+  "package_ownership_verified": false,
+  "trusted_publishing_configured": false,
+  "status": "local candidate only",
+  "reason": "No new redistribution grant or index ownership was established. Original reference provenance is retained; do not infer permissions from local builds."
+}

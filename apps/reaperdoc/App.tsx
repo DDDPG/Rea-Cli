@@ -21,13 +21,12 @@ import {
   Code2, 
   Activity 
 } from 'lucide-react';
-import { DOC_DATA as BASELINE_DOC_DATA } from './constants';
-import { SUPPLEMENT_DATA } from './supplementData';
-import { RPP_STRUCTURE } from './rppStructure';
+import generated from './generated.json';
+const RPP_STRUCTURE = generated.structure;
 import { DocEntry, DocSection, RPPNode, InfoBlockItem } from './types';
 
-// Reviewed corrections live in constants.ts; supplemental entries retain separate sections.
-const DOC_DATA: DocSection[] = [...BASELINE_DOC_DATA, ...SUPPLEMENT_DATA];
+// Generated from schema/rpp/spec.json; legacy TS files are historical snapshots.
+const DOC_DATA: DocSection[] = generated.sections;
 
 // --- Components ---
 
@@ -453,8 +452,8 @@ export default function App() {
     const hasKey = (section: DocSection) => section.entries.some(entry =>
       entry.name.split('/').some(part => part.trim().replace(/[<>]/g, '') === key)
     );
-    const baselineSection = BASELINE_DOC_DATA.find(section => section.id === contextId);
-    const supplementSection = SUPPLEMENT_DATA.find(section =>
+    const baselineSection = DOC_DATA.filter(section => !section.id.startsWith("supplement-")).find(section => section.id === contextId);
+    const supplementSection = DOC_DATA.filter(section => section.id.startsWith("supplement-")).find(section =>
       section.id === `supplement-${contextId}` && hasKey(section)
     );
     const targetId = baselineSection && hasKey(baselineSection)
@@ -497,6 +496,7 @@ export default function App() {
           </div>
           <div>
             <h1 className="font-bold tracking-tight text-white">ReaperDoc</h1>
+            <small title={generated.meta.schema_sha256}>Schema {generated.meta.schema_version} · {generated.meta.schema_sha256.slice(0, 8)}</small>
             <p className="text-xs text-gray-500 font-mono">v0.1 dev</p>
           </div>
         </div>

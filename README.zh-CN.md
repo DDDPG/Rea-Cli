@@ -1,3 +1,7 @@
+> **Ecosystem alpha:** source packages now live in `packages/reacli` and `packages/reaper-parser`.
+> Install both together. ReaperDoc is in `apps/reaperdoc`; shared specifications are in `schema/rpp`.
+> See [ecosystem installation, data demo and validation boundaries](docs/ecosystem/README.md).
+
 <p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli "></p>
 <h1 align="center">Rea-Cli</h1>
 
@@ -93,7 +97,7 @@ Agent / Python / CLI → RPP 或 Lua 源码 → rac pre-check → REAPER → 保
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install .
+python -m pip install ./packages/reaper-parser ./packages/reacli
 reacli --version
 ```
 
@@ -172,23 +176,24 @@ reacli exec --project ./quickstart/minimal.rpp \
 ## 开发
 
 ```bash
-python -m pip install -e '.[dev]'
+python -m pip install -e ./packages/reaper-parser -e './packages/reacli[audio,dev]'
 python -m pytest                         # 默认跳过实机测试
 RAC_TEST_LIVE=1 python -m pytest -m live  # 需先配置本机 REAPER
-python -m build
-python -m twine check dist/*
-python scripts/check_dist.py dist
+npm ci --prefix apps/reaperdoc
+python tools/build_release.py --output dist/new-candidate
+python -m twine check dist/new-candidate/reacli/* dist/new-candidate/reaper-parser/*
+python scripts/check_dist.py dist/new-candidate/reacli
 ```
 
 仓库按运行代码、示例和参考资料划分：
 
 ```text
-src/rac/     Python 库、CLI 及内置运行资源
+packages/reacli/src/rac/     Python 库、CLI 及内置运行资源
 examples/    可运行的工作流示例
 tests/       离线测试、按需启用的实机测试与合成素材
 docs/        环境、API、验证及发布文档
 reference/   双语开发规范及历史证据，不进入 wheel 或 sdist
-skills/      随仓库交付的 REAPER agent skill
+integrations/agents/  可独立安装的 REAPER agent bundle
 scripts/     环境引导与发行包检查
 .github/     CI、问题模板和手动发布工作流
 ```
@@ -198,7 +203,7 @@ scripts/     环境引导与发行包检查
 
 ## Rea-Cli Agent skill
 
-仓库包含 [`reaper-agent-cli`](skills/reaper-agent-cli/SKILL.md)。它更准确的定位是
+仓库包含 [`reaper-agent-cli`](integrations/agents/reaper-agent-cli/SKILL.md)。它更准确的定位是
 “把 Rea-Cli 接入现有 agent harness、并支持围绕 Rea-Cli 进行二次开发的知识与工作流 skill”，
 而不是完整 harness，也不是可以脱离仓库复制使用的通用 REAPER skill。它会引导 AI agent
 遵循 RPP、ReaScript、Lua 和 JSFX 规范，使用 `rac` / `reacli` 预检查、查看和验证工程，
@@ -210,8 +215,8 @@ scripts/     环境引导与发行包检查
 
 使用该 skill 时，预期的响应/交付内容包括用户要求的工程或脚本、必要的媒体或合成说明，
 以及简洁的验证结果；相关 REAPER/插件版本和未经测试的行为应明确注明。具体的任务路由
-和边界见 [skill 中文说明](skills/reaper-agent-cli/GUIDE.zh-CN.md) 及
-[English guide](skills/reaper-agent-cli/SKILL.md)。
+和边界见 [skill 中文说明](integrations/agents/reaper-agent-cli/GUIDE.zh-CN.md) 及
+[English guide](integrations/agents/reaper-agent-cli/SKILL.md)。
 
 ## 文档入口
 
@@ -219,7 +224,7 @@ scripts/     环境引导与发行包检查
 - [Python API 与 CLI 行为](docs/api.md)
 - [验证记录](docs/validation.md)
 - [自动化开发规范](reference/README.zh-CN.md)：[调用](reference/workflow/README.zh-CN.md) · [RPP](reference/rpp/README.zh-CN.md) · [ReaScript](reference/reascript/README.zh-CN.md) · [Lua](reference/lua/README.zh-CN.md) · [JSFX](reference/jsfx/README.zh-CN.md)
-- [Agent skill](skills/reaper-agent-cli/SKILL.md) · [中文使用说明](skills/reaper-agent-cli/GUIDE.zh-CN.md)
+- [Agent skill](integrations/agents/reaper-agent-cli/SKILL.md) · [中文使用说明](integrations/agents/reaper-agent-cli/GUIDE.zh-CN.md)
 - [更新记录](CHANGELOG.md) · [发布流程](docs/releasing.md)
 
 ## 许可证

@@ -1,0 +1,1171 @@
+{
+  "authorization": "User requested applying verified fixes and publishing to GitHub.",
+  "host": "7.48/macOS-arm64",
+  "changes": [
+    {
+      "scope": "project",
+      "name": "CURSOR",
+      "issue": "D026",
+      "before": {
+        "name": "CURSOR",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "cursor vertical position in seconds"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py"
+      },
+      "after": {
+        "name": "CURSOR",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "Edit cursor position in seconds"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D026). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "project",
+      "name": "MASTERPEAKCOL",
+      "issue": "D026",
+      "before": {
+        "name": "MASTERPEAKCOL",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "NOT CLEAR"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py"
+      },
+      "after": {
+        "name": "MASTERPEAKCOL",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "Master track custom color, corresponding to I_CUSTOMCOLOR; native color encoding is platform-dependent"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D026). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "project",
+      "name": "MASTERTRACKVIEW",
+      "issue": "D028",
+      "before": {
+        "name": "MASTERTRACKVIEW",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int (bool)",
+            "description": "show in mixer"
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "relative vertical position for 'Sends'-'Fader' region separator"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "relative vertical position for 'FX'-'Sends' region separator"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "relative vertical position for 'FX'-'FX Params' region separator"
+          },
+          {
+            "label": "field 5-14",
+            "description": "various settings (NOT CLEAR)"
+          },
+          {
+            "label": "field 15",
+            "type": "int (bool)",
+            "description": "pin track"
+          }
+        ],
+        "tags": [
+          "TODO"
+        ],
+        "sourceFile": "reaper_parser/project.py"
+      },
+      "after": {
+        "name": "MASTERTRACKVIEW",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int (bool)",
+            "description": "show in mixer"
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "F_MCP_FXSEND_SCALE: FX/send region scale in the mixer panel (0 = minimum allowed, 1 = maximum allowed)"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "F_MCP_SENDRGN_SCALE: send region size as a proportion of the FX/send region"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "F_MCP_FXPARM_SCALE: FX parameter region scale"
+          },
+          {
+            "label": "field 5-12",
+            "description": "Other view settings (NOT CLEAR)"
+          },
+          {
+            "label": "field 13",
+            "type": "float",
+            "description": "F_TCP_FXPARM_SCALE: embedded TCP FX parameter region scale"
+          },
+          {
+            "label": "field 14",
+            "type": "int",
+            "description": "Other view setting (NOT CLEAR)"
+          },
+          {
+            "label": "field 15",
+            "type": "int (bool)",
+            "description": "pin track"
+          }
+        ],
+        "tags": [
+          "TODO"
+        ],
+        "sourceFile": "reaper_parser/project.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D028). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "project",
+      "name": "MASTERHWOUT",
+      "issue": "D013",
+      "before": {
+        "name": "MASTERHWOUT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "output index (bitfield)"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "send mode"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "volume (1 = 0 dB)"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "pan (-1 to +1)"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "mute (1=On, 0=Off)"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "invert polarity (1=On, 0=Off)"
+          },
+          {
+            "label": "field 7",
+            "type": "int",
+            "description": "send source channel (bitfield)"
+          },
+          {
+            "label": "field 9",
+            "type": "int",
+            "description": "automation mode"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py"
+      },
+      "after": {
+        "name": "MASTERHWOUT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "output index (bitfield)"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "send mode"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "volume (1 = 0 dB)"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "pan (-1 to +1)"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "mute (1=On, 0=Off)"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "invert polarity (1=On, 0=Off)"
+          },
+          {
+            "label": "field 7",
+            "type": "int",
+            "description": "send source channel (bitfield)"
+          },
+          {
+            "label": "field 8",
+            "type": "float",
+            "description": "Pan law gain (D_PANLAW): -1 = project default, 0.5 = -6 dB, 1 = 0 dB"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py",
+        "description": "REAPER 7.48/macOS saves eight parameters. Changing master hardware I_AUTOMODE read back through the API but did not serialize a ninth parameter; the former field 9 claim is withdrawn for this tested layout."
+      }
+    },
+    {
+      "scope": "project",
+      "name": "MASTER_NCH",
+      "issue": "D016",
+      "before": {
+        "name": "MASTER_NCH",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "Number of channels"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "NOT CLEAR"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py"
+      },
+      "after": {
+        "name": "MASTER_NCH",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "Number of channels (even values, 2–128 in REAPER 7; 128 verified on 7.48)"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "NOT CLEAR"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D016). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "track",
+      "name": "NCHAN",
+      "issue": "D016",
+      "before": {
+        "name": "NCHAN",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "Number of track channels"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py"
+      },
+      "after": {
+        "name": "NCHAN",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "Number of channels (even values, 2–128 in REAPER 7; 128 verified on 7.48)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D016). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "project",
+      "name": "MASTER_PANMODE",
+      "issue": "D001",
+      "before": {
+        "name": "MASTER_PANMODE",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "master track pan mode",
+            "subFields": [
+              "-1 = project default",
+              "3 = mono pan",
+              "5 = stereo pan",
+              "6 = dual pan"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py"
+      },
+      "after": {
+        "name": "MASTER_PANMODE",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "master track pan mode",
+            "subFields": [
+              "-1 = project default (inherited definition; fallback not tested here)",
+              "0 = classic REAPER 3.x balance",
+              "3 = stereo balance",
+              "5 = stereo pan",
+              "6 = dual pan"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/project.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D001). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "track",
+      "name": "PANMODE",
+      "issue": "D001",
+      "before": {
+        "name": "PANMODE",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "track pan mode",
+            "subFields": [
+              "-1 = project default",
+              "3 = mono pan",
+              "5 = stereo pan",
+              "6 = dual pan"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py"
+      },
+      "after": {
+        "name": "PANMODE",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "track pan mode",
+            "subFields": [
+              "-1 = project default (inherited definition; fallback not tested here)",
+              "0 = classic REAPER 3.x balance",
+              "3 = stereo balance",
+              "5 = stereo pan",
+              "6 = dual pan"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D001). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "track",
+      "name": "PLAYOFFS",
+      "issue": "D015",
+      "before": {
+        "name": "PLAYOFFS",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "play offset length (unit depends on field 2)"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "play offset mode",
+            "subFields": [
+              "0 = ms",
+              "1 = off",
+              "2 = samples"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py"
+      },
+      "after": {
+        "name": "PLAYOFFS",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "Playback offset (D_PLAY_OFFSET): seconds unless field 2 has bit 2 set, then samples"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "Playback offset flags (I_PLAY_OFFSET_FLAG), combined by bitwise OR",
+            "subFields": [
+              "0 = active offset in seconds",
+              "+1 = bypass offset",
+              "+2 = use samples instead of seconds",
+              "3 = bypassed offset in samples"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D015). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "track",
+      "name": "REC",
+      "issue": "D011",
+      "before": {
+        "name": "REC",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int (bool)",
+            "description": "armed"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "input index (0=mono left, 1=mono right, 1024=stereo, etc.)"
+          },
+          {
+            "label": "field 3",
+            "type": "int",
+            "description": "monitor",
+            "subFields": [
+              "0 = off",
+              "1 = on",
+              "2 = auto"
+            ]
+          },
+          {
+            "label": "field 4",
+            "type": "int",
+            "description": "record mode",
+            "subFields": [
+              "0 = input",
+              "1 = output (stereo)",
+              "2 = disable(monitor)",
+              "3 = output (stereo, latency comp)",
+              "4 = output (MIDI)",
+              "5 = output (mono)",
+              "6 = output (mono latency comp)",
+              "7 = MIDI overdub",
+              "8 = MIDI replace",
+              "9 = MIDI touch replace",
+              "10 = output (multichannel)",
+              "11 = output (multichannel latency comp)"
+            ]
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "monitor track media while recording"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "preserve PDC delayed monitoring"
+          },
+          {
+            "label": "field 7",
+            "type": "int",
+            "description": "record path (0=primary, 1=secondary, 2=both)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py"
+      },
+      "after": {
+        "name": "REC",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int (bool)",
+            "description": "armed"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "input index (0=mono left, 1=mono right, 1024=stereo, etc.)"
+          },
+          {
+            "label": "field 3",
+            "type": "int",
+            "description": "monitor",
+            "subFields": [
+              "0 = off",
+              "1 = normal monitoring",
+              "2 = monitor when not playing"
+            ]
+          },
+          {
+            "label": "field 4",
+            "type": "int",
+            "description": "record mode",
+            "subFields": [
+              "0 = input",
+              "1 = output (stereo)",
+              "2 = disable(monitor)",
+              "3 = output (stereo, latency comp)",
+              "4 = output (MIDI)",
+              "5 = output (mono)",
+              "6 = output (mono latency comp)",
+              "7 = MIDI overdub",
+              "8 = MIDI replace",
+              "9 = MIDI touch replace",
+              "10 = output (multichannel)",
+              "11 = output (multichannel latency comp)"
+            ]
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "monitor track media while recording"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "preserve PDC delayed monitoring"
+          },
+          {
+            "label": "field 7",
+            "type": "int",
+            "description": "record path (0=primary, 1=secondary, 2=both)"
+          },
+          {
+            "label": "field 8",
+            "type": "int",
+            "description": "I_RECMODE_FLAGS: recording tap selection in the low two bits",
+            "subFields": [
+              "0 = post-fader",
+              "1 = pre-FX",
+              "2 = post-FX",
+              "Preserve other bits; tested values 0, 1 and 2"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D011). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "track",
+      "name": "AUXRECV",
+      "issue": "D014",
+      "before": {
+        "name": "AUXRECV",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "source track index (zero based)"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "mode (0=Post Fader (Post Pan), 1=Pre FX, 3=Pre Fader (Post FX))"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "volume"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "pan"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "mute"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "mono sum"
+          },
+          {
+            "label": "field 7",
+            "type": "int (bool)",
+            "description": "invert polarity"
+          },
+          {
+            "label": "field 8",
+            "type": "int",
+            "description": "source audio channels (-1=none, 0=1+2, 1=2+3, etc.)"
+          },
+          {
+            "label": "field 9",
+            "type": "int",
+            "description": "dest audio channels (same as source but no -1)"
+          },
+          {
+            "label": "field 10",
+            "type": "float",
+            "description": "panlaw"
+          },
+          {
+            "label": "field 11",
+            "type": "int",
+            "description": "midi channels (source = val & 0x1F (0=None), dest = val // 32)"
+          },
+          {
+            "label": "field 12",
+            "type": "int",
+            "description": "automation mode (-1 = use track mode)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py"
+      },
+      "after": {
+        "name": "AUXRECV",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "source track index (zero based)"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "mode (0=Post Fader (Post Pan), 1=Pre FX, 3=Pre Fader (Post FX))"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "volume"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "pan"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "mute"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "mono sum"
+          },
+          {
+            "label": "field 7",
+            "type": "int (bool)",
+            "description": "invert polarity"
+          },
+          {
+            "label": "field 8",
+            "type": "int",
+            "description": "source audio channels (-1=none, 0=1+2, 1=2+3, etc.)"
+          },
+          {
+            "label": "field 9",
+            "type": "int",
+            "description": "dest audio channels (same as source but no -1)"
+          },
+          {
+            "label": "field 10",
+            "type": "float[:U]",
+            "description": "Pan law gain; may carry the literal :U suffix (for example -1:U). Preserve the suffix; its meaning remains unverified."
+          },
+          {
+            "label": "field 11",
+            "type": "int",
+            "description": "MIDI routing bitfield (I_MIDIFLAGS); preserve all bits",
+            "subFields": [
+              "Source = value & 31: 0 = all channels, 1–16 = channel, 31 = no MIDI",
+              "Destination = (value >> 5) & 31: 0 = original channel, 1–16 = channel",
+              "Higher bits encode additional options; do not decode destination as an unmasked division by 32"
+            ]
+          },
+          {
+            "label": "field 12",
+            "type": "int",
+            "description": "automation mode (-1 = use track mode)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D014). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "track",
+      "name": "HWOUT",
+      "issue": "D013",
+      "before": {
+        "name": "HWOUT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "output index (bitfield)",
+            "subFields": [
+              "0-511: stereo output",
+              "512-1023: mono output",
+              "1024-1535: aux/rearoute loopback stereo output",
+              "1536-2047: aux/rearoute loopback mono output"
+            ]
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "send mode",
+            "subFields": [
+              "0: Post-Fader (Post-Pan)",
+              "1: Pre-FX",
+              "3: Pre-Fader (Post-FX)"
+            ]
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "volume (1 = 0 dB)"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "pan (-1 to +1)"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "mute (1=On, 0=Off)"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "invert polarity (1=On, 0=Off)"
+          },
+          {
+            "label": "field 7",
+            "type": "int",
+            "description": "send source channel (bitfield)",
+            "subFields": [
+              "-1: None",
+              "0-1023: multichannel 1ch",
+              "1024-2047: multichannel 2ch",
+              "2048-3071: multichannel 4ch",
+              "3072-4095: multichannel 6ch"
+            ]
+          },
+          {
+            "label": "field 9",
+            "type": "int",
+            "description": "automation mode",
+            "subFields": [
+              "-1: Track automation mode",
+              "0: Trim/read",
+              "1: Read",
+              "2: Touch",
+              "3: Write",
+              "4: Latch",
+              "5: Latch Preview"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py"
+      },
+      "after": {
+        "name": "HWOUT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "int",
+            "description": "output index (bitfield)",
+            "subFields": [
+              "0-511: stereo output",
+              "512-1023: mono output",
+              "1024-1535: aux/rearoute loopback stereo output",
+              "1536-2047: aux/rearoute loopback mono output"
+            ]
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "send mode",
+            "subFields": [
+              "0: Post-Fader (Post-Pan)",
+              "1: Pre-FX",
+              "3: Pre-Fader (Post-FX)"
+            ]
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "volume (1 = 0 dB)"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "pan (-1 to +1)"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "mute (1=On, 0=Off)"
+          },
+          {
+            "label": "field 6",
+            "type": "int (bool)",
+            "description": "invert polarity (1=On, 0=Off)"
+          },
+          {
+            "label": "field 7",
+            "type": "int",
+            "description": "send source channel (bitfield)",
+            "subFields": [
+              "-1: None",
+              "0-1023: multichannel 1ch",
+              "1024-2047: multichannel 2ch",
+              "2048-3071: multichannel 4ch",
+              "3072-4095: multichannel 6ch"
+            ]
+          },
+          {
+            "label": "field 8",
+            "type": "float[:U]",
+            "description": "Pan law gain (D_PANLAW); may include :U, e.g. -1:U. Preserve the suffix; its meaning remains unverified."
+          },
+          {
+            "label": "field 9",
+            "type": "int",
+            "description": "automation mode",
+            "subFields": [
+              "-1: Track automation mode",
+              "0: Trim/read",
+              "1: Read",
+              "2: Touch",
+              "3: Write",
+              "4: Latch",
+              "5: Latch Preview"
+            ]
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/track.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D013). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "item",
+      "name": "FADEIN",
+      "issue": "D018",
+      "before": {
+        "name": "FADEIN",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "fade envelope shape",
+            "subFields": [
+              "single_fade: 0-5, 5.1",
+              "crossfade: 0, 1.1, 2-5, 5.1"
+            ]
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "fade length in seconds"
+          },
+          {
+            "label": "field 6",
+            "type": "float",
+            "description": "fade curve (-1.0 to 1.0)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/item.py"
+      },
+      "after": {
+        "name": "FADEIN",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "fade envelope shape",
+            "subFields": [
+              "single_fade: 0-5, 5.1",
+              "crossfade: 0, 1.1, 2-5, 5.1"
+            ]
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "fade length in seconds"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "Automatic fade length in seconds (D_FADEINLEN_AUTO)"
+          },
+          {
+            "label": "field 6",
+            "type": "float",
+            "description": "fade curve (-1.0 to 1.0)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/item.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D018). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "item",
+      "name": "FADEOUT",
+      "issue": "D018",
+      "before": {
+        "name": "FADEOUT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "fade envelope shape"
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "fade length in seconds"
+          },
+          {
+            "label": "field 6",
+            "type": "float",
+            "description": "fade curve (-1.0 to 1.0)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/item.py"
+      },
+      "after": {
+        "name": "FADEOUT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "fade envelope shape"
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "fade length in seconds"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "Automatic fade length in seconds (D_FADEOUTLEN_AUTO)"
+          },
+          {
+            "label": "field 6",
+            "type": "float",
+            "description": "fade curve (-1.0 to 1.0)"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/item.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D018). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "item",
+      "name": "PLAYRATE",
+      "issue": "D019",
+      "before": {
+        "name": "PLAYRATE",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "playback rate"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "preserve pitch"
+          },
+          {
+            "label": "field 4",
+            "type": "int",
+            "description": "pitch shift mode"
+          },
+          {
+            "label": "field 5",
+            "type": "int",
+            "description": "stretch marker fade mode"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/item.py"
+      },
+      "after": {
+        "name": "PLAYRATE",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "playback rate"
+          },
+          {
+            "label": "field 2",
+            "type": "int",
+            "description": "preserve pitch"
+          },
+          {
+            "label": "field 3",
+            "type": "float",
+            "description": "Take pitch adjustment in semitones (D_PITCH)"
+          },
+          {
+            "label": "field 4",
+            "type": "int",
+            "description": "pitch shift mode"
+          },
+          {
+            "label": "field 5",
+            "type": "int",
+            "description": "Stretch mode flags (I_STRETCHFLAGS); mode override is stored in the low three bits"
+          },
+          {
+            "label": "field 6",
+            "type": "float",
+            "description": "Stretch marker fade size in seconds (F_STRETCHFADESIZE), not a quality index"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/item.py",
+        "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D019). Validation applies only to the documented changes; see the behavior review."
+      }
+    },
+    {
+      "scope": "envelope",
+      "name": "PT",
+      "issue": "D004",
+      "before": {
+        "name": "PT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "time position in seconds"
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "value"
+          },
+          {
+            "label": "field 3",
+            "type": "int",
+            "description": "point shape"
+          },
+          {
+            "label": "field 4",
+            "type": "float",
+            "description": "tension"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/envelope.py"
+      },
+      "after": {
+        "name": "PT",
+        "fields": [
+          {
+            "label": "field 1",
+            "type": "float",
+            "description": "time position in seconds"
+          },
+          {
+            "label": "field 2",
+            "type": "float",
+            "description": "value"
+          },
+          {
+            "label": "field 3",
+            "type": "int",
+            "description": "point shape"
+          },
+          {
+            "label": "field 4",
+            "type": "int",
+            "description": "Context-dependent subtype/signature data; not Bézier tension"
+          },
+          {
+            "label": "field 5",
+            "type": "int (bool)",
+            "description": "Point selected (ordinary parameter envelope)"
+          },
+          {
+            "label": "field 6",
+            "type": "int",
+            "description": "Context-dependent data / placeholder (NOT CLEAR)"
+          },
+          {
+            "label": "field 7",
+            "type": "float",
+            "description": "Bézier tension (shape 5), verified with -0.6 and 0.4"
+          }
+        ],
+        "tags": [],
+        "sourceFile": "reaper_parser/envelope.py",
+        "description": "Ordinary Bézier parameter envelope layout verified in REAPER 7.48/macOS. Trailing parameters can be omitted in saved non-Bézier points. TEMPOENVEX has context-specific meanings and was not tested here."
+      }
+    }
+  ]
+}

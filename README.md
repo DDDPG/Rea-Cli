@@ -1,3 +1,7 @@
+> **Ecosystem alpha:** source packages now live in `packages/reacli` and `packages/reaper-parser`.
+> Install both together. ReaperDoc is in `apps/reaperdoc`; shared specifications are in `schema/rpp`.
+> See [ecosystem installation, data demo and validation boundaries](docs/ecosystem/README.md).
+
 <p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli icon"></p>
 <h1 align="center">Rea-Cli</h1>
 
@@ -107,7 +111,7 @@ Use **Python 3.10+** in a virtual environment. From the source directory:
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install .
+python -m pip install ./packages/reaper-parser ./packages/reacli
 reacli --version
 ```
 
@@ -195,23 +199,24 @@ See [validation evidence](docs/validation.md) for tested systems and boundaries.
 ## Development
 
 ```bash
-python -m pip install -e '.[dev]'
+python -m pip install -e ./packages/reaper-parser -e './packages/reacli[audio,dev]'
 python -m pytest                         # offline suite; live tests opt out
 RAC_TEST_LIVE=1 python -m pytest -m live  # requires the prepared REAPER host
-python -m build
-python -m twine check dist/*
-python scripts/check_dist.py dist
+npm ci --prefix apps/reaperdoc
+python tools/build_release.py --output dist/new-candidate
+python -m twine check dist/new-candidate/reacli/* dist/new-candidate/reaper-parser/*
+python scripts/check_dist.py dist/new-candidate/reacli
 ```
 
 The repository keeps runtime code, examples and research references separate:
 
 ```text
-src/rac/     Python library, CLI and bundled runtime resources
+packages/reacli/src/rac/     Python library, CLI and bundled runtime resources
 examples/    Runnable workflows
 tests/      Offline tests, opt-in live tests and synthetic fixtures
 docs/       Setup, API, validation and release documentation
 reference/   Bilingual developer handbook and historical evidence; Git-only
-skills/      Repository-delivered REAPER agent skill
+integrations/agents/  Standalone agent bundle source
 scripts/     Host bootstrap and distribution checks
 .github/     CI, issue templates and manual publishing workflow
 ```
@@ -221,24 +226,10 @@ Virtual environments, REAPER run artifacts and local configuration are ignored b
 
 ## Rea-Cli agent skill
 
-The repository includes [`reaper-agent-cli`](skills/reaper-agent-cli/SKILL.md), a
-repository-integrated knowledge and workflow skill for adding Rea-Cli to an
-existing agent harness and extending it when needed. It routes an agent through
-the maintained RPP, ReaScript, Lua and JSFX contracts; uses `rac` / `reacli` to
-pre-check, inspect and verify project source; composes custom Lua when high-level
-operations are not enough; and runs isolated jobs before checking the saved
-project or rendered audio.
-
-This skill is not a complete agent harness or a general-purpose standalone
-REAPER skill. It expects a full Rea-Cli checkout, `reacli` installed from that
-checkout, and access to the sibling `reference/`, `examples/` and packaged
-resources. It does not install REAPER or require an MCP server.
-
-When the skill is used, its expected response/delivery is the requested project
-or script, any required media or synthesis instructions, and concise verification
-results with relevant REAPER/plugin versions and untested behavior called out.
-See the [skill guide](skills/reaper-agent-cli/SKILL.md) and
-[Chinese guide](skills/reaper-agent-cli/GUIDE.zh-CN.md) for its routing and boundaries.
+The [agent bundle source](integrations/agents/reaper-agent-cli/SKILL.md) packages a
+self-contained skill, concise reference and examples. Candidate releases include
+`reaper-agent-cli.zip`; install the matching Python wheels and configure REAPER/Lua
+separately. No checkout or persistent MCP server is required by the installed bundle.
 
 ## Documentation
 
@@ -246,7 +237,7 @@ See the [skill guide](skills/reaper-agent-cli/SKILL.md) and
 - [Python API and CLI behavior](docs/api.md)
 - [Validation records](docs/validation.md)
 - [Automation developer handbook](reference/README.md): [Invocation](reference/workflow/README.md) · [RPP](reference/rpp/README.md) · [ReaScript](reference/reascript/README.md) · [Lua](reference/lua/README.md) · [JSFX](reference/jsfx/README.md)
-- [REAPER agent skill](skills/reaper-agent-cli/SKILL.md) · [Repository skill usage](skills/README.md)
+- [REAPER agent skill](integrations/agents/reaper-agent-cli/SKILL.md) · [Repository skill usage](integrations/agents/README.md)
 - [Changelog](CHANGELOG.md) · [Release process](docs/releasing.md)
 
 ## License

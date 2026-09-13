@@ -1,0 +1,647 @@
+{
+  "host": "7.48/macOS-arm64",
+  "ok": true,
+  "probes": [
+    {
+      "api": "RENDER_SETTINGS",
+      "token": "RENDER_STEMS",
+      "index": 1,
+      "a": 1,
+      "b": 2,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_SETTINGS_a.rpp",
+        "evidence/live/RENDER_SETTINGS_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_STEMS 1"
+        ],
+        [
+          "RENDER_STEMS 2"
+        ]
+      ],
+      "values": [
+        1,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_BOUNDSFLAG",
+      "token": "RENDER_RANGE",
+      "index": 1,
+      "a": 0,
+      "b": 2,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_BOUNDSFLAG_a.rpp",
+        "evidence/live/RENDER_BOUNDSFLAG_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_RANGE 0 0 0 0 1000"
+        ],
+        [
+          "RENDER_RANGE 2 0 0 0 1000"
+        ]
+      ],
+      "values": [
+        0,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_STARTPOS",
+      "token": "RENDER_RANGE",
+      "index": 2,
+      "a": 1.25,
+      "b": 2.5,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_STARTPOS_a.rpp",
+        "evidence/live/RENDER_STARTPOS_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_RANGE 1 1.25 0 0 1000"
+        ],
+        [
+          "RENDER_RANGE 1 2.5 0 0 1000"
+        ]
+      ],
+      "values": [
+        1.25,
+        2.5
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_ENDPOS",
+      "token": "RENDER_RANGE",
+      "index": 3,
+      "a": 5.5,
+      "b": 8.75,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_ENDPOS_a.rpp",
+        "evidence/live/RENDER_ENDPOS_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_RANGE 1 0 5.5 0 1000"
+        ],
+        [
+          "RENDER_RANGE 1 0 8.75 0 1000"
+        ]
+      ],
+      "values": [
+        5.5,
+        8.75
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_TAILFLAG",
+      "token": "RENDER_RANGE",
+      "index": 4,
+      "a": 1,
+      "b": 3,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_TAILFLAG_a.rpp",
+        "evidence/live/RENDER_TAILFLAG_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_RANGE 1 0 0 1 1000"
+        ],
+        [
+          "RENDER_RANGE 1 0 0 3 1000"
+        ]
+      ],
+      "values": [
+        1,
+        3
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_TAILMS",
+      "token": "RENDER_RANGE",
+      "index": 5,
+      "a": 450,
+      "b": 900,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_TAILMS_a.rpp",
+        "evidence/live/RENDER_TAILMS_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_RANGE 1 0 0 0 450"
+        ],
+        [
+          "RENDER_RANGE 1 0 0 0 900"
+        ]
+      ],
+      "values": [
+        450,
+        900
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_ADDTOPROJ",
+      "token": "RENDER_ADDTOPROJ",
+      "index": 1,
+      "a": 0,
+      "b": 3,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_ADDTOPROJ_a.rpp",
+        "evidence/live/RENDER_ADDTOPROJ_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_ADDTOPROJ 0"
+        ],
+        [
+          "RENDER_ADDTOPROJ 3"
+        ]
+      ],
+      "values": [
+        0,
+        3
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_DITHER",
+      "token": "RENDER_DITHER",
+      "index": 1,
+      "a": 0,
+      "b": 3,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_DITHER_a.rpp",
+        "evidence/live/RENDER_DITHER_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_DITHER 0"
+        ],
+        [
+          "RENDER_DITHER 3"
+        ]
+      ],
+      "values": [
+        0,
+        3
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_NORMALIZE",
+      "token": "RENDER_NORMALIZE",
+      "index": 1,
+      "a": 1,
+      "b": 65,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_NORMALIZE_a.rpp",
+        "evidence/live/RENDER_NORMALIZE_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 1 0 0 0 0 1 1"
+        ],
+        [
+          "RENDER_NORMALIZE 65 0 0 0 0 1 1"
+        ]
+      ],
+      "values": [
+        1,
+        65
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_NORMALIZE_TARGET",
+      "token": "RENDER_NORMALIZE",
+      "index": 2,
+      "a": 0.5,
+      "b": 0.7,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_NORMALIZE_TARGET_a.rpp",
+        "evidence/live/RENDER_NORMALIZE_TARGET_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 0 0.5 0 0 0 1 1"
+        ],
+        [
+          "RENDER_NORMALIZE 0 0.7 0 0 0 1 1"
+        ]
+      ],
+      "values": [
+        0.5,
+        0.7
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_BRICKWALL",
+      "token": "RENDER_NORMALIZE",
+      "index": 3,
+      "a": 0.6,
+      "b": 0.8,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_BRICKWALL_a.rpp",
+        "evidence/live/RENDER_BRICKWALL_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 0 0 0.6 0 0 1 1"
+        ],
+        [
+          "RENDER_NORMALIZE 0 0 0.8 0 0 1 1"
+        ]
+      ],
+      "values": [
+        0.6,
+        0.8
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_FADEIN",
+      "token": "RENDER_NORMALIZE",
+      "index": 4,
+      "a": 0.012,
+      "b": 0.024,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_FADEIN_a.rpp",
+        "evidence/live/RENDER_FADEIN_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 0 0 0 0.012 0 1 1"
+        ],
+        [
+          "RENDER_NORMALIZE 0 0 0 0.024 0 1 1"
+        ]
+      ],
+      "values": [
+        0.012,
+        0.024
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_FADEOUT",
+      "token": "RENDER_NORMALIZE",
+      "index": 5,
+      "a": 0.036,
+      "b": 0.048,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_FADEOUT_a.rpp",
+        "evidence/live/RENDER_FADEOUT_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 0 0 0 0 0.036 1 1"
+        ],
+        [
+          "RENDER_NORMALIZE 0 0 0 0 0.048 1 1"
+        ]
+      ],
+      "values": [
+        0.036,
+        0.048
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_TRIMSTART",
+      "token": "RENDER_TRIM",
+      "index": 1,
+      "a": 0.02,
+      "b": 0.03,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_TRIMSTART_a.rpp",
+        "evidence/live/RENDER_TRIMSTART_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_TRIM 0.02 0.000001 0 0"
+        ],
+        [
+          "RENDER_TRIM 0.03 0.000001 0 0"
+        ]
+      ],
+      "values": [
+        0.02,
+        0.03
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_TRIMEND",
+      "token": "RENDER_TRIM",
+      "index": 2,
+      "a": 0.04,
+      "b": 0.05,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_TRIMEND_a.rpp",
+        "evidence/live/RENDER_TRIMEND_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_TRIM 0.000001 0.04 0 0"
+        ],
+        [
+          "RENDER_TRIM 0.000001 0.05 0 0"
+        ]
+      ],
+      "values": [
+        0.04,
+        0.05
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_PADSTART",
+      "token": "RENDER_TRIM",
+      "index": 3,
+      "a": 0.06,
+      "b": 0.07,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_PADSTART_a.rpp",
+        "evidence/live/RENDER_PADSTART_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_TRIM 0.000001 0.000001 0.06 0"
+        ],
+        [
+          "RENDER_TRIM 0.000001 0.000001 0.07 0"
+        ]
+      ],
+      "values": [
+        0.06,
+        0.07
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_PADEND",
+      "token": "RENDER_TRIM",
+      "index": 4,
+      "a": 0.08,
+      "b": 0.09,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_PADEND_a.rpp",
+        "evidence/live/RENDER_PADEND_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_TRIM 0.000001 0.000001 0 0.08"
+        ],
+        [
+          "RENDER_TRIM 0.000001 0.000001 0 0.09"
+        ]
+      ],
+      "values": [
+        0.08,
+        0.09
+      ],
+      "ok": true
+    },
+    {
+      "api": "PROJECT_SRATE",
+      "token": "SAMPLERATE",
+      "index": 1,
+      "a": 44100,
+      "b": 48000,
+      "scope": "project",
+      "files": [
+        "evidence/live/PROJECT_SRATE_a.rpp",
+        "evidence/live/PROJECT_SRATE_b.rpp"
+      ],
+      "lines": [
+        [
+          "SAMPLERATE 44100 0 0"
+        ],
+        [
+          "SAMPLERATE 48000 0 0"
+        ]
+      ],
+      "values": [
+        44100,
+        48000
+      ],
+      "ok": true
+    },
+    {
+      "api": "PROJECT_SRATE_USE",
+      "token": "SAMPLERATE",
+      "index": 2,
+      "a": 0,
+      "b": 1,
+      "scope": "project",
+      "files": [
+        "evidence/live/PROJECT_SRATE_USE_a.rpp",
+        "evidence/live/PROJECT_SRATE_USE_b.rpp"
+      ],
+      "lines": [
+        [
+          "SAMPLERATE 44100 0 0"
+        ],
+        [
+          "SAMPLERATE 44100 1 0"
+        ]
+      ],
+      "values": [
+        0,
+        1
+      ],
+      "ok": true
+    },
+    {
+      "api": "PROJECT_TCP_UI_FLAGS",
+      "token": "TCPUIFLAGS",
+      "index": 1,
+      "a": 1,
+      "b": 2,
+      "scope": "project",
+      "files": [
+        "evidence/live/PROJECT_TCP_UI_FLAGS_a.rpp",
+        "evidence/live/PROJECT_TCP_UI_FLAGS_b.rpp"
+      ],
+      "lines": [
+        [
+          "TCPUIFLAGS 1"
+        ],
+        [
+          "TCPUIFLAGS 2"
+        ]
+      ],
+      "values": [
+        1,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "api": "D_WIDTH",
+      "token": "WIDTH",
+      "index": 1,
+      "a": 0.25,
+      "b": 0.75,
+      "scope": "track",
+      "files": [
+        "evidence/live/D_WIDTH_a.rpp",
+        "evidence/live/D_WIDTH_b.rpp"
+      ],
+      "lines": [
+        [
+          "WIDTH 0.25"
+        ],
+        [
+          "WIDTH 0.75"
+        ]
+      ],
+      "values": [
+        0.25,
+        0.75
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_FADEINSHAPE",
+      "token": "RENDER_NORMALIZE",
+      "index": 6,
+      "a": 1,
+      "b": 3,
+      "scope": "project",
+      "files": [
+        "evidence/live-shapes/RENDER_FADEINSHAPE_a.rpp",
+        "evidence/live-shapes/RENDER_FADEINSHAPE_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 1 0 0 0 0 1 1"
+        ],
+        [
+          "RENDER_NORMALIZE 1 0 0 0 0 3 1"
+        ]
+      ],
+      "values": [
+        1,
+        3
+      ],
+      "ok": true
+    },
+    {
+      "api": "RENDER_FADEOUTSHAPE",
+      "token": "RENDER_NORMALIZE",
+      "index": 7,
+      "a": 2,
+      "b": 4,
+      "scope": "project",
+      "files": [
+        "evidence/live-shapes/RENDER_FADEOUTSHAPE_a.rpp",
+        "evidence/live-shapes/RENDER_FADEOUTSHAPE_b.rpp"
+      ],
+      "lines": [
+        [
+          "RENDER_NORMALIZE 1 0 0 0 0 1 2"
+        ],
+        [
+          "RENDER_NORMALIZE 1 0 0 0 0 1 4"
+        ]
+      ],
+      "values": [
+        2,
+        4
+      ],
+      "ok": true
+    }
+  ],
+  "midi": [
+    {
+      "file": "evidence/live/midi_s0_m0.rpp",
+      "selected": false,
+      "muted": false,
+      "prefix": "E",
+      "line": "E 0 90 3c 64"
+    },
+    {
+      "file": "evidence/live/midi_s0_m1.rpp",
+      "selected": false,
+      "muted": true,
+      "prefix": "Em",
+      "line": "Em 0 90 3c 64"
+    },
+    {
+      "file": "evidence/live/midi_s1_m0.rpp",
+      "selected": true,
+      "muted": false,
+      "prefix": "e",
+      "line": "e 0 90 3c 64"
+    },
+    {
+      "file": "evidence/live/midi_s1_m1.rpp",
+      "selected": true,
+      "muted": true,
+      "prefix": "em",
+      "line": "em 0 90 3c 64"
+    }
+  ],
+  "initialOmissions": [
+    {
+      "api": "RENDER_FADEINSHAPE",
+      "token": "RENDER_NORMALIZE",
+      "index": 6,
+      "a": 1,
+      "b": 3,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_FADEINSHAPE_a.rpp",
+        "evidence/live/RENDER_FADEINSHAPE_b.rpp"
+      ],
+      "lines": [
+        [],
+        []
+      ],
+      "reason": "初次关闭归一化时整行未写出；补测开启 RENDER_NORMALIZE=1"
+    },
+    {
+      "api": "RENDER_FADEOUTSHAPE",
+      "token": "RENDER_NORMALIZE",
+      "index": 7,
+      "a": 2,
+      "b": 4,
+      "scope": "project",
+      "files": [
+        "evidence/live/RENDER_FADEOUTSHAPE_a.rpp",
+        "evidence/live/RENDER_FADEOUTSHAPE_b.rpp"
+      ],
+      "lines": [
+        [],
+        []
+      ],
+      "reason": "初次关闭归一化时整行未写出；补测开启 RENDER_NORMALIZE=1"
+    }
+  ]
+}

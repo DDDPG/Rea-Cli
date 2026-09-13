@@ -1,0 +1,316 @@
+{
+  "host": "7.48/macOS-arm64",
+  "method": "Native API/action change, readback and saved RPP comparison. Not a full reload or audio render test.",
+  "checks": [
+    {
+      "run": 2,
+      "file": "pt_tension_1.rpp",
+      "line": "PT 1.5 0.8 5 1 0 0 -0.6"
+    },
+    {
+      "run": 2,
+      "file": "pt_tension_2.rpp",
+      "line": "PT 1.5 0.8 5 1 0 0 0.4"
+    },
+    {
+      "run": 2,
+      "file": "pt_selected.rpp",
+      "line": "PT 1.5 0.8 5 1 1 0 0.4"
+    },
+    {
+      "run": 2,
+      "file": "selection.rpp",
+      "line": "SELECTION 1.25 2.5"
+    },
+    {
+      "run": 2,
+      "file": "selection.rpp",
+      "line": "SELECTION2 4 7"
+    },
+    {
+      "run": 2,
+      "file": "action_41119.rpp",
+      "line": "AUTOXFADE 128"
+    },
+    {
+      "run": 2,
+      "file": "action_41121.rpp",
+      "line": "AUTOXFADE 128"
+    },
+    {
+      "run": 2,
+      "file": "action_41118.rpp",
+      "line": "AUTOXFADE 129"
+    },
+    {
+      "run": 2,
+      "file": "action_41120.rpp",
+      "line": "AUTOXFADE 131"
+    },
+    {
+      "run": 1,
+      "file": "track_I_RECMODE_2.rpp",
+      "line": "REC 0 0 1 3 0 0 0 0"
+    },
+    {
+      "run": 1,
+      "file": "track_I_RECMODE_FLAGS_2.rpp",
+      "line": "REC 0 0 1 0 0 0 0 1"
+    },
+    {
+      "run": 1,
+      "file": "seconds_D_PLAY_OFFSET_1.rpp",
+      "line": "PLAYOFFS 0.125 0"
+    },
+    {
+      "run": 1,
+      "file": "seconds_D_PLAY_OFFSET_2.rpp",
+      "line": "PLAYOFFS 0.25 0"
+    },
+    {
+      "run": 1,
+      "file": "samples_D_PLAY_OFFSET_1.rpp",
+      "line": "PLAYOFFS 128 2"
+    },
+    {
+      "run": 1,
+      "file": "samples_D_PLAY_OFFSET_2.rpp",
+      "line": "PLAYOFFS 256 2"
+    },
+    {
+      "run": 1,
+      "file": "take_F_STRETCHFADESIZE_1.rpp",
+      "line": "PLAYRATE 1 1 0 -1 0 0.001"
+    },
+    {
+      "run": 1,
+      "file": "take_F_STRETCHFADESIZE_2.rpp",
+      "line": "PLAYRATE 1 1 0 -1 0 0.012"
+    },
+    {
+      "run": 1,
+      "file": "take_D_PITCH_1.rpp",
+      "line": "PLAYRATE 1 1 -7 -1 0 0.0025"
+    },
+    {
+      "run": 1,
+      "file": "take_D_PITCH_2.rpp",
+      "line": "PLAYRATE 1 1 5 -1 0 0.0025"
+    },
+    {
+      "run": 1,
+      "file": "fx_delta_2.rpp",
+      "line": "WET 1 1"
+    },
+    {
+      "run": 1,
+      "file": "track_I_NCHAN_2.rpp",
+      "line": "NCHAN 128"
+    },
+    {
+      "run": 1,
+      "file": "master_I_NCHAN_2.rpp",
+      "line": "MASTER_NCH 128 2"
+    },
+    {
+      "run": 1,
+      "file": "take_marker_color_1.rpp",
+      "line": "TKM 1.25 probe_marker 21308161 0"
+    },
+    {
+      "run": 1,
+      "file": "take_marker_color_2.rpp",
+      "line": "TKM 1.25 probe_marker 26900486 0"
+    },
+    {
+      "run": 1,
+      "file": "send_I_AUTOMODE_3.rpp",
+      "line": "AUXRECV 0 0 1 0 0 0 0 0 0 -1:U 0 2 ''"
+    },
+    {
+      "run": 1,
+      "file": "hw_I_AUTOMODE_3.rpp",
+      "line": "HWOUT 0 0 1 0 0 0 0 -1:U 2"
+    },
+    {
+      "run": 1,
+      "file": "cursor_1.rpp",
+      "line": "CURSOR 1.25"
+    },
+    {
+      "run": 1,
+      "file": "cursor_2.rpp",
+      "line": "CURSOR 3.75"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D001",
+      "verdict": "部分支持新来源；root 待验证",
+      "detail": "Track/master 的 I_PANMODE=0/3/5/6 已设置、读回并保存。枚举名称由官方 API 支持：0 classic、3 balance、5 stereo、6 dual。未单独验证 root PANMODE 和 -1 回退，不能把 track 实验直接当 root 的完整行为验证。",
+      "evidence": "track_I_PANMODE_*; master_I_PANMODE_*"
+    },
+    {
+      "id": "D002",
+      "verdict": "本地模块证据支持保留原文；未做编辑器行为实验",
+      "detail": "上一轮 reaper_midi.dylib 含编辑器字段 writer；足以否定只扫主 EXE 的推理方法，不能直接裁定 7.61 Windows 模块。",
+      "evidence": "../evidence/binary-formats.json"
+    },
+    {
+      "id": "D003",
+      "verdict": "原文正确；新来源 K.2 正确、C.8.2 错",
+      "detail": "此前四状态实测 E 未选、e 选中，m 后缀静音。",
+      "evidence": "../evidence/live-validation.json"
+    },
+    {
+      "id": "D004",
+      "verdict": "新来源第7参 tension 正确",
+      "detail": "普通 JSFX 参数包络，shape=5；改变 tension 只改变 PT t7，选中改变 t5。原文 t4=tension 错。tempo 包络及 t4 精细语义未验证。",
+      "evidence": "run2/pt_tension_1.rpp; run2/pt_tension_2.rpp; run2/pt_selected.rpp"
+    },
+    {
+      "id": "D005",
+      "verdict": "仍待本地行为验证",
+      "detail": "pitch range/snap 有独立文档支持，本轮未操纵 DEFSHAPE。不能列为实机定论。",
+      "evidence": ""
+    },
+    {
+      "id": "D006",
+      "verdict": "原文低两位正确；新来源非位域结论错误",
+      "detail": "关闭两选项128；只开 crossfade129；再开 trim131；动作状态分别读回。支持 +1/+2 独立位。其它位含 -64 与 bit7 尚未验证。",
+      "evidence": "run2/action_41119.rpp; run2/action_41118.rpp; run2/action_41120.rpp"
+    },
+    {
+      "id": "D007",
+      "verdict": "原文正确",
+      "detail": "解除联动，时间选区1.25..2.5、loop4..7；分别保存 SELECTION 与 SELECTION2，后者不是副本。",
+      "evidence": "run2/selection.rpp"
+    },
+    {
+      "id": "D008",
+      "verdict": "待对应版本验证",
+      "detail": "本机7.48不能直接验证7.61新增根头第4参。",
+      "evidence": ""
+    },
+    {
+      "id": "D009",
+      "verdict": "未新增实机结论",
+      "detail": "TEMPO t4 / RIPPLE t2 保留基准，未做逐项实验。",
+      "evidence": ""
+    },
+    {
+      "id": "D010",
+      "verdict": "原文部分细节正确",
+      "detail": "B_TCPPIN 对应 SHOWINMIX t9；I_NUMFIXEDLANES 对应 ITEMLANES；C_LANESETTINGS=0/2/8/32 对应 FIXEDLANES t1。未验证其余位及 LANEREC。",
+      "evidence": "track_B_TCPPIN_*; track_I_NUMFIXEDLANES_*; track_C_LANESETTINGS_*"
+    },
+    {
+      "id": "D011",
+      "verdict": "双方各有正确部分",
+      "detail": "REC t3=I_RECMON、t4=I_RECMODE、t5=I_RECMONITEMS，支持原文；新增 t8 对应 I_RECMODE_FLAGS，0/1/2已读回保存。t6 PDC 未本轮切换。",
+      "evidence": "track_I_RECMON_*; track_I_RECMODE_*; track_I_RECMONITEMS_*; track_I_RECMODE_FLAGS_*"
+    },
+    {
+      "id": "D012",
+      "verdict": "原文已知字段获支持；新增位置只确认结构",
+      "detail": "TRACKHEIGHT t1高度/t3锁高、BUSCOMP t1折叠均验证；保存分别7/5参，未解释所有其它位置。",
+      "evidence": "track_I_HEIGHTOVERRIDE_*; track_B_HEIGHTLOCK_*; track_I_FOLDERCOMPACT_*"
+    },
+    {
+      "id": "D013",
+      "verdict": "普通 HWOUT 原文t9正确；新来源t8获支持；master另论",
+      "detail": "HWOUT t8=panlaw含:U，t9=I_AUTOMODE；MASTERHWOUT本机只写8参，t8颜色无关、为panlaw。master I_AUTOMODE虽API读回成功，RPP无变化，不能认定存在持久化t9。",
+      "evidence": "hw_I_AUTOMODE_*; hw_D_PANLAW_*; masterhw_I_AUTOMODE_*; masterhw_D_PANLAW_*"
+    },
+    {
+      "id": "D014",
+      "verdict": "双方各有正确部分",
+      "detail": "AUXRECV t10=panlaw含:U；t11对应 I_MIDIFLAGS（0/31/1/33）；t12=I_AUTOMODE，支持原文自动化解释，不能降成未知flags。API定义0=全部，31=禁用源MIDI，所以原文0=None不成立；未做MIDI音频渲染，t13 GUID未验证。",
+      "evidence": "send_I_MIDIFLAGS_*; send_I_AUTOMODE_*; send_D_PANLAW_*"
+    },
+    {
+      "id": "D015",
+      "verdict": "原文单位有误；新来源无条件秒也不完整",
+      "detail": "flag0，D_PLAY_OFFSET=.125/.25原值写出，即秒而非毫秒；flag2写128/256采样；flags可为3，按位解释，不能只用互斥枚举。",
+      "evidence": "seconds_D_PLAY_OFFSET_*; samples_D_PLAY_OFFSET_*; track_I_PLAY_OFFSET_FLAG_*"
+    },
+    {
+      "id": "D016",
+      "verdict": "128声道说法获支持；通用64上限错误",
+      "detail": "普通轨与master设置128读回成功并保存128，同时出现>64标记。本轮不验证128路实际音频路由。",
+      "evidence": "track_I_NCHAN_2.rpp; master_I_NCHAN_2.rpp"
+    },
+    {
+      "id": "D017",
+      "verdict": "原文MUTE两字段正确；其余待验证",
+      "detail": "更正先前清单措辞：原文本来就有MUTE t2。B_MUTE_ACTUAL改变t1；C_MUTE_SOLO=-1/0/1改变t2。这不是新增arg。POSITION/LENGTH/SNAPOFFS的QN尾参仍待验证。",
+      "evidence": "item_B_MUTE_ACTUAL_*; item_C_MUTE_SOLO_*"
+    },
+    {
+      "id": "D018",
+      "verdict": "原文已知字段及部分新位置获支持",
+      "detail": "FADEIN/OUT t2手动时长、t3自动时长、t6曲率有API设置与保存证据。形状设置可能同时改变t1/t4及曲率；不能据此完整裁定小数形状枚举及t5/t7。",
+      "evidence": "item_D_FADEINLEN_*; item_D_FADEINLEN_AUTO_*; item_D_FADEINDIR_*; item_D_FADEOUT*"
+    },
+    {
+      "id": "D019",
+      "verdict": "新来源t3正确、t6错误；t5需精确措辞",
+      "detail": "PLAYRATE t3=D_PITCH半音，t5=I_STRETCHFLAGS，t6=F_STRETCHFADESIZE（秒），不是quality。原文未列t6；两份文档都不足以完整说明。",
+      "evidence": "take_D_PITCH_*; take_I_STRETCHFLAGS_*; take_F_STRETCHFADESIZE_*"
+    },
+    {
+      "id": "D020",
+      "verdict": "原文第3参颜色正确",
+      "detail": "改变 take marker color，TKM t3跟随；macOS颜色保存数值与API颜色整数可能存在通道布局转换，不能直接泛化跨平台编码。t4用途未验证。",
+      "evidence": "take_marker_color_*"
+    },
+    {
+      "id": "D021",
+      "verdict": "原文WET t2正确；其它部分仍待验证",
+      "detail": "切换 :delta 后 WET 1 1，t2是delta solo；wet=.25/.75写t1。API设置-.5被钳为0，此路径不支持负值，但没有测试RPP reader是否另支持负值。BYPASS t1旁路/t2offline已验证；t3及窗口坐标未验证。",
+      "evidence": "fx_delta_*; fx_wet_*; fx_bypass_*; fx_offline_*"
+    },
+    {
+      "id": "D022",
+      "verdict": "待本地行为验证",
+      "detail": "ACT/VIS/LANEHEIGHT尾参、ARM缺省未做单变量测试。",
+      "evidence": ""
+    },
+    {
+      "id": "D023",
+      "verdict": "待本地行为验证",
+      "detail": "本轮未切换trim/pitch等包络类型，不把PROGRAMENV内部矛盾当作实机证明。",
+      "evidence": ""
+    },
+    {
+      "id": "D024",
+      "verdict": "未验证全称；不采信全称保证",
+      "detail": "未进行未知token重载回写实验。来源自身缺乏无条件无损保证的充分证据。",
+      "evidence": ""
+    },
+    {
+      "id": "D025",
+      "verdict": "待reader级验证",
+      "detail": "未穷尽引号/注释/省略尾参；WDL源码只能证明对应解析器实现，不能替代REAPER所有调用点。",
+      "evidence": ""
+    },
+    {
+      "id": "D026",
+      "verdict": "新来源CURSOR与MASTERPEAKCOL解释正确",
+      "detail": "编辑光标1.25/3.75秒对应CURSOR；master I_CUSTOMCOLOR改变MASTERPEAKCOL。VZOOMEX未测试，颜色跨平台位布局未推定。",
+      "evidence": "cursor_*; master_I_CUSTOMCOLOR_*"
+    },
+    {
+      "id": "D027",
+      "verdict": "部分结构确认，flags未裁定",
+      "detail": "新增marker和region真实保存；可见region结束短行，但未逐项切换选择/渲染/颜色位，不能裁定全部字段。",
+      "evidence": "project_markers.rpp"
+    },
+    {
+      "id": "D028",
+      "verdict": "新来源四项API映射正确",
+      "detail": "MASTERTRACKVIEW t2=F_MCP_FXSEND_SCALE、t3=F_MCP_SENDRGN_SCALE、t4=F_MCP_FXPARM_SCALE、t13=F_TCP_FXPARM_SCALE，各自两值设置/读回/保存。原文t13未知可补；参照区域应依API精确定义。原文t15 pin也验证。",
+      "evidence": "master_F_MCP_*; master_F_TCP_FXPARM_SCALE_*; master_B_TCPPIN_*"
+    }
+  ]
+}

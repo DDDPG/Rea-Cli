@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-13",
+  "offline": {
+    "passed": 194,
+    "skipped": 5,
+    "host": "macOS-arm64 Python 3.12.10"
+  },
+  "existing_live_tests": {
+    "passed": 4,
+    "host": "REAPER 7.48/macOS-arm64"
+  },
+  "source_data_demo": {
+    "status": "passed",
+    "host": "7.48/macOS-arm64",
+    "sample_rate": 48000,
+    "channels": 2,
+    "frames": 48000,
+    "gain": 0.5,
+    "checks": {
+      "original_unchanged": true,
+      "source_exact": true,
+      "numpy_gain_exact": true,
+      "rendered_gain_tolerance": 6.103515625e-05
+    },
+    "local_artifacts": ".state/data-roundtrip-20260913-v2"
+  },
+  "corpus": {
+    "files": 68,
+    "roundtrip": 68,
+    "assembled_roundtrip": 68,
+    "failures": [],
+    "timings_seconds": {
+      "parse": {
+        "sum": 2.6848033722490072,
+        "median": 0.005583687452599406
+      },
+      "traverse": {
+        "sum": 0.8206374978180975,
+        "median": 0.005127979558892548
+      },
+      "lookup": {
+        "sum": 0.024713166756555438,
+        "median": 0.00010041706264019012
+      },
+      "patch": {
+        "sum": 0.0024832850322127342,
+        "median": 1.8457998521625996e-05
+      },
+      "serialize": {
+        "sum": 2.8805212508887053,
+        "median": 0.005783707951195538
+      }
+    },
+    "peak_bytes": 27814652,
+    "note": "Local related corpus, one instrumented pass; serialize includes reparse. Not a comparative speed claim."
+  },
+  "wheel_installation": {
+    "parser_without_rac_numpy": true,
+    "distribution_checks_passed": 14,
+    "final_bundle_demo": "pending final candidate check"
+  },
+  "platforms": {
+    "macOS": "offline and live checked",
+    "Linux": "CI configured; not executed in this local run",
+    "Windows": "parser CI configured; not executed in this local run"
+  },
+  "public_release": "blocked by recorded source permissions and package-index prerequisites"
+}

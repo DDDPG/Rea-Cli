@@ -3,6 +3,7 @@
 为验证层/patch 层提供字段级元数据查询与类型化写入校验。
 键制 <section>:<KEY> (上下文敏感)。
 """
+
 from __future__ import annotations
 
 import json
@@ -24,12 +25,21 @@ def key_meta(section: str, key: str, path: str | Path | None = None) -> dict | N
     """('track','VOLPAN') -> {name, section, fields, tags, verified} 或 None"""
     keys = load(path)["keys"]
     direct = keys.get(f"{section}:{key}")
-    if direct: return direct
-    return next((e for e in keys.values() if e.get("context", e["section"]) == section and key in e.get("tokens", [])), None)
+    if direct:
+        return direct
+    return next(
+        (
+            e
+            for e in keys.values()
+            if e.get("context", e["section"]) == section and key in e.get("tokens", [])
+        ),
+        None,
+    )
 
 
-def field_meta(section: str, key: str, index: int,
-               path: str | Path | None = None) -> dict | None:
+def field_meta(
+    section: str, key: str, index: int, path: str | Path | None = None
+) -> dict | None:
     """('track','VOLPAN',1) -> {index,label,type,description,enum_candidates} 或 None"""
     meta = key_meta(section, key, path)
     if not meta:
@@ -40,8 +50,9 @@ def field_meta(section: str, key: str, index: int,
     return None
 
 
-def field_description(section: str, key: str, index: int,
-                      path: str | Path | None = None) -> str | None:
+def field_description(
+    section: str, key: str, index: int, path: str | Path | None = None
+) -> str | None:
     f = field_meta(section, key, index, path)
     return f["description"] if f else None
 
@@ -76,8 +87,9 @@ def _enum_allowed(enum_candidates: list[str]) -> set[str] | None:
     return allowed if allowed else None
 
 
-def validate_value(section: str, key: str, index: int, value: str,
-                   path: str | Path | None = None) -> str | None:
+def validate_value(
+    section: str, key: str, index: int, value: str, path: str | Path | None = None
+) -> str | None:
     """类型校验 value 是否可写入该字段。返回 None=通过, 否则错误描述。
 
     只做类型级拒绝 (int/float/GUID)。枚举不在此拒绝——
@@ -97,8 +109,9 @@ def validate_value(section: str, key: str, index: int, value: str,
     return None
 
 
-def enum_check(section: str, key: str, index: int, value: str,
-               path: str | Path | None = None) -> str | None:
+def enum_check(
+    section: str, key: str, index: int, value: str, path: str | Path | None = None
+) -> str | None:
     """枚举偏差警告 (非阻断): 可精确化的候选集中不含该值时返回警告, 否则 None。
 
     警告 = "文档未记载但不必然非法"; 位标志形式返回 None (不检查)。"""
@@ -107,8 +120,10 @@ def enum_check(section: str, key: str, index: int, value: str,
         return None
     allowed = _enum_allowed(f["enum_candidates"])
     if allowed is not None and value not in allowed:
-        return (f"enum warning: {section}:{key}[{index}] value {value!r} "
-                f"not documented in {sorted(allowed)} (may still be legal)")
+        return (
+            f"enum warning: {section}:{key}[{index}] value {value!r} "
+            f"not documented in {sorted(allowed)} (may still be legal)"
+        )
     return None
 
 

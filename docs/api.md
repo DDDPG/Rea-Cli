@@ -86,7 +86,7 @@ not proof that two projects will sound identical. Schema facts and API
 signatures are versioned reference data, not live queries of the installed host.
 
 Optional independent parser checks are in `rac.rpp.oracle`. Install the extra
-from this checkout with `python -m pip install '.[oracle]'`; it uses the upstream
+from this checkout with `python -m pip install ./packages/reaper-parser './packages/reacli[oracle]'`; it uses the upstream
 `rpp` dependency without a vendored copy or `sys.path` changes.
 
 ## Generate or write Lua
@@ -105,7 +105,7 @@ validate(script)  # useful separately for hand-written or later-edited scripts
 
 `generate(intent, out_path=None)` returns the written `Path` and immediately
 runs `luac -p`. It accepts only operations in
-[`OP_REGISTRY`](../src/rac/luagen/generator.py), validates their argument types,
+[`OP_REGISTRY`](../packages/reacli/src/rac/luagen/generator.py), validates their argument types,
 and includes the required library snippets in the generated script. The
 operation set covers selected track, item, marker, envelope, FX, MIDI, render,
 project, and routing edits; it is not the entire ReaScript API.

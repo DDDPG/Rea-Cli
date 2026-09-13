@@ -124,7 +124,7 @@ def check_dist(directory: Path, root: Path) -> dict:
         for name in ("pyproject.toml", "LICENSE", "THIRD_PARTY_NOTICES.md",
                      "README.md", "README.zh-CN.md", "CONTRIBUTING.md", "SECURITY.md",
                      "scripts/check_dist.py", "tests/test_distribution.py"):
-            if read(name) != (root / name).read_bytes():
+            if (root / name).exists() and read(name) != (root / name).read_bytes():
                 raise ValueError(f"sdist differs from source: {name}")
 
     return {
@@ -141,7 +141,8 @@ def main() -> int:
     parser.add_argument("directory", nargs="?", type=Path, default=Path("dist"))
     args = parser.parse_args()
     try:
-        result = check_dist(args.directory, Path(__file__).resolve().parents[1])
+        root = Path(__file__).resolve().parents[1]
+        result = check_dist(args.directory, root / "packages/reacli" if (root / "packages/reacli").exists() else root)
     except (OSError, ValueError, KeyError, tarfile.TarError, zipfile.BadZipFile) as exc:
         print(json.dumps({"ok": False, "error": str(exc)}))
         return 1

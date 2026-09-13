@@ -103,9 +103,9 @@ Install the development dependencies and prepare REAPER as described in
 python -m pytest -m "not live"
 RAC_TEST_LIVE=1 python -m pytest -m live
 reacli doctor --render --work-dir ./smoke-artifacts --json
-python -m build
-python -m twine check dist/*
-python scripts/check_dist.py dist
+python tools/build_release.py --output dist/new-candidate
+python -m twine check dist/new-candidate/reacli/* dist/new-candidate/reaper-parser/*
+python scripts/check_dist.py dist/new-candidate/reacli
 ```
 
 `RAC_REAPER_BIN` can select an installation outside the normal discovery paths.

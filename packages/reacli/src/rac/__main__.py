@@ -193,6 +193,9 @@ def cmd_doctor(args):
     if (a.smoke or a.render) and a.profile in {"offline", "lua"}:
         p.error("--smoke/--render requires --profile runner or full")
     report = doctor(profile=a.profile, reaper_bin=a.reaper_bin, resource=a.resource)
+    import reaper_parser
+    from reaper_parser import schema
+    report["ecosystem"] = {"parser_version": reaper_parser.__version__, **schema.load()["meta"]}
     if a.smoke or a.render:
         if report["ok"]:
             from rac.smoke import smoke_check
