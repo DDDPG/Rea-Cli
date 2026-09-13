@@ -55,9 +55,21 @@
     "note": "Local related corpus, one instrumented pass; serialize includes reparse. Not a comparative speed claim."
   },
   "wheel_installation": {
-    "parser_without_rac_numpy": true,
-    "distribution_checks_passed": 14,
-    "final_bundle_demo": "pending final candidate check"
+    "parser_without_rac_numpy_rppxml": true,
+    "distribution_and_integration_checks_passed": 43,
+    "final_bundle_demo": "passed",
+    "isolated_python": true,
+    "execution_directory": "outside repository",
+    "local_evidence_archive": ".state/final-wheel-acceptance",
+    "evidence_note": "Unmodified archive retains original execution paths; not a relocated runnable project.",
+    "roundtrip_sha256": "4be11015c4cecc7ba2e48ac43662fa04fda24750ba3d2dab50b60f6a5892ec3a",
+    "host": "7.48/macOS-arm64",
+    "checks": {
+      "original_unchanged": true,
+      "source_exact": true,
+      "numpy_gain_exact": true,
+      "rendered_gain_tolerance": 6.103515625e-05
+    }
   },
   "platforms": {
     "macOS": "offline and live checked",
