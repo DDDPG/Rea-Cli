@@ -72,9 +72,39 @@
     }
   },
   "platforms": {
-    "macOS": "offline and live checked",
-    "Linux": "CI configured; not executed in this local run",
-    "Windows": "parser CI configured; not executed in this local run"
+    "macOS": "Local REAPER 7.48 live acceptance; GitHub parser Python 3.10-3.14 and rac 3.10/3.12/3.14 offline passed",
+    "Linux": "GitHub Ubuntu parser Python 3.10-3.14; rac 3.10/3.12/3.14 offline passed; candidate wheels isolated installation passed; no new REAPER live acceptance",
+    "Windows": "GitHub parser Python 3.10-3.14 offline passed; no runner or REAPER live acceptance"
   },
-  "public_release": "blocked by recorded source permissions and package-index prerequisites"
+  "public_release": "blocked by recorded source permissions and package-index prerequisites",
+  "github_actions": {
+    "run_id": 34756655368,
+    "url": "https://github.com/DDDPG/Rea-Cli/actions/runs/34756655368",
+    "source_commit": "56c71bcc5b349c7ef6addc7473fceaf444c6ab70",
+    "conclusion": "success",
+    "jobs_passed": 22,
+    "repository_visibility": "private",
+    "parser_per_job": {
+      "passed": 25,
+      "skipped": 1,
+      "skip_reason": "rac compatibility test intentionally skipped in parser-only environment"
+    },
+    "linux_rac_per_job": {
+      "passed": 194,
+      "live_deselected": 5
+    },
+    "linux_candidate_wheel_checks_passed": 43,
+    "parser_dependency_isolation": "passed without rac, numpy or rppxml",
+    "initial_run": {
+      "run_id": 34756589993,
+      "failure": "Windows test read UTF-8 evidence JSON using platform default cp1252",
+      "fix_commit": "56c71bcc5b349c7ef6addc7473fceaf444c6ab70",
+      "fix": "Specify encoding=utf-8; all five Windows jobs passed on rerun"
+    },
+    "local_logs": ".state/github-final-acceptance.log",
+    "log_sha256": "0f04e39cad7b02a62cf54f925f3e452c345eb954d636c700908e98888b58a48f",
+    "candidate_directory": "dist/ecosystem-linux-34756655368",
+    "candidate_manifest_sha256": "a744259658ed132b823e590861bf2b08bbb3b9c2a39654acc84a45ce008f3da0",
+    "candidate_note": "Downloaded artifacts preserved unchanged; their bundled validation predates this completed CI attestation."
+  }
 }

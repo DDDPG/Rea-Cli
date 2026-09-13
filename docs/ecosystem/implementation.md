@@ -16,7 +16,11 @@ The first live data run failed the final waveform assertion because REAPER added
 item fades. The import implementation now explicitly disables manual and automatic fades;
 the second run passed at the original tolerance. Failure artifacts were retained locally.
 
-Only macOS live results are claimed. Linux/Windows CI has not been run here. Existing
+Only macOS live results are claimed. GitHub Actions run 34756655368 passed all 22 jobs,
+including Linux/macOS/Windows parser checks and Linux/macOS rac offline checks. Linux
+candidate wheel isolation and 43 distribution checks passed. The first Windows run
+exposed default-codepage decoding in an evidence test; explicit UTF-8 fixed all five
+Python versions without changing runtime code. Existing
 reference permission questions remain explicit in publication.json; no package was uploaded.
 The public set_field interface refuses fields without a verified write contract; low-level
 set_raw/convenience setters remain raw patches, not claims of verified semantic writes.

@@ -20,8 +20,10 @@ python -m pip install /path/to/candidate/reaper-parser/*.whl /path/to/candidate/
 ```
 
 Lua and REAPER are external prerequisites for host operations. The tested host is
-REAPER 7.48/macOS-arm64. Linux/Windows parser CI is configured; local macOS results do
-not establish that those CI jobs or other hosts have passed.
+REAPER 7.48/macOS-arm64. [Cross-platform CI](https://github.com/DDDPG/Rea-Cli/actions/runs/34756655368)
+passed all 22 jobs: parser on Linux/macOS/Windows (Python 3.10–3.14), rac offline on
+Linux/macOS (3.10/3.12/3.14), and Linux candidate wheel installation. These offline
+results do not establish Linux or Windows REAPER host acceptance. See [validation.json](validation.json).
 
 ## Document contract
 
