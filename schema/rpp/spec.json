@@ -1,14 +1,1710 @@
 {
-  "meta": {
-    "schema_version": "1.0.0",
-    "schema_sha256": "e8e45b1cc7dc9345fdaa32d2f0765e8ccff584d69863f89aa2061766d99185c9",
-    "source": "ReaperDoc @ 6416435fdf4cc7e38346fd7875f5d04949b431a2",
-    "index_base": 1,
-    "key_count": 181,
-    "section_count": 10
+  "schema_version": "1.0.0",
+  "index_base": 1,
+  "source_commit": "6416435fdf4cc7e38346fd7875f5d04949b431a2",
+  "license_status": "source review required before public distribution",
+  "sections": [
+    {
+      "id": "project",
+      "title": "<REAPER_PROJECT>",
+      "subtitle": "Project Settings",
+      "description": "Source file: reaper_parser/project.py"
+    },
+    {
+      "id": "track",
+      "title": "<TRACK>",
+      "subtitle": "Track Definition",
+      "description": "Source file: reaper_parser/track.py"
+    },
+    {
+      "id": "item",
+      "title": "<ITEM>",
+      "subtitle": "Media Item",
+      "description": "Source file: reaper_parser/item.py"
+    },
+    {
+      "id": "take",
+      "title": "Take",
+      "subtitle": "Take Definition",
+      "description": "Definition for Takes within an Item. Source file: reaper_parser/take.py"
+    },
+    {
+      "id": "source",
+      "title": "<SOURCE>",
+      "subtitle": "Media Source",
+      "description": "Item Source and MIDI Source definitions. Source file: reaper_parser/take.py"
+    },
+    {
+      "id": "fx",
+      "title": "FX Chains",
+      "subtitle": "Plugins",
+      "description": "Definitions for FX Chains (Track/Take/Master) and Plugins."
+    },
+    {
+      "id": "envelope",
+      "title": "Envelopes",
+      "subtitle": "Automation",
+      "description": "Automation Envelope definitions.",
+      "introList": {
+        "title": "Supported Envelope Types",
+        "items": [
+          {
+            "label": "VOLENV",
+            "description": "Track (pre FX)/Take volume (0.0 to 2.0)"
+          },
+          {
+            "label": "VOLENV2",
+            "description": "Track (post FX) volume (0.0 to 2.0)"
+          },
+          {
+            "label": "VOLENV3",
+            "description": "Track trim volume (0 to 2)"
+          },
+          {
+            "label": "PANENV",
+            "description": "Track (pre FX)/Take pan (-1.0 to 1.0)"
+          },
+          {
+            "label": "PANENV2",
+            "description": "Track (post FX) pan (-1.0 to 1.0)"
+          },
+          {
+            "label": "DUALPANENVL",
+            "description": "Track pan (left) (pre-FX) (-1 to 1) in 'Dual pan' pan mode"
+          },
+          {
+            "label": "DUALPANENV",
+            "description": "Track pan (right) (pre-FX) (-1 to 1) in 'Dual pan' pan mode"
+          },
+          {
+            "label": "DUALPANENVL2",
+            "description": "Track pan (left) (-1 to 1) in 'Dual pan' pan mode"
+          },
+          {
+            "label": "DUALPANENV2",
+            "description": "Track pan (right) (-1 to 1) in 'Dual pan' pan mode"
+          },
+          {
+            "label": "WIDTHENV",
+            "description": "Track (pre FX) stereo width (-1 to 1) in 'Stereo pan' pan mode"
+          },
+          {
+            "label": "WIDTHENV2",
+            "description": "Track stereo width (-1 to 1) in 'Stereo pan' pan mode"
+          },
+          {
+            "label": "MUTEENV",
+            "description": "Track mute (0.0 to 1.0)"
+          },
+          {
+            "label": "AUXVOLENV",
+            "description": "Track send volume (0.0 to 2.0)"
+          },
+          {
+            "label": "AUXPANENV",
+            "description": "Track sendpan (-1.0 to 1.0)"
+          },
+          {
+            "label": "AUXMUTEENV",
+            "description": "Track send mute (0.0 to 1.0)"
+          },
+          {
+            "label": "PARMENV",
+            "description": "Parameter modulation envelope"
+          }
+        ]
+      }
+    },
+    {
+      "id": "supplement-project",
+      "title": "project · verified additions",
+      "subtitle": "7z 增补 / 结构核验",
+      "description": "以 ReaperDoc 为基准。以下新条目已验证出现位置与一个实际参数布局；明确标有实机核验的字段另已验证API映射。其余含义、默认值及其他版本布局未独立证实。支持资料与实验记录仅保留在本地。"
+    },
+    {
+      "id": "supplement-track",
+      "title": "track · verified additions",
+      "subtitle": "7z 增补 / 结构核验",
+      "description": "以 ReaperDoc 为基准。以下新条目已验证出现位置与一个实际参数布局；明确标有实机核验的字段另已验证API映射。其余含义、默认值及其他版本布局未独立证实。支持资料与实验记录仅保留在本地。"
+    },
+    {
+      "id": "supplement-envelope",
+      "title": "envelope · verified additions",
+      "subtitle": "7z 增补 / 结构核验",
+      "description": "以 ReaperDoc 为基准。以下新条目已验证出现位置与一个实际参数布局；明确标有实机核验的字段另已验证API映射。其余含义、默认值及其他版本布局未独立证实。支持资料与实验记录仅保留在本地。"
+    }
+  ],
+  "structure": {
+    "key": "<REAPER_PROJECT>",
+    "values": "0.1 \"7.48/macOS-arm64\" 1766225573",
+    "sectionId": "project",
+    "children": [
+      {
+        "key": "TITLE",
+        "values": "\"Project Title\"",
+        "sectionId": "project"
+      },
+      {
+        "key": "AUTHOR",
+        "values": "KDW",
+        "sectionId": "project"
+      },
+      {
+        "key": "<NOTES",
+        "values": "0 0",
+        "sectionId": "project",
+        "children": [
+          {
+            "key": "|This is Project Settings Note",
+            "sectionId": "project"
+          }
+        ]
+      },
+      {
+        "key": "RIPPLE",
+        "values": "0 5",
+        "sectionId": "project"
+      },
+      {
+        "key": "GROUPOVERRIDE",
+        "values": "1 0 0 0",
+        "sectionId": "project"
+      },
+      {
+        "key": "AUTOXFADE",
+        "values": "192",
+        "sectionId": "project"
+      },
+      {
+        "key": "ENVATTACH",
+        "values": "1",
+        "sectionId": "project"
+      },
+      {
+        "key": "MIXERUIFLAGS",
+        "values": "16 3",
+        "sectionId": "project"
+      },
+      {
+        "key": "PEAKGAIN",
+        "values": "1.21",
+        "sectionId": "project"
+      },
+      {
+        "key": "PANLAW",
+        "values": "1",
+        "sectionId": "project"
+      },
+      {
+        "key": "PANMODE",
+        "values": "5",
+        "sectionId": "project"
+      },
+      {
+        "key": "CURSOR",
+        "values": "16.552",
+        "sectionId": "project"
+      },
+      {
+        "key": "VZOOMEX",
+        "values": "6.86831951 0",
+        "sectionId": "project"
+      },
+      {
+        "key": "RECMODE",
+        "values": "1",
+        "sectionId": "project"
+      },
+      {
+        "key": "SMPTESYNC",
+        "values": "0 30 90 45 1000 300 0 -0.00332 1 23 12",
+        "sectionId": "project"
+      },
+      {
+        "key": "LOOP",
+        "values": "0",
+        "sectionId": "project"
+      },
+      {
+        "key": "RECORD_PATH",
+        "values": "\"Audio files\" \"\"",
+        "sectionId": "project"
+      },
+      {
+        "key": "RENDER_PATTERN",
+        "values": "$project-mix",
+        "sectionId": "project"
+      },
+      {
+        "key": "COMP",
+        "values": "1 \"Comp 1\"",
+        "sectionId": "project"
+      },
+      {
+        "key": "TEMPO",
+        "values": "116 4 4 0",
+        "sectionId": "project"
+      },
+      {
+        "key": "PLAYRATE",
+        "values": "1 0 0.75 1.5",
+        "sectionId": "project"
+      },
+      {
+        "key": "SELECTION",
+        "values": "194.486 213.107",
+        "sectionId": "project"
+      },
+      {
+        "key": "SELECTION2",
+        "values": "194.486 213.107",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTERAUTOMODE",
+        "values": "0",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTERTRACKHEIGHT",
+        "values": "74 0",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTERPEAKCOL",
+        "values": "100",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTERMUTESOLO",
+        "values": "0",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTERTRACKVIEW",
+        "values": "0 1 0.25 0.647727 0 0 0 0 0 0 0 0 0 0 1",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTERHWOUT",
+        "values": "0 0 1 0 0 0 0 -1",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTER_NCH",
+        "values": "2 66",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTER_VOLUME",
+        "values": "1 0 -1 -1 1",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTER_PANMODE",
+        "values": "-1",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTER_FX",
+        "values": "1",
+        "sectionId": "project"
+      },
+      {
+        "key": "MASTER_SEL",
+        "values": "0",
+        "sectionId": "project"
+      },
+      {
+        "key": "<MASTERFXLIST>",
+        "sectionId": "project",
+        "children": [
+          {
+            "key": "WNDRECT",
+            "values": "763 1603 981 394",
+            "sectionId": "fx"
+          },
+          {
+            "key": "SHOW",
+            "values": "0",
+            "sectionId": "fx"
+          },
+          {
+            "key": "LASTSEL",
+            "values": "0",
+            "sectionId": "fx"
+          },
+          {
+            "key": "DOCKED",
+            "values": "0",
+            "sectionId": "fx"
+          }
+        ]
+      },
+      {
+        "key": "<MASTERPLAYSPEEDENV",
+        "sectionId": "envelope",
+        "children": [
+          {
+            "key": "EGUID",
+            "values": "{2572283B-9128-E444-84BF-7A8A5EBFF77A}",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "ACT",
+            "values": "0 -1",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "VIS",
+            "values": "0 1 1",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "LANEHEIGHT",
+            "values": "0 0",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "ARM",
+            "values": "0",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "DEFSHAPE",
+            "values": "0 -1 -1",
+            "sectionId": "envelope"
+          }
+        ]
+      },
+      {
+        "key": "<TEMPOENVEX",
+        "sectionId": "envelope",
+        "children": [
+          {
+            "key": "EGUID",
+            "values": "{B247A57F-9961-BE4C-90A0-D72FFBB10EE0}",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "ACT",
+            "values": "0 -1",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "VIS",
+            "values": "1 0 1",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "LANEHEIGHT",
+            "values": "27 0",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "ARM",
+            "values": "0",
+            "sectionId": "envelope"
+          },
+          {
+            "key": "DEFSHAPE",
+            "values": "1 -1 -1",
+            "sectionId": "envelope"
+          }
+        ]
+      },
+      {
+        "key": "MARKER",
+        "values": "1 10.344 \"\" 1 0 1 B {GUID} 0",
+        "sectionId": "project"
+      },
+      {
+        "key": "<PROJBAY",
+        "sectionId": "project",
+        "children": []
+      },
+      {
+        "key": "<TRACK",
+        "values": "{CD21E59C-94D9-1F4A-959F-69580F714C49}",
+        "sectionId": "track",
+        "children": [
+          {
+            "key": "NAME",
+            "values": "receive",
+            "sectionId": "track"
+          },
+          {
+            "key": "PEAKCOL",
+            "values": "33513868",
+            "sectionId": "track"
+          },
+          {
+            "key": "BEAT",
+            "values": "-1",
+            "sectionId": "track"
+          },
+          {
+            "key": "AUTOMODE",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "PANMODE",
+            "values": "6",
+            "sectionId": "track"
+          },
+          {
+            "key": "PANLAWFLAGS",
+            "values": "3",
+            "sectionId": "track"
+          },
+          {
+            "key": "VOLPAN",
+            "values": "1 -0.596 1 -1 0.196",
+            "sectionId": "track"
+          },
+          {
+            "key": "MUTESOLO",
+            "values": "0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "IPHASE",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "PLAYOFFS",
+            "values": "0 1",
+            "sectionId": "track"
+          },
+          {
+            "key": "ISBUS",
+            "values": "0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "BUSCOMP",
+            "values": "0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "SHOWINMIX",
+            "values": "1 1 0.314286 1 0.675958 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "FIXEDLANES",
+            "values": "8 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "LANESOLO",
+            "values": "1 0 0 0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "LANENAME",
+            "values": "C1 lane2",
+            "sectionId": "track"
+          },
+          {
+            "key": "LANEREC",
+            "values": "0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "SEL",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "REC",
+            "values": "1 1024 1 0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "VU",
+            "values": "64",
+            "sectionId": "track"
+          },
+          {
+            "key": "TRACKHEIGHT",
+            "values": "0 0 0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "INQ",
+            "values": "0 0 0 0.5 99 0 0 100",
+            "sectionId": "track"
+          },
+          {
+            "key": "NCHAN",
+            "values": "4",
+            "sectionId": "track"
+          },
+          {
+            "key": "<RECCFG",
+            "values": "0",
+            "sectionId": "track",
+            "children": [
+              {
+                "key": "ZXZhdyEkAQ==",
+                "sectionId": "track"
+              }
+            ]
+          },
+          {
+            "key": "FX",
+            "values": "1",
+            "sectionId": "track"
+          },
+          {
+            "key": "TRACKID",
+            "values": "{CD21E59C-94D9-1F4A-959F-69580F714C49}",
+            "sectionId": "track"
+          },
+          {
+            "key": "PERF",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "AUXRECV",
+            "values": "1 0 1 0 0 0 0 0 0 -1:U 0 -1 ''",
+            "sectionId": "track"
+          },
+          {
+            "key": "MIDIOUT",
+            "values": "-1",
+            "sectionId": "track"
+          },
+          {
+            "key": "MAINSEND",
+            "values": "1 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "HWOUT",
+            "values": "2 0 1 0 0 0 0 -1:U -1",
+            "sectionId": "track"
+          },
+          {
+            "key": "LOCK",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "FREEMODE",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "ITEMLANES",
+            "values": "8",
+            "sectionId": "track"
+          },
+          {
+            "key": "<FXCHAIN",
+            "sectionId": "fx",
+            "children": [
+              {
+                "key": "WNDRECT",
+                "values": "488 1146 1181 626",
+                "sectionId": "fx"
+              },
+              {
+                "key": "SHOW",
+                "values": "0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "LASTSEL",
+                "values": "1",
+                "sectionId": "fx"
+              },
+              {
+                "key": "DOCKED",
+                "values": "0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "BYPASS",
+                "values": "1 0 0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "<VST",
+                "values": "\"VST3: bx_digital V3 (Plugin Alliance)\" \"bx_digital V3.vst3\" 0 \"\" 1846886468{5653546278643362785F646967697461} \"\"",
+                "sectionId": "fx",
+                "children": [
+                  {
+                    "key": "REAVbu5e7f4CAAAAAQAAAAAAAAACAAAAAAAAAAIAAAABAAAAAAAAAAIAAAAAAAAAIBQAAAEAAAD//wAA",
+                    "sectionId": "fx"
+                  },
+                  {
+                    "key": "CAoAAAEAAABCWENrAAAKAEVmY3QAAAnsUG10cgAACdQAAAncAAAAfQAAAAQAAAAAQnlwYQAAAAAAAAAAAAAAAAAAAABCYW5rAAAAAAAAAAAAAAAAAAAAAEduSW4/AAAA",
+                    "sectionId": "fx"
+                  },
+                  {
+                    "key": "dGhpcyBpcyBqdXN0IG1vY2sgZGF0YS4uLiBwbGVhc2UgaW1hZ2luZSBhIHJlYWwgcGx1Z2luIHN0YXRlIGhlcmU=",
+                    "sectionId": "fx"
+                  }
+                ]
+              },
+              {
+                "key": "WET",
+                "values": "0.329946 0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "FLOATPOS",
+                "values": "421 1163 1024 731",
+                "sectionId": "fx"
+              },
+              {
+                "key": "FXID",
+                "values": "{33537175-3F37-6E48-9243-5A83ED47FABD}",
+                "sectionId": "fx"
+              },
+              {
+                "key": "<PARMENV",
+                "values": "0:1115254881 0 1 0.5 \"Bypass / bx_digital V3\"",
+                "sectionId": "envelope",
+                "children": [
+                  {
+                    "key": "EGUID",
+                    "values": "{4DAEBD23-A6E5-EA41-973A-A17D6336064D}",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "ACT",
+                    "values": "0 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "VIS",
+                    "values": "0 1 1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "LANEHEIGHT",
+                    "values": "0 0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "ARM",
+                    "values": "0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "DEFSHAPE",
+                    "values": "1 -1 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "PT",
+                    "values": "4.138 0 1",
+                    "sectionId": "envelope"
+                  }
+                ]
+              },
+              {
+                "key": "WAK",
+                "values": "0 0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "BYPASS",
+                "values": "0 0 0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "<VST",
+                "values": "\"VST3: Pro-Q 4 (FabFilter)\" \"FabFilter Pro-Q 4.vst3\" 0 \"\" 934538646{ED57BD725C60467EA64DD2F400758B6F} \"\"",
+                "sectionId": "fx",
+                "children": [
+                  {
+                    "key": "lu2zN+5e7f4EAAAAAQAAAAAAAAACAAAAAAAAAAQAAAAAAAAACAAAAAAAAAACAAAAAQAAAAAAAAACAAAAAAAAAMYKAAABAAAAAAAAAA==",
+                    "sectionId": "fx"
+                  },
+                  {
+                    "key": "eAkAAAEAAABGRkJTAQAAAFgCAAAAAIA/AAAAAHia1EAAAAAAAAAAPwAAAAAAAABAAAAAQAAAgD8AAAAAAACAPwAAgD8AAIA/AABIQgAASEIAAAAAAAAAAHia1EDczzhB",
+                    "sectionId": "fx"
+                  },
+                  {
+                    "key": "YW5vdGhlciBwbGFjZWhvbGRlciBmb3IgdGhlIHZzdCBkYXRhIGJsb2NrIHdoaWNoIGlzIHR5cGljYWxseSB2ZXJ5IGxvbmc=",
+                    "sectionId": "fx"
+                  }
+                ]
+              },
+              {
+                "key": "PRESETNAME",
+                "values": "\"Program 1\"",
+                "sectionId": "fx"
+              },
+              {
+                "key": "FLOATPOS",
+                "values": "794 1374 950 623",
+                "sectionId": "fx"
+              },
+              {
+                "key": "FXID",
+                "values": "{26C746C5-5741-9F41-A20F-1EFB1A52E098}",
+                "sectionId": "fx"
+              },
+              {
+                "key": "<PARMENV",
+                "values": "737:bypass 0 1 0.5 \"Bypass / Pro-Q 4\"",
+                "sectionId": "envelope",
+                "children": [
+                  {
+                    "key": "EGUID",
+                    "values": "{F54364D5-ED6E-D84E-BDE0-BFEAA484745E}",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "ACT",
+                    "values": "0 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "VIS",
+                    "values": "0 1 1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "LANEHEIGHT",
+                    "values": "0 0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "ARM",
+                    "values": "0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "DEFSHAPE",
+                    "values": "1 -1 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "PT",
+                    "values": "4.138 0 1",
+                    "sectionId": "envelope"
+                  }
+                ]
+              },
+              {
+                "key": "WAK",
+                "values": "0 0",
+                "sectionId": "fx"
+              }
+            ]
+          },
+          {
+            "key": "<VOLENV2",
+            "sectionId": "envelope",
+            "comment": "Track post-FX volume envelope example",
+            "children": [
+              {
+                "key": "EGUID",
+                "values": "{60736C76-8B79-B04B-B199-74AFC22A6F70}",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ACT",
+                "values": "0 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VIS",
+                "values": "0 1 1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "LANEHEIGHT",
+                "values": "0 0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ARM",
+                "values": "0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "DEFSHAPE",
+                "values": "0 -1 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VOLTYPE",
+                "values": "1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "PT",
+                "values": "4.138 1 0",
+                "sectionId": "envelope"
+              }
+            ]
+          },
+          {
+            "key": "<MUTEENV",
+            "sectionId": "envelope",
+            "comment": "Track mute envelope example",
+            "children": [
+              {
+                "key": "EGUID",
+                "values": "{8EA5F0AD-160F-5149-BA05-51A5B0DB1D3C}",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ACT",
+                "values": "0 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VIS",
+                "values": "0 1 1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "LANEHEIGHT",
+                "values": "0 0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ARM",
+                "values": "0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "DEFSHAPE",
+                "values": "0 -1 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "PT",
+                "values": "4.138 0 0",
+                "sectionId": "envelope"
+              }
+            ]
+          },
+          {
+            "key": "<ITEM",
+            "sectionId": "item",
+            "children": [
+              {
+                "key": "POSITION",
+                "values": "2.0689",
+                "sectionId": "item"
+              },
+              {
+                "key": "SNAPOFFS",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "LENGTH",
+                "values": "2.0689",
+                "sectionId": "item"
+              },
+              {
+                "key": "LOOP",
+                "values": "1",
+                "sectionId": "item"
+              },
+              {
+                "key": "ALLTAKES",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "FADEIN",
+                "values": "2 0 0 2 0 1 1",
+                "sectionId": "item"
+              },
+              {
+                "key": "FADEOUT",
+                "values": "1 0.01 0 3 0 0 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "MUTE",
+                "values": "0 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "BEAT",
+                "values": "1",
+                "sectionId": "item"
+              },
+              {
+                "key": "SEL",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "YPOS",
+                "values": "0 1 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "IGUID",
+                "values": "{455A7CC8-0CE8-D049-9BEC-44911C9736A2}",
+                "sectionId": "item"
+              },
+              {
+                "key": "IID",
+                "values": "4",
+                "sectionId": "item"
+              },
+              {
+                "key": "COMP",
+                "values": "1 1 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "NAME",
+                "values": "test_audio.mp3",
+                "sectionId": "item"
+              },
+              {
+                "key": "VOLPAN",
+                "values": "1 0 1 1",
+                "sectionId": "item"
+              },
+              {
+                "key": "SOFFS",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "PLAYRATE",
+                "values": "1.000 1 33 -65536 0 0.0023",
+                "sectionId": "item"
+              },
+              {
+                "key": "CHANMODE",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "GUID",
+                "values": "{4BCE0917-FE2F-F24E-8B32-12144D8D0F44}",
+                "sectionId": "item"
+              },
+              {
+                "key": "COLOR",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "TKM",
+                "values": "22.24137931034483 take_marker 0 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "RESOURCEFN",
+                "values": "\"/Users/lertoon/Music/test_VAE_pross.mp3\"",
+                "sectionId": "item"
+              },
+              {
+                "key": "IMGRESOURCEFLAGS",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "GROUP",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "FADEFLAG",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "FADELPF",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "<SOURCE",
+                "values": "MP3",
+                "sectionId": "source",
+                "children": [
+                  {
+                    "key": "FILE",
+                    "values": "\"/path/to/project/audio/test_audio.mp3\" 1",
+                    "sectionId": "source"
+                  }
+                ]
+              },
+              {
+                "key": "<PANENV",
+                "sectionId": "envelope",
+                "children": [
+                  {
+                    "key": "ACT",
+                    "values": "0 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "VIS",
+                    "values": "0 1 1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "PT",
+                    "values": "0 0 0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "PT",
+                    "values": "2.069 0 0",
+                    "sectionId": "envelope"
+                  }
+                ]
+              },
+              {
+                "key": "TAKE",
+                "values": "SEL",
+                "sectionId": "take"
+              },
+              {
+                "key": "NAME",
+                "values": "\"test_audio.wav\"",
+                "sectionId": "take"
+              },
+              {
+                "key": "TAKEVOLPAN",
+                "values": "0 1 0",
+                "sectionId": "take"
+              },
+              {
+                "key": "SOFFS",
+                "values": "0",
+                "sectionId": "take"
+              },
+              {
+                "key": "PLAYRATE",
+                "values": "2 1 0 -1 0 0.0025",
+                "sectionId": "take"
+              },
+              {
+                "key": "CHANMODE",
+                "values": "0",
+                "sectionId": "take"
+              },
+              {
+                "key": "GUID",
+                "values": "{ADC20F9D-1BBD-1F40-B8C8-461BF438D098}",
+                "sectionId": "take"
+              },
+              {
+                "key": "<SOURCE",
+                "values": "WAVE",
+                "sectionId": "source",
+                "children": [
+                  {
+                    "key": "FILE",
+                    "values": "\"Audio files/test_audio.wav\"",
+                    "sectionId": "source"
+                  }
+                ]
+              },
+              {
+                "key": "<PANENV",
+                "sectionId": "envelope",
+                "comment": "Take pan envelope",
+                "children": [
+                  {
+                    "key": "EGUID",
+                    "values": "{46E289C8-073B-AE4C-AA39-DB67D6D38C01}",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "ACT",
+                    "values": "0 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "VIS",
+                    "values": "0 1 1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "LANEHEIGHT",
+                    "values": "0 0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "ARM",
+                    "values": "0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "DEFSHAPE",
+                    "values": "0 -1 -1",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "PT",
+                    "values": "0 0 0",
+                    "sectionId": "envelope"
+                  },
+                  {
+                    "key": "PT",
+                    "values": "4.13793103 0 0",
+                    "sectionId": "envelope"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "<ITEM",
+            "sectionId": "item",
+            "comment": "MIDI Item Example",
+            "children": [
+              {
+                "key": "<NOTES",
+                "values": "0 0",
+                "sectionId": "item",
+                "comment": "Item notes chunk",
+                "children": [
+                  {
+                    "key": "|This is an item note example",
+                    "sectionId": "item"
+                  }
+                ]
+              },
+              {
+                "key": "POSITION",
+                "values": "4.138",
+                "sectionId": "item"
+              },
+              {
+                "key": "SNAPOFFS",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "LENGTH",
+                "values": "39.311",
+                "sectionId": "item"
+              },
+              {
+                "key": "LOOP",
+                "values": "1",
+                "sectionId": "item"
+              },
+              {
+                "key": "ALLTAKES",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "FADEIN",
+                "values": "1 0 0 1 0 0 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "FADEOUT",
+                "values": "1 0 0 1 0 0 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "MUTE",
+                "values": "0 0",
+                "sectionId": "item"
+              },
+              {
+                "key": "BEAT",
+                "values": "-1",
+                "sectionId": "item"
+              },
+              {
+                "key": "SEL",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "IGUID",
+                "values": "{1E260C1A-2185-A747-A250-1D0D4C2F15F9}",
+                "sectionId": "item"
+              },
+              {
+                "key": "IID",
+                "values": "9",
+                "sectionId": "item"
+              },
+              {
+                "key": "NAME",
+                "values": "07-MIDI",
+                "sectionId": "item"
+              },
+              {
+                "key": "VOLPAN",
+                "values": "1 0 1 -1",
+                "sectionId": "item"
+              },
+              {
+                "key": "SOFFS",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "PLAYRATE",
+                "values": "1 1 0 -1 0 0.0025",
+                "sectionId": "item"
+              },
+              {
+                "key": "CHANMODE",
+                "values": "0",
+                "sectionId": "item"
+              },
+              {
+                "key": "GUID",
+                "values": "{61D9AC0A-84AB-924A-9CAA-9C1E5A65A7BF}",
+                "sectionId": "item"
+              },
+              {
+                "key": "<SOURCE",
+                "values": "MIDI",
+                "sectionId": "source",
+                "children": [
+                  {
+                    "key": "HASDATA",
+                    "values": "1 960 QN",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "CCINTERP",
+                    "values": "32",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "POOLEDEVTS",
+                    "values": "{B8B6F3A4-D7F2-014F-980A-6185DA688A2B}",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "e",
+                    "values": "3840 90 3e 31",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "e",
+                    "values": "5760 80 3e 00",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "E",
+                    "values": "960 90 41 66",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "E",
+                    "values": "7680 80 41 00",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "E",
+                    "values": "0 90 3c 49",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "E",
+                    "values": "6720 80 3c 00",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "E",
+                    "values": "48001 b0 7b 00",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "CCINTERP",
+                    "values": "32",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "CHASE_CC_TAKEOFFS",
+                    "values": "1",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "GUID",
+                    "values": "{3EA4022F-E009-BF41-9C78-A1A6097CB1CA}",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "IGNTEMPO",
+                    "values": "1 116 4 4",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "SRCCOLOR",
+                    "values": "0",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "EVTFILTER",
+                    "values": "0 -1 -1 -1 -1 0 0 0 0 -1 -1 -1 -1 0 -1 0 -1 -1",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "VELLANE",
+                    "values": "-1 100 0 0 1",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "CFGEDITVIEW",
+                    "values": "0 0.01065 61 12 0 0 0 0 0 0.5",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "KEYSNAP",
+                    "values": "0",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "TRACKSEL",
+                    "values": "0",
+                    "sectionId": "source"
+                  },
+                  {
+                    "key": "CFGEDIT",
+                    "values": "1 1 0 1 0 0 1 1 1 1 1 0.125 801 1579 1744 1957 0 0 0 0 0 0 0 0 0 0.5 0 0 1 64",
+                    "sectionId": "source"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "<TRACK",
+        "values": "{26E432D0-CED4-3546-A16C-C4EDA16CB87C}",
+        "sectionId": "track",
+        "comment": "Second track with additional envelope examples",
+        "children": [
+          {
+            "key": "NAME",
+            "values": "test_trim",
+            "sectionId": "track"
+          },
+          {
+            "key": "PEAKCOL",
+            "values": "33513868",
+            "sectionId": "track"
+          },
+          {
+            "key": "BEAT",
+            "values": "-1",
+            "sectionId": "track"
+          },
+          {
+            "key": "AUTOMODE",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "PANLAWFLAGS",
+            "values": "3",
+            "sectionId": "track"
+          },
+          {
+            "key": "VOLPAN",
+            "values": "1 0 -1 -1 1",
+            "sectionId": "track"
+          },
+          {
+            "key": "MUTESOLO",
+            "values": "0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "IPHASE",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "PLAYOFFS",
+            "values": "0 1",
+            "sectionId": "track"
+          },
+          {
+            "key": "ISBUS",
+            "values": "0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "BUSCOMP",
+            "values": "2 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "SHOWINMIX",
+            "values": "1 1 0.319149 1 0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "FIXEDLANES",
+            "values": "9 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "SEL",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "REC",
+            "values": "0 0 1 0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "VU",
+            "values": "64",
+            "sectionId": "track"
+          },
+          {
+            "key": "TRACKHEIGHT",
+            "values": "0 0 0 0 0 0 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "INQ",
+            "values": "0 0 0 0.5 100 0 0 100",
+            "sectionId": "track"
+          },
+          {
+            "key": "NCHAN",
+            "values": "2",
+            "sectionId": "track"
+          },
+          {
+            "key": "FX",
+            "values": "1",
+            "sectionId": "track"
+          },
+          {
+            "key": "TRACKID",
+            "values": "{26E432D0-CED4-3546-A16C-C4EDA16CB87C}",
+            "sectionId": "track"
+          },
+          {
+            "key": "PERF",
+            "values": "0",
+            "sectionId": "track"
+          },
+          {
+            "key": "AUXRECV",
+            "values": "0 0 1 0 0 0 0 0 0 -1:U 0 -1 ''",
+            "sectionId": "track"
+          },
+          {
+            "key": "MIDIOUT",
+            "values": "-1",
+            "sectionId": "track"
+          },
+          {
+            "key": "MAINSEND",
+            "values": "1 0",
+            "sectionId": "track"
+          },
+          {
+            "key": "<VOLENV2",
+            "sectionId": "envelope",
+            "children": [
+              {
+                "key": "EGUID",
+                "values": "{60736C76-8B79-B04B-B199-74AFC22A6F70}",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ACT",
+                "values": "0 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VIS",
+                "values": "0 1 1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "LANEHEIGHT",
+                "values": "0 0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ARM",
+                "values": "0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "DEFSHAPE",
+                "values": "0 -1 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VOLTYPE",
+                "values": "1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "PT",
+                "values": "4.138 1 0",
+                "sectionId": "envelope"
+              }
+            ]
+          },
+          {
+            "key": "<PANENV2",
+            "sectionId": "envelope",
+            "children": [
+              {
+                "key": "EGUID",
+                "values": "{8EA5F0AD-160F-5149-BA05-51A5B0DB1D3C}",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ACT",
+                "values": "0 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VIS",
+                "values": "0 1 1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "LANEHEIGHT",
+                "values": "0 0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ARM",
+                "values": "0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "DEFSHAPE",
+                "values": "0 -1 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "PT",
+                "values": "4.138 0 0",
+                "sectionId": "envelope"
+              }
+            ]
+          },
+          {
+            "key": "<WIDTHENV2",
+            "sectionId": "envelope",
+            "children": [
+              {
+                "key": "EGUID",
+                "values": "{7DBC4F41-BE24-D64E-A756-3C58AB195720}",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ACT",
+                "values": "0 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "VIS",
+                "values": "0 1 1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "LANEHEIGHT",
+                "values": "0 0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "ARM",
+                "values": "0",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "DEFSHAPE",
+                "values": "0 -1 -1",
+                "sectionId": "envelope"
+              },
+              {
+                "key": "PT",
+                "values": "4.138 1 0",
+                "sectionId": "envelope"
+              }
+            ]
+          },
+          {
+            "key": "<FXCHAIN",
+            "sectionId": "fx",
+            "children": [
+              {
+                "key": "WNDRECT",
+                "values": "488 1146 1181 626",
+                "sectionId": "fx"
+              },
+              {
+                "key": "SHOW",
+                "values": "0",
+                "sectionId": "fx"
+              },
+              {
+                "key": "LASTSEL",
+                "values": "1",
+                "sectionId": "fx"
+              },
+              {
+                "key": "DOCKED",
+                "values": "0",
+                "sectionId": "fx"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "<EXTENSIONS",
+        "sectionId": "project",
+        "children": [
+          {
+            "key": "<SWSAUTOCOLOR",
+            "sectionId": "project",
+            "children": [
+              {
+                "key": "{00000000-0000-0000-0000-000000000000}",
+                "values": "0 \"\" \"\" \"\"",
+                "sectionId": "project"
+              },
+              {
+                "key": "{CD21E59C-94D9-1F4A-959F-69580F714C49}",
+                "values": "59531775 \"\" \"\" \"\"",
+                "sectionId": "project"
+              },
+              {
+                "key": "{26E432D0-CED4-3546-A16C-C4EDA16CB87C}",
+                "values": "59531775 \"\" \"\" \"\"",
+                "sectionId": "project"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
-  "keys": {
-    "project:<REAPER_PROJECT>": {
+  "entries": [
+    {
       "name": "<REAPER_PROJECT>",
       "section": "project",
       "is_chunk": true,
@@ -41,7 +1737,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:TITLE": {
+    {
       "name": "TITLE",
       "section": "project",
       "is_chunk": false,
@@ -74,7 +1770,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:AUTHOR": {
+    {
       "name": "AUTHOR",
       "section": "project",
       "is_chunk": false,
@@ -107,7 +1803,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:<NOTES>": {
+    {
       "name": "<NOTES>",
       "section": "project",
       "is_chunk": true,
@@ -140,7 +1836,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:RIPPLE": {
+    {
       "name": "RIPPLE",
       "section": "project",
       "is_chunk": false,
@@ -195,7 +1891,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:AUTOXFADE": {
+    {
       "name": "AUTOXFADE",
       "section": "project",
       "is_chunk": false,
@@ -232,7 +1928,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MIXERUIFLAGS": {
+    {
       "name": "MIXERUIFLAGS",
       "section": "project",
       "is_chunk": false,
@@ -297,7 +1993,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:PEAKGAIN": {
+    {
       "name": "PEAKGAIN",
       "section": "project",
       "is_chunk": false,
@@ -330,7 +2026,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:PANLAW": {
+    {
       "name": "PANLAW",
       "section": "project",
       "is_chunk": false,
@@ -363,7 +2059,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:PANMODE": {
+    {
       "name": "PANMODE",
       "section": "project",
       "is_chunk": false,
@@ -401,7 +2097,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:CURSOR": {
+    {
       "name": "CURSOR",
       "section": "project",
       "is_chunk": false,
@@ -434,7 +2130,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D026). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:VZOOMEX": {
+    {
       "name": "VZOOMEX",
       "section": "project",
       "is_chunk": false,
@@ -480,7 +2176,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:RECMODE": {
+    {
       "name": "RECMODE",
       "section": "project",
       "is_chunk": false,
@@ -517,7 +2213,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:SMPTESYNC": {
+    {
       "name": "SMPTESYNC",
       "section": "project",
       "is_chunk": false,
@@ -697,7 +2393,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:LOOP": {
+    {
       "name": "LOOP",
       "section": "project",
       "is_chunk": false,
@@ -730,7 +2426,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:RECORD_PATH": {
+    {
       "name": "RECORD_PATH",
       "section": "project",
       "is_chunk": false,
@@ -776,7 +2472,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:RENDER_PATTERN": {
+    {
       "name": "RENDER_PATTERN",
       "section": "project",
       "is_chunk": false,
@@ -809,7 +2505,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:COMP": {
+    {
       "name": "COMP",
       "section": "project",
       "is_chunk": false,
@@ -855,7 +2551,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:TEMPO": {
+    {
       "name": "TEMPO",
       "section": "project",
       "is_chunk": false,
@@ -927,7 +2623,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:PLAYRATE": {
+    {
       "name": "PLAYRATE",
       "section": "project",
       "is_chunk": false,
@@ -999,7 +2695,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:SELECTION": {
+    {
       "name": "SELECTION",
       "section": "project",
       "is_chunk": false,
@@ -1045,7 +2741,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:SELECTION2": {
+    {
       "name": "SELECTION2",
       "section": "project",
       "is_chunk": false,
@@ -1091,7 +2787,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTERAUTOMODE": {
+    {
       "name": "MASTERAUTOMODE",
       "section": "project",
       "is_chunk": false,
@@ -1131,7 +2827,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTERTRACKHEIGHT": {
+    {
       "name": "MASTERTRACKHEIGHT",
       "section": "project",
       "is_chunk": false,
@@ -1177,7 +2873,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTERPEAKCOL": {
+    {
       "name": "MASTERPEAKCOL",
       "section": "project",
       "is_chunk": false,
@@ -1210,7 +2906,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D026). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTERMUTESOLO": {
+    {
       "name": "MASTERMUTESOLO",
       "section": "project",
       "is_chunk": false,
@@ -1249,7 +2945,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTERTRACKVIEW": {
+    {
       "name": "MASTERTRACKVIEW",
       "section": "project",
       "is_chunk": false,
@@ -1375,7 +3071,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D028). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTERHWOUT": {
+    {
       "name": "MASTERHWOUT",
       "section": "project",
       "is_chunk": false,
@@ -1499,7 +3195,7 @@
       "description": "REAPER 7.48/macOS saves eight parameters. Changing master hardware I_AUTOMODE read back through the API but did not serialize a ninth parameter; the former field 9 claim is withdrawn for this tested layout.",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTER_NCH": {
+    {
       "name": "MASTER_NCH",
       "section": "project",
       "is_chunk": false,
@@ -1545,7 +3241,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D016). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTER_VOLUME": {
+    {
       "name": "MASTER_VOLUME",
       "section": "project",
       "is_chunk": false,
@@ -1630,7 +3326,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTER_PANMODE": {
+    {
       "name": "MASTER_PANMODE",
       "section": "project",
       "is_chunk": false,
@@ -1669,7 +3365,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D001). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTER_FX": {
+    {
       "name": "MASTER_FX",
       "section": "project",
       "is_chunk": false,
@@ -1702,7 +3398,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MASTER_SEL": {
+    {
       "name": "MASTER_SEL",
       "section": "project",
       "is_chunk": false,
@@ -1735,7 +3431,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:MARKER": {
+    {
       "name": "MARKER",
       "section": "project",
       "is_chunk": false,
@@ -1824,7 +3520,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:<MASTERFXLIST>": {
+    {
       "name": "<MASTERFXLIST>",
       "section": "project",
       "is_chunk": true,
@@ -1857,7 +3553,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:<MASTERPLAYSPEEDENV>": {
+    {
       "name": "<MASTERPLAYSPEEDENV>",
       "section": "project",
       "is_chunk": true,
@@ -1890,7 +3586,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:<TEMPOENVEX>": {
+    {
       "name": "<TEMPOENVEX>",
       "section": "project",
       "is_chunk": true,
@@ -1923,7 +3619,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:<PROJBAY>": {
+    {
       "name": "<PROJBAY>",
       "section": "project",
       "is_chunk": true,
@@ -1958,7 +3654,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "project:<EXTENSIONS>": {
+    {
       "name": "<EXTENSIONS>",
       "section": "project",
       "is_chunk": true,
@@ -1993,7 +3689,7 @@
       "description": "",
       "sourceFile": "reaper_parser/project.py"
     },
-    "track:TRACK": {
+    {
       "name": "TRACK",
       "section": "track",
       "is_chunk": false,
@@ -2026,7 +3722,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:NAME": {
+    {
       "name": "NAME",
       "section": "track",
       "is_chunk": false,
@@ -2059,7 +3755,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:PEAKCOL": {
+    {
       "name": "PEAKCOL",
       "section": "track",
       "is_chunk": false,
@@ -2092,7 +3788,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:BEAT": {
+    {
       "name": "BEAT",
       "section": "track",
       "is_chunk": false,
@@ -2127,7 +3823,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:AUTOMODE": {
+    {
       "name": "AUTOMODE",
       "section": "track",
       "is_chunk": false,
@@ -2166,7 +3862,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:PANMODE": {
+    {
       "name": "PANMODE",
       "section": "track",
       "is_chunk": false,
@@ -2205,7 +3901,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D001). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:PANLAWFLAGS": {
+    {
       "name": "PANLAWFLAGS",
       "section": "track",
       "is_chunk": false,
@@ -2242,7 +3938,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:VOLPAN": {
+    {
       "name": "VOLPAN",
       "section": "track",
       "is_chunk": false,
@@ -2327,7 +4023,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:MUTESOLO": {
+    {
       "name": "MUTESOLO",
       "section": "track",
       "is_chunk": false,
@@ -2390,7 +4086,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:IPHASE": {
+    {
       "name": "IPHASE",
       "section": "track",
       "is_chunk": false,
@@ -2423,7 +4119,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:PLAYOFFS": {
+    {
       "name": "PLAYOFFS",
       "section": "track",
       "is_chunk": false,
@@ -2474,7 +4170,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D015). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:ISBUS": {
+    {
       "name": "ISBUS",
       "section": "track",
       "is_chunk": false,
@@ -2524,7 +4220,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:BUSCOMP": {
+    {
       "name": "BUSCOMP",
       "section": "track",
       "is_chunk": false,
@@ -2583,7 +4279,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:SHOWINMIX": {
+    {
       "name": "SHOWINMIX",
       "section": "track",
       "is_chunk": false,
@@ -2694,7 +4390,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:FIXEDLANES": {
+    {
       "name": "FIXEDLANES",
       "section": "track",
       "is_chunk": false,
@@ -2757,7 +4453,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:SEL": {
+    {
       "name": "SEL",
       "section": "track",
       "is_chunk": false,
@@ -2790,7 +4486,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:REC": {
+    {
       "name": "REC",
       "section": "track",
       "is_chunk": false,
@@ -2936,7 +4632,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D011). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:VU": {
+    {
       "name": "VU",
       "section": "track",
       "is_chunk": false,
@@ -2978,7 +4674,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:TRACKHEIGHT": {
+    {
       "name": "TRACKHEIGHT",
       "section": "track",
       "is_chunk": false,
@@ -3024,7 +4720,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:INQ": {
+    {
       "name": "INQ",
       "section": "track",
       "is_chunk": false,
@@ -3148,7 +4844,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:NCHAN": {
+    {
       "name": "NCHAN",
       "section": "track",
       "is_chunk": false,
@@ -3181,7 +4877,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D016). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:<RECCFG>": {
+    {
       "name": "<RECCFG>",
       "section": "track",
       "is_chunk": true,
@@ -3214,7 +4910,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:FX": {
+    {
       "name": "FX",
       "section": "track",
       "is_chunk": false,
@@ -3250,7 +4946,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:TRACKID": {
+    {
       "name": "TRACKID",
       "section": "track",
       "is_chunk": false,
@@ -3283,7 +4979,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:PERF": {
+    {
       "name": "PERF",
       "section": "track",
       "is_chunk": false,
@@ -3319,7 +5015,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:AUXRECV": {
+    {
       "name": "AUXRECV",
       "section": "track",
       "is_chunk": false,
@@ -3499,7 +5195,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D014). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:MIDIOUT": {
+    {
       "name": "MIDIOUT",
       "section": "track",
       "is_chunk": false,
@@ -3535,7 +5231,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:MAINSEND": {
+    {
       "name": "MAINSEND",
       "section": "track",
       "is_chunk": false,
@@ -3581,7 +5277,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:HWOUT": {
+    {
       "name": "HWOUT",
       "section": "track",
       "is_chunk": false,
@@ -3741,7 +5437,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D013). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:LOCK": {
+    {
       "name": "LOCK",
       "section": "track",
       "is_chunk": false,
@@ -3774,7 +5470,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:FREEMODE": {
+    {
       "name": "FREEMODE",
       "section": "track",
       "is_chunk": false,
@@ -3811,7 +5507,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:LANEREC": {
+    {
       "name": "LANEREC",
       "section": "track",
       "is_chunk": false,
@@ -3870,7 +5566,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:ITEMLANES": {
+    {
       "name": "ITEMLANES",
       "section": "track",
       "is_chunk": false,
@@ -3903,7 +5599,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:<FXCHAIN>": {
+    {
       "name": "<FXCHAIN>",
       "section": "track",
       "is_chunk": true,
@@ -3936,7 +5632,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:<MIDINOTENAMES>": {
+    {
       "name": "<MIDINOTENAMES>",
       "section": "track",
       "is_chunk": true,
@@ -3969,7 +5665,7 @@
       "description": "",
       "sourceFile": "reaper_parser/extras.py"
     },
-    "track:<FREEZE>": {
+    {
       "name": "<FREEZE>",
       "section": "track",
       "is_chunk": true,
@@ -4002,7 +5698,7 @@
       "description": "",
       "sourceFile": "reaper_parser/extras.py"
     },
-    "track:<ITEM>": {
+    {
       "name": "<ITEM>",
       "section": "track",
       "is_chunk": true,
@@ -4035,7 +5731,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "track:VOLENV / PANENV / MUTEENV / etc": {
+    {
       "name": "VOLENV / PANENV / MUTEENV / etc",
       "section": "track",
       "is_chunk": false,
@@ -4068,7 +5764,7 @@
       "description": "",
       "sourceFile": "reaper_parser/track.py"
     },
-    "item:Item Properties": {
+    {
       "name": "Item Properties",
       "section": "item",
       "is_chunk": false,
@@ -4112,7 +5808,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:POSITION": {
+    {
       "name": "POSITION",
       "section": "item",
       "is_chunk": false,
@@ -4145,7 +5841,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:SNAPOFFS": {
+    {
       "name": "SNAPOFFS",
       "section": "item",
       "is_chunk": false,
@@ -4178,7 +5874,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:LENGTH": {
+    {
       "name": "LENGTH",
       "section": "item",
       "is_chunk": false,
@@ -4211,7 +5907,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:LOOP": {
+    {
       "name": "LOOP",
       "section": "item",
       "is_chunk": false,
@@ -4244,7 +5940,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:ALLTAKES": {
+    {
       "name": "ALLTAKES",
       "section": "item",
       "is_chunk": false,
@@ -4277,7 +5973,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:FADEIN": {
+    {
       "name": "FADEIN",
       "section": "item",
       "is_chunk": false,
@@ -4352,7 +6048,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D018). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:FADEOUT": {
+    {
       "name": "FADEOUT",
       "section": "item",
       "is_chunk": false,
@@ -4424,7 +6120,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D018). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:MUTE": {
+    {
       "name": "MUTE",
       "section": "item",
       "is_chunk": false,
@@ -4474,7 +6170,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:BEAT": {
+    {
       "name": "BEAT",
       "section": "item",
       "is_chunk": false,
@@ -4513,7 +6209,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:SEL": {
+    {
       "name": "SEL",
       "section": "item",
       "is_chunk": false,
@@ -4546,7 +6242,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:YPOS": {
+    {
       "name": "YPOS",
       "section": "item",
       "is_chunk": false,
@@ -4592,7 +6288,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:IGUID": {
+    {
       "name": "IGUID",
       "section": "item",
       "is_chunk": false,
@@ -4625,7 +6321,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:IID": {
+    {
       "name": "IID",
       "section": "item",
       "is_chunk": false,
@@ -4660,7 +6356,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:COMP": {
+    {
       "name": "COMP",
       "section": "item",
       "is_chunk": false,
@@ -4706,7 +6402,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:NAME": {
+    {
       "name": "NAME",
       "section": "item",
       "is_chunk": false,
@@ -4739,7 +6435,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:VOLPAN": {
+    {
       "name": "VOLPAN",
       "section": "item",
       "is_chunk": false,
@@ -4811,7 +6507,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:SOFFS": {
+    {
       "name": "SOFFS",
       "section": "item",
       "is_chunk": false,
@@ -4857,7 +6553,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:PLAYRATE": {
+    {
       "name": "PLAYRATE",
       "section": "item",
       "is_chunk": false,
@@ -4955,7 +6651,7 @@
       "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D019). Validation applies only to the documented changes; see the behavior review.",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:CHANMODE": {
+    {
       "name": "CHANMODE",
       "section": "item",
       "is_chunk": false,
@@ -4995,7 +6691,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:GUID": {
+    {
       "name": "GUID",
       "section": "item",
       "is_chunk": false,
@@ -5028,7 +6724,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:TKM": {
+    {
       "name": "TKM",
       "section": "item",
       "is_chunk": false,
@@ -5087,7 +6783,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:SM": {
+    {
       "name": "SM",
       "section": "item",
       "is_chunk": false,
@@ -5122,7 +6818,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:TMINFO": {
+    {
       "name": "TMINFO",
       "section": "item",
       "is_chunk": false,
@@ -5157,7 +6853,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:TM": {
+    {
       "name": "TM",
       "section": "item",
       "is_chunk": false,
@@ -5192,7 +6888,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:<SOURCE>": {
+    {
       "name": "<SOURCE>",
       "section": "item",
       "is_chunk": true,
@@ -5225,7 +6921,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:COLOR": {
+    {
       "name": "COLOR",
       "section": "item",
       "is_chunk": false,
@@ -5258,7 +6954,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:<NOTES>": {
+    {
       "name": "<NOTES>",
       "section": "item",
       "is_chunk": true,
@@ -5291,7 +6987,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:RESOURCEFN": {
+    {
       "name": "RESOURCEFN",
       "section": "item",
       "is_chunk": false,
@@ -5324,7 +7020,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:IMGRESOURCEFLAGS": {
+    {
       "name": "IMGRESOURCEFLAGS",
       "section": "item",
       "is_chunk": false,
@@ -5363,7 +7059,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:GROUP": {
+    {
       "name": "GROUP",
       "section": "item",
       "is_chunk": false,
@@ -5396,7 +7092,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:FADEFLAG": {
+    {
       "name": "FADEFLAG",
       "section": "item",
       "is_chunk": false,
@@ -5429,7 +7125,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "item:FADELPF": {
+    {
       "name": "FADELPF",
       "section": "item",
       "is_chunk": false,
@@ -5462,7 +7158,7 @@
       "description": "",
       "sourceFile": "reaper_parser/item.py"
     },
-    "take:TAKE": {
+    {
       "name": "TAKE",
       "section": "take",
       "is_chunk": false,
@@ -5495,7 +7191,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "take:NAME": {
+    {
       "name": "NAME",
       "section": "take",
       "is_chunk": false,
@@ -5528,7 +7224,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "take:TAKEVOLPAN": {
+    {
       "name": "TAKEVOLPAN",
       "section": "take",
       "is_chunk": false,
@@ -5587,7 +7283,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "take:SOFFS": {
+    {
       "name": "SOFFS",
       "section": "take",
       "is_chunk": false,
@@ -5620,7 +7316,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "take:GUID": {
+    {
       "name": "GUID",
       "section": "take",
       "is_chunk": false,
@@ -5653,7 +7349,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "take:<SOURCE>": {
+    {
       "name": "<SOURCE>",
       "section": "take",
       "is_chunk": true,
@@ -5686,7 +7382,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "take:<TAKEFX>": {
+    {
       "name": "<TAKEFX>",
       "section": "take",
       "is_chunk": true,
@@ -5719,7 +7415,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:SOURCE": {
+    {
       "name": "SOURCE",
       "section": "source",
       "is_chunk": false,
@@ -5752,7 +7448,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:FILE": {
+    {
       "name": "FILE",
       "section": "source",
       "is_chunk": false,
@@ -5787,7 +7483,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:HASDATA": {
+    {
       "name": "HASDATA",
       "section": "source",
       "is_chunk": false,
@@ -5835,7 +7531,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:IGNTEMPO": {
+    {
       "name": "IGNTEMPO",
       "section": "source",
       "is_chunk": false,
@@ -5883,7 +7579,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:VELLANE": {
+    {
       "name": "VELLANE",
       "section": "source",
       "is_chunk": false,
@@ -5937,7 +7633,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:BANKPROGRAMFILE": {
+    {
       "name": "BANKPROGRAMFILE",
       "section": "source",
       "is_chunk": false,
@@ -5972,7 +7668,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:GUID": {
+    {
       "name": "GUID",
       "section": "source",
       "is_chunk": false,
@@ -6007,7 +7703,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:e/E": {
+    {
       "name": "e/E",
       "section": "source",
       "is_chunk": false,
@@ -6097,7 +7793,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:<X>/<x>": {
+    {
       "name": "<X>/<x>",
       "section": "source",
       "is_chunk": true,
@@ -6146,7 +7842,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:EVTFILTER": {
+    {
       "name": "EVTFILTER",
       "section": "source",
       "is_chunk": false,
@@ -6194,7 +7890,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:CFGEDITVIEW": {
+    {
       "name": "CFGEDITVIEW",
       "section": "source",
       "is_chunk": false,
@@ -6229,7 +7925,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "source:CFGEDIT": {
+    {
       "name": "CFGEDIT",
       "section": "source",
       "is_chunk": false,
@@ -6277,7 +7973,7 @@
       "description": "",
       "sourceFile": ""
     },
-    "fx:SHOW": {
+    {
       "name": "SHOW",
       "section": "fx",
       "is_chunk": false,
@@ -6310,7 +8006,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:LASTSEL": {
+    {
       "name": "LASTSEL",
       "section": "fx",
       "is_chunk": false,
@@ -6343,7 +8039,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:DOCKED": {
+    {
       "name": "DOCKED",
       "section": "fx",
       "is_chunk": false,
@@ -6376,7 +8072,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:WNDRECT": {
+    {
       "name": "WNDRECT",
       "section": "fx",
       "is_chunk": false,
@@ -6448,7 +8144,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:BYPASS": {
+    {
       "name": "BYPASS",
       "section": "fx",
       "is_chunk": false,
@@ -6497,7 +8193,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:<VST>/<AU>/etc": {
+    {
       "name": "<VST>/<AU>/etc",
       "section": "fx",
       "is_chunk": true,
@@ -6541,7 +8237,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:WET": {
+    {
       "name": "WET",
       "section": "fx",
       "is_chunk": false,
@@ -6587,7 +8283,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:PRESETNAME": {
+    {
       "name": "PRESETNAME",
       "section": "fx",
       "is_chunk": false,
@@ -6620,7 +8316,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:FXID": {
+    {
       "name": "FXID",
       "section": "fx",
       "is_chunk": false,
@@ -6653,7 +8349,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:FLOATPOS": {
+    {
       "name": "FLOATPOS",
       "section": "fx",
       "is_chunk": false,
@@ -6727,7 +8423,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "fx:WAK": {
+    {
       "name": "WAK",
       "section": "fx",
       "is_chunk": false,
@@ -6773,7 +8469,7 @@
       "description": "",
       "sourceFile": "reaper_parser/fx.py"
     },
-    "envelope:EGUID": {
+    {
       "name": "EGUID",
       "section": "envelope",
       "is_chunk": false,
@@ -6806,7 +8502,7 @@
       "description": "",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "envelope:ACT": {
+    {
       "name": "ACT",
       "section": "envelope",
       "is_chunk": false,
@@ -6839,7 +8535,7 @@
       "description": "",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "envelope:VIS": {
+    {
       "name": "VIS",
       "section": "envelope",
       "is_chunk": false,
@@ -6885,7 +8581,7 @@
       "description": "",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "envelope:LANEHEIGHT": {
+    {
       "name": "LANEHEIGHT",
       "section": "envelope",
       "is_chunk": false,
@@ -6918,7 +8614,7 @@
       "description": "",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "envelope:ARM": {
+    {
       "name": "ARM",
       "section": "envelope",
       "is_chunk": false,
@@ -6951,7 +8647,7 @@
       "description": "",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "envelope:DEFSHAPE": {
+    {
       "name": "DEFSHAPE",
       "section": "envelope",
       "is_chunk": false,
@@ -7001,7 +8697,7 @@
       "description": "",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "envelope:PT": {
+    {
       "name": "PT",
       "section": "envelope",
       "is_chunk": false,
@@ -7112,7 +8808,7 @@
       "description": "Ordinary Bézier parameter envelope layout verified in REAPER 7.48/macOS. Trailing parameters can be omitted in saved non-Bézier points. TEMPOENVEX has context-specific meanings and was not tested here.",
       "sourceFile": "reaper_parser/envelope.py"
     },
-    "project:GROUPOVERRIDE": {
+    {
       "name": "GROUPOVERRIDE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7187,7 +8883,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：GROUPOVERRIDE 1 0 0 0",
       "sourceFile": ""
     },
-    "project:ENVATTACH": {
+    {
       "name": "ENVATTACH",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7223,7 +8919,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：ENVATTACH 1",
       "sourceFile": ""
     },
-    "project:POOLEDENVATTACH": {
+    {
       "name": "POOLEDENVATTACH",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7259,7 +8955,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：POOLEDENVATTACH 0",
       "sourceFile": ""
     },
-    "project:FEEDBACK": {
+    {
       "name": "FEEDBACK",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7295,7 +8991,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：FEEDBACK 0",
       "sourceFile": ""
     },
-    "project:PROJOFFS": {
+    {
       "name": "PROJOFFS",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7357,7 +9053,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：PROJOFFS 0 0 0",
       "sourceFile": ""
     },
-    "project:MAXPROJLEN": {
+    {
       "name": "MAXPROJLEN",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7406,7 +9102,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：MAXPROJLEN 0 600",
       "sourceFile": ""
     },
-    "project:GRID": {
+    {
       "name": "GRID",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7533,7 +9229,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：GRID 3455 8 1 8 1 0 0 0",
       "sourceFile": ""
     },
-    "project:VIDEO_CONFIG": {
+    {
       "name": "VIDEO_CONFIG",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7595,7 +9291,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：VIDEO_CONFIG 0 0 256",
       "sourceFile": ""
     },
-    "project:ZOOM": {
+    {
       "name": "ZOOM",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7657,7 +9353,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：ZOOM 6.44004969 0 0",
       "sourceFile": ""
     },
-    "project:LOOPGRAN": {
+    {
       "name": "LOOPGRAN",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7706,7 +9402,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：LOOPGRAN 0 4",
       "sourceFile": ""
     },
-    "project:LOCK": {
+    {
       "name": "LOCK",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7742,7 +9438,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：LOCK 64",
       "sourceFile": ""
     },
-    "project:ITEMMIX": {
+    {
       "name": "ITEMMIX",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7778,7 +9474,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：ITEMMIX 0",
       "sourceFile": ""
     },
-    "project:TIMELOCKMODE": {
+    {
       "name": "TIMELOCKMODE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7814,7 +9510,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：TIMELOCKMODE 0",
       "sourceFile": ""
     },
-    "project:TEMPOENVLOCKMODE": {
+    {
       "name": "TEMPOENVLOCKMODE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7850,7 +9546,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：TEMPOENVLOCKMODE 1",
       "sourceFile": ""
     },
-    "project:DEFPITCHMODE": {
+    {
       "name": "DEFPITCHMODE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7899,7 +9595,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：DEFPITCHMODE 589824 0",
       "sourceFile": ""
     },
-    "project:TAKELANE": {
+    {
       "name": "TAKELANE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7935,7 +9631,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：TAKELANE 1",
       "sourceFile": ""
     },
-    "project:USE_REC_CFG": {
+    {
       "name": "USE_REC_CFG",
       "section": "supplement-project",
       "is_chunk": false,
@@ -7971,7 +9667,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：USE_REC_CFG 0",
       "sourceFile": ""
     },
-    "project:SAMPLERATE": {
+    {
       "name": "SAMPLERATE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8049,7 +9745,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：SAMPLERATE 44100 0 0",
       "sourceFile": ""
     },
-    "project:MIDIEDITOR": {
+    {
       "name": "MIDIEDITOR",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8111,7 +9807,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：MIDIEDITOR 4 0 0",
       "sourceFile": ""
     },
-    "project:GLOBAL_AUTO": {
+    {
       "name": "GLOBAL_AUTO",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8147,7 +9843,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：GLOBAL_AUTO -1",
       "sourceFile": ""
     },
-    "project:RENDER_FILE": {
+    {
       "name": "RENDER_FILE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8183,7 +9879,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_FILE \"\"",
       "sourceFile": ""
     },
-    "project:RENDER_1X": {
+    {
       "name": "RENDER_1X",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8219,7 +9915,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_1X 0",
       "sourceFile": ""
     },
-    "project:RENDER_RANGE": {
+    {
       "name": "RENDER_RANGE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8347,7 +10043,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_RANGE 1 0 0 18 1000",
       "sourceFile": ""
     },
-    "project:RENDER_RESAMPLE": {
+    {
       "name": "RENDER_RESAMPLE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8409,7 +10105,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_RESAMPLE 9 0 1",
       "sourceFile": ""
     },
-    "project:RENDER_ADDTOPROJ": {
+    {
       "name": "RENDER_ADDTOPROJ",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8453,7 +10149,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_ADDTOPROJ 0",
       "sourceFile": ""
     },
-    "project:RENDER_STEMS": {
+    {
       "name": "RENDER_STEMS",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8497,7 +10193,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_STEMS 0",
       "sourceFile": ""
     },
-    "project:RENDER_DITHER": {
+    {
       "name": "RENDER_DITHER",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8541,7 +10237,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_DITHER 0",
       "sourceFile": ""
     },
-    "project:RENDER_NORMALIZE": {
+    {
       "name": "RENDER_NORMALIZE",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8711,7 +10407,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_NORMALIZE 1 0.063096 1 0 0 1 1",
       "sourceFile": ""
     },
-    "project:RENDER_TRIM": {
+    {
       "name": "RENDER_TRIM",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8818,7 +10514,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：RENDER_TRIM 0.000001 0.000001 0 0",
       "sourceFile": ""
     },
-    "project:TCPUIFLAGS": {
+    {
       "name": "TCPUIFLAGS",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8862,7 +10558,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：TCPUIFLAGS 0",
       "sourceFile": ""
     },
-    "project:TIMEBASE_EXTRAFLAGS": {
+    {
       "name": "TIMEBASE_EXTRAFLAGS",
       "section": "supplement-project",
       "is_chunk": false,
@@ -8898,7 +10594,7 @@
       "description": "作用域：project。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：TIMEBASE_EXTRAFLAGS 1",
       "sourceFile": ""
     },
-    "track:WIDTH": {
+    {
       "name": "WIDTH",
       "section": "supplement-track",
       "is_chunk": false,
@@ -8942,7 +10638,7 @@
       "description": "作用域：track。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：WIDTH 0.5",
       "sourceFile": ""
     },
-    "track:SPACER": {
+    {
       "name": "SPACER",
       "section": "supplement-track",
       "is_chunk": false,
@@ -8978,7 +10674,7 @@
       "description": "作用域：track。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：SPACER 1",
       "sourceFile": ""
     },
-    "envelope:VOLTYPE": {
+    {
       "name": "VOLTYPE",
       "section": "supplement-envelope",
       "is_chunk": false,
@@ -9014,47 +10710,1511 @@
       "description": "作用域：envelope。本机 7.48 格式串与真实 RPP 样例交叉核验；明确标注的字段语义已实机核验，其余待证实。示例：VOLTYPE 1",
       "sourceFile": ""
     }
+  ],
+  "corrections": {
+    "authorization": "User requested applying verified fixes and publishing to GitHub.",
+    "host": "7.48/macOS-arm64",
+    "changes": [
+      {
+        "scope": "project",
+        "name": "CURSOR",
+        "issue": "D026",
+        "before": {
+          "name": "CURSOR",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "cursor vertical position in seconds"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py"
+        },
+        "after": {
+          "name": "CURSOR",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "Edit cursor position in seconds"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D026). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "project",
+        "name": "MASTERPEAKCOL",
+        "issue": "D026",
+        "before": {
+          "name": "MASTERPEAKCOL",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "NOT CLEAR"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py"
+        },
+        "after": {
+          "name": "MASTERPEAKCOL",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "Master track custom color, corresponding to I_CUSTOMCOLOR; native color encoding is platform-dependent"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D026). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "project",
+        "name": "MASTERTRACKVIEW",
+        "issue": "D028",
+        "before": {
+          "name": "MASTERTRACKVIEW",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int (bool)",
+              "description": "show in mixer"
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "relative vertical position for 'Sends'-'Fader' region separator"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "relative vertical position for 'FX'-'Sends' region separator"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "relative vertical position for 'FX'-'FX Params' region separator"
+            },
+            {
+              "label": "field 5-14",
+              "description": "various settings (NOT CLEAR)"
+            },
+            {
+              "label": "field 15",
+              "type": "int (bool)",
+              "description": "pin track"
+            }
+          ],
+          "tags": [
+            "TODO"
+          ],
+          "sourceFile": "reaper_parser/project.py"
+        },
+        "after": {
+          "name": "MASTERTRACKVIEW",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int (bool)",
+              "description": "show in mixer"
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "F_MCP_FXSEND_SCALE: FX/send region scale in the mixer panel (0 = minimum allowed, 1 = maximum allowed)"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "F_MCP_SENDRGN_SCALE: send region size as a proportion of the FX/send region"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "F_MCP_FXPARM_SCALE: FX parameter region scale"
+            },
+            {
+              "label": "field 5-12",
+              "description": "Other view settings (NOT CLEAR)"
+            },
+            {
+              "label": "field 13",
+              "type": "float",
+              "description": "F_TCP_FXPARM_SCALE: embedded TCP FX parameter region scale"
+            },
+            {
+              "label": "field 14",
+              "type": "int",
+              "description": "Other view setting (NOT CLEAR)"
+            },
+            {
+              "label": "field 15",
+              "type": "int (bool)",
+              "description": "pin track"
+            }
+          ],
+          "tags": [
+            "TODO"
+          ],
+          "sourceFile": "reaper_parser/project.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D028). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "project",
+        "name": "MASTERHWOUT",
+        "issue": "D013",
+        "before": {
+          "name": "MASTERHWOUT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "output index (bitfield)"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "send mode"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "volume (1 = 0 dB)"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "pan (-1 to +1)"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "mute (1=On, 0=Off)"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "invert polarity (1=On, 0=Off)"
+            },
+            {
+              "label": "field 7",
+              "type": "int",
+              "description": "send source channel (bitfield)"
+            },
+            {
+              "label": "field 9",
+              "type": "int",
+              "description": "automation mode"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py"
+        },
+        "after": {
+          "name": "MASTERHWOUT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "output index (bitfield)"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "send mode"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "volume (1 = 0 dB)"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "pan (-1 to +1)"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "mute (1=On, 0=Off)"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "invert polarity (1=On, 0=Off)"
+            },
+            {
+              "label": "field 7",
+              "type": "int",
+              "description": "send source channel (bitfield)"
+            },
+            {
+              "label": "field 8",
+              "type": "float",
+              "description": "Pan law gain (D_PANLAW): -1 = project default, 0.5 = -6 dB, 1 = 0 dB"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py",
+          "description": "REAPER 7.48/macOS saves eight parameters. Changing master hardware I_AUTOMODE read back through the API but did not serialize a ninth parameter; the former field 9 claim is withdrawn for this tested layout."
+        }
+      },
+      {
+        "scope": "project",
+        "name": "MASTER_NCH",
+        "issue": "D016",
+        "before": {
+          "name": "MASTER_NCH",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "Number of channels"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "NOT CLEAR"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py"
+        },
+        "after": {
+          "name": "MASTER_NCH",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "Number of channels (even values, 2–128 in REAPER 7; 128 verified on 7.48)"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "NOT CLEAR"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D016). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "track",
+        "name": "NCHAN",
+        "issue": "D016",
+        "before": {
+          "name": "NCHAN",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "Number of track channels"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py"
+        },
+        "after": {
+          "name": "NCHAN",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "Number of channels (even values, 2–128 in REAPER 7; 128 verified on 7.48)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D016). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "project",
+        "name": "MASTER_PANMODE",
+        "issue": "D001",
+        "before": {
+          "name": "MASTER_PANMODE",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "master track pan mode",
+              "subFields": [
+                "-1 = project default",
+                "3 = mono pan",
+                "5 = stereo pan",
+                "6 = dual pan"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py"
+        },
+        "after": {
+          "name": "MASTER_PANMODE",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "master track pan mode",
+              "subFields": [
+                "-1 = project default (inherited definition; fallback not tested here)",
+                "0 = classic REAPER 3.x balance",
+                "3 = stereo balance",
+                "5 = stereo pan",
+                "6 = dual pan"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/project.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D001). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "track",
+        "name": "PANMODE",
+        "issue": "D001",
+        "before": {
+          "name": "PANMODE",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "track pan mode",
+              "subFields": [
+                "-1 = project default",
+                "3 = mono pan",
+                "5 = stereo pan",
+                "6 = dual pan"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py"
+        },
+        "after": {
+          "name": "PANMODE",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "track pan mode",
+              "subFields": [
+                "-1 = project default (inherited definition; fallback not tested here)",
+                "0 = classic REAPER 3.x balance",
+                "3 = stereo balance",
+                "5 = stereo pan",
+                "6 = dual pan"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D001). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "track",
+        "name": "PLAYOFFS",
+        "issue": "D015",
+        "before": {
+          "name": "PLAYOFFS",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "play offset length (unit depends on field 2)"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "play offset mode",
+              "subFields": [
+                "0 = ms",
+                "1 = off",
+                "2 = samples"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py"
+        },
+        "after": {
+          "name": "PLAYOFFS",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "Playback offset (D_PLAY_OFFSET): seconds unless field 2 has bit 2 set, then samples"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "Playback offset flags (I_PLAY_OFFSET_FLAG), combined by bitwise OR",
+              "subFields": [
+                "0 = active offset in seconds",
+                "+1 = bypass offset",
+                "+2 = use samples instead of seconds",
+                "3 = bypassed offset in samples"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D015). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "track",
+        "name": "REC",
+        "issue": "D011",
+        "before": {
+          "name": "REC",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int (bool)",
+              "description": "armed"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "input index (0=mono left, 1=mono right, 1024=stereo, etc.)"
+            },
+            {
+              "label": "field 3",
+              "type": "int",
+              "description": "monitor",
+              "subFields": [
+                "0 = off",
+                "1 = on",
+                "2 = auto"
+              ]
+            },
+            {
+              "label": "field 4",
+              "type": "int",
+              "description": "record mode",
+              "subFields": [
+                "0 = input",
+                "1 = output (stereo)",
+                "2 = disable(monitor)",
+                "3 = output (stereo, latency comp)",
+                "4 = output (MIDI)",
+                "5 = output (mono)",
+                "6 = output (mono latency comp)",
+                "7 = MIDI overdub",
+                "8 = MIDI replace",
+                "9 = MIDI touch replace",
+                "10 = output (multichannel)",
+                "11 = output (multichannel latency comp)"
+              ]
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "monitor track media while recording"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "preserve PDC delayed monitoring"
+            },
+            {
+              "label": "field 7",
+              "type": "int",
+              "description": "record path (0=primary, 1=secondary, 2=both)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py"
+        },
+        "after": {
+          "name": "REC",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int (bool)",
+              "description": "armed"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "input index (0=mono left, 1=mono right, 1024=stereo, etc.)"
+            },
+            {
+              "label": "field 3",
+              "type": "int",
+              "description": "monitor",
+              "subFields": [
+                "0 = off",
+                "1 = normal monitoring",
+                "2 = monitor when not playing"
+              ]
+            },
+            {
+              "label": "field 4",
+              "type": "int",
+              "description": "record mode",
+              "subFields": [
+                "0 = input",
+                "1 = output (stereo)",
+                "2 = disable(monitor)",
+                "3 = output (stereo, latency comp)",
+                "4 = output (MIDI)",
+                "5 = output (mono)",
+                "6 = output (mono latency comp)",
+                "7 = MIDI overdub",
+                "8 = MIDI replace",
+                "9 = MIDI touch replace",
+                "10 = output (multichannel)",
+                "11 = output (multichannel latency comp)"
+              ]
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "monitor track media while recording"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "preserve PDC delayed monitoring"
+            },
+            {
+              "label": "field 7",
+              "type": "int",
+              "description": "record path (0=primary, 1=secondary, 2=both)"
+            },
+            {
+              "label": "field 8",
+              "type": "int",
+              "description": "I_RECMODE_FLAGS: recording tap selection in the low two bits",
+              "subFields": [
+                "0 = post-fader",
+                "1 = pre-FX",
+                "2 = post-FX",
+                "Preserve other bits; tested values 0, 1 and 2"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D011). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "track",
+        "name": "AUXRECV",
+        "issue": "D014",
+        "before": {
+          "name": "AUXRECV",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "source track index (zero based)"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "mode (0=Post Fader (Post Pan), 1=Pre FX, 3=Pre Fader (Post FX))"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "volume"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "pan"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "mute"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "mono sum"
+            },
+            {
+              "label": "field 7",
+              "type": "int (bool)",
+              "description": "invert polarity"
+            },
+            {
+              "label": "field 8",
+              "type": "int",
+              "description": "source audio channels (-1=none, 0=1+2, 1=2+3, etc.)"
+            },
+            {
+              "label": "field 9",
+              "type": "int",
+              "description": "dest audio channels (same as source but no -1)"
+            },
+            {
+              "label": "field 10",
+              "type": "float",
+              "description": "panlaw"
+            },
+            {
+              "label": "field 11",
+              "type": "int",
+              "description": "midi channels (source = val & 0x1F (0=None), dest = val // 32)"
+            },
+            {
+              "label": "field 12",
+              "type": "int",
+              "description": "automation mode (-1 = use track mode)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py"
+        },
+        "after": {
+          "name": "AUXRECV",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "source track index (zero based)"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "mode (0=Post Fader (Post Pan), 1=Pre FX, 3=Pre Fader (Post FX))"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "volume"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "pan"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "mute"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "mono sum"
+            },
+            {
+              "label": "field 7",
+              "type": "int (bool)",
+              "description": "invert polarity"
+            },
+            {
+              "label": "field 8",
+              "type": "int",
+              "description": "source audio channels (-1=none, 0=1+2, 1=2+3, etc.)"
+            },
+            {
+              "label": "field 9",
+              "type": "int",
+              "description": "dest audio channels (same as source but no -1)"
+            },
+            {
+              "label": "field 10",
+              "type": "float[:U]",
+              "description": "Pan law gain; may carry the literal :U suffix (for example -1:U). Preserve the suffix; its meaning remains unverified."
+            },
+            {
+              "label": "field 11",
+              "type": "int",
+              "description": "MIDI routing bitfield (I_MIDIFLAGS); preserve all bits",
+              "subFields": [
+                "Source = value & 31: 0 = all channels, 1–16 = channel, 31 = no MIDI",
+                "Destination = (value >> 5) & 31: 0 = original channel, 1–16 = channel",
+                "Higher bits encode additional options; do not decode destination as an unmasked division by 32"
+              ]
+            },
+            {
+              "label": "field 12",
+              "type": "int",
+              "description": "automation mode (-1 = use track mode)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D014). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "track",
+        "name": "HWOUT",
+        "issue": "D013",
+        "before": {
+          "name": "HWOUT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "output index (bitfield)",
+              "subFields": [
+                "0-511: stereo output",
+                "512-1023: mono output",
+                "1024-1535: aux/rearoute loopback stereo output",
+                "1536-2047: aux/rearoute loopback mono output"
+              ]
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "send mode",
+              "subFields": [
+                "0: Post-Fader (Post-Pan)",
+                "1: Pre-FX",
+                "3: Pre-Fader (Post-FX)"
+              ]
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "volume (1 = 0 dB)"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "pan (-1 to +1)"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "mute (1=On, 0=Off)"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "invert polarity (1=On, 0=Off)"
+            },
+            {
+              "label": "field 7",
+              "type": "int",
+              "description": "send source channel (bitfield)",
+              "subFields": [
+                "-1: None",
+                "0-1023: multichannel 1ch",
+                "1024-2047: multichannel 2ch",
+                "2048-3071: multichannel 4ch",
+                "3072-4095: multichannel 6ch"
+              ]
+            },
+            {
+              "label": "field 9",
+              "type": "int",
+              "description": "automation mode",
+              "subFields": [
+                "-1: Track automation mode",
+                "0: Trim/read",
+                "1: Read",
+                "2: Touch",
+                "3: Write",
+                "4: Latch",
+                "5: Latch Preview"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py"
+        },
+        "after": {
+          "name": "HWOUT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "int",
+              "description": "output index (bitfield)",
+              "subFields": [
+                "0-511: stereo output",
+                "512-1023: mono output",
+                "1024-1535: aux/rearoute loopback stereo output",
+                "1536-2047: aux/rearoute loopback mono output"
+              ]
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "send mode",
+              "subFields": [
+                "0: Post-Fader (Post-Pan)",
+                "1: Pre-FX",
+                "3: Pre-Fader (Post-FX)"
+              ]
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "volume (1 = 0 dB)"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "pan (-1 to +1)"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "mute (1=On, 0=Off)"
+            },
+            {
+              "label": "field 6",
+              "type": "int (bool)",
+              "description": "invert polarity (1=On, 0=Off)"
+            },
+            {
+              "label": "field 7",
+              "type": "int",
+              "description": "send source channel (bitfield)",
+              "subFields": [
+                "-1: None",
+                "0-1023: multichannel 1ch",
+                "1024-2047: multichannel 2ch",
+                "2048-3071: multichannel 4ch",
+                "3072-4095: multichannel 6ch"
+              ]
+            },
+            {
+              "label": "field 8",
+              "type": "float[:U]",
+              "description": "Pan law gain (D_PANLAW); may include :U, e.g. -1:U. Preserve the suffix; its meaning remains unverified."
+            },
+            {
+              "label": "field 9",
+              "type": "int",
+              "description": "automation mode",
+              "subFields": [
+                "-1: Track automation mode",
+                "0: Trim/read",
+                "1: Read",
+                "2: Touch",
+                "3: Write",
+                "4: Latch",
+                "5: Latch Preview"
+              ]
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/track.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D013). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "item",
+        "name": "FADEIN",
+        "issue": "D018",
+        "before": {
+          "name": "FADEIN",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "fade envelope shape",
+              "subFields": [
+                "single_fade: 0-5, 5.1",
+                "crossfade: 0, 1.1, 2-5, 5.1"
+              ]
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "fade length in seconds"
+            },
+            {
+              "label": "field 6",
+              "type": "float",
+              "description": "fade curve (-1.0 to 1.0)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/item.py"
+        },
+        "after": {
+          "name": "FADEIN",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "fade envelope shape",
+              "subFields": [
+                "single_fade: 0-5, 5.1",
+                "crossfade: 0, 1.1, 2-5, 5.1"
+              ]
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "fade length in seconds"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "Automatic fade length in seconds (D_FADEINLEN_AUTO)"
+            },
+            {
+              "label": "field 6",
+              "type": "float",
+              "description": "fade curve (-1.0 to 1.0)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/item.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D018). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "item",
+        "name": "FADEOUT",
+        "issue": "D018",
+        "before": {
+          "name": "FADEOUT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "fade envelope shape"
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "fade length in seconds"
+            },
+            {
+              "label": "field 6",
+              "type": "float",
+              "description": "fade curve (-1.0 to 1.0)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/item.py"
+        },
+        "after": {
+          "name": "FADEOUT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "fade envelope shape"
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "fade length in seconds"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "Automatic fade length in seconds (D_FADEOUTLEN_AUTO)"
+            },
+            {
+              "label": "field 6",
+              "type": "float",
+              "description": "fade curve (-1.0 to 1.0)"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/item.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D018). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "item",
+        "name": "PLAYRATE",
+        "issue": "D019",
+        "before": {
+          "name": "PLAYRATE",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "playback rate"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "preserve pitch"
+            },
+            {
+              "label": "field 4",
+              "type": "int",
+              "description": "pitch shift mode"
+            },
+            {
+              "label": "field 5",
+              "type": "int",
+              "description": "stretch marker fade mode"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/item.py"
+        },
+        "after": {
+          "name": "PLAYRATE",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "playback rate"
+            },
+            {
+              "label": "field 2",
+              "type": "int",
+              "description": "preserve pitch"
+            },
+            {
+              "label": "field 3",
+              "type": "float",
+              "description": "Take pitch adjustment in semitones (D_PITCH)"
+            },
+            {
+              "label": "field 4",
+              "type": "int",
+              "description": "pitch shift mode"
+            },
+            {
+              "label": "field 5",
+              "type": "int",
+              "description": "Stretch mode flags (I_STRETCHFLAGS); mode override is stored in the low three bits"
+            },
+            {
+              "label": "field 6",
+              "type": "float",
+              "description": "Stretch marker fade size in seconds (F_STRETCHFADESIZE), not a quality index"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/item.py",
+          "description": "Reviewed against REAPER 7.48/macOS API readback and saved RPP (D019). Validation applies only to the documented changes; see the behavior review."
+        }
+      },
+      {
+        "scope": "envelope",
+        "name": "PT",
+        "issue": "D004",
+        "before": {
+          "name": "PT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "time position in seconds"
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "value"
+            },
+            {
+              "label": "field 3",
+              "type": "int",
+              "description": "point shape"
+            },
+            {
+              "label": "field 4",
+              "type": "float",
+              "description": "tension"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/envelope.py"
+        },
+        "after": {
+          "name": "PT",
+          "fields": [
+            {
+              "label": "field 1",
+              "type": "float",
+              "description": "time position in seconds"
+            },
+            {
+              "label": "field 2",
+              "type": "float",
+              "description": "value"
+            },
+            {
+              "label": "field 3",
+              "type": "int",
+              "description": "point shape"
+            },
+            {
+              "label": "field 4",
+              "type": "int",
+              "description": "Context-dependent subtype/signature data; not Bézier tension"
+            },
+            {
+              "label": "field 5",
+              "type": "int (bool)",
+              "description": "Point selected (ordinary parameter envelope)"
+            },
+            {
+              "label": "field 6",
+              "type": "int",
+              "description": "Context-dependent data / placeholder (NOT CLEAR)"
+            },
+            {
+              "label": "field 7",
+              "type": "float",
+              "description": "Bézier tension (shape 5), verified with -0.6 and 0.4"
+            }
+          ],
+          "tags": [],
+          "sourceFile": "reaper_parser/envelope.py",
+          "description": "Ordinary Bézier parameter envelope layout verified in REAPER 7.48/macOS. Trailing parameters can be omitted in saved non-Bézier points. TEMPOENVEX has context-specific meanings and was not tested here."
+        }
+      }
+    ]
   },
-  "sections": [
+  "historical_review": [
     {
-      "id": "project",
-      "entry_count": 39
+      "title": "PANMODE 枚举编号错位",
+      "kind": "实质语义差异",
+      "baseline": [
+        "project/PANMODE",
+        "track/PANMODE",
+        "project/MASTER_PANMODE"
+      ],
+      "source": "RPP_Complete_Spec.md I.3：0=classic 3.x、3=new balance、5=stereo pan、6=dual pan；C.1.2 又把 3 描述为新式均衡功率。",
+      "evidence": "官方 reascripthelp.html 的 I_PANMODE 明确给出 0/3/5/6 对应关系；这是 API 枚举证据，尚未以受控保存实验验证所有 project/master 特殊回退值。",
+      "verdict": "project 原文的 0/3/5/6 映射与官方 API 冲突；值得优先修订。",
+      "action": "请决定是否按官方枚举修正 project/PANMODE，保留 -1 等上下文特例单独验证。"
     },
     {
-      "id": "track",
-      "entry_count": 38
+      "title": "MIDI 编辑器字段被新报告误判为无结构透传",
+      "kind": "新来源推理缺陷 / 不采信",
+      "baseline": [
+        "source/VELLANE",
+        "source/CFGEDIT",
+        "source/CFGEDITVIEW",
+        "source/EVTFILTER"
+      ],
+      "source": "RPP_Complete_Spec.md K.1 / I.16：在 reaper.exe 中找不到这些字符串，因而宣称 7.61 不解析编辑器状态。",
+      "evidence": "本机 7.48 reaper_midi.dylib 明确含 CFGEDIT、CFGEDITVIEW、VELLANE、EVTFILTER、CCINTERP、KEYSNAP、SRCCOLOR 的 writer 格式串及独立名称，见 evidence/binary-formats.json；ReaTeam 文档也描述这些状态。尚无 7.61 Windows 的 MIDI 模块用于直接复测。",
+      "verdict": "仅扫描主 EXE 不能排除模块解析；拒绝把该报告结论应用于基准，不声称已直接复核 7.61 的全部路径。",
+      "action": "保留原字段；需要进一步细化时对 MIDI 模块做版本对应验证。"
     },
     {
-      "id": "item",
-      "entry_count": 33
+      "title": "E/e 的选中状态在新报告内部前后相反",
+      "kind": "来源内部冲突",
+      "baseline": [
+        "source/e/E"
+      ],
+      "source": "C.8.2：E=selected、e=unselected；K.2：E=未选、e=选中；rpp_spec/R3_midi_events.md 等专题另有叙述。",
+      "evidence": "本机7.48受控实验：同一音符分别设置selected/muted并读回，再保存4份RPP。E=未选未静音，Em=未选静音，e=选中未静音，em=选中静音，见 evidence/live-validation.json。",
+      "verdict": "K.2的大小写映射获7.48实机支持，C.8.2相反；原文保持供用户决定。",
+      "action": "可按实机结果补充/修订，但此轮不覆盖基准。"
     },
     {
-      "id": "take",
-      "entry_count": 7
+      "title": "包络 PT 第 4 与第 7 参数",
+      "kind": "实质字段序差异",
+      "baseline": [
+        "envelope/PT"
+      ],
+      "source": "C.4.2：第4是整数子型，第5 selected，第6 tempo/占位，第7 tension；原文第4写 tension。",
+      "evidence": "ReaTeam-State-Chunk-Definitions.txt 1017 行起明确第7为 bezier tension，第4在 TEMPOENVEX 承载拍号；源报告对于非 tempo 第4具体子型还自留 GAP。",
+      "verdict": "第4=tension 与独立文档不符；第7=tension 有交叉支持。不能将所有包络 PT 合成同一种 tempo 布局。",
+      "action": "建议修订 tension 索引并分开普通包络和 TEMPOENVEX；未自动改动。"
     },
     {
-      "id": "source",
-      "entry_count": 12
+      "title": "DEFSHAPE 尾参不是已证实的 default tension",
+      "kind": "原文及新来源均有可疑语义",
+      "baseline": [
+        "envelope/DEFSHAPE"
+      ],
+      "source": "C.4.1：3 个整数，新点默认形状 + 张力/扩展；原文第2是 float/default tension。",
+      "evidence": "ReaTeam 文档 956 行起引用 schwa：第2 pitch envelope range，第3 pitch envelope snap setting；-1 随全局。",
+      "verdict": "独立文档支持 int 及 pitch 范围/吸附解释，不支持两份输入中的 tension 说法。",
+      "action": "建议将第2/3按 pitch 包络上下文修订；其它包络保留未知/缺省标记。"
     },
     {
-      "id": "fx",
-      "entry_count": 11
+      "title": "AUTOXFADE：位域与单一枚举的争议",
+      "kind": "实质语义差异 / 来源自修订",
+      "baseline": [
+        "project/AUTOXFADE"
+      ],
+      "source": "C.1.2 原称 bit7=分割淡化（I）；K.4 改称单一整数、非位域，依据配置整存与动作字符串。",
+      "evidence": "本地 blank.RPP 实际 AUTOXFADE 130，基准结构示例为192。整数整存不能证明消费者不按位读取；报告自己撤回 bit7 解释。",
+      "verdict": "不采信 bit7 或非位域结论，也不把样例值当作对现有每一位解释的证明。",
+      "action": "保留基准，之后针对 crossfade/trim/razor 选项逐一切换取差。"
     },
     {
-      "id": "envelope",
-      "entry_count": 7
+      "title": "SELECTION2：loop 区间还是时间选区副本",
+      "kind": "语义差异",
+      "baseline": [
+        "project/SELECTION",
+        "project/SELECTION2"
+      ],
+      "source": "C.1.4 将 SELECTION2 描述为时间选区副本；原文为 loop start/end。",
+      "evidence": "基准示例的两组值相同，不能区分 link loop points to time selection 开关状态。",
+      "verdict": "不以相同样例证明两种语义等价。",
+      "action": "保留基准；解除 loop/time selection 联动并设置不同区间进行验证。"
     },
     {
-      "id": "supplement-project",
-      "entry_count": 31
+      "title": "REAPER_PROJECT 根头第4参数",
+      "kind": "版本/可选字段增量",
+      "baseline": [
+        "project/<REAPER_PROJECT>"
+      ],
+      "source": "PART B / C.1.1 / J.8：7.61 writer 新增尾 flags，时间整数为保存时间戳。",
+      "evidence": "基准 rppStructure.ts 根头是3参数的7.48示例；归档没有附对应7.61二进制、反编译数据库及472份语料。",
+      "verdict": "只作为7.61候选布局；不能将3参数旧头判为无效，也不把旗标内存偏移当作已复核事实。",
+      "action": "未来补根头字段文档时将第4标成版本相关候选，先保留基准。"
     },
     {
-      "id": "supplement-track",
-      "entry_count": 2
+      "title": "TEMPO 第4、RIPPLE 第2：新来源更模糊",
+      "kind": "语义精度差异，保留基准",
+      "baseline": [
+        "project/TEMPO",
+        "project/RIPPLE"
+      ],
+      "source": "C.1.4/J.8 称 TEMPO t4 为未知附加标志；C.1.2 称 RIPPLE t2 为 I；原文已有 bpm basis 枚举及 ripple 位。",
+      "evidence": "两边字段数一致，新来源没有独立证据反驳基准更具体的枚举。",
+      "verdict": "不是新增字段，不能用未知描述降级现有结论。",
+      "action": "保持原文；新报告的版本宣称与未知语义记录在此。"
     },
     {
-      "id": "supplement-envelope",
-      "entry_count": 1
+      "title": "SHOWINMIX 第9、FIXEDLANES、LANEREC 等已知位被泛化",
+      "kind": "已有知识精度差异",
+      "baseline": [
+        "track/SHOWINMIX",
+        "track/FIXEDLANES",
+        "track/LANEREC",
+        "track/ITEMLANES"
+      ],
+      "source": "C.2/J.2 将多个已知位置概括为视图态/未定flags；SHOWINMIX t9 为 I。",
+      "evidence": "基准已有 t9 pin track 及 fixed-lanes 的具体位；新来源的 arity 声称不等于新发现。",
+      "verdict": "保留已有细粒度解释；新增尾参候选需按位置单独审阅。",
+      "action": "不要用整条替换方式导入新报告。"
+    },
+    {
+      "title": "REC 第8及模式字段映射",
+      "kind": "尾参增量 / 语义映射不一致",
+      "baseline": [
+        "track/REC"
+      ],
+      "source": "C.2列8个整数，并将t4映射到内部RECPDCMODE；I.2又以API录音字段解释，arg到字段部分标I。",
+      "evidence": "基准列7个字段，t4=record mode、t6=PDC。独立API枚举不能直接证明RPP字段索引；完整新格式与本地样例在逐项对照中保留。",
+      "verdict": "第8候选独立留待审阅，拒绝未经实验重新排列 t3/t4/t6。",
+      "action": "分开审核新增t8和现有字段语义，不自动修改。"
+    },
+    {
+      "title": "TRACKHEIGHT、BUSCOMP 等多参数布局",
+      "kind": "原文仅列部分字段 / 新增布局候选",
+      "baseline": [
+        "track/TRACKHEIGHT",
+        "track/BUSCOMP"
+      ],
+      "source": "C.2：TRACKHEIGHT 7参、BUSCOMP 5参。",
+      "evidence": "基准 TRACKHEIGHT 只解释1和3；未列的字段不意味着不存在。详见完整对照的真实样例。",
+      "verdict": "是未说明位置的增量，不自动认定基准 arity 错误。",
+      "action": "保留原语义；审阅后可补未定尾参和版本备注。"
+    },
+    {
+      "title": "MASTERHWOUT 与 HWOUT 第8、9参数",
+      "kind": "字段空缺 / 来源布局不一致",
+      "baseline": [
+        "project/MASTERHWOUT",
+        "track/HWOUT"
+      ],
+      "source": "C.1.9 MASTERHWOUT 列8参；C.3.3 HWOUT列9参，t8=panlaw :U、t9=附加flags；原文两条都列t9=automation mode且未列t8。",
+      "evidence": "基准结构 MASTERHWOUT 示例只有8参；常规HWOUT与master不是可无条件互换的证据。",
+      "verdict": "应按 master/track 与版本分别验证；:U 是复合词法，不宜仅以纯float解析。",
+      "action": "保留原条目，审核 t8 候选及 master t9 是否真实支持。"
+    },
+    {
+      "title": "AUXRECV 第10复合后缀、第11 MIDI、第12/13",
+      "kind": "布局增量及枚举冲突",
+      "baseline": [
+        "track/AUXRECV"
+      ],
+      "source": "C.3.2/3.4：t10可含 :U，t12 附加flags，t13源轨GUID；I.10 MIDI通道映射语义与基准0=None有差异。",
+      "evidence": "官方 I_MIDIFLAGS 文档说明 source/destination channel 的0=all、source31=none；但API位域不能代替对每个RPP索引的受控确认。",
+      "verdict": "t11 基准0=None有明显疑点；t12究竟自动化/附加flags以及13尾参另审。",
+      "action": "建议优先核实 MIDI 位域；不自动覆盖或把高位丢掉。"
+    },
+    {
+      "title": "PLAYOFFS 的单位取决于flags",
+      "kind": "单位语义差异",
+      "baseline": [
+        "track/PLAYOFFS"
+      ],
+      "source": "C.2 简写为秒；I.4又给出 D_PLAY_OFFSET 与 I_PLAY_OFFSET_FLAG。",
+      "evidence": "官方API描述 I_PLAY_OFFSET_FLAG：bit1(值2)表示采样单位，否则秒；因此不能对所有值统一标秒。",
+      "verdict": "新来源C.2概括过度；应采用带flags条件的单位定义。",
+      "action": "审阅现有条目是否需补单位条件。"
+    },
+    {
+      "title": "NCHAN 的64上限与v7的128声道",
+      "kind": "版本差异 / 来源内部矛盾",
+      "baseline": [
+        "track/NCHAN",
+        "project/MASTER_NCH"
+      ],
+      "source": "C.2/C.1.9 clamp 2..64；J.3/J.4 又列 >64 标记并称 clamp128。",
+      "evidence": "报告混用v6和v7结构；本机版本与官方 API 能支持区分版本，不能从旧clamp推导全版本上限。",
+      "verdict": "不采信通用64上限；裸标记不等于实际声道数字。",
+      "action": "保留现有数量字段，另标版本上限候选。"
+    },
+    {
+      "title": "ITEM的MUTE、POSITION/LENGTH/SNAPOFFS新增位置",
+      "kind": "条件字段增量",
+      "baseline": [
+        "item/MUTE",
+        "item/POSITION",
+        "item/LENGTH",
+        "item/SNAPOFFS"
+      ],
+      "source": "C.5：MUTE两字段，位置/长度/吸附可多一个QN参数。",
+      "evidence": "基准只描述常见字段；新来源关于条件写出与内部缺省未能本机反编译复核。",
+      "verdict": "作为条件布局候选保留，不把第二参数推成所有工程必填。",
+      "action": "在审核后补条件说明及样例。"
+    },
+    {
+      "title": "FADEIN/FADEOUT 7字段与自动淡化曲线",
+      "kind": "布局增量 / 曲线枚举未定",
+      "baseline": [
+        "item/FADEIN",
+        "item/FADEOUT"
+      ],
+      "source": "C.5补自动淡化时长、自动形状、flags及自动曲率；K.5承认0..6曲线精确映射仍I。",
+      "evidence": "ReaTeam包含多字段淡化示例；归档7参结构可对照，但不能从动作中的crossfade type编号推导fade shape编号。",
+      "verdict": "保留原有已知参数；新增位置和小数子型逐项待审。",
+      "action": "禁止用交叉淡化菜单序号直接覆盖现有shape。"
+    },
+    {
+      "title": "Take PLAYRATE 第3/6及第5意义",
+      "kind": "字段增量及语义差异",
+      "baseline": [
+        "item/PLAYRATE"
+      ],
+      "source": "C.6：t3 semitones、t6 stretch quality、t5 stretch submode；基准t5 stretch marker fade mode。",
+      "evidence": "源报告仅以结构偏移命名解释quality；本地数值0.0025本身不能证明质量或时长。",
+      "verdict": "t3可结合API音高核验；t5/6须受控修改拉伸设置后再定。",
+      "action": "保留原文，第3/6候选不自动插入。"
+    },
+    {
+      "title": "TKM 第3 color与flags、第4额外浮点",
+      "kind": "字段语义及尾参差异",
+      "baseline": [
+        "item/TKM"
+      ],
+      "source": "C.6/J.5：pos/name/flags/[extra]；基准第3为color code。",
+      "evidence": "官方 GetTakeMarker/SetTakeMarker 使用 color；API证实标记带颜色，但不足以单独判定第4的用途。",
+      "verdict": "保留第3颜色解释；未知flags概括不能替换它，第4另审。",
+      "action": "受控修改take marker颜色核验位格式与尾参。"
+    },
+    {
+      "title": "BYPASS第3、WET范围/第2及FX窗口坐标",
+      "kind": "布局和语义差异",
+      "baseline": [
+        "fx/BYPASS",
+        "fx/WET",
+        "fx/WNDRECT",
+        "fx/FLOATPOS"
+      ],
+      "source": "C.9.3 BYPASS三参；WET可负且第2称脏标志；WNDRECT写x/y/r/b、FLOAT写l/t/r/b；原文top/left/width/height与delta solo。",
+      "evidence": "ReaTeam有BYPASS三参及WET/window描述；字符串中的四个整数不足以证明右/下坐标还是宽高。",
+      "verdict": "t3作为增量待审；WET第2和坐标轴不能凭字段名覆盖基准。",
+      "action": "分别切换delta solo与移动/缩放窗口，比较序列化差值。"
+    },
+    {
+      "title": "ACT/VIS/LANEHEIGHT尾参及ARM默认值",
+      "kind": "布局增量 / 默认值未核验",
+      "baseline": [
+        "envelope/ACT",
+        "envelope/VIS",
+        "envelope/LANEHEIGHT",
+        "envelope/ARM"
+      ],
+      "source": "C.4.1：ACT两参、VIS三参、LANEHEIGHT两参，并给出缺省。",
+      "evidence": "基准只描述1/2/1个字段；ReaTeam对部分额外位置仍标问号。出现值不等于构造缺省。",
+      "verdict": "保留已有含义；只把新位置作为候选，默认值暂不采信。",
+      "action": "审阅后可加入未定字段说明。"
+    },
+    {
+      "title": "Envelope类型名：VOLENV3、TRIMVOLENV及PROGRAMENV",
+      "kind": "chunk名称/语义差异",
+      "baseline": [],
+      "source": "C.4.3称TRIMVOLENV=trim且PROGRAMENV=MIDI program；C.12又把PROGRAMENV定义为参数调制。基准introList列VOLENV3=trim。",
+      "evidence": "同一源文件存在PROGRAMENV两种解释；基准introList属于原始知识而非entries，单独列出以免遗漏。",
+      "verdict": "不自动替换类型名或把PROGRAMENV当成MIDI program包络。",
+      "action": "核验具体chunk实际保存与类型，再决定别名或纠错。"
+    },
+    {
+      "title": "未知token全部原样回写的全称结论",
+      "kind": "来源内部冲突 / 超出证据范围",
+      "baseline": [],
+      "source": "PART E与开头称未知全部透传；J.6又明确LASTPRESET/FOLDED识别即丢、LOAD_PRESET_FROM_FILE是执行指令。",
+      "evidence": "没有原始语料或可运行验证器证实其所谓472份全量round-trip；报告内部也区分了状态与导入指令。",
+      "verdict": "不将REAPER的所有读写行为推广成无损保证，也不会执行文档中的导入指令。",
+      "action": "若以后实现解析器，应保留原始文本并专测未知/旧token；本任务只更新文档。"
+    },
+    {
+      "title": "词法引号/注释开关与所谓任意尾参可省略",
+      "kind": "新来源过度泛化",
+      "baseline": [],
+      "source": "A.1/A.2/A.6称注释与渐进可选是统一机制；A.3声称三引号全出现就走base64。",
+      "evidence": "WDL-lineparse.h公开实现带ignore_commentchars/backtickquote/allowunterminatedquotes开关，parse与parse_ex缺省不同；源码不能证明REAPER每个调用点及所有字段都相同。",
+      "verdict": "不采信全称可选规则及未经调用点核实的引号回退结论。",
+      "action": "只保留已验证词法事实，未来按具体reader/版本补行为测试。"
+    },
+    {
+      "title": "CURSOR、VZOOMEX、MASTERPEAKCOL描述差异",
+      "kind": "语义澄清候选",
+      "baseline": [
+        "project/CURSOR",
+        "project/VZOOMEX",
+        "project/MASTERPEAKCOL"
+      ],
+      "source": "C.1.2 CURSOR为编辑光标时间，VZOOMEX t2为顶部可见轨序；C.1.9 MASTERPEAKCOL为自定义颜色。",
+      "evidence": "CURSOR的秒单位两边一致但基准称vertical position；VZOOMEX与master颜色含义尚无单变量实验。",
+      "verdict": "CURSOR文字可疑，另两项只保留候选；不把命名推测当事实。",
+      "action": "审阅后决定措辞澄清或进一步实测。"
+    },
+    {
+      "title": "MARKER 各字段及region结束短行",
+      "kind": "字段增量 / 版本和标志语义差异",
+      "baseline": [
+        "project/MARKER"
+      ],
+      "source": "J.1补充start 9参、region-end短行、颜色及渲染状态；基准只列1/2/3/4/8。",
+      "evidence": "源报告有较详细writer叙述，但未附原二进制；真实保存样例见完整对照，不能把start与end行视为同一固定arity。",
+      "verdict": "追加未列字段候选，同时保留原字段4 selected/region位解释。",
+      "action": "审阅后分别补marker、region起点、region终点，未定flags不改。"
+    },
+    {
+      "title": "MASTERTRACKVIEW 比例字段的定义差异",
+      "kind": "专题增补与基准语义差异",
+      "baseline": [
+        "project/MASTERTRACKVIEW"
+      ],
+      "source": "RPP_v7_Addendum.md 11.2：t2=F_MCP_FXSEND_SCALE，t3=F_MCP_SENDRGN_SCALE，t4=F_MCP_FXPARM_SCALE，t13=F_TCP_FXPARM_SCALE；基准将t2/3/4描述为各区域分隔线相对位置，5-14全部未知。",
+      "evidence": "专题提供API属性到内部偏移的解释，比汇总文件更详细；本轮未对master mixer布局做受控实验。otherSourceReferences已保留所有专题命中。",
+      "verdict": "独立记录为待审差异；布局比例的参照区域不能只由“relative”一词判为相同。",
+      "action": "用户确认后针对四项比例分别改变保存值，再考虑补t13及修改t2/3/4。"
     }
-  ]
+  ],
+  "source_files": {
+    "constants.ts": "0b9272d3c1d901ac8953520588a2000f864347b6280b2daf19745415622619a7",
+    "supplementData.ts": "5c5eaca1f7e286f55ba3fe308e04d470feec3d6f06093d7b8066604b4fb02846",
+    "rppStructure.ts": "25edb5238c1f1400699e742e058b58d480f1b89e25741d8afa3873e91f20fe11",
+    "supplements/reaper-7z/semantic-fields.json": "b8809a10b641b6a5858fece9e510274887e882260f32a18524f563331e41be92"
+  }
 }
