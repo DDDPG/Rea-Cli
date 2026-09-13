@@ -30,7 +30,8 @@
 
 ## 账号与发布身份
 
-维护者目前没有 PyPI/TestPyPI 账号。需要本人完成注册、邮箱验证及账号要求的双因素认证。
+维护者已报告完成 PyPI/TestPyPI 注册，两个用户名均为 `DDDPG`。
+邮箱验证与双因素认证尚未独立核实；浏览器读取连续超时。
 不要在对话或仓库中保存密码、恢复码或 token。
 
 - [PyPI 注册](https://pypi.org/account/register/)
@@ -48,7 +49,10 @@
 | Workflow | `publish.yml` | `publish.yml` |
 | Environment | `testpypi` | `pypi` |
 
-GitHub API 当前返回 environments 数量为 0；上表是待配置值，不是完成声明。
+GitHub API 初次核查 environments 数量为 0；上表是待配置值，不是完成声明。
+创建带 DDDPG required reviewer 的 TestPyPI environment 时返回 HTTP 422，
+提示当前账单方案不支持 required reviewers。复查发现 GitHub 已先创建
+`testpypi` 空环境，但未添加保护规则；尚未配置 publisher，也没有触发发布。
 后续创建对应 environment，并验证保护规则与 OIDC 配置。当前工作流仅允许人工触发，
 生产索引另外要求 `ecosystem-v` 标签；保留这些门禁。
 

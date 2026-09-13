@@ -32,8 +32,15 @@
   "github": {
     "repository": "DDDPG/Rea-Cli",
     "visibility": "private",
-    "environments": [],
-    "workflow": "publish.yml"
+    "environments": [
+      {
+        "name": "testpypi",
+        "required_reviewers": false,
+        "status": "created by API before protection-rule failure; publisher not configured"
+      }
+    ],
+    "workflow": "publish.yml",
+    "reviewer_protection": "Creation rejected HTTP 422: current billing plan does not support required reviewers"
   },
   "original_reaperdoc_license": {
     "license": "MIT",
@@ -41,5 +48,16 @@
     "date": "2026-09-13",
     "scope": "maintainer-owned original code and documentation; external material excluded"
   },
-  "accounts": "Maintainer reports no PyPI or TestPyPI account yet"
+  "accounts": {
+    "pypi": {
+      "username": "DDDPG",
+      "registration": "reported by maintainer",
+      "email_and_2fa": "not independently verified"
+    },
+    "testpypi": {
+      "username": "DDDPG",
+      "registration": "reported by maintainer",
+      "email_and_2fa": "not independently verified"
+    }
+  }
 }
