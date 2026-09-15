@@ -32,7 +32,7 @@
     "trusted_publishing_configured": {
       "value": false,
       "status": "blocking",
-      "evidence": "On 2026-09-15 the GitHub environments API returned only testpypi with protection_rules=[]; no pypi environment was present in the response, and index-side publisher configuration was not independently verified."
+      "evidence": "On 2026-09-15 the GitHub environments API returned only testpypi with protection_rules=[]; no pypi environment was present in the response. The maintainer reports a TestPyPI reacli pending publisher, but no successful OIDC upload was observed and reaper-parser registration was rejected as a duplicate pending configuration."
     }
   },
   "conditional_gates": {
@@ -42,6 +42,38 @@
       "status": "not_evaluated_until_prerequisites_pass"
     }
   },
+  "bootstrap_publish": {
+    "testpypi": {
+      "reacli": {
+        "allowed": true,
+        "publisher_status": "maintainer_reported_configured",
+        "first_upload": "pending",
+        "evidence": "Maintainer reports the TestPyPI pending publisher is configured; first upload remains pending."
+      },
+      "reaper-parser": {
+        "allowed": false,
+        "publisher_status": "blocked_duplicate_pending_configuration",
+        "first_upload": "pending",
+        "evidence": "Enable after the reacli pending publisher has been consumed and the parser pending publisher is registered."
+      }
+    }
+  },
+  "publisher_checks": [
+    {
+      "index": "test.pypi.org",
+      "project": "reacli",
+      "status": "maintainer_reported_configured; first_upload_pending",
+      "checked_date": "2026-09-15",
+      "evidence": "Maintainer reports that the pending publisher was configured; no successful GitHub upload or project JSON response was observed in this session."
+    },
+    {
+      "index": "test.pypi.org",
+      "project": "reaper-parser",
+      "status": "blocked_duplicate_pending_configuration",
+      "checked_date": "2026-09-15",
+      "evidence": "Maintainer reports TestPyPI rejected the pending publisher because the same configuration is already registered for a different project name."
+    }
+  ],
   "index_checks": [
     {
       "index": "pypi.org",

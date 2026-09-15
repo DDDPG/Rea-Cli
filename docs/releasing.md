@@ -13,11 +13,13 @@ Follow [the ecosystem guide](ecosystem/README.md) for installation and validatio
    bundled data example on a prepared macOS host. Retain its proof manifests.
 6. Record measured and untested platforms explicitly in the validation report.
 
-Candidate builds never upload packages. Source permissions, package ownership and
-Trusted Publishing must be explicitly resolved in `ecosystem/publication.json` before
-manual publication. Public TestPyPI also requires these prerequisites. Production
-requires an `ecosystem-v` tag. Package versions and compatibility.json must be updated
-together for a new release; package indexes cannot replace already-published files.
+Candidate builds never upload packages. Normal publication requires source permissions,
+package ownership and Trusted Publishing to be explicitly resolved in
+`ecosystem/publication.json`. For first-project creation on TestPyPI only, the manual
+workflow exposes an explicit `testpypi-bootstrap` mode for one manifest-authorized
+package at a time; it cannot target PyPI or bypass the source gate. Production requires
+an `ecosystem-v` tag. Package versions and compatibility.json must be updated together
+for a new release; package indexes cannot replace already-published files.
 
 The CI parser matrix covers macOS/Linux/Windows and Python 3.10–3.14. The rac offline
 matrix retains macOS/Linux. CI configuration is not evidence those jobs ran locally.
