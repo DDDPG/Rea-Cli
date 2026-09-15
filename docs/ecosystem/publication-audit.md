@@ -1,13 +1,12 @@
 # 发布前置核查（2026-09-15）
 
-当前状态：私有仓库候选已通过跨平台验收；尚不满足公开上传条件。
+当前状态：私有仓库候选已通过跨平台验收；来源授权已由维护者确认，但尚不满足公开上传条件。
 本次没有创建账号、占用包名、配置 PyPI publisher 或上传发行包。
 
-2026-09-15 已完成独立的[来源与再分发授权审计](source-license-audit.md)。结论是
-“部分清除”：维护者授权覆盖原创 ReaperDoc 部分，但 ReaTeam、Cockos、Ultraschall
-和旧项目 Lua 资源仍有逐项范围或许可缺口。用户声明当前没有商业盈利已记录为
-非商业条件的背景信息，不改变 `source_permissions_resolved=false`，也不改变
-TestPyPI/PyPI 属于对外再分发这一事实。
+2026-09-15 已完成[来源与再分发授权审计](source-license-audit.md)。维护者确认
+ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来源署名；该声明
+已记录为 `source_permissions_resolved=true`。它不替代发行物中的署名和适用许可证
+条件，也不改变 TestPyPI/PyPI 属于对外再分发这一事实。
 
 ## 已落实
 
@@ -15,13 +14,13 @@ TestPyPI/PyPI 属于对外再分发这一事实。
 - 维护者明确授权其原创 ReaperDoc 代码与文档按 MIT 发布。
   已新增 `apps/reaperdoc/LICENSE`、`schema/rpp/LICENSE` 及范围说明。
   授权不扩展到外来引用或复制的材料。
-- 已核查 ReaperDoc README 对 ReaTeam State Chunk Definitions 的致谢；ReaTeam/Doc
-  当前仓库标注 GPL-3.0，故不能把混合来源规格整体静默标成 MIT。
-- 已核查 Ultraschall 渲染原件的文件级 `cc-by-nc` 标记；由于许可证版本和完整
-  法律文本未记录，当前只保留署名和限制，不宣称授权已清除。
-- 已核查 Cockos ReaScript/JSFX 官方参考页；本次页面核查没有找到可直接套用的
-  文档再分发许可。REAPER 用户指南的官方 PDF 版本还明确保留全部权利并要求
-  取得许可后再发布，不能由“公开可访问”推出自由复制。
+- 已核查 ReaperDoc README 对 ReaTeam State Chunk Definitions 的致谢；维护者确认
+  可以使用，仍保留 ReaTeam/IXix/Cockos Wiki 来源和适用许可证信息。
+- 已核查 Ultraschall 渲染原件的文件级 `cc-by-nc` 标记；维护者确认可以使用，仍
+  保留 Meo-Ada Mespotine/Ultraschall 署名与来源链接。
+- 已核查 Cockos ReaScript/JSFX 官方参考页；维护者确认可以在署名和来源链接完整
+  的前提下整理使用，项目不把 Cockos 原文冒充为本项目原创。
+- 维护者确认旧项目来源的 Lua 资源可使用；包内仍保留原项目/原作者来源信息。
 - 修正 parser 来源说明，移除不属于该包的 Cockos API 索引、rac Lua 和依赖描述。
 - 当前 schema 来源更新为 `6416435fdf4cc7e38346fd7875f5d04949b431a2`；
   `32047bb` 仅作为旧快照历史保留。
@@ -32,14 +31,49 @@ TestPyPI/PyPI 属于对外再分发这一事实。
 
 | 产物 | 已确认范围 | 仍需处理 |
 | --- | --- | --- |
-| parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT | 将 schema 中外来原文与原创说明逐项区分；ReaTeam 等外来部分取得授权或独立重写 |
-| rac wheel/sdist | 原创代码 MIT | Cockos API 索引复制描述、旧项目 Lua 资源尚无独立授权记录；需移除、重写或取得许可 |
+| parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT；外来资料有维护者授权声明 | 保留 ReaTeam 来源、许可证和署名；不把上游文本冒充为 MIT 原创 |
+| rac wheel/sdist | 原创代码 MIT；Cockos API 与 Lua 资源有维护者授权声明 | 保留 Cockos、旧项目/原作者来源及适用条件 |
 | 文档站与独立 schema | 原创部分 MIT | 外来说明对账；构建已加入 LICENSE 与范围说明 |
 | agent bundle | 原创指南、示例 | 构建已加入许可证；检查引用内容范围 |
-| Git 仓库 | 保持 private | `reference/` 的历史 ReaTeam、Ultraschall、Cockos 等材料不因排除于 wheel 而获得公开授权 |
+| Git 仓库 | 保持 private | `reference/` 的历史 ReaTeam、Ultraschall、Cockos 等材料按维护者声明保留来源；继续排除用户工程、媒体和研究原件 |
 
-这是一份来源记录，不将无法找到授权等同于确认禁止分发。未知项继续保持未决。
-全局 `source_permissions_resolved` 不能因原创部分授权而直接改为 true。
+这是一份来源记录。当前来源门禁依据维护者声明通过，但并不替代逐项保留
+许可证文本、署名和来源链接的发行要求。
+
+## `check_publish` 门禁
+
+| 门禁 | 当前值 | 结果 | 说明 |
+| --- | --- | --- | --- |
+| `source_permissions_resolved` | `true` | 通过（维护者声明） | 已记录 ReaTeam、Cockos、Ultraschall 和 Lua 来源使用确认 |
+| `package_ownership_verified` | `false` | 阻拦 | 尚无 PyPI/TestPyPI 项目归属或首次创建权限的直接 API 证据 |
+| `trusted_publishing_configured` | `false` | 阻拦 | 尚无两个索引对应 publisher 配置的直接证据 |
+
+2026-09-15 本地实际执行结果：
+
+```text
+$ python tools/check_publish.py
+Publication prerequisites unresolved: package_ownership_verified, trusted_publishing_configured
+$ echo $?
+1
+```
+
+因此当前 `check_publish` 的未满足项只有后两项。脚本还包含一个条件门禁：当
+`TARGET=pypi` 时，运行必须来自 `ecosystem-v*` 标签；由于前置布尔门禁尚未通过，
+本次运行尚未进入该条件检查。
+
+## 实时索引与 GitHub 环境复核
+
+- `https://pypi.org/pypi/reacli/json`、`https://pypi.org/pypi/reaper-parser/json`、
+  `https://test.pypi.org/pypi/reacli/json` 和
+  `https://test.pypi.org/pypi/reaper-parser/json` 在 2026-09-15 均返回 HTTP 404。
+  404 只能作为“当前没有公开项目响应”的记录，不能证明包名可注册、首次创建权限或
+  账号所有权，因此 `package_ownership_verified` 继续保持 `false`。
+- `gh api repos/DDDPG/Rea-Cli/environments` 在 2026-09-15 返回一个 `testpypi`
+  环境，`protection_rules` 为空；响应中没有 `pypi` 环境。GitHub 环境存在本身不等于
+  PyPI/TestPyPI 已登记 Trusted Publisher，故 `trusted_publishing_configured` 继续为
+  `false`。
+- 当前没有上传任何发行包。配置完成后应先分别验证 TestPyPI 的两个 publisher 和
+  安装结果，再处理 PyPI 的两个 publisher；生产运行仍需使用 `ecosystem-v*` 标签。
 
 ## 账号与发布身份
 
@@ -62,12 +96,12 @@ TestPyPI/PyPI 属于对外再分发这一事实。
 | Workflow | `publish.yml` | `publish.yml` |
 | Environment | `testpypi` | `pypi` |
 
-GitHub API 初次核查 environments 数量为 0；上表是待配置值，不是完成声明。
-创建带 DDDPG required reviewer 的 TestPyPI environment 时返回 HTTP 422，
-提示当前账单方案不支持 required reviewers。复查发现 GitHub 已先创建
-`testpypi` 空环境，但未添加保护规则；尚未配置 publisher，也没有触发发布。
-后续创建对应 environment，并验证保护规则与 OIDC 配置。当前工作流仅允许人工触发，
-生产索引另外要求 `ecosystem-v` 标签；保留这些门禁。
+GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已创建
+`testpypi` 空环境，但未添加保护规则。创建带 DDDPG required reviewer 的保护规则时
+返回 HTTP 422，提示当前账单方案不支持 required reviewers；尚未配置 publisher，也没有
+触发发布。当前复核仍未观察到 `pypi` 环境。后续应补建 `pypi` environment，并在
+两个索引登记对应 OIDC publisher；当前工作流仅允许人工触发，生产索引另外要求
+`ecosystem-v` 标签。
 
 [PyPI 官方文档](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/)
 说明 pending publisher 可用于首次创建项目，但登记本身不保留包名。
@@ -76,10 +110,12 @@ GitHub API 初次核查 environments 数量为 0；上表是待配置值，不�
 
 ## 下一次执行顺序
 
-1. 维护者注册两个账号；记录账号名及配置结果，不收集凭证。
-2. 完成外来文本逐项对账，保留事实字段及来源，对未获授权的复制描述独立重写或剔除。
-3. 独立产物许可证已补齐；继续在内容调整后重建并验收，旧候选不原地替换。
-4. 核实四个 publisher 与 GitHub environment，按实际证据更新发布门禁。
-5. 经明确发布授权后手动运行 TestPyPI；验证索引安装后再处理正式 PyPI。
+1. 记录维护者已完成的两个账号配置结果，不收集密码、恢复码或 token；邮箱验证和
+   双因素状态仍由维护者自行确认。
+2. 保持外来材料的来源、署名和适用许可证条件随每个发行物分发；内容变更后重新构建
+   并验收，旧候选不原地替换。
+3. 补建 `pypi` GitHub environment，并在 TestPyPI/PyPI 各登记 `reacli` 与
+   `reaper-parser` 的 publisher；保存可核验的配置结果后将对应布尔门禁改为 `true`。
+4. 经明确发布授权后手动运行 TestPyPI；验证索引安装和回读结果后再处理正式 PyPI。
 
 TestPyPI 也是对外上传，不等于私有分发。保持 Git 仓库 private 不会使索引包私有。

@@ -7,7 +7,8 @@ It does not relicense upstream quotations, copied descriptions, or third-party d
 Historical sources and evidence retain their provenance. No blanket redistribution
 grant for all upstream material is asserted. See docs/ecosystem/publication-audit.md
 and docs/ecosystem/source-license-audit.md in the repository for the remaining
-per-artifact review. ReaperDoc's README credits
+per-artifact review. The maintainer has confirmed that the acknowledged sources may
+be used with attribution. ReaperDoc's README credits
 [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions),
 whose repository is detected as GPL-3.0; that source remains outside this MIT scope
-until the copied portions and applicable terms are separated.
+and its attribution and applicable terms remain required.

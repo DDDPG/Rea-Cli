@@ -12,13 +12,15 @@ The previous rac snapshot used `32047bb`; that is historical provenance, not the
 current schema revision. The imported ReaperDoc snapshot had no explicit license. On 2026-09-13 the
 maintainer authorized MIT for original ReaperDoc portions; the monorepo records
 this in apps/reaperdoc/LICENSE and its scope notice. External copied descriptions
-still require source-specific review. Local builds do not establish permission.
+remain subject to their source terms. On 2026-09-15 the maintainer confirmed that
+the acknowledged sources may be used with attribution. Local builds do not establish
+permission independently of that attestation.
 
 ReaperDoc's README credits [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions).
 The [ReaTeam/Doc repository](https://github.com/ReaTeam/Doc) is detected as GPL-3.0;
 directly copied prose, if any, remains subject to its applicable terms and is not
-covered by this package's MIT notice. The schema is therefore a mixed-source artifact
-until each affected field is independently authored or cleared.
+covered by this package's MIT notice. The maintainer confirms use of the mixed-source
+schema; ReaTeam attribution and applicable terms remain required.
 
 ## Package boundaries
 
@@ -29,5 +31,6 @@ REAPER is a Cockos product; this project is independent and not endorsed by Cock
 
 See `../../docs/ecosystem/publication-audit.md` and
 `../../docs/ecosystem/source-license-audit.md` in the source repository for the current
-release checklist and per-source decision log. This notice deliberately does not
-claim that an unresolved grant has been cleared.
+release checklist and per-source decision log. The source gate is cleared by the
+maintainer attestation; this notice still requires source attribution and applicable
+license terms.

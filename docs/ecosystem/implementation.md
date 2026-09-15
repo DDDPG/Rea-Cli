@@ -21,6 +21,7 @@ including Linux/macOS/Windows parser checks and Linux/macOS rac offline checks. 
 candidate wheel isolation and 43 distribution checks passed. The first Windows run
 exposed default-codepage decoding in an evidence test; explicit UTF-8 fixed all five
 Python versions without changing runtime code. Existing
-reference permission questions remain explicit in publication.json; no package was uploaded.
+source attribution and the remaining package-index questions remain explicit in
+publication.json; no package was uploaded.
 The public set_field interface refuses fields without a verified write contract; low-level
 set_raw/convenience setters remain raw patches, not claims of verified semantic writes.

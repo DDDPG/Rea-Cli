@@ -108,8 +108,9 @@ python tools/build_release.py --output dist/new-candidate
 The output contains two wheel/sdist pairs, static website ZIP, standalone agent ZIP,
 examples ZIP, runtime schema and SHA-256 manifest. The builder refuses existing output
 folders, checks schema freshness, compares archive runtime bytes to source, and runs twine.
-Candidate builds do not upload or change visibility. Publication stays blocked while the
-recorded source permissions, index ownership and publishing identity are unresolved.
+Candidate builds do not upload or change visibility. Publication stays blocked while
+index ownership and publishing identity remain unresolved; source authorization is
+currently recorded as a maintainer attestation in `publication.json`.
 
 ## Migration and recovery
 

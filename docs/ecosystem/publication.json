@@ -1,25 +1,46 @@
 {
-  "source_permissions_resolved": false,
+  "source_permissions_resolved": true,
   "package_ownership_verified": false,
   "trusted_publishing_configured": false,
-  "status": "private candidate validated; public release prerequisites unresolved",
-  "reason": "No new redistribution grant or index ownership was established. Original reference provenance is retained; do not infer permissions from local builds.",
+  "status": "source authorization attested; package ownership and trusted publishing unresolved",
+  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. Package ownership and Trusted Publisher configuration remain unverified.",
   "audit": "publication-audit.md",
   "checked_date": "2026-09-15",
   "source_audit": {
     "checked_date": "2026-09-15",
-    "status": "partial_clearance_only",
+    "status": "maintainer_attested; attribution_required",
+    "authorization_basis": "maintainer confirmation in conversation on 2026-09-15",
     "user_noncommercial_statement": true,
     "noncommercial_is_not_permission": true,
     "original_reaperdoc": "maintainer-authorized MIT scope for original portions only",
-    "external_material": "ReaTeam GPL-3.0 source, Cockos reference text, Ultraschall cc-by-nc note, and legacy Lua provenance require per-file resolution",
+    "external_material": "maintainer confirms use of ReaTeam, Cockos public references, Ultraschall notes, and open-source Lua materials with attribution; upstream license terms and notices remain recorded",
+    "attribution_required": true,
     "artifacts": [
       "docs/ecosystem/source-license-audit.md",
       "reference/SOURCES.md",
       "packages/reacli/THIRD_PARTY_NOTICES.md",
       "packages/reaper-parser/THIRD_PARTY_NOTICES.md"
     ],
-    "release_decision": "do not publish current wheels, sdist, documentation site, or agent bundle"
+    "release_decision": "source gate cleared by maintainer attestation; do not publish until package ownership and Trusted Publisher gates pass"
+  },
+  "remaining_gates": {
+    "package_ownership_verified": {
+      "value": false,
+      "status": "blocking",
+      "evidence": "On 2026-09-15 the PyPI and TestPyPI JSON endpoints for reacli and reaper-parser each returned HTTP 404; this does not prove name availability, ownership or first-create permission."
+    },
+    "trusted_publishing_configured": {
+      "value": false,
+      "status": "blocking",
+      "evidence": "On 2026-09-15 the GitHub environments API returned only testpypi with protection_rules=[]; no pypi environment was present in the response, and index-side publisher configuration was not independently verified."
+    }
+  },
+  "conditional_gates": {
+    "production_tag": {
+      "condition": "TARGET=pypi",
+      "requirement": "GITHUB_REF_TYPE=tag and GITHUB_REF_NAME starts with ecosystem-v",
+      "status": "not_evaluated_until_prerequisites_pass"
+    }
   },
   "index_checks": [
     {
@@ -51,7 +72,7 @@
       {
         "name": "testpypi",
         "required_reviewers": false,
-        "status": "created by API before protection-rule failure; publisher not configured"
+        "status": "exists; protection_rules=[]; publisher not independently verified"
       }
     ],
     "workflow": "publish.yml",

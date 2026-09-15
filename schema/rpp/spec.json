@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "index_base": 1,
   "source_commit": "6416435fdf4cc7e38346fd7875f5d04949b431a2",
-  "license_status": "source review required before public distribution",
+  "license_status": "maintainer authorization recorded; source attribution and applicable license terms required",
   "sections": [
     {
       "id": "project",
