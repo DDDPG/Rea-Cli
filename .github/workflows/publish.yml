@@ -3,10 +3,17 @@ on:
   workflow_dispatch:
     inputs:
       target:
+        description: Destination index
         type: choice
         required: true
         default: testpypi
         options: [testpypi, pypi]
+      package:
+        description: One package to upload
+        type: choice
+        required: true
+        default: reacli
+        options: [reacli, reaper-parser]
 permissions:
   contents: read
 jobs:
@@ -44,8 +51,12 @@ jobs:
         with:
           name: release-dists
           path: dist/candidate
-      - name: Collect Python distributions
-        run: mkdir publish && cp dist/candidate/reacli/* dist/candidate/reaper-parser/* publish/
+      - name: Collect selected Python distribution
+        env:
+          PACKAGE: ${{ inputs.package }}
+        run: |
+          mkdir publish
+          cp "dist/candidate/${PACKAGE}"/* publish/
       - uses: pypa/gh-action-pypi-publish@release/v1
         if: inputs.target == 'testpypi'
         with:
