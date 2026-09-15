@@ -1,7 +1,13 @@
-# 发布前置核查（2026-09-13）
+# 发布前置核查（2026-09-15）
 
 当前状态：私有仓库候选已通过跨平台验收；尚不满足公开上传条件。
 本次没有创建账号、占用包名、配置 PyPI publisher 或上传发行包。
+
+2026-09-15 已完成独立的[来源与再分发授权审计](source-license-audit.md)。结论是
+“部分清除”：维护者授权覆盖原创 ReaperDoc 部分，但 ReaTeam、Cockos、Ultraschall
+和旧项目 Lua 资源仍有逐项范围或许可缺口。用户声明当前没有商业盈利已记录为
+非商业条件的背景信息，不改变 `source_permissions_resolved=false`，也不改变
+TestPyPI/PyPI 属于对外再分发这一事实。
 
 ## 已落实
 
@@ -9,6 +15,13 @@
 - 维护者明确授权其原创 ReaperDoc 代码与文档按 MIT 发布。
   已新增 `apps/reaperdoc/LICENSE`、`schema/rpp/LICENSE` 及范围说明。
   授权不扩展到外来引用或复制的材料。
+- 已核查 ReaperDoc README 对 ReaTeam State Chunk Definitions 的致谢；ReaTeam/Doc
+  当前仓库标注 GPL-3.0，故不能把混合来源规格整体静默标成 MIT。
+- 已核查 Ultraschall 渲染原件的文件级 `cc-by-nc` 标记；由于许可证版本和完整
+  法律文本未记录，当前只保留署名和限制，不宣称授权已清除。
+- 已核查 Cockos ReaScript/JSFX 官方参考页；本次页面核查没有找到可直接套用的
+  文档再分发许可。REAPER 用户指南的官方 PDF 版本还明确保留全部权利并要求
+  取得许可后再发布，不能由“公开可访问”推出自由复制。
 - 修正 parser 来源说明，移除不属于该包的 Cockos API 索引、rac Lua 和依赖描述。
 - 当前 schema 来源更新为 `6416435fdf4cc7e38346fd7875f5d04949b431a2`；
   `32047bb` 仅作为旧快照历史保留。
@@ -19,11 +32,11 @@
 
 | 产物 | 已确认范围 | 仍需处理 |
 | --- | --- | --- |
-| parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT | 将 schema 中外来原文与原创说明逐项区分；外来部分取得授权或独立重写 |
-| rac wheel/sdist | 原创代码 MIT | 同上；Cockos API 索引中的复制描述尚无独立授权记录 |
+| parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT | 将 schema 中外来原文与原创说明逐项区分；ReaTeam 等外来部分取得授权或独立重写 |
+| rac wheel/sdist | 原创代码 MIT | Cockos API 索引复制描述、旧项目 Lua 资源尚无独立授权记录；需移除、重写或取得许可 |
 | 文档站与独立 schema | 原创部分 MIT | 外来说明对账；构建已加入 LICENSE 与范围说明 |
 | agent bundle | 原创指南、示例 | 构建已加入许可证；检查引用内容范围 |
-| Git 仓库 | 保持 private | `reference/` 的历史 Ultraschall、Cockos 等材料不因排除于 wheel 而获得公开授权 |
+| Git 仓库 | 保持 private | `reference/` 的历史 ReaTeam、Ultraschall、Cockos 等材料不因排除于 wheel 而获得公开授权 |
 
 这是一份来源记录，不将无法找到授权等同于确认禁止分发。未知项继续保持未决。
 全局 `source_permissions_resolved` 不能因原创部分授权而直接改为 true。

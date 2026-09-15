@@ -17,10 +17,17 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
   the imported snapshot. On 2026-09-13 the maintainer authorized MIT for original
   ReaperDoc portions; see `apps/reaperdoc/LICENSE` and its scope notice in the
   monorepo. External copied descriptions still require source-specific review.
+- ReaperDoc's upstream README credits [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions).
+  The [ReaTeam/Doc repository license](https://github.com/ReaTeam/Doc/blob/master/LICENSE)
+  is detected as GPL-3.0, while the file also preserves IXix/Cockos Wiki attribution.
+  Any directly copied prose must retain its applicable terms; the ReaperDoc MIT scope
+  does not turn that material into MIT.
 - `src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
-  Official reference: [ReaScript API](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
-  No separate redistribution grant was established from the local source files.
+  Official references: [ReaScript overview](https://www.reaper.fm/sdk/reascript/reascript.php)
+  and [generated API help](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
+  The inspected pages provide access to the reference but no separate redistribution
+  grant for copying the descriptions into a package was found.
 
 Before public distribution, the maintainer must establish permission for these
 bundled descriptions/data, or replace them with independently authored data and
@@ -57,11 +64,20 @@ is not a license grant.
   and the source's **cc-by-nc** label. The exact license version and applicable
   source document terms need verification. These notes must not be presented
   as MIT-licensed material or as permitting commercial redistribution.
+- The upstream render file explicitly says `licensed creative commons cc-by-nc`,
+  but the version is not stated and the Ultraschall API repository has no detected
+  top-level LICENSE. Keep the file private or resolve the exact license and required
+  notices before any public distribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
-  No independent redistribution grant for upstream descriptions was recorded.
+  No independent redistribution grant for upstream descriptions was recorded. The
+  official [JSFX programming reference](https://www.reaper.fm/sdk/js/js.php) is a
+  public reference page; public access is not treated as a copying license. One
+  official user-guide PDF version also states that reproduction requires permission:
+  [REAPER User Guide](https://www.reaper.fm/userguide/ReaperUserGuide735cc.pdf).
 
 Before public release, resolve these source terms or replace the affected
 material with independently authored references. Preserve attribution and
-record the resolution. [Sources and attribution](reference/SOURCES.md) and the
-[reference manifest](reference/source-manifest.json) identify the files and
-their provenance.
+record the resolution. The detailed decision log is
+[source-license-audit.md](../../docs/ecosystem/source-license-audit.md).
+[Sources and attribution](reference/SOURCES.md) and the [reference manifest](reference/source-manifest.json)
+identify the files and their provenance.

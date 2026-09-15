@@ -127,6 +127,9 @@ def main():
     shutil.copyfile(
         ROOT / "docs/ecosystem/publication-audit.md", out / "publication-audit.md"
     )
+    shutil.copyfile(
+        ROOT / "docs/ecosystem/source-license-audit.md", out / "source-license-audit.md"
+    )
     shutil.copyfile(ROOT / "docs/ecosystem/publication.json", out / "publication.json")
     if (ROOT / "docs/ecosystem/validation.json").exists():
         shutil.copyfile(

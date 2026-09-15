@@ -5,7 +5,22 @@
   "status": "private candidate validated; public release prerequisites unresolved",
   "reason": "No new redistribution grant or index ownership was established. Original reference provenance is retained; do not infer permissions from local builds.",
   "audit": "publication-audit.md",
-  "checked_date": "2026-09-13",
+  "checked_date": "2026-09-15",
+  "source_audit": {
+    "checked_date": "2026-09-15",
+    "status": "partial_clearance_only",
+    "user_noncommercial_statement": true,
+    "noncommercial_is_not_permission": true,
+    "original_reaperdoc": "maintainer-authorized MIT scope for original portions only",
+    "external_material": "ReaTeam GPL-3.0 source, Cockos reference text, Ultraschall cc-by-nc note, and legacy Lua provenance require per-file resolution",
+    "artifacts": [
+      "docs/ecosystem/source-license-audit.md",
+      "reference/SOURCES.md",
+      "packages/reacli/THIRD_PARTY_NOTICES.md",
+      "packages/reaper-parser/THIRD_PARTY_NOTICES.md"
+    ],
+    "release_decision": "do not publish current wheels, sdist, documentation site, or agent bundle"
+  },
   "index_checks": [
     {
       "index": "pypi.org",

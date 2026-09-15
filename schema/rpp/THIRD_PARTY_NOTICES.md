@@ -6,4 +6,5 @@ LICENSE applies to those original portions, including original specification tex
 It does not relicense upstream quotations, copied descriptions, or third-party data.
 Historical sources and evidence retain their provenance. No blanket redistribution
 grant for all upstream material is asserted. See docs/ecosystem/publication-audit.md
-in the repository for the remaining per-artifact review.
+and docs/ecosystem/source-license-audit.md in the repository for the remaining
+per-artifact review, including the ReaTeam GPL-3.0 source acknowledged by ReaperDoc.
