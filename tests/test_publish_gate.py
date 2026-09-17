@@ -11,7 +11,7 @@ def publication():
         "bootstrap_publish": {
             "testpypi": {
                 "reacli": {"allowed": True},
-                "reaper-parser": {"allowed": False},
+                "reaper-parser": {"allowed": True},
             }
         },
     }
@@ -34,14 +34,25 @@ def test_testpypi_bootstrap_allows_manifest_authorized_package():
     )
 
 
+def test_testpypi_bootstrap_allows_parser_after_registration():
+    evaluate(
+        publication(),
+        target="testpypi",
+        package="reaper-parser",
+        mode="testpypi-bootstrap",
+    )
+
+
 def test_testpypi_bootstrap_rejects_unregistered_package():
+    record = publication()
+    record["bootstrap_publish"]["testpypi"]["unknown"] = {"allowed": False}
     with pytest.raises(
         PublicationGateError, match="TestPyPI bootstrap not authorized for package"
     ):
         evaluate(
-            publication(),
+            record,
             target="testpypi",
-            package="reaper-parser",
+            package="unknown",
             mode="testpypi-bootstrap",
         )
 
