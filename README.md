@@ -3,7 +3,6 @@
 > See [installation and validation boundaries](docs/ecosystem/README.md),
 > [ReaperDoc maintenance](docs/ecosystem/reaperdoc-maintenance.md) and [deferred public entry points](docs/ecosystem/public-entrypoints.md).
 
-<p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli icon"></p>
 <h1 align="center">Rea-Cli</h1>
 
 <p align="center"><strong>REAPER coding. REAPER executing. REAPER verifying.</strong></p>
@@ -28,27 +27,202 @@ Use the Python library for code-driven workflows, the CLI for checks and
 isolated execution, and the repository skill to inject Rea-Cli's project-specific
 knowledge into an agent.
 
-**Status:** 0.1.0 alpha. `reacli==0.1.0` and `reaper-parser==0.1.0a1` are
-published on PyPI as wheel and source distributions. Install the released pair
-with:
+Rea-Cli drives REAPER's **native ReaScript API only**. It does not require the
+**SWS extension**, **ReaPack**, or any other REAPER add-on, and it installs none
+of them. Bundled historical references and example projects may mention SWS
+actions; those are lookup data, not runtime dependencies.
 
-```sh
+## Names at a glance
+
+The project uses several names. They map as follows:
+
+| Name | Kind | Where it appears |
+|---|---|---|
+| `reacli` | PyPI distribution and primary CLI command | `pip install reacli`, `reacli doctor` |
+| `rac` | Python import package **and** CLI alias | `import rac`, `rac doctor` |
+| `reaper-parser` | PyPI distribution for the standalone parser | `pip install reaper-parser` |
+| `reaper_parser` | Python import package of that parser | `from reaper_parser import parse` |
+| `reacli[audio]` | Optional extra for WAV checks and rendering | `pip install './packages/reacli[audio]'` |
+
+`reacli` and `rac` are the same command-line program: the distribution registers
+both entry points. `reacli` declares `reaper-parser` as a dependency, so
+installing the pair in one command keeps their versions aligned.
+
+## Installation
+
+Use **Python 3.10+**. REAPER, Lua and all system libraries are installed
+separately; see [prerequisites](#prerequisites).
+
+### Path A — install the released packages
+
+For using the CLI and the Python API without this repository:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+reacli --version
+```
+
+Reacli's WAV and render checks need the optional audio extra:
+
+```bash
+python -m pip install "reacli[audio]==0.1.0"
 ```
 
 See [`reacli` on PyPI](https://pypi.org/project/reacli/0.1.0/) and
 [`reaper-parser` on PyPI](https://pypi.org/project/reaper-parser/0.1.0a1/).
-The API may evolve. The distribution and CLI are named `reacli`; Python imports
-use `rac`.
-This reviewed checkout also contains post-publication runtime hardening and
-privacy cleanup that are not in the immutable `0.1.0`/`0.1.0a1` files; bump both
-package versions before the next upload.
+
+### Path B — work from a source checkout
+
+Needed for the runnable examples, the `reference/` handbook, and development:
+
+```bash
+git clone https://github.com/DDDPG/Rea-Cli.git
+cd Rea-Cli
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install ./packages/reaper-parser ./packages/reacli
+reacli --version
+```
+
+### Which version should I install?
+
+**Status:** `0.1.0` alpha. The published `reacli==0.1.0` and
+`reaper-parser==0.1.0a1` archives are immutable and were uploaded before the
+resource, archive, parser and audio safety guards now present in this
+repository. Installing from PyPI therefore gives you the earlier runtime;
+installing from a current checkout gives you the hardened one. The API may
+evolve either way. Path B above installs the newer code. The next upload will use
+the next version numbers (see [releasing](docs/releasing.md)); until then the two
+paths are not byte-identical, and that is expected rather than a bug.
+
+The distribution and CLI are named `reacli`; Python imports use `rac`.
+
+## Prerequisites
+
+Installing `reacli` does not install REAPER, Lua or system libraries. Choose only
+what your workflow needs:
+
+| Requirement | Needed for | Notes |
+|---|---|---|
+| Python 3.10+ | everything | A system interpreter reporting 3.9 cannot run this package. On macOS check `python3 --version`. |
+| REAPER 7.x, official build | execution, rendering, live checks | Not certified to a minimum minor version. Download from [reaper.fm](https://www.reaper.fm/download.php) and install it separately; REAPER is proprietary and supplied under [Cockos's terms](https://www.reaper.fm/purchase.php). |
+| A graphical session | execution, rendering | macOS runs on the **logged-in desktop session** — a desktop-less service or CI runner is not supported. Linux needs a reachable `DISPLAY`, or `xvfb-run`, `Xvfb` and `xauth`. |
+| macOS: first launch done | execution, rendering | Open REAPER once and pick an output in **Preferences > Audio > Device**. A configured CoreAudio output is required **even for offline rendering**. |
+| Linux: GTK3, ALSA, Xvfb, xauth | execution, rendering | See the [Linux commands](docs/environment.md#linux) for Debian/Ubuntu and Fedora package names. |
+| Lua 5.3 or 5.4 `luac` | generating Lua from the CLI | Syntax pre-check only — REAPER executes scripts with its embedded Lua. Lua 5.5 is not supported. |
+| SWS, ReaPack, MCP server | — | **Not required.** Rea-Cli uses REAPER's native ReaScript API and installs no add-ons. |
+
+**Operating systems:** execution supports macOS and Linux. Windows currently
+supports the offline parser and RPP checks but **not** REAPER execution through
+`rac`.
+
+On macOS, Homebrew users can install a newer Python and `lua@5.4`:
+
+```bash
+brew install python lua@5.4
+```
+
+See the [environment guide](docs/environment.md) for platform setup, executable
+discovery and troubleshooting.
+
+## Quick start
+
+### Offline quick start (no REAPER)
+
+Inspect a bundled empty project and query the packaged knowledge indexes:
+
+```bash
+reacli doctor --profile offline --json
+reacli resources --output ./quickstart
+reacli rpp validate ./quickstart/minimal.rpp
+reacli knowledge api GetTrack
+```
+
+Validation reports `ok: true` and zero tracks. Resource export protects existing
+files; use a fresh output directory on reruns. This path needs Python only.
+
+### Build a playable session (requires REAPER)
+
+![From blank to a playable REAPER session, 52 numbered build states](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
+
+This walkthrough builds a self-contained, playable REAPER session from a blank
+project. After installing from a source checkout and configuring REAPER with the
+[environment guide](docs/environment.md), run from the repository root:
+
+```bash
+reacli init
+reacli doctor --json
+python examples/show_session.py ./demo/my-first-session
+```
+
+Open **`demo/my-first-session/Show-Session.rpp`** in REAPER and press Play. The
+project uses embedded MIDI and REAPER's built-in **ReaSynth**, so it needs no
+audio assets or third-party instruments. Use a new output directory on each run.
+Add `--render` when you also want a local WAV preview. If ReaSynth discovery
+fails, prepare the dedicated VST index as described in the
+[environment guide](docs/environment.md#plugin-discovery-and-macos-window-restoration).
+
+`examples/show_session.py` and `examples/create_project.py` export their own
+resources into the output directory, so they do not need the `quickstart` export
+above. Both need a source checkout, because the examples live in the repository
+rather than in the wheel.
+
+For the session layout, effect settings, verification boundaries and the 52
+build checkpoints behind the GIF, see the [playable show demo guide](examples/README.md#playable-show-demo).
+
+
+## A small Python example
+
+This example uses the `quickstart` resources exported in the offline quick start
+above. It creates a **Vocal** track at **−6 dB**, saves a copy and checks the
+saved state:
+
+```python
+from pathlib import Path
+from rac.luagen import generate
+from rac.rpp import parse
+from rac.runner import run
+from rac.verify import expect
+
+root = Path("quickstart")
+script = generate({"ops": [
+    {"op": "track.create", "args": [0, "Vocal"]},
+    {"op": "track.set_volume_db", "args": [0, -6.0]},
+]}, root / "create.lua")
+
+proof = run(
+    root / "minimal.rpp", script,
+    save_as=root / "created.rpp",
+    run_root=root / "runs",
+)
+assert proof.ok, proof.to_dict()
+expect(parse(root / "created.rpp")).track_count(1).track(0) \
+    .name("Vocal").volume(10 ** (-6 / 20))
+print(proof.run_dir)
+```
+
+`generate(...)` writes `quickstart/create.lua`. The CLI can then run that same
+generated script — the file has to exist first, so run the snippet above before
+copying this command:
+
+```bash
+reacli exec --project ./quickstart/minimal.rpp \
+  --script ./quickstart/create.lua --save-as ./quickstart/created.rpp \
+  --run-root ./quickstart/runs
+```
+
+A complete runnable example that exports its own resources is available in
+[examples/create_project.py](examples/create_project.py).
 
 ## Harness quick start
 
 Already using **Claude Code, Codex or Qwen Code**? Give your agent this instruction:
 
-> Read https://github.com/DDDPG/Rea-Cli and its `docs/harness/README.md` installation guide. Install the ReaCli CLI toolkit and `reaper-agent-cli` skill for the harness I am using into a new `my-reaper-work` project. Check Python, CLI, Lua and local REAPER availability, and tell me how to start using it. If the private repository is inaccessible, ask for my authorized local checkout and install from there.
+> Read https://github.com/DDDPG/Rea-Cli and its `docs/harness/README.md` installation guide. Install the ReaCli CLI toolkit and `reaper-agent-cli` skill for the harness I am using into a new `my-reaper-work` project. Check Python, CLI, Lua and local REAPER availability, and tell me how to start using it.
 
 This installs a project-level **CLI toolkit + skill** using the harness's existing
 shell tools. See the [full installation guide](docs/harness/README.md) for each
@@ -64,50 +238,12 @@ Open Claude Code, Codex or Qwen Code in that directory and ask:
 “Use the reaper-agent-cli skill to check my environment, create a new REAPER session,
 save it and verify the rendered audio.” The project-local skill uses shell tools and
 an isolated Python runtime; it requires no MCP service. REAPER/Lua and harness login
-are separate prerequisites. The current private-repository pipeline uses local source
-as the acquisition mock; candidate wheels also work without a checkout.
+are separate prerequisites. Candidate wheels from a release bundle also work without
+a checkout.
 
 See the [three-harness quick start](docs/harness/README.md),
 [one-instruction showcase brief](integrations/agents/acceptance/showcase-brief.md),
 and [actual acceptance results](docs/harness/acceptance.md).
-
-## Quick start: build a playable session
-
-![From blank to a playable REAPER session, 52 numbered build states](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
-
-This walkthrough builds a self-contained, playable REAPER session from a blank
-project. After [installing the package](#installation) and configuring REAPER
-with the [environment guide](docs/environment.md), run from the repository root:
-
-```bash
-reacli init
-reacli doctor --json
-python examples/show_session.py ./demo/my-first-session
-```
-
-Open **`demo/my-first-session/Show-Session.rpp`** in REAPER and press Play. The
-project uses embedded MIDI and REAPER's built-in **ReaSynth**, so it needs no
-audio assets or third-party instruments. Use a new output directory on each run.
-Add `--render` when you also want a local WAV preview. If ReaSynth discovery
-fails, prepare the dedicated VST index as described in the
-[environment guide](docs/environment.md#plugin-discovery-and-macos-window-restoration).
-
-For the session layout, effect settings, verification boundaries and the 52
-build checkpoints behind the GIF, see the [playable show demo guide](examples/README.md#playable-show-demo).
-
-### Offline quick start
-
-Without REAPER, you can inspect a bundled empty project:
-
-```bash
-reacli doctor --profile offline --json
-reacli resources --output ./quickstart
-reacli rpp validate ./quickstart/minimal.rpp
-reacli knowledge api GetTrack
-```
-
-Validation reports `ok: true` and zero tracks. Resource export protects existing
-files; use a fresh output directory on reruns.
 
 ## Highlights
 
@@ -143,77 +279,6 @@ The workflow is simple:
 Agent / Python / CLI → RPP or Lua source → rac pre-check → REAPER → saved project / audio → verification
 ```
 
-## Installation
-
-Use **Python 3.10+** in a virtual environment. For the published release:
-
-```bash
-python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
-reacli --version
-```
-
-For source development, install the two local packages from the repository root:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install ./packages/reaper-parser ./packages/reacli
-reacli --version
-```
-
-REAPER is installed separately. Requirements depend on the work:
-
-- **Offline RPP checks:** Python only.
-- **Lua generation:** Lua 5.3 or 5.4 with `luac` for syntax checks.
-- **Live execution:** REAPER 7.x on macOS or Linux. macOS needs a configured
-  CoreAudio output; Linux needs the documented libraries and an X display or Xvfb.
-
-On macOS, check `python3 --version`: the system interpreter may still be 3.9.
-Homebrew users can install a newer Python and `lua@5.4`, then create the environment
-with that Python. See the [environment guide](docs/environment.md) for platform
-setup, executable discovery and troubleshooting.
-
-## A small Python example
-
-This example uses the `quickstart` resources exported above. It creates a **Vocal**
-track at **−6 dB**, saves a copy and checks the saved state:
-
-```python
-from pathlib import Path
-from rac.luagen import generate
-from rac.rpp import parse
-from rac.runner import run
-from rac.verify import expect
-
-root = Path("quickstart")
-script = generate({"ops": [
-    {"op": "track.create", "args": [0, "Vocal"]},
-    {"op": "track.set_volume_db", "args": [0, -6.0]},
-]}, root / "create.lua")
-
-proof = run(
-    root / "minimal.rpp", script,
-    save_as=root / "created.rpp",
-    run_root=root / "runs",
-)
-assert proof.ok, proof.to_dict()
-expect(parse(root / "created.rpp")).track_count(1).track(0) \
-    .name("Vocal").volume(10 ** (-6 / 20))
-print(proof.run_dir)
-```
-
-Prefer the CLI? The same generated script can be executed with:
-
-```bash
-reacli exec --project ./quickstart/minimal.rpp \
-  --script ./quickstart/create.lua --save-as ./quickstart/created.rpp \
-  --run-root ./quickstart/runs
-```
-
-A complete runnable example is available in
-[examples/create_project.py](examples/create_project.py).
-
 ## Default startup behavior
 
 Existing `run()` and `Pool.map()` calls need no additional parameters:
@@ -240,6 +305,9 @@ plugins used by a project from loading their own dialogs. See
   Third-party plugins and different REAPER versions need local verification.
 - Audio checks support mono/stereo 16/24-bit PCM WAV. Loudness is approximate;
   project-structure comparison does not prove identical sound.
+- Rea-Cli calls REAPER's native ReaScript API. It does not install, load or
+  require SWS, ReaPack or any other extension, so scripts that depend on a
+  third-party extension are outside the verified scope.
 
 See [validation evidence](docs/validation.md) for tested systems and boundaries.
 
@@ -275,6 +343,22 @@ scripts/     Host bootstrap and distribution checks
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development conventions.
 Virtual environments, REAPER run artifacts and local configuration are ignored by Git.
 
+### Attribution for Git-only reference material
+
+`reference/` and `schema/rpp/evidence/` are excluded from every wheel, sdist,
+documentation site and agent bundle. That is a packaging boundary, not a license
+boundary: the files are tracked in Git, so cloning this repository clones them
+too. They are not covered by the project's MIT license, and the maintainer has
+confirmed they may be published with their sources attributed — every file keeps
+its attribution and source link.
+
+Two conditions travel with that material and are not discharged by attribution:
+one source is labelled `cc-by-nc`, so **its noncommercial condition still
+applies**, and part of the specification derives from a GPL-3.0 repository. Read
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the
+[source and redistribution audit](docs/ecosystem/source-license-audit.md) before
+redistributing this repository or any part of it, especially for commercial use.
+
 ## Rea-Cli agent skill
 
 The [agent bundle source](integrations/agents/reaper-agent-cli/SKILL.md) packages a
@@ -284,11 +368,10 @@ separately. No checkout or persistent MCP server is required by the installed bu
 
 ## Documentation
 
-- [Shared parser and media API](docs/ecosystem/api.md)
-
-- [Setup and troubleshooting](docs/environment.md)
+- [Setup and prerequisites](docs/environment.md)
 - [Python API and CLI behavior](docs/api.md)
 - [Validation records](docs/validation.md)
+- [Shared parser and media API](docs/ecosystem/api.md)
 - [Automation developer handbook](reference/README.md): [Invocation](reference/workflow/README.md) · [RPP](reference/rpp/README.md) · [ReaScript](reference/reascript/README.md) · [Lua](reference/lua/README.md) · [JSFX](reference/jsfx/README.md)
 - [REAPER agent skill](integrations/agents/reaper-agent-cli/SKILL.md) · [Repository skill usage](integrations/agents/README.md)
 - [Changelog](CHANGELOG.md) · [Release process](docs/releasing.md)

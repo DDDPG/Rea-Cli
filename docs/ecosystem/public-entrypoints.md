@@ -8,9 +8,9 @@ Account-side publisher administration remains external to this repository cleanu
 
 | Entry | Current state | Deferred action |
 | --- | --- | --- |
-| Rea-Cli default branch | Remote default is `codex/reaper-ecosystem-alpha`; local `main` is prepared at the reviewed commit but is not pushed | Push or select the long-term branch separately, then verify public links |
-| Package Documentation / Changelog URLs | `packages/reacli/pyproject.toml` points to `blob/main`; the remote `main` URL is not live until the maintainer pushes it | Verify the links after the branch is published; do not rewrite them to a temporary branch |
-| Repository visibility | Private at inspection | Keep private until the maintainer's separate public-release decision |
+| Rea-Cli default branch | Remote default is `codex/reaper-ecosystem-alpha`; local `main` is prepared but is not pushed | **Blocking for a public release.** Push `main` and set it as the default branch before publishing, then verify public links |
+| Package Documentation / Changelog URLs | `packages/reacli/pyproject.toml` points to `blob/main`; the remote `main` URL is not live until `main` is pushed | Verify the links after `main` is published; do not rewrite them to a temporary branch |
+| Repository visibility | Private at inspection | Not blocked by source licensing: on 2026-09-17 the maintainer confirmed the tracked `reference/` and `schema/rpp/evidence/` material may be published with sources attributed. Carry each item's attribution and the `cc-by-nc` noncommercial condition; see [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md). Changing visibility remains the maintainer's decision |
 | Repository About | Description exists; homepage and topics unset | Add the final documentation URL and accurate discovery topics |
 | ReaperDoc repository | Independently maintained `DDDPG/ReaperDoc` | Preserve independent ownership; agree on versioned specification exchange |
 | Integrated ReaperDoc site | Vite base `/ReaperDoc/`; nested historical deployment workflow | Decide integration preview vs independent site destination before changing base or deployment |

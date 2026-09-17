@@ -12,5 +12,5 @@ python integrations/agents/reaper-agent-cli/scripts/install.py --source . --proj
 ```
 
 The candidate ZIP includes this installer's code and generic coding assets. It can install
-from candidate wheels without access to the private source repository. See
+from candidate wheels without a source checkout. See
 [recorded outcomes](../../docs/harness/acceptance.md) for live validation boundaries.

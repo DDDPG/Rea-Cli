@@ -14,6 +14,31 @@ The reviewed checkout contains post-upload runtime hardening and generated-data
 privacy cleanup, so its runtime is intentionally newer than those immutable files;
 do not reuse either published version for the next upload.
 
+### Next release: version bump checklist
+
+`reacli==0.1.0` and `reaper-parser==0.1.0a1` are immutable. The next upload must
+use new version numbers — `reacli==0.1.1` and `reaper-parser==0.1.0a2` are the
+planned pair, since the parser keeps its pre-release marker until its upload
+channel is independently evidenced. Bump both together; `reacli` pins
+`reaper-parser>=0.1.0a1,<0.2`, so a parser-only bump still satisfies the pin but
+leaves the pair out of step.
+
+Update every version reference in the same change:
+
+- `packages/reacli/src/rac/__init__.py` (`__version__`, the single source for the
+  `reacli` distribution version)
+- `packages/reaper-parser/pyproject.toml` (`[project] version`)
+- `packages/reacli/pyproject.toml` (the `reaper-parser` dependency pin)
+- `integrations/agents/reaper-agent-cli/compatibility.json` (`reacli`,
+  `reaper-parser`, and `bundle_version`)
+- `CHANGELOG.md` (new section) and both READMEs
+- `docs/ecosystem/publication.json` and `publication-audit.md` (recorded release
+  facts) — add the new artifacts, do not rewrite the 0.1.0/0.1.0a1 records
+
+`tests/test_distribution.py` and `scripts/check_dist.py` verify that package
+metadata stays tied to `rac.__version__`; run them before building.
+
+
 1. Install both packages and their development/audio extras; run the offline suite.
 2. Run `python tools/generate_schema.py --check`.
 3. Install website dependencies with `npm ci --prefix apps/reaperdoc`.

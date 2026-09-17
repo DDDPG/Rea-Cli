@@ -9,6 +9,10 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
 
 ## Bundled reference data — attribution and source conditions
 
+This notice ships with the package. The repository's
+[`THIRD_PARTY_NOTICES.md`](../../THIRD_PARTY_NOTICES.md) carries the same wording
+plus the Git-only redistribution boundary; keep the two aligned.
+
 - `src/rac/data/knowledge/rpp_schema.json` is now generated from the canonical
   monorepo `schema/rpp/spec.json`, based on **DDDPG/ReaperDoc** commit
   `6416435fdf4cc7e38346fd7875f5d04949b431a2` and recorded adopted evidence.
@@ -33,8 +37,9 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
   that the reference can be curated and used with Cockos attribution and source links.
 
 Before public distribution, preserve the recorded source attribution and applicable
-terms. The source gate is marked resolved by the maintainer's 2026-09-15 attestation;
-the project MIT license does not replace the terms of these third-party materials.
+terms. The source gate is marked resolved by the maintainer's 2026-09-15 attestation,
+extended on 2026-09-17 to the Git-only reference material; the project MIT license
+does not replace the terms of these third-party materials.
 
 ## Python dependencies
 
@@ -52,9 +57,11 @@ included in the Python build.
 
 ## Repository-only supplemental references
 
-The material under `reference/` is excluded from both wheel and sdist. Publishing
-the Git repository still distributes these files; exclusion from `pip install`
-is not a license grant.
+The material under `reference/` is excluded from both wheel and sdist. That is a
+packaging boundary, not a license boundary: the files are tracked in Git, so
+publishing the repository publishes them. On 2026-09-17 the maintainer confirmed
+that this material may be published with its sources attributed, so the notices
+below are standing attribution obligations rather than open blockers.
 
 - The annotated RPP tree and extraction notes derive from ReaperDoc at the
   historical `32047bb` snapshot. The maintainer confirms use with the recorded

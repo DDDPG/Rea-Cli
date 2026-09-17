@@ -1,3 +1,3 @@
 include README*.md LICENSE THIRD_PARTY_NOTICES.md CONTRIBUTING.md SECURITY.md
-recursive-include src/rac *.lua *.ini *.json *.rpp
+recursive-include src/rac *.lua *.ini *.json *.rpp py.typed
 global-exclude __pycache__ *.py[cod] .DS_Store

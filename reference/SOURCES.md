@@ -13,10 +13,13 @@ internal milestone names, replaces obsolete paths with local links, and
 distinguishes observed behavior from general guarantees. It is not a new live
 validation of the source's claims.
 
-These files are excluded from wheel and source distributions. That packaging
-boundary does not resolve redistribution rights when publishing the Git
-repository itself. The project license does not relicense third-party text or
-data; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
+These files are excluded from wheel and source distributions, but they are
+tracked in Git, so publishing the repository publishes them. On 2026-09-17 the
+maintainer confirmed that this material may be published with its sources
+attributed. The project license does not relicense third-party text or data:
+each item below keeps its own attribution and applicable conditions, and the
+`cc-by-nc` entry in particular keeps its noncommercial condition. See
+[THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
 ## RPP
 

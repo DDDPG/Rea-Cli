@@ -3,7 +3,6 @@
 > 参见[安装与验证边界](docs/ecosystem/README.md)、[ReaperDoc 维护关系](docs/ecosystem/reaperdoc-maintenance.md)
 > 和[对外入口待办](docs/ecosystem/public-entrypoints.md)。
 
-<p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli "></p>
 <h1 align="center">Rea-Cli</h1>
 
 <p align="center"><strong>REAPER coding. REAPER executing. REAPER verifying.</strong></p>
@@ -25,24 +24,185 @@ Rea-Cli 本身不是完整的 agent harness，也不是持久化的 REAPER 远�
 Python 库用于编程式工作流，CLI 用于检查和隔离执行，仓库内的 skill 则用于向 agent
 注入 Rea-Cli 相关的工程知识。
 
-**当前状态：** 0.1.0 alpha；`reacli==0.1.0` 和 `reaper-parser==0.1.0a1`
-已经以 wheel 和源码包形式发布到 PyPI。安装正式版本：
+Rea-Cli **只使用 REAPER 原生 ReaScript API**，不需要 **SWS 扩展**、**ReaPack**
+或任何其他 REAPER 附加组件，也不会安装它们。仓库内的历史参考资料和示例工程可能
+提到 SWS action，那只是查询数据，不是运行依赖。
 
-```sh
+## 名称速查
+
+项目里有几个相近的名字，对应关系如下：
+
+| 名称 | 类型 | 出现位置 |
+|---|---|---|
+| `reacli` | PyPI 发行包名，也是主 CLI 命令 | `pip install reacli`、`reacli doctor` |
+| `rac` | Python 导入包名**兼** CLI 别名 | `import rac`、`rac doctor` |
+| `reaper-parser` | 独立 parser 的 PyPI 发行包名 | `pip install reaper-parser` |
+| `reaper_parser` | 该 parser 的 Python 导入包名 | `from reaper_parser import parse` |
+| `reacli[audio]` | WAV 检查与渲染所需的可选扩展 | `pip install './packages/reacli[audio]'` |
+
+`reacli` 和 `rac` 是同一个命令行程序的两个入口，发行版同时注册两者。
+`reacli` 声明依赖 `reaper-parser`，因此用一条命令成对安装可以让版本保持匹配。
+
+## 安装
+
+需要 **Python 3.10+**。REAPER、Lua 和所有系统库都需要单独安装，见[前置要求](#前置要求)。
+
+### 路线 A —— 安装正式发布版
+
+只想使用 CLI 和 Python API，不需要本仓库源码：
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+reacli --version
+```
+
+WAV 和渲染检查需要额外的 audio 扩展：
+
+```bash
+python -m pip install "reacli[audio]==0.1.0"
 ```
 
 参见 [`reacli` PyPI 页面](https://pypi.org/project/reacli/0.1.0/) 和
 [`reaper-parser` PyPI 页面](https://pypi.org/project/reaper-parser/0.1.0a1/)。
-API 后续可能调整。安装包与 CLI 名称为 `reacli`，Python 导入名为 `rac`。
-本次审查后的 checkout 还包含发布后加入的运行时加固和隐私清理，这些改动不在不可变的
-`0.1.0`/`0.1.0a1` 构件中；下次上传前需要同时提升两个包的版本。
+
+### 路线 B —— 从源码 checkout 使用
+
+需要运行示例、阅读 `reference/` 手册或参与开发时使用：
+
+```bash
+git clone https://github.com/DDDPG/Rea-Cli.git
+cd Rea-Cli
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install ./packages/reaper-parser ./packages/reacli
+reacli --version
+```
+
+### 应该装哪一个？
+
+**当前状态：** 0.1.0 alpha。已发布的 `reacli==0.1.0` 和 `reaper-parser==0.1.0a1`
+构件不可变，且上传时间早于本仓库现有的资源、压缩包、parser 和音频安全防护。
+因此：从 PyPI 安装得到的是加固前的运行时，从当前 checkout 安装得到的是加固后的版本。
+两者的 API 都可能继续调整。上面的路线 B 安装的是较新的代码，下次上传会使用新的版本号
+（见[发布流程](docs/releasing.md)）；在那之前两条路线的代码并非逐字节一致，这是预期情况
+而不是缺陷。
+
+安装包与 CLI 名称为 `reacli`，Python 导入名为 `rac`。
+
+## 前置要求
+
+安装 `reacli` 不会安装 REAPER、Lua 或系统库。请按实际用途选择所需项：
+
+| 依赖 | 用途 | 说明 |
+|---|---|---|
+| Python 3.10+ | 全部功能 | 系统解释器若仍为 3.9 则无法运行本包；macOS 请先确认 `python3 --version`。 |
+| 官方 REAPER 7.x | 执行、渲染、实机检查 | 未认证最低小版本。请从 [reaper.fm](https://www.reaper.fm/download.php) 下载并单独安装；REAPER 为商业软件，按 [Cockos 条款](https://www.reaper.fm/purchase.php)提供。 |
+| 图形会话 | 执行、渲染 | macOS 依赖**已登录的桌面会话**，无桌面服务或无头 CI 不被支持；Linux 需要可用的 `DISPLAY`，或 `xvfb-run`、`Xvfb` 与 `xauth`。 |
+| macOS：已完成首次启动 | 执行、渲染 | 需先打开一次 REAPER，并在 **Preferences > Audio > Device** 中选择输出设备。**即使只做离线渲染**也必须先配置好 CoreAudio 输出。 |
+| Linux：GTK3、ALSA、Xvfb、xauth | 执行、渲染 | Debian/Ubuntu 与 Fedora 的包名见[环境指南的 Linux 章节](docs/environment.md#linux)。 |
+| Lua 5.3 或 5.4 的 `luac` | 通过 CLI 生成 Lua | 仅用于语法预检；宿主执行使用 REAPER 内置 Lua。不支持 Lua 5.5。 |
+| SWS、ReaPack、MCP 服务 | — | **不需要。** Rea-Cli 使用 REAPER 原生 ReaScript API，不安装任何附加组件。 |
+
+**操作系统支持：** 执行层支持 macOS 和 Linux。Windows 目前支持离线 parser 和
+RPP 检查，**不支持**通过 `rac` 执行 REAPER。
+
+macOS 使用 Homebrew 时可安装新版 Python 与 `lua@5.4`：
+
+```bash
+brew install python lua@5.4
+```
+
+完整的平台配置、程序路径与排错说明见[环境指南](docs/environment.md)。
+
+## 快速开始
+
+### 不启动 REAPER 的快速体验
+
+检查内置空工程并查询包内知识索引：
+
+```bash
+reacli doctor --profile offline --json
+reacli resources --output ./quickstart
+reacli rpp validate ./quickstart/minimal.rpp
+reacli knowledge api GetTrack
+```
+
+校验结果应为 `ok: true`、轨道数为 0。资源导出不会覆盖已有文件，重复运行时请使用新目录。
+这条路径只需要 Python。
+
+### 从零构建可播放工程（需要 REAPER）
+
+![从空白工程开始，逐步构建 REAPER session 的 52 个中间状态](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
+
+这个演示会从空白工程构建一个可直接播放的 REAPER session。请先按路线 B 从源码安装，
+并按[环境指南](docs/environment.md)配置 REAPER，再在仓库根目录运行：
+
+```bash
+reacli init
+reacli doctor --json
+python examples/show_session.py ./demo/my-first-session
+```
+
+在 REAPER 中打开 **`demo/my-first-session/Show-Session.rpp`**，按播放即可。
+工程内嵌 MIDI，并使用 REAPER 自带的 **ReaSynth**，不需要音频素材或第三方乐器。
+每次运行请使用新的输出目录；需要 WAV 预览时追加 `--render`。如果找不到 ReaSynth，
+请按[环境指南](docs/environment.md#plugin-discovery-and-macos-window-restoration)准备独立资源的 VST 索引。
+
+`examples/show_session.py` 和 `examples/create_project.py` 会把所需资源导出到输出目录，
+因此**不需要**先执行上面的 `reacli resources`。两者都需要源码 checkout，因为示例位于
+仓库中而不是 wheel 内。
+
+GIF 展示的工程结构、效果器设置、验证边界和 52 个构建中间状态（checkpoint），见[可播放演示指南](examples/README.md#playable-show-demo)。
+
+## 一个简短的 Python 示例
+
+下面使用前面「不启动 REAPER 的快速体验」导出的 `quickstart` 资源，创建一条 **Vocal**
+轨道，将音量设为 **−6 dB**，另存并验证工程：
+
+```python
+from pathlib import Path
+from rac.luagen import generate
+from rac.rpp import parse
+from rac.runner import run
+from rac.verify import expect
+
+root = Path("quickstart")
+script = generate({"ops": [
+    {"op": "track.create", "args": [0, "Vocal"]},
+    {"op": "track.set_volume_db", "args": [0, -6.0]},
+]}, root / "create.lua")
+
+proof = run(
+    root / "minimal.rpp", script,
+    save_as=root / "created.rpp",
+    run_root=root / "runs",
+)
+assert proof.ok, proof.to_dict()
+expect(parse(root / "created.rpp")).track_count(1).track(0) \
+    .name("Vocal").volume(10 ** (-6 / 20))
+print(proof.run_dir)
+```
+
+`generate(...)` 会写出 `quickstart/create.lua`。下面这条 CLI 命令运行的就是同一个
+生成的脚本，因此**必须先执行上面的 Python 片段**，否则文件不存在：
+
+```bash
+reacli exec --project ./quickstart/minimal.rpp \
+  --script ./quickstart/create.lua --save-as ./quickstart/created.rpp \
+  --run-root ./quickstart/runs
+```
+
+一个自带资源导出、可直接运行的完整示例见 [examples/create_project.py](examples/create_project.py)。
 
 ## Harness quick start：让 agent 安装并开始使用
 
 已经在使用 **Claude Code、Codex 或 Qwen Code**？直接把下面这句话交给 agent：
 
-> 请阅读 https://github.com/DDDPG/Rea-Cli 及其中的 `docs/harness/README.zh-CN.md` 安装指南，将 ReaCli CLI toolkit 和 `reaper-agent-cli` skill 安装到新建的 `my-reaper-work` 项目，适配我正在使用的 harness。检查 Python、CLI、Lua 和本机 REAPER 是否可用，并告诉我如何开始使用。如果无法访问这个私有仓库，请向我询问已授权的本地源码目录，改用本地安装。
+> 请阅读 https://github.com/DDDPG/Rea-Cli 及其中的 `docs/harness/README.zh-CN.md` 安装指南，将 ReaCli CLI toolkit 和 `reaper-agent-cli` skill 安装到新建的 `my-reaper-work` 项目，适配我正在使用的 harness。检查 Python、CLI、Lua 和本机 REAPER 是否可用，并告诉我如何开始使用。
 
 接入组件是项目级的 **CLI toolkit + skill**，通过 harness 已有的 shell 工具执行。
 [完整安装指南](docs/harness/README.zh-CN.md)列出了三个 harness 的技能位置、环境要求
@@ -57,44 +217,11 @@ python integrations/agents/reaper-agent-cli/scripts/install.py --source . --proj
 进入新目录打开 Claude Code、Codex 或 Qwen Code，输入：
 “使用 reaper-agent-cli skill 检查环境，在 REAPER 中新建工程，保存并验证实际渲染音频。”
 项目级技能通过 shell 调用绑定的 CLI/Python，无需 MCP 服务；REAPER、Lua 和 harness 登录
-需提前准备。仓库 private 阶段以本地源码模拟获取，也支持无 checkout 的候选 wheel 安装。
+需提前准备。发布 bundle 中的候选 wheel 也支持无 checkout 安装。
 
 详见[三个 harness 的快速接入](docs/harness/README.zh-CN.md)、
 [一句指令 showcase 需求](integrations/agents/acceptance/showcase-brief.md)和
 [实际验收记录](docs/harness/acceptance.md)。
-
-## 快速开始：从零构建可播放工程
-
-![从空白工程开始，逐步构建 REAPER session 的 52 个中间状态](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
-
-这个演示会从空白工程构建一个可直接播放的 REAPER session。请先完成[安装](#安装)，
-并按[环境指南](docs/environment.md)配置 REAPER，再在仓库根目录运行：
-
-```bash
-reacli init
-reacli doctor --json
-python examples/show_session.py ./demo/my-first-session
-```
-
-在 REAPER 中打开 **`demo/my-first-session/Show-Session.rpp`**，按播放即可。
-工程内嵌 MIDI，并使用 REAPER 自带的 **ReaSynth**，不需要音频素材或第三方乐器。
-每次运行请使用新的输出目录；需要 WAV 预览时追加 `--render`。如果找不到 ReaSynth，
-请按[环境指南](docs/environment.md#plugin-discovery-and-macos-window-restoration)准备独立资源的 VST 索引。
-
-GIF 展示的工程结构、效果器设置、验证边界和 52 个构建中间状态（checkpoint），见[可播放演示指南](examples/README.md#playable-show-demo)。
-
-### 不启动 REAPER 的快速体验
-
-也可以先检查内置空工程：
-
-```bash
-reacli doctor --profile offline --json
-reacli resources --output ./quickstart
-reacli rpp validate ./quickstart/minimal.rpp
-reacli knowledge api GetTrack
-```
-
-校验结果应为 `ok: true`、轨道数为 0。资源导出不会覆盖已有文件，重复运行时请使用新目录。
 
 ## 项目亮点
 
@@ -125,77 +252,6 @@ reacli knowledge api GetTrack
 Agent / Python / CLI → RPP 或 Lua 源码 → rac pre-check → REAPER → 保存工程 / 渲染音频 → 验证
 ```
 
-## 安装
-
-正式发布版本：
-
-```bash
-python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
-reacli --version
-```
-
-如果要参与源码开发，请在仓库根目录安装本地包：
-
-使用 **Python 3.10+**，在源码目录中创建独立环境：
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install ./packages/reaper-parser ./packages/reacli
-reacli --version
-```
-
-REAPER 需要单独安装。其他依赖取决于使用方式：
-
-- **离线 RPP 检查：** 只需要 Python。
-- **生成 Lua：** 需要 Lua 5.3 或 5.4 的 `luac` 编译器进行语法检查。
-- **实机执行：** 需要 macOS 或 Linux 上的 REAPER 7.x。macOS 需配置 CoreAudio 输出；
-  Linux 需安装相关系统库，并提供 X 显示环境或 Xvfb。
-
-macOS 请先检查 `python3 --version`，系统解释器可能仍为 3.9。
-使用 Homebrew 时可安装新版 Python 和 `lua@5.4`，再用新版解释器创建环境。
-完整的平台配置、程序路径与排错说明见[环境指南](docs/environment.md)。
-
-## 一个简短的 Python 示例
-
-下面使用第一步导出的 `quickstart` 资源，创建一条 **Vocal** 轨道，
-将音量设为 **−6 dB**，另存并验证工程：
-
-```python
-from pathlib import Path
-from rac.luagen import generate
-from rac.rpp import parse
-from rac.runner import run
-from rac.verify import expect
-
-root = Path("quickstart")
-script = generate({"ops": [
-    {"op": "track.create", "args": [0, "Vocal"]},
-    {"op": "track.set_volume_db", "args": [0, -6.0]},
-]}, root / "create.lua")
-
-proof = run(
-    root / "minimal.rpp", script,
-    save_as=root / "created.rpp",
-    run_root=root / "runs",
-)
-assert proof.ok, proof.to_dict()
-expect(parse(root / "created.rpp")).track_count(1).track(0) \
-    .name("Vocal").volume(10 ** (-6 / 20))
-print(proof.run_dir)
-```
-
-同一个生成的脚本也可以通过 CLI 执行：
-
-```bash
-reacli exec --project ./quickstart/minimal.rpp \
-  --script ./quickstart/create.lua --save-as ./quickstart/created.rpp \
-  --run-root ./quickstart/runs
-```
-
-完整的可运行示例见 [examples/create_project.py](examples/create_project.py)。
-
 ## 默认启动行为
 
 现有 `run()` 和 `Pool.map()` 调用无需增加参数：
@@ -215,6 +271,8 @@ reacli exec --project ./quickstart/minimal.rpp \
   尝试修改重要工程时请使用副本。
 - 执行层支持 macOS 和 Linux，尚未实现 Windows 执行。不同 REAPER 版本及第三方插件需在目标机器验证。
 - 音频检查支持单声道或双声道的 16/24-bit PCM WAV，响度为近似测量；工程结构相同不代表声音完全相同。
+- Rea-Cli 调用 REAPER 原生 ReaScript API，不安装、不加载也不要求 SWS、ReaPack
+  或其他扩展；依赖第三方扩展的脚本不在已验证范围内。
 
 已测试的环境与验证范围见[验证记录](docs/validation.md)。
 
@@ -250,6 +308,19 @@ scripts/     环境引导与发行包检查
 开发约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 虚拟环境、REAPER 执行产物和本地配置已由 Git 忽略。
 
+### Git-only 参考语料的署名要求
+
+`reference/` 与 `schema/rpp/evidence/` 不进入任何 wheel、sdist、文档站或 agent bundle。
+这是**打包边界，不是授权边界**：这些文件由 Git 跟踪，因此 clone 本仓库就会一并取得。
+它们不受本项目 MIT 许可证覆盖；维护者已确认可在保留来源署名的前提下公开发布，
+每个文件都保留其署名与来源链接。
+
+有两项条件随这批材料一同生效，且**不能靠署名满足**：其中一份来源标注为 `cc-by-nc`，
+其**非商业性条件仍然有效**；另有部分规范文本派生自 GPL-3.0 仓库。
+再分发本仓库或其任何部分（尤其是商业用途）之前，请先阅读
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和
+[来源与再分发授权审计](docs/ecosystem/source-license-audit.md)。
+
 ## Rea-Cli Agent skill
 
 [Agent bundle 源码](integrations/agents/reaper-agent-cli/SKILL.md)包含自包含的 skill、
@@ -262,9 +333,10 @@ scripts/     环境引导与发行包检查
 
 ## 文档入口
 
-- [环境配置与排错](docs/environment.md)
+- [环境配置与前置要求](docs/environment.md)
 - [Python API 与 CLI 行为](docs/api.md)
 - [验证记录](docs/validation.md)
+- [共享 parser 与媒体 API](docs/ecosystem/api.md)
 - [自动化开发规范](reference/README.zh-CN.md)：[调用](reference/workflow/README.zh-CN.md) · [RPP](reference/rpp/README.zh-CN.md) · [ReaScript](reference/reascript/README.zh-CN.md) · [Lua](reference/lua/README.zh-CN.md) · [JSFX](reference/jsfx/README.zh-CN.md)
 - [Agent skill](integrations/agents/reaper-agent-cli/SKILL.md) · [中文使用说明](integrations/agents/reaper-agent-cli/GUIDE.zh-CN.md)
 - [更新记录](CHANGELOG.md) · [发布流程](docs/releasing.md)

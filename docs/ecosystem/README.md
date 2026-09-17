@@ -140,8 +140,11 @@ evidence is complete; source authorization is recorded as a maintainer attestati
 The `codex/reaper-ecosystem-alpha` branch preserves pre-existing ReaCli work in a separate
 snapshot commit, specification work in a subsequent commit, and directory migration in a
 separate commit. ReaperDoc history was imported without squashing. Original sibling folders
-were not deleted. Full baseline archives and binary diffs are local under
-`.state/ecosystem-baseline-20260913`; public baseline/corpus summaries live beside this guide.
+were not deleted. Full baseline archives and binary diffs are held only in a
+local, Git-ignored `.state/ecosystem-baseline-20260913` directory. They are
+**not** in this repository and cannot be downloaded from it; only the summaries
+beside this guide are public. The recorded evidence JSON keeps its original
+`.state/` paths, which mark evidence that stays on the machine that produced it.
 
 Known scope limits: macOS-only new live evidence; no Windows runner, all-plugin state
 interpretation, offline time-stretch reconstruction, live control server or training system.

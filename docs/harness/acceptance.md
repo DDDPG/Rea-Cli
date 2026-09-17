@@ -63,7 +63,8 @@ existing-runtime binding, source installation, and a standalone extracted bundle
 wheels from outside the repository. The bundle excludes local runtime bindings/caches
 and contains no showcase solution. The offline suite passed 207 tests, with one optional
 oracle skip and five live tests deselected; the host checks above ran explicitly.
-Linux/Windows harness execution was not tested in this run. The repository remains private.
+Linux/Windows harness execution was not tested in this run. These results therefore
+cover macOS arm64 only.
 
 The JSFX gain starter also passed a separate real-host DSP check using
 [verify_jsfx.py](../../integrations/agents/acceptance/verify_jsfx.py): a 440 Hz stereo

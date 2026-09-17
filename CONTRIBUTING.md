@@ -104,21 +104,43 @@ removing private file paths and device details.
 
 ## Documentation and knowledge changes
 
-Keep [README.md](README.md) and [README.zh-CN.md](README.zh-CN.md) aligned for
-installation, quick starts, supported platforms, and important limitations.
-Put detailed API behavior in `docs/api.md`, setup and troubleshooting in
-`docs/environment.md`, and reusable workflow material in `reference/`.
+Keep [README.md](README.md) and [README.zh-CN.md](README.zh-CN.md) aligned in
+**section order and content** for installation, prerequisites, quick starts,
+supported platforms, and important limitations. A reader switching languages
+should land on the same sections in the same order. Put detailed API behavior in
+`docs/api.md`, setup and troubleshooting in `docs/environment.md`, and reusable
+workflow material in `reference/`.
 
-`reference/` must remain outside wheels and source distributions. Canonical
-knowledge and Lua assets belong in `packages/reacli/src/rac/data/`: maintain one copy of the two JSON
-indexes and 12 Lua files, and link to them from repository notes. Record sources
-and permissions for new reference material. Public availability alone is not
-redistribution permission; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
-and [reference/SOURCES.md](reference/SOURCES.md).
+Keep the README ordered for a first-time visitor: what the project is, what the
+names mean, how to install, what has to be installed separately, then how to
+run something. Harness- and agent-specific material belongs after that, not
+first.
+
+Prefer linked images over committed ones. No binary screenshot, GIF or icon is
+tracked in this repository; the README links to a hosted copy of the showcase
+animation, and contributors regenerate such assets under the Git-ignored `demo/`
+tree. Do not add new binary assets without a deliberate decision.
+
+`reference/`, `schema/rpp/evidence/` and `integrations/agents/` must remain
+outside wheels and source distributions. Canonical knowledge and Lua assets
+belong in `packages/reacli/src/rac/data/`: maintain one copy of the two JSON
+indexes and 12 Lua files, and link to them from repository notes.
+
+Record the source and the applicable terms for every new reference item. Public
+availability alone is not redistribution permission, and excluding a file from
+the packages settles nothing: these files are tracked in Git, so they ship with
+every clone. The existing corpus is published under the maintainer's attribution
+decision recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); a new item
+needs equivalent treatment before it is committed. Keep each item's attribution
+and source link, and keep the `cc-by-nc` noncommercial condition on the rendering
+notes rather than treating attribution as sufficient. See
+[reference/SOURCES.md](reference/SOURCES.md) for the per-topic records.
 
 Check relative links and run documented examples with a fresh output directory.
 Keep machine-specific validation artifacts separate from public documentation;
-publish concise, reproducible evidence with private details removed.
+publish concise, reproducible evidence with private details removed. Records that
+cite local-only evidence paths must say so explicitly, so a reader without your
+working tree knows the evidence is not in the repository.
 
 ## Report a bug or submit a change
 
@@ -146,9 +168,6 @@ reviews or other project discussions.
 Maintain the English and Chinese [developer guides](reference/README.md) together. Keep current invocation rules separate from original versioned evidence. Preserve source hashes and update destination hashes in `reference/source-manifest.json` when changing tracked reference content.
 
 The [repository skill](integrations/agents/reaper-agent-cli/SKILL.md) uses the installed package and these guides. Update its routing when adding topics, without vendoring rac or Lua templates. Check local links, run affected examples, validate the skill frontmatter, and build distributions to confirm `reference/` and `integrations/agents/` remain Git-only. Documentation checks do not establish new live REAPER validation.
-
-同步维护[双语开发规范](reference/README.zh-CN.md)，将当前调用约定与历史证据分开。保留来源哈希，修改纳入清单的资料后更新目标哈希。Skill 共用包内资源；变更后检查链接、相关示例、skill 格式及分发范围，不将文档检查记为实机测试。
-
 
 ## Monorepo documentation and integration checks
 

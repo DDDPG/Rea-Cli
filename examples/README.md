@@ -118,9 +118,9 @@ To capture the sequence on macOS and assemble the GIF:
 # REAPER, Swift and macOS Screen Recording permission are required for capture.
 python scripts/capture_showcase_macos.py ./demo/walkthrough
 
-# Pillow is only needed to assemble the documentation GIF.
+# Pillow is only needed to assemble the GIF.
 python -m pip install Pillow
-python scripts/make_showcase_gif.py ./demo/walkthrough/frames ./docs/assets/showcase.gif
+python scripts/make_showcase_gif.py ./demo/walkthrough/frames ./demo/walkthrough/showcase.gif
 ```
 
 The capture helper launches a separate REAPER process for each RPP, checks the
@@ -135,8 +135,9 @@ rejects missing frames or changed source projects.
 Use `--resource-seed /path/to/prepared/resource` when capture needs an existing
 local REAPER resource setup; it is copied into the demo output, never modified.
 Such local resources, screenshots, logs and RPP files stay under Git-ignored
-`demo/`. Only the assembled GIF is included in the documentation. The normal
-quick start does not capture the screen or require Pillow/Swift.
+`demo/`. Assemble the GIF there too: no image assets are committed to this
+repository, and the README links to a hosted copy of the finished animation.
+The normal quick start does not capture the screen or require Pillow/Swift.
 
 ## Development contracts / 开发规范
 

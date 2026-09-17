@@ -15,6 +15,32 @@
   removes a local media path from generated public data. These changes are not part of the
   immutable `0.1.0`/`0.1.0a1` archives; bump versions before the next upload.
 
+### Public-readiness cleanup (unreleased, no version bump)
+
+Documentation and packaging-metadata pass toward a public repository state.
+Runtime behavior is unchanged and `0.1.0`/`0.1.0a1` remain the published versions.
+
+- Rewrite both READMEs: a name table for the two distributions and their import
+  names, installation split into PyPI and source-checkout paths, a prerequisites
+  table, and an explicit statement that SWS, ReaPack and MCP are not required.
+- Remove the tracked binary images (~10.6 MB) and link the showcase animation
+  instead; regenerate such assets under the Git-ignored `demo/` tree.
+- Record the maintainer's 2026-09-17 decision that the Git-only `reference/` and
+  `schema/rpp/evidence/` corpus may be published with its sources attributed,
+  clearing it as a public-release blocker. Those files are unchanged and still
+  tracked in Git, so a clone still distributes them; the `cc-by-nc` entry keeps
+  its noncommercial condition, which attribution does not discharge.
+- Add the PEP 561 `py.typed` marker to the `rac` package with its `package-data`
+  and `MANIFEST.in` entries.
+- Add `schema/rpp/README.md`, which explains that `sourceFile` is relative to the
+  `reaper_agent_cli` source workspace while `source_commit`/`source_files` are
+  ReaperDoc provenance. The generated consumers now carry `source_file_base` and
+  `source_file_note`, so the shipped `rpp_schema.json` is self-describing.
+- Mark `.state/` evidence paths as local-only, and separate the current 167-test
+  macOS run from the dated 164-test release baseline in `docs/validation.md`.
+- Record the next version pair (`reacli==0.1.1`, `reaper-parser==0.1.0a2`) and the
+  files that must move together in `docs/releasing.md`.
+
 ### Repository maintenance
 
 - Repair monorepo handbook paths and installation commands; share the contributor guide.

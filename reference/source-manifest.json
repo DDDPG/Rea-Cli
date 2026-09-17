@@ -180,7 +180,7 @@
       "comparison": "identical at import",
       "sha256": "98b68a21272fa976ef2b0a42e8c022ee614ceb4d96d8d7c26fb7cb077285865f",
       "canonical_at_import": "src/rac/data/knowledge/rpp_schema.json",
-      "current_sha256": "f6ca31f24e228efe1844da4aab03cc002fdcdff4d12f28c9223301f6e952a5df"
+      "current_sha256": "5025382e4c1206765729f9f46424db963e8c1514c68a8d92b4c9ac1f8cbf4167"
     },
     {
       "source": "lua/entry.lua",
@@ -471,7 +471,7 @@
     {
       "destination": "integrations/agents/README.md",
       "description": "Current standalone agent bundle documentation",
-      "destination_sha256": "4d29264718d32609eb38dafd20c45877c49487de192f44eaf25e6285ffb6f898"
+      "destination_sha256": "5ac94bf8855975c66a11166b8a1febdd13a417a5efaff94147b9326450deedd7"
     },
     {
       "destination": "integrations/agents/reaper-agent-cli/SKILL.md",

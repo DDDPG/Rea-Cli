@@ -2,6 +2,8 @@
   "schema_version": "1.0.0",
   "index_base": 1,
   "source_commit": "6416435fdf4cc7e38346fd7875f5d04949b431a2",
+  "source_file_base": "reaper_agent_cli",
+  "source_file_note": "Each entry's sourceFile is relative to the reaper_agent_cli source workspace, not to this repository and not to ReaperDoc. That workspace is not shipped; see reference/source-manifest.json. An empty sourceFile means no specific source file was recorded.",
   "license_status": "maintainer authorization recorded; source attribution and applicable license terms required",
   "sections": [
     {

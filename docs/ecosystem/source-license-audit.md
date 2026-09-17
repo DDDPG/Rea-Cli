@@ -1,9 +1,14 @@
 # 来源与再分发授权审计
 
-审计日期：2026-09-15
+审计日期：2026-09-15；2026-09-17 更新
 
 审计对象：Rea-Cli 单仓中的 `reacli`、`reaper-parser`、ReaperDoc 规格、文档参考和 Lua 资源。
 审计目的：判断哪些内容可以随源码、wheel/sdist、文档站或 agent bundle 再分发。
+
+> **2026-09-17 更新**：维护者确认 `reference/` 与 `schema/rpp/evidence/` 下的语料
+> 同样**可在保留来源署名的前提下公开发布**。下表中原本标为“排除”的最后一项据此
+> 改为“维护者已确认”，公开前的阻挡条件已解除。`cc-by-nc` 条目的
+> **非商业性条件不受署名影响**，仍然有效；详见“许可证含义的适用边界”。
 
 ## 结论
 
@@ -12,8 +17,9 @@ ReaTeam、Cockos 公开资料、Ultraschall 资料以及 GitHub 开源 Lua 资�
 使用，并按来源署名。基于这一维护者授权声明，**来源授权门禁已清除**；它仍然是
 维护者声明而非外部机构对本项目发行物的独立背书，来源许可证和署名义务继续保留。
 当前来源授权门禁已经按维护者声明记录为通过；两个正式 Python 项目也已在 PyPI
-出现。公开仓库仍需由维护者单独决定，且未来发布流程的 Trusted Publisher/channel
-证据不能仅由“构件已经存在”推导出来：
+出现。维护者已于 2026-09-17 确认仓库中全部来源语料可在保留署名的前提下公开，
+因此不再有来源授权层面阻挡公开的因素；公开的**时机**仍由维护者决定。未来发布
+流程的 Trusted Publisher/channel 证据不能仅由“构件已经存在”推导出来：
 
 - 用户已确认其原创 ReaperDoc 代码和文档按 MIT 发布；该授权不覆盖外来引用、复制描述、第三方数据或来源项目中不属于用户的内容。
 - “网页公开可访问”不等于允许复制和再分发。GitHub 的官方说明明确指出，未附许可证时仍适用默认版权，其他人没有自动的复制、分发或改作权。[GitHub licensing guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
@@ -44,7 +50,7 @@ ReaTeam、Cockos 公开资料、Ultraschall 资料以及 GitHub 开源 Lua 资�
 | `reference/knowledge/reascript/render_internals.md` | 当前文件 SHA-256 `282c766019d738626e239374d5662f6d8ed61cebc801c8d4725696efec6d0936`，保留 Meo-Ada Mespotine/Ultraschall 署名及 `cc-by-nc` 标签 | 上游文件 [RENDER_How_RenderCFG-Base64-strings_are_encoded.txt](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt) 明写 `licensed creative commons cc-by-nc`；维护者确认可使用 | **维护者已确认** | 保留 Meo-Ada Mespotine/Ultraschall 署名、来源链接和 `cc-by-nc` 标签；具体版本未知时不补写版本号 |
 | `reference/knowledge/reascript/actions_index.json` | 来源清单记录来自 Ultraschall 的历史 action list；当前 SHA-256 `bf570b0c62b85436f4065acf16d8e9a4261dcfc8f6fb1ac015913b41f1ab42f6` | Ultraschall API 仓库没有识别到顶层 LICENSE；维护者确认 GitHub 开源来源可使用 | **维护者已确认** | 保留 Ultraschall 来源、版本和 attribution；不把历史索引声明为本项目原创 |
 | `packages/reacli/src/rac/data/lua/entry.lua` 与 11 个 `stdlib/*.lua` | 文件头写有 `(reaper_agent_cli)`、`粘贴片段`；来源清单记录与旧项目字节一致，entry SHA-256 `b2c74e382efa0fc7a86bdf13d3629796848ea39c691f244c506eb4ffd693c9fc` | 维护者确认这些来自 GitHub 开源社区的 Lua 资源可使用 | **维护者已确认** | 保留原项目/原作者链接和适用许可证；不要用根 MIT 文件覆盖原来源条件 |
-| `schema/rpp/evidence`、`reference/` 中研究原件、工程备份、插件状态和媒体 | 文件清单与来源 manifest 已记录，部分内容源于本地实验或第三方文档 | 不属于运行时所需的最小发行内容；第三方来源各自的许可没有统一解决 | **排除** | 保持私有；不进入 wheel、sdist、文档站或 agent bundle。Git 仓库若公开也会分发这些文件，因此当前仓库继续 private |
+| `schema/rpp/evidence`、`reference/` 下的知识语料、逐字段证据与 RPP 前后对照捕获 | 文件清单与来源 manifest 已记录上游路径、来源散列与编辑改动；本次扫描未发现绝对路径、用户名或主机名残留 | 由 `reference/SOURCES.md` 按主题逐项记录来源与署名；维护者于 2026-09-17 确认可在保留署名前提下公开 | **维护者已确认** | 可随公开仓库发布，须保留每项的来源链接、署名和适用条件（其中 `render_internals.md` 的 `cc-by-nc` 非商业性条件继续有效）。这些文件按发行内容划分仍不进入 wheel、sdist、文档站和 agent bundle，但这是打包边界，不是授权限制 |
 
 ## 许可证含义的适用边界
 

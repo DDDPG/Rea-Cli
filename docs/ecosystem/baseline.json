@@ -1,5 +1,6 @@
 {
   "date": "2026-09-13",
+  "evidence_archive_note": "Paths beginning with .state/ are local-only, Git-ignored archives. They are not part of the repository and cannot be downloaded from it; only the summaries recorded here are public.",
   "reacli": {
     "commit": "d55e595ac8258700545a24558dee5ebe2007b974",
     "passed": 162,

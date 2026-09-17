@@ -1,5 +1,6 @@
 {
   "date": "2026-09-13",
+  "evidence_archive_note": "Paths beginning with .state/ are local-only, Git-ignored archives. They are not part of the repository and cannot be downloaded from it; only the summaries recorded here are public.",
   "offline": {
     "passed": 194,
     "skipped": 5,

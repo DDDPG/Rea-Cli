@@ -1,7 +1,9 @@
 # Documentation
 
 Start with the [English README](../README.md) or [中文 README](../README.zh-CN.md)
-for installation and a working example.
+for installation and a working example. Both open with a name table, because the
+project uses two distributions with distinct import names (`reacli` / `rac`,
+`reaper-parser` / `reaper_parser`).
 
 - [Environment setup](environment.md): Python, Lua, REAPER, Linux displays,
   macOS CoreAudio, resource initialization and troubleshooting.
@@ -28,6 +30,10 @@ for installation and a working example.
 The [developer handbook](../reference/README.md) ([中文](../reference/README.zh-CN.md)) defines invocation, RPP, ReaScript, Lua and JSFX development contracts. Each topic has paired English and Chinese guides, with a separate [historical evidence catalog](../reference/knowledge/README.md). Use it to select an implementation path, check units and object identity, and verify results beyond a successful process exit.
 
 The repository [REAPER agent skill](../integrations/agents/reaper-agent-cli/SKILL.md) uses these contracts and the installed rac package. See [skill usage](../integrations/agents/README.md). Both directories are Git-only deliverables, excluded from wheel and sdist. Current setup/API docs take precedence over historical observations.
+
+The [RPP specification source](../schema/rpp/README.md) documents `schema/rpp/spec.json`,
+its four generated consumers and the regeneration gate. Read it first if a
+provenance field in the schema appears to name a file that does not exist here.
 
 [`source-baseline.json`](source-baseline.json) preserves hashes of the original
 project-relative files used to extract the library. It is a provenance snapshot,

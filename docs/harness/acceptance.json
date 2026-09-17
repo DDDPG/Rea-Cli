@@ -9,7 +9,7 @@
   },
   "brief_sha256": "01e9fabe6020d992b8ab746e0ae19b26bb82acdd66aa1305ad7c55d22ad5cd83",
   "prompt": "Use the reaper-agent-cli skill to independently implement requirements.md in this workspace, operate local REAPER through the installed CLI toolkit, and deliver the saved session, real audio preview and verified readback evidence.",
-  "acquisition": "local checkout mock; standalone wheel/bundle installation separately passed",
+  "acquisition": "installed from a local checkout; standalone wheel/bundle installation separately passed",
   "harnesses": {
     "codex": {
       "cli_version": "0.153.4",

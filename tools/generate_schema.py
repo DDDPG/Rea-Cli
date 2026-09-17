@@ -60,6 +60,8 @@ def products(root=ROOT):
         "schema_version": data["schema_version"],
         "schema_sha256": digest,
         "source": "ReaperDoc @ " + data["source_commit"],
+        "source_file_base": data["source_file_base"],
+        "source_file_note": data["source_file_note"],
         "index_base": 1,
         "key_count": len(keys),
         "section_count": len(sections),

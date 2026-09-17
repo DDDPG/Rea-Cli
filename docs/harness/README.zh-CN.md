@@ -11,18 +11,18 @@
 宿主执行还需 REAPER 7.x、Lua 5.3/5.4；macOS 需要桌面会话及已配置的 CoreAudio。
 Linux 依赖见[环境指南](../environment.md)。Windows 当前只支持离线解析，不支持 rac 宿主执行。
 
-仓库暂为 private，使用本地 checkout 模拟获取源码，不向 GitHub 发起请求：
+从本地 checkout 安装：
 
 ```sh
+# 将 --source 指向你的 checkout，源码获取不会向 GitHub 发起请求。
 REACLI_SOURCE=/absolute/path/to/Rea-Cli
 python "$REACLI_SOURCE/integrations/agents/reaper-agent-cli/scripts/install.py" \
   --source "$REACLI_SOURCE" --project ./my-reaper-work --harness all
 ```
 
-安装器建立项目私有 venv，安装两个包及音频依赖，检查 CLI，并注册三个项目级技能。
-只装一个可选 `--harness claude`、`codex` 或 `qwen`。Python 依赖仍可能联网下载；
-mock 的只是 GitHub 源码获取。安装结果不依赖原 checkout 的 editable 路径。
-不会修改全局 harness 权限、登录信息或 MCP 配置。
+安装器建立项目内 venv，安装两个包及音频依赖，检查 CLI，并注册三个项目级技能。
+只装一个可选 `--harness claude`、`codex` 或 `qwen`。Python 依赖仍可能联网下载。
+安装结果不依赖原 checkout 的 editable 路径，也不会修改全局 harness 权限、登录信息或 MCP 配置。
 
 候选包解压后也可使用：
 

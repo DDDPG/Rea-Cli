@@ -102,7 +102,7 @@ def main():
     parser.add_argument('--project', required=True, type=Path)
     parser.add_argument('--harness', choices=[*LOCATIONS, 'all'], default='all')
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument('--source', type=Path, help='Local checkout; private GitHub acquisition may be mocked by providing this path')
+    mode.add_argument('--source', type=Path, help='Local checkout used as the source for the install')
     mode.add_argument('--wheels', type=Path, help='Candidate folder with exactly one wheel per package')
     mode.add_argument('--runtime-python', type=Path, help='Reuse an already installed Python with rac, parser and audio dependencies')
     args = parser.parse_args()

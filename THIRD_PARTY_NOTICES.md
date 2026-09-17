@@ -7,7 +7,13 @@ REAPER is a Cockos product. This project is independent, is not endorsed by
 Cockos, and includes no REAPER executables, plugins, installers or license keys.
 Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
 
-## Bundled reference data — redistribution review required
+## Bundled reference data — attribution and source conditions
+
+This section covers the data shipped inside the wheels and sdists. For material
+that stays in the Git repository only, see
+[Repository-only supplemental references](#repository-only-supplemental-references).
+`packages/reacli/THIRD_PARTY_NOTICES.md` ships the same notice with the package;
+the two are kept aligned.
 
 - `packages/reacli/src/rac/data/knowledge/rpp_schema.json` is now generated from the canonical
   monorepo `schema/rpp/spec.json`, based on **DDDPG/ReaperDoc** commit
@@ -16,18 +22,21 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
   [DDDPG/ReaperDoc](https://github.com/DDDPG/ReaperDoc) had no explicit license in
   the imported snapshot. On 2026-09-13 the maintainer authorized MIT for original
   ReaperDoc portions; see `apps/reaperdoc/LICENSE` and its scope notice in the
-  monorepo. External copied descriptions still require source-specific review.
+  monorepo. External copied descriptions still require source-specific review and
+  are not relicensed by that grant.
 - `packages/reacli/src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
   Official reference: [ReaScript API](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
-  No separate redistribution grant was established from the local source files.
+  No separate redistribution grant was located in the local source files. On
+  2026-09-15 the maintainer confirmed that this reference may be curated and used
+  with Cockos attribution and source links; the upstream terms are not replaced by
+  the project's MIT license.
 
-The maintainer's 2026-09-15 attestation records permission to use these bundled
-descriptions/data with attribution. That attestation is the repository's current
-source-gate record, not independent upstream authorization. A project-level
-license does not grant rights to these third-party materials; preserve their
-source links, notices and applicable terms, and re-run the audit if the scope or
-distribution context changes.
+That 2026-09-15 maintainer attestation is the repository's current source-gate
+record, not independent upstream authorization. A project-level license does not
+grant rights to these third-party materials; preserve their source links, notices
+and applicable terms, and re-run the audit if the scope or distribution context
+changes.
 
 ## Python dependencies
 
@@ -45,21 +54,33 @@ included in the Python build.
 
 ## Repository-only supplemental references
 
-The material under `reference/` is excluded from both wheel and sdist. Publishing
-the Git repository still distributes these files; exclusion from `pip install`
-is not a license grant.
+The material under `reference/` and `schema/rpp/evidence/` is excluded from every
+wheel, sdist, documentation site and agent bundle. That is a packaging boundary,
+not a license boundary: those files are tracked in Git, so cloning or
+redistributing this repository distributes them too.
+
+On 2026-09-17 the maintainer confirmed that this material may be published with
+its sources attributed. It is not covered by the project's MIT license, so
+publishing it means carrying the attribution below rather than relicensing it.
+Keep each item's source link and notice:
 
 - The annotated RPP tree and extraction notes derive from ReaperDoc at the
-  historical `32047bb` snapshot, with unresolved source-license status.
+  historical `32047bb` snapshot. Retain the ReaperDoc and ReaTeam attribution
+  recorded in [reference/SOURCES.md](reference/SOURCES.md); the ReaperDoc MIT
+  scope does not extend to externally copied descriptions.
 - The historical action index derives from the Ultraschall API project's
-  REAPER 5.941 / SWS 2.9.7 action list. The import record does not establish a
-  separate redistribution grant for the extracted descriptions.
+  REAPER 5.941 / SWS 2.9.7 action list. Retain the Ultraschall attribution,
+  version and source link. The upstream repository's license metadata is absent,
+  so no broader license is inferred from this use.
 - The rendering notes retain attribution to **Meo-Ada Mespotine / Ultraschall**
-  and the source's **cc-by-nc** label. The exact license version and applicable
-  source document terms need verification. These notes must not be presented
-  as MIT-licensed material or as permitting commercial redistribution.
+  and the source's **cc-by-nc** label. Attribution does not satisfy that label:
+  **the noncommercial condition still applies.** The exact license version is
+  not recorded and is not to be guessed. These notes must not be presented as
+  MIT-licensed or as permitting commercial redistribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
-  No independent redistribution grant for upstream descriptions was recorded.
+  Retain the Cockos attribution and official links. One official user-guide PDF
+  version states that reproduction requires permission, so no blanket right to
+  reuse upstream prose is claimed.
 
 The current source-gate decision is recorded in
 [the publication audit](docs/ecosystem/source-license-audit.md). Preserve

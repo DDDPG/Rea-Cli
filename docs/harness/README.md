@@ -12,21 +12,21 @@ Host work also needs local REAPER 7.x and Lua 5.3/5.4; macOS needs a logged-in d
 and configured CoreAudio device. Linux host setup is in the [environment guide](../environment.md).
 Windows currently supports the offline parser, not REAPER execution through rac.
 
-While the repository is private, use a local checkout as the acquisition provider:
+Install from a local checkout of the repository:
 
 ```sh
-# Local acquisition mock: point at your authorized checkout; no GitHub request is made.
+# Point --source at your checkout. No GitHub request is made for the source.
 REACLI_SOURCE=/absolute/path/to/Rea-Cli
 python "$REACLI_SOURCE/integrations/agents/reaper-agent-cli/scripts/install.py" \
   --source "$REACLI_SOURCE" --project ./my-reaper-work --harness all
 ```
 
-This creates a private venv, installs BOTH packages plus audio dependencies, checks the
+This creates a project-local venv, installs BOTH packages plus audio dependencies, checks the
 CLI, and installs the shared skill in the three project discovery locations. It does
 not edit global harness permissions, login or MCP configuration. Choose one harness
 with `--harness claude`, `--harness codex` or `--harness qwen` instead of `all`.
-Python dependencies may be downloaded; the GitHub source acquisition alone is mocked.
-The installed runtime uses package copies, not editable links to the checkout.
+Python dependencies may be downloaded. The installed runtime uses package copies,
+not editable links to the checkout.
 
 Alternative inputs (mutually exclusive):
 

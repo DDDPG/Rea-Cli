@@ -48,7 +48,7 @@ where = ["src"]
 version = {attr = "rac.__version__"}
 
 [tool.setuptools.package-data]
-rac = ["data/lua/*.lua", "data/lua/stdlib/*.lua", "data/knowledge/*.json",
+rac = ["py.typed", "data/lua/*.lua", "data/lua/stdlib/*.lua", "data/knowledge/*.json",
        "data/defaults/*.rpp", "data/examples/*.rpp", "runner/assets/*.ini"]
 
 [tool.pytest.ini_options]

@@ -1,9 +1,10 @@
-"""Assemble one screenshot per numbered RPP into the README GIF (requires Pillow).
+"""Assemble one screenshot per numbered RPP into a GIF (requires Pillow).
 
-python scripts/make_showcase_gif.py ./demo/walkthrough/frames ./docs/assets/showcase.gif
+python scripts/make_showcase_gif.py ./demo/walkthrough/frames ./demo/walkthrough/showcase.gif
 
 Reads the capture manifest in build order and rejects missing or stale captures.
 Only layout, captions, scaling and title-bar cropping are applied to screenshots.
+Write the output under the Git-ignored demo/ tree; no image assets are committed.
 """
 from __future__ import annotations
 import argparse

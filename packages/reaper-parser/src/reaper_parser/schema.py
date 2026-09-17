@@ -1,4 +1,4 @@
-"""rac.rpp.schema — ReaperDoc 语义层 (消费 docs/knowledge/rpp/rpp_schema.json)
+"""reaper_parser.schema — ReaperDoc 语义层 (消费 data/rpp_schema.json)
 
 为验证层/patch 层提供字段级元数据查询与类型化写入校验。
 键制 <section>:<KEY> (上下文敏感)。

@@ -1,6 +1,6 @@
 # 发布前置核查（2026-09-17）
 
-当前状态：私有仓库候选已通过跨平台验收；来源授权已由维护者确认，TestPyPI 的
+当前状态：仓库仍为 private；候选已通过跨平台验收，来源授权已由维护者确认，TestPyPI 的
 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成首次 OIDC 上传并通过隔离安装；
 PyPI 当前同时提供两个项目的 `0.1.0`/`0.1.0a1` wheel 和 sdist，四个构件的文件名、
 大小、上传时间和 SHA-256 已写入 `publication.json`。`reacli==0.1.0` 有成功的生产
@@ -12,9 +12,14 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 已记录为 `source_permissions_resolved=true`。它不替代发行物中的署名和适用许可证
 条件，也不改变 TestPyPI/PyPI 属于对外再分发这一事实。
 
+2026-09-17 维护者进一步确认，Git-only 的 `reference/` 与 `schema/rpp/evidence/`
+语料同样可在保留来源署名的前提下公开发布。**来源授权层面已无公开阻挡项**；其
+`cc-by-nc` 条目的非商业性条件不因署名而消失，仍需随文件保留。
+
 ## 已落实
 
-- `DDDPG/Rea-Cli` 经 GitHub API 确认为 private；保持该可见性。
+- `DDDPG/Rea-Cli` 经 GitHub API 确认为 private（核查当日状态）。仓库可见性变更属于
+  单独决策，不再由来源授权阻挡，但公开的时机仍由维护者决定。
 - 维护者明确授权其原创 ReaperDoc 代码与文档按 MIT 发布。
   已新增 `apps/reaperdoc/LICENSE`、`schema/rpp/LICENSE` 及范围说明。
   授权不扩展到外来引用或复制的材料。
@@ -43,7 +48,7 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 | rac wheel/sdist | 原创代码 MIT；Cockos API 与 Lua 资源有维护者授权声明 | 保留 Cockos、旧项目/原作者来源及适用条件 |
 | 文档站与独立 schema | 原创部分 MIT | 外来说明对账；构建已加入 LICENSE 与范围说明 |
 | agent bundle | 原创指南、示例 | 构建已加入许可证；检查引用内容范围 |
-| Git 仓库 | 保持 private | `reference/` 的历史 ReaTeam、Ultraschall、Cockos 等材料按维护者声明保留来源；继续排除用户工程、媒体和研究原件 |
+| Git 仓库 | 当前仍为 private；来源授权已确认，无授权层面阻挡 | `reference/` 与 `schema/rpp/evidence/` 的历史 ReaTeam、Ultraschall、Cockos 等材料按维护者 2026-09-17 的确认可随仓库公开，须保留来源与署名，`cc-by-nc` 条目的非商业性条件继续有效；clone 或再分发本仓库会分发这些文件。用户工程与媒体仍不进入公开语料 |
 
 这是一份来源记录。当前来源门禁依据维护者声明通过，但并不替代逐项保留
 许可证文本、署名和来源链接的发行要求。
@@ -150,4 +155,5 @@ GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已
    `publish.yml` 对应 publisher/channel，并保留一次成功的 parser 生产 publish-job 记录。
    在该证据出现前，不把全局 `trusted_publishing_configured` 改为 `true`。
 
-TestPyPI 也是对外上传，不等于私有分发。保持 Git 仓库 private 不会使索引包私有。
+TestPyPI 也是对外上传，不等于私有分发。Git 仓库的可见性不会改变已经上传到索引的构件
+的公开状态；两个方向互相独立，需要分别处理。
