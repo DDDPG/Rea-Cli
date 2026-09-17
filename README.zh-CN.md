@@ -335,7 +335,8 @@ clone 本仓库时会一并取得；保留的上游内容继续带有署名和�
 
 Cockos API 和 JSFX 参考资料按适用的上游条款使用，并保留来源链接。来自 ReaTeam 的
 schema 内容保留 ReaTeam、IXix 和 Cockos Wiki 的适用署名与条款。Ultraschall 渲染笔记
-保留 Meo-Ada Mespotine/Ultraschall 署名和来源链接，其中 `cc-by-nc` 条件（包括非商业
+保留 Meo-Ada Mespotine/Ultraschall 署名和
+[来源文件](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt)，其中 `cc-by-nc` 条件（包括非商业
 使用限制）继续适用。导入的 Lua 资源也保留原始来源署名和条款。详见
 [第三方声明](THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](docs/ecosystem/source-license-audit.md)。
 

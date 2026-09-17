@@ -53,5 +53,6 @@ python3 -m http.server 8080 --directory site
 
 页面中的项目自有内容采用 [MIT 许可证](../LICENSE)。上游内容继续遵循各自许可证和条款；
 Cockos API 和 JSFX 参考资料保留来源链接并按适用的上游条款使用。Ultraschall 渲染笔记
-保留 Meo-Ada Mespotine/Ultraschall 署名、来源链接和 `cc-by-nc` 非商业条件。详见
+保留 Meo-Ada Mespotine/Ultraschall 署名、
+[来源文件](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt)和 `cc-by-nc` 非商业条件。详见
 [第三方声明](../THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](../docs/ecosystem/source-license-audit.md)。

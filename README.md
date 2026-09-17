@@ -370,7 +370,8 @@ its attribution and source link.
 Cockos API and JSFX reference material is included with its source links under
 the applicable upstream terms. ReaTeam-derived schema material retains the
 applicable ReaTeam, IXix and Cockos Wiki attribution and terms. The Ultraschall
-render note retains Meo-Ada Mespotine/Ultraschall attribution and its source link;
+render note retains Meo-Ada Mespotine/Ultraschall attribution and its
+[source file](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt);
 the `cc-by-nc` condition, including noncommercial use, applies to that material.
 Imported Lua resources likewise retain their original source attribution and
 terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the
