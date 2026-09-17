@@ -3,7 +3,8 @@
 当前状态：私有仓库候选已通过跨平台验收；来源授权已由维护者确认，TestPyPI 的
 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成首次 OIDC 上传并通过隔离安装；
 GitHub `pypi` environment 与 PyPI 的 `reacli` publisher 已配置，`reacli==0.1.0` 已完成首次
-生产 OIDC 上传并通过正式 PyPI 隔离安装；`reaper-parser` 的生产 publisher 已配置，首次上传仍待完成。
+生产 OIDC 上传并通过正式 PyPI 隔离安装；`reaper-parser` 的生产 publisher 已配置，首次
+上传的 build 和门禁已通过，但 publish job 被 GitHub 计费限制阻止。
 
 2026-09-15 已完成[来源与再分发授权审计](source-license-audit.md)。维护者确认
 ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来源署名；该声明
@@ -49,7 +50,7 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 | --- | --- | --- | --- |
 | `source_permissions_resolved` | `true` | 通过（维护者声明） | 已记录 ReaTeam、Cockos、Ultraschall 和 Lua 来源使用确认 |
 | `package_ownership_verified` | `false` | 阻拦 | PyPI 的 `reacli` 已返回项目 JSON，但 `reaper-parser` 尚未创建，两个项目的完整生产归属仍未核实 |
-| `trusted_publishing_configured` | `false` | 阻拦 | `reacli` 的 PyPI OIDC 上传已验证，`reaper-parser` publisher 已由维护者报告配置，首次上传尚未核实 |
+| `trusted_publishing_configured` | `false` | 阻拦 | `reacli` 的 PyPI OIDC 上传已验证，`reaper-parser` publisher 已配置，但首次 publish 被 GitHub 计费限制阻止 |
 
 2026-09-15 本地实际执行结果：
 
@@ -90,8 +91,11 @@ $ echo $?
   `reaper_parser`。
 - GitHub Actions run `35206896709` 的 build 和 publish job 均成功，使用 PyPI OIDC 发布了
   `reacli==0.1.0`；正式 PyPI JSON 和隔离 wheel 安装均已复核。
-- GitHub `pypi` environment 已创建且无保护规则；`reaper-parser` 的 PyPI publisher 尚未
-  通过实际上传消费验证；维护者现已报告该 publisher 配置完成。
+- GitHub Actions run `35207817702` 在 `ecosystem-v0.1.0a1` 上 build 和 `check_publish` 均成功，
+  但 publish job 未启动。GitHub 返回“recent account payments have failed or your spending
+  limit needs to be increased”；因此没有向 PyPI 上传 parser，PyPI JSON 仍为 HTTP 404。
+- GitHub `pypi` environment 已创建且无保护规则；`reaper-parser` publisher 已由维护者报告配置，
+  待 GitHub 计费限制解除后重新运行同一标签。
 
 ## 账号与发布身份
 
@@ -137,8 +141,9 @@ GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已
 4. `reacli==0.1.0` 已在 `ecosystem-v0.1.0` 上完成 `target=pypi`、
    `package=reacli`、`mode=pypi-bootstrap`；保留 run `35206896709`、PyPI JSON 和
    隔离安装作为证据。
-5. `reaper-parser` 的 PyPI publisher 已由维护者配置；更新 manifest 后创建新的
-   `ecosystem-v0.1.0a1` 标签，并以 `target=pypi`、`package=reaper-parser`、
-   `mode=pypi-bootstrap` 单独上传 parser。
+5. `reaper-parser` 的 PyPI publisher 已由维护者配置；run `35207817702` 的 build 已通过，
+   但 GitHub 计费限制阻止了 publish。修复 GitHub Billing & plans 中的付款或 spending limit
+   后，使用同一个 `ecosystem-v0.1.0a1` 标签重新运行 `target=pypi`、
+   `package=reaper-parser`、`mode=pypi-bootstrap`。
 
 TestPyPI 也是对外上传，不等于私有分发。保持 Git 仓库 private 不会使索引包私有。

@@ -2,8 +2,8 @@
   "source_permissions_resolved": true,
   "package_ownership_verified": false,
   "trusted_publishing_configured": false,
-  "status": "source authorization attested; TestPyPI packages verified; PyPI reacli published; parser bootstrap configured",
-  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. Both TestPyPI OIDC uploads and the PyPI reacli upload are verified; the parser publisher is now configured and its first upload remains pending.",
+  "status": "source authorization attested; TestPyPI packages verified; PyPI reacli published; parser bootstrap blocked by GitHub billing",
+  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. Both TestPyPI OIDC uploads and the PyPI reacli upload are verified; the parser publisher is configured, its build passed, and the publish job was blocked before start by a GitHub billing failure.",
   "audit": "publication-audit.md",
   "checked_date": "2026-09-17",
   "source_audit": {
@@ -32,7 +32,7 @@
     "trusted_publishing_configured": {
       "value": false,
       "status": "blocking",
-      "evidence": "GitHub Actions run 35206896709 successfully published reacli 0.1.0 to PyPI through OIDC. The maintainer reports the parser publisher is configured; its first production upload remains pending."
+      "evidence": "GitHub Actions run 35206896709 successfully published reacli 0.1.0 to PyPI through OIDC. The parser publisher is configured and run 35207817702 passed build and check_publish, but its publish job did not start because GitHub reported failed recent payments or an insufficient spending limit."
     }
   },
   "conditional_gates": {
@@ -74,8 +74,8 @@
       "reaper-parser": {
         "allowed": true,
         "publisher_status": "maintainer_reported_configured",
-        "first_upload": "pending",
-        "evidence": "The maintainer reports the PyPI reaper-parser publisher is configured with the DDDPG/Rea-Cli publish.yml workflow and pypi environment; first production upload remains pending and requires a new ecosystem-v tag."
+        "first_upload": "blocked_github_billing",
+        "evidence": "The maintainer reports the PyPI reaper-parser publisher is configured. GitHub Actions run 35207817702 passed build and the publication gate on ecosystem-v0.1.0a1, but the publish job did not start because of a GitHub billing/spending-limit failure; PyPI remains unpublished."
       }
     }
   },
@@ -104,9 +104,9 @@
     {
       "index": "pypi.org",
       "project": "reaper-parser",
-      "status": "publisher_configured; first_upload_pending",
+      "status": "publisher_configured; first_upload_blocked_by_github_billing",
       "checked_date": "2026-09-17",
-      "evidence": "Maintainer reports the PyPI reaper-parser publisher is configured; run the separate pypi-bootstrap after the new ecosystem-v tag is created."
+      "evidence": "Run 35207817702 build and check_publish jobs succeeded, but GitHub did not start publish because recent account payments failed or the spending limit needs to be increased; PyPI JSON remains HTTP 404."
     }
   ],
   "index_checks": [
