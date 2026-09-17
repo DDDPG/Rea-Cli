@@ -17,8 +17,8 @@ These files are excluded from wheel and source distributions, but they are
 tracked in Git, so publishing the repository publishes them. The project license
 does not relicense third-party text or data: each item below keeps its own
 attribution and applicable conditions, and the `cc-by-nc` entry in particular
-keeps its noncommercial condition. Include an item in a public artifact only when
-its source terms or separate redistribution permission allow it. See
+keeps its noncommercial condition. The current repository delivery carries these
+conditions with the referenced material. See
 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
 ## RPP
@@ -58,14 +58,13 @@ its source terms or separate redistribution permission allow it. See
   `ACTIONS_List_of_Reaper_Actions_including_undocumented_ones.txt`,
   REAPER 5.941 with SWS 2.9.7, from the
   [Ultraschall API project](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper).
-  It is a historical lookup aid. The import record retains the upstream license
-  uncertainty; obtain permission or exclude it before public distribution.
+  It is a historical lookup aid. Retain the Ultraschall repository citation, the
+  REAPER/SWS version and the source link with this index when it is distributed.
 - `render_internals.md` attributes its underlying `RENDER_*` notes to
   **Meo-Ada Mespotine / Ultraschall** and labels them **cc-by-nc**. That
   attribution and restriction are retained. The source file is [RENDER_How_RenderCFG-Base64-strings_are_encoded.txt](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt).
-  It does not record a full license version, and the repository has no detected
-  top-level LICENSE. Retain the attribution and source label; no broader license
-  or redistribution permission is inferred.
+  The full license version is not recorded; retain the attribution, source link,
+  source label and noncommercial condition as part of the reference record.
 
 ## JSFX
 

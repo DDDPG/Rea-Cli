@@ -15,6 +15,7 @@ project uses two distributions with distinct import names (`reacli` / `rac`,
 - [Release process](releasing.md): local artifacts, package checks and GitHub publishing setup.
 - [Security policy](../SECURITY.md): execution trust boundaries and vulnerability reporting.
 - [Third-party notices](../THIRD_PARTY_NOTICES.md): imported data and attribution.
+- [Landing page](index.html): static GitHub Pages `/docs` prototype; see [its notes](site.md) for local preview and deployment.
 
 - [Harness installation and one-instruction workflows](harness/README.md) ([中文](harness/README.zh-CN.md)).
 

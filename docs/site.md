@@ -1,4 +1,4 @@
-# Rea-Cli 落地页（GitHub Pages 原型）
+# Rea-Cli 落地页（GitHub Pages `/docs` 原型）
 
 纯静态 HTML/CSS/JS，无构建步骤、无运行时依赖。直接以静态站点方式部署即可。
 它是仓库内的落地页原型，不属于 `tools/build_release.py` 生成的
@@ -9,12 +9,12 @@
 - `index.html` — 简体中文（默认）
 - `en/index.html` — English（导航栏 `EN` / `中文` 互切）
 - `styles.css` / `main.js` — 两版共用；英文版通过 `window.SITE_I18N` 注入英文交互文案（复制提示、菜单标签、工作流状态文本）
-- `assets/reacli-icon.png` — 仓库 README 图标的本地拷贝
+- `assets/reacli-icon.png` — 仓库自有图标
 
 ## 本地预览
 
 ```bash
-python3 -m http.server 8080 --directory site
+python3 -m http.server 8080 --directory docs
 # 打开 http://localhost:8080 （中文）或 http://localhost:8080/en/ （English）
 ```
 
@@ -22,8 +22,8 @@ python3 -m http.server 8080 --directory site
 
 任选其一（本轮不执行发布）：
 
-1. **GitHub Actions（推荐）**：用 `actions/upload-pages-artifact` + `actions/deploy-pages`，将 `site/` 作为 artifact 发布。
-2. **分支目录**：把 `site/` 内容放到 `gh-pages` 分支根目录，或重命名为 `docs/` 后在仓库设置中选择该目录（注意与现有文档目录冲突，需先迁移现有 `docs/`）。
+1. **分支目录**：在仓库 Settings → Pages 中选择 `main` 分支的 `/docs` 目录；`docs/index.html` 是默认中文入口，`docs/en/` 是英文入口。
+2. **GitHub Actions**：如果后续改用 Actions，用 `actions/upload-pages-artifact` + `actions/deploy-pages` 将 `docs/` 作为 artifact 发布。
 
 ## 设计参考与取舍
 
@@ -41,7 +41,7 @@ python3 -m http.server 8080 --directory site
 - 安装命令 `python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"`、离线三命令（`doctor --profile offline --json` / `resources --output` / `rpp validate`）、`reacli exec` 参数形式、`expect` / `expect_audio` API 均与文档一致。
 - 环境要求：Python 3.10+；离线检查仅需 Python；Lua 5.3/5.4 `luac`；实时执行需 REAPER 7.x（macOS / Linux）；Windows 执行尚未实现；0.1.0 alpha。
 - 首屏工作台与三步流程中的面板内容均为**流程示意**（演示数据），页面上已明确标注；未伪装成真实启动 REAPER 或真实验证结果。
-- 页面不包含外部图片资源；图标为仓库自有 `docs/assets/reacli-icon.png` 的本地拷贝。
+- 页面不包含外部图片资源；图标使用仓库自有 `docs/assets/reacli-icon.png`。
 - 文档链接使用 `https://github.com/DDDPG/Rea-Cli/blob/HEAD/...` 指向真实路径：`docs/environment.md`、`docs/api.md`、`docs/validation.md`、`docs/harness/README.zh-CN.md`。
 ## 无障碍与交互自查清单
 
@@ -55,4 +55,4 @@ python3 -m http.server 8080 --directory site
 Cockos API 和 JSFX 参考资料保留来源链接并按适用的上游条款使用。Ultraschall 渲染笔记
 保留 Meo-Ada Mespotine/Ultraschall 署名、
 [来源文件](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt)和 `cc-by-nc` 非商业条件。详见
-[第三方声明](../THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](../docs/ecosystem/source-license-audit.md)。
+[第三方声明](../THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](ecosystem/source-license-audit.md)。

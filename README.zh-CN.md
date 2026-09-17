@@ -67,6 +67,31 @@ python examples/show_session.py ./demo/my-first-session
 
 GIF 展示的工程结构、效果器设置、验证边界和 52 个构建中间状态（checkpoint），见[可播放演示指南](examples/README.md#playable-show-demo)。
 
+### Harness quick start：让 agent 安装并开始使用
+
+已经在使用 **Claude Code、Codex 或 Qwen Code**？直接把下面这句话交给 agent：
+
+> 请阅读 https://github.com/DDDPG/Rea-Cli 及其中的 `docs/harness/README.zh-CN.md` 安装指南，将 ReaCli CLI toolkit 和 `reaper-agent-cli` skill 安装到新建的 `my-reaper-work` 项目，适配我正在使用的 harness。检查 Python、CLI、Lua 和本机 REAPER 是否可用，并告诉我如何开始使用。
+
+接入组件是项目级的 **CLI toolkit + skill**，通过 harness 已有的 shell 工具执行。
+[完整安装指南](docs/harness/README.zh-CN.md)列出了三个 harness 的技能位置、环境要求
+以及候选 bundle 的安装方法。
+
+**也可以自己安装：**在本地仓库根目录用 Python 3.10+ 执行：
+
+```sh
+python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
+```
+
+进入新目录打开 Claude Code、Codex 或 Qwen Code，输入：
+“使用 reaper-agent-cli skill 检查环境，在 REAPER 中新建工程，保存并验证实际渲染音频。”
+项目级技能通过 shell 调用绑定的 CLI/Python，无需 MCP 服务；REAPER、Lua 和 harness 登录
+需提前准备。发布 bundle 中的候选 wheel 也支持无 checkout 安装。
+
+详见[三个 harness 的快速接入](docs/harness/README.zh-CN.md)、
+[一句指令 showcase 需求](integrations/agents/acceptance/showcase-brief.md)和
+[实际验收记录](docs/harness/acceptance.md)。
+
 ## 名称速查
 
 项目里有几个相近的名字，对应关系如下：
@@ -196,31 +221,6 @@ reacli exec --project ./quickstart/minimal.rpp \
 
 一个自带资源导出、可直接运行的完整示例见 [examples/create_project.py](examples/create_project.py)。
 
-## Harness quick start：让 agent 安装并开始使用
-
-已经在使用 **Claude Code、Codex 或 Qwen Code**？直接把下面这句话交给 agent：
-
-> 请阅读 https://github.com/DDDPG/Rea-Cli 及其中的 `docs/harness/README.zh-CN.md` 安装指南，将 ReaCli CLI toolkit 和 `reaper-agent-cli` skill 安装到新建的 `my-reaper-work` 项目，适配我正在使用的 harness。检查 Python、CLI、Lua 和本机 REAPER 是否可用，并告诉我如何开始使用。
-
-接入组件是项目级的 **CLI toolkit + skill**，通过 harness 已有的 shell 工具执行。
-[完整安装指南](docs/harness/README.zh-CN.md)列出了三个 harness 的技能位置、环境要求
-以及候选 bundle 的安装方法。
-
-**也可以自己安装：**在本地仓库根目录用 Python 3.10+ 执行：
-
-```sh
-python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
-```
-
-进入新目录打开 Claude Code、Codex 或 Qwen Code，输入：
-“使用 reaper-agent-cli skill 检查环境，在 REAPER 中新建工程，保存并验证实际渲染音频。”
-项目级技能通过 shell 调用绑定的 CLI/Python，无需 MCP 服务；REAPER、Lua 和 harness 登录
-需提前准备。发布 bundle 中的候选 wheel 也支持无 checkout 安装。
-
-详见[三个 harness 的快速接入](docs/harness/README.zh-CN.md)、
-[一句指令 showcase 需求](integrations/agents/acceptance/showcase-brief.md)和
-[实际验收记录](docs/harness/acceptance.md)。
-
 ## 项目亮点
 
 | 重点 | Rea-Cli 的做法 | 与常见替代方案的区别 |
@@ -337,7 +337,9 @@ Cockos API 和 JSFX 参考资料按适用的上游条款使用，并保留来源
 schema 内容保留 ReaTeam、IXix 和 Cockos Wiki 的适用署名与条款。Ultraschall 渲染笔记
 保留 Meo-Ada Mespotine/Ultraschall 署名和
 [来源文件](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt)，其中 `cc-by-nc` 条件（包括非商业
-使用限制）继续适用。导入的 Lua 资源也保留原始来源署名和条款。详见
+使用限制）继续适用。导入的 Lua 资源也保留原始来源署名和条款。
+[历史 action 索引](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper)保留 Ultraschall
+仓库引用、REAPER/SWS 版本和来源链接。详见
 [第三方声明](THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](docs/ecosystem/source-license-audit.md)。
 
 已发布 wheel 的元数据仍记录 `License-Expression: MIT`，不可变构件无法回写；当前 checkout

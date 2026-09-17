@@ -76,6 +76,33 @@ rather than in the wheel.
 For the session layout, effect settings, verification boundaries and the 52
 build checkpoints behind the GIF, see the [playable show demo guide](examples/README.md#playable-show-demo).
 
+### Harness quick start
+
+Already using **Claude Code, Codex or Qwen Code**? Give your agent this instruction:
+
+> Read https://github.com/DDDPG/Rea-Cli and its `docs/harness/README.md` installation guide. Install the ReaCli CLI toolkit and `reaper-agent-cli` skill for the harness I am using into a new `my-reaper-work` project. Check Python, CLI, Lua and local REAPER availability, and tell me how to start using it.
+
+This installs a project-level **CLI toolkit + skill** using the harness's existing
+shell tools. See the [full installation guide](docs/harness/README.md) for each
+harness's skill location, prerequisites and candidate-bundle installation.
+
+**Prefer installing it yourself?** From a local checkout's root, run with Python 3.10+:
+
+```sh
+python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
+```
+
+Open Claude Code, Codex or Qwen Code in that directory and ask:
+“Use the reaper-agent-cli skill to check my environment, create a new REAPER session,
+save it and verify the rendered audio.” The project-local skill uses shell tools and
+an isolated Python runtime; it requires no MCP service. REAPER/Lua and harness login
+are separate prerequisites. Candidate wheels from a release bundle also work without
+a checkout.
+
+See the [three-harness quick start](docs/harness/README.md),
+[one-instruction showcase brief](integrations/agents/acceptance/showcase-brief.md),
+and [actual acceptance results](docs/harness/acceptance.md).
+
 ## Names at a glance
 
 The project uses several names. They map as follows:
@@ -215,33 +242,6 @@ reacli exec --project ./quickstart/minimal.rpp \
 A complete runnable example that exports its own resources is available in
 [examples/create_project.py](examples/create_project.py).
 
-## Harness quick start
-
-Already using **Claude Code, Codex or Qwen Code**? Give your agent this instruction:
-
-> Read https://github.com/DDDPG/Rea-Cli and its `docs/harness/README.md` installation guide. Install the ReaCli CLI toolkit and `reaper-agent-cli` skill for the harness I am using into a new `my-reaper-work` project. Check Python, CLI, Lua and local REAPER availability, and tell me how to start using it.
-
-This installs a project-level **CLI toolkit + skill** using the harness's existing
-shell tools. See the [full installation guide](docs/harness/README.md) for each
-harness's skill location, prerequisites and candidate-bundle installation.
-
-**Prefer installing it yourself?** From a local checkout's root, run with Python 3.10+:
-
-```sh
-python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
-```
-
-Open Claude Code, Codex or Qwen Code in that directory and ask:
-“Use the reaper-agent-cli skill to check my environment, create a new REAPER session,
-save it and verify the rendered audio.” The project-local skill uses shell tools and
-an isolated Python runtime; it requires no MCP service. REAPER/Lua and harness login
-are separate prerequisites. Candidate wheels from a release bundle also work without
-a checkout.
-
-See the [three-harness quick start](docs/harness/README.md),
-[one-instruction showcase brief](integrations/agents/acceptance/showcase-brief.md),
-and [actual acceptance results](docs/harness/acceptance.md).
-
 ## Highlights
 
 | Focus | Rea-Cli | Compared with common alternatives |
@@ -373,6 +373,8 @@ applicable ReaTeam, IXix and Cockos Wiki attribution and terms. The Ultraschall
 render note retains Meo-Ada Mespotine/Ultraschall attribution and its
 [source file](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt);
 the `cc-by-nc` condition, including noncommercial use, applies to that material.
+The historical action index retains its [Ultraschall API repository citation](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper),
+the REAPER/SWS version and its source link.
 Imported Lua resources likewise retain their original source attribution and
 terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the
 [source and redistribution audit](docs/ecosystem/source-license-audit.md) for

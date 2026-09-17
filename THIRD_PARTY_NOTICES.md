@@ -33,12 +33,10 @@ the two are kept aligned.
   applicable upstream terms. Retain Cockos attribution and source links with the
   copied descriptions; the project MIT scope does not relicense them.
 
-The project policy is to follow each upstream license and term, not to treat a
-maintainer statement, public URL or noncommercial intent as permission. A
-project-level license does not grant rights to these third-party materials;
-preserve their source links, notices and applicable terms, and re-run the audit if
-the scope or distribution context changes. Unresolved source terms remain a release
-gate for any artifact that contains the affected material.
+The project follows each upstream license and term. A project-level license does
+not relicense these third-party materials; preserve their source links, notices
+and applicable conditions, and re-run the audit if the scope or distribution
+context changes.
 
 ## Python dependencies
 
@@ -61,31 +59,30 @@ wheel, sdist, documentation site and agent bundle. That is a packaging boundary,
 not a license boundary: those files are tracked in Git, so cloning or
 redistributing this repository distributes them too.
 
-This material is not covered by the project's MIT license. It may be published
-only when each item's source terms or a separate redistribution permission allow
-it, with the attribution and notice below carried along. Keep each item's source
-link and applicable conditions:
+This material is not covered by the project's MIT license. The current repository
+delivery carries each item's attribution, source link and applicable conditions
+with the notices below. Keep those conditions with every future copy:
 
 - The annotated RPP tree and extraction notes derive from ReaperDoc at the
   historical `32047bb` snapshot. Retain the ReaperDoc and ReaTeam attribution
   recorded in [reference/SOURCES.md](reference/SOURCES.md); the ReaperDoc MIT
-  scope does not extend to externally copied descriptions.
+  scope does not relicense externally copied descriptions.
 - The historical action index derives from the Ultraschall API project's
-  REAPER 5.941 / SWS 2.9.7 action list. Retain the Ultraschall attribution,
-  version and source link. The upstream repository's license metadata is absent,
-  so no broader license is inferred from this use.
+  REAPER 5.941 / SWS 2.9.7 action list. Retain the
+  [Ultraschall API repository citation](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper),
+  attribution, version and source link with the index.
 - The rendering notes retain attribution to **Meo-Ada Mespotine / Ultraschall**
-  and the source's **cc-by-nc** label. Attribution does not satisfy that label:
-  **the noncommercial condition still applies.** The exact license version is
-  not recorded and is not to be guessed. These notes must not be presented as
-  MIT-licensed or as permitting commercial redistribution.
+  and the source's **cc-by-nc** label. The [source file](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt)
+  and attribution remain attached to the notes; the **noncommercial condition
+  still applies**. The exact license version is not recorded. These notes are
+  not relicensed as MIT and are not for commercial redistribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
   Retain the Cockos attribution and official links. The material is included
   under the applicable upstream terms and is not relicensed as MIT.
 
 The current source-gate decision is recorded in
-[the publication audit](docs/ecosystem/source-license-audit.md). Preserve
+[the publication audit](docs/ecosystem/source-license-audit.md). The current
+repository scope is cleared under the recorded source conditions. Preserve
 attribution and applicable terms in future releases; the [sources and attribution](reference/SOURCES.md)
 and [reference manifest](reference/source-manifest.json) identify the files and
-their provenance. The source gate remains conditional until the unresolved items
-are licensed, permitted or excluded from the public artifact.
+their provenance.

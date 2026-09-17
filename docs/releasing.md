@@ -15,8 +15,8 @@ privacy cleanup, so its runtime is intentionally newer than those immutable file
 do not reuse either published version for the next upload.
 The published wheel metadata also still says `License-Expression: MIT` for both
 versions. That metadata cannot be rewritten; the current checkout intentionally
-omits a single license expression while bundled upstream terms remain mixed or
-unresolved, and carries the scope in `THIRD_PARTY_NOTICES.md`.
+omits a single license expression because bundled upstream terms remain separate,
+and carries the scope in `THIRD_PARTY_NOTICES.md`.
 
 ### Next release: version bump checklist
 
@@ -56,8 +56,8 @@ metadata stays tied to `rac.__version__`; run them before building.
 
 Candidate builds never upload packages. Normal future publication requires source
 permissions, package ownership and Trusted Publishing to be explicitly resolved in
-`ecosystem/publication.json`; the current record keeps only the source-permission
-gate closed. The maintainer confirms that `reaper-parser==0.1.0a1` was uploaded
+`ecosystem/publication.json`; all three are cleared for the current repository
+scope. The maintainer confirms that `reaper-parser==0.1.0a1` was uploaded
 manually, so this version is not used as evidence for a `publish.yml` workflow
 channel.
 For first-project creation, the manual workflow exposes

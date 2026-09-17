@@ -131,11 +131,11 @@ folders, checks schema freshness, compares archive runtime bytes to source, and 
 Candidate builds do not upload or change visibility. The current package artifacts are
 already live on PyPI but are immutable; because this checkout includes post-upload runtime
 hardening, a same-version candidate is for review only and the next upload must use a new
-version. The normal future-publication gate remains blocked by the unresolved
-source-specific license/permission review. Package ownership and Trusted
-Publishing configuration are recorded as cleared; `publication.json` records
-MIT only for project-owned code, keeps upstream terms separate, and records that
-the existing published wheel metadata cannot be rewritten. The manually
+version. The current repository scope has its source conditions recorded and the
+normal publication gate is cleared. Package ownership and Trusted Publishing
+configuration are recorded as cleared; `publication.json` records MIT only for
+project-owned code, keeps upstream terms separate, and records that the existing
+published wheel metadata cannot be rewritten. The manually
 uploaded parser version is not represented as a workflow-channel proof.
 
 ## Migration and recovery

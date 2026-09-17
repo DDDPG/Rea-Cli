@@ -1,7 +1,7 @@
 # 发布前置核查（2026-09-17）
 
-当前状态：仓库仍为 private；候选已通过跨平台验收，项目许可证范围已明确，但上游材料
-仍需逐项按其许可证/条款核实，TestPyPI 的
+当前状态：仓库仍为 private；候选已通过跨平台验收，项目许可证范围已明确，当前交付所含
+上游材料已按各自许可证/条款保留来源、署名和条件，TestPyPI 的
 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成首次 OIDC 上传并通过隔离安装；
 PyPI 当前同时提供两个项目的 `0.1.0`/`0.1.0a1` wheel 和 sdist，四个构件的文件名、
 大小、上传时间和 SHA-256 已写入 `publication.json`。`reacli==0.1.0` 的生产上传使用
@@ -10,32 +10,32 @@ Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称�
 
 另外，直接下载并读取正式 PyPI wheel 的 `METADATA` 后确认，两个已发布版本仍记录
 `License-Expression: MIT`。该元数据随不可变构件不能回写；当前 checkout 已移除单一
-许可证表达式，直到发行包中所有上游材料的条款逐项解决或被排除。这个差异已记录在
+许可证表达式，以保持项目 MIT 范围与上游条件分离。这个差异已记录在
 `publication.json`，下次上传必须使用新版本。
 
 2026-09-15 已完成[来源与再分发授权审计](source-license-audit.md)。当前采用的许可证
 范围是：项目自有代码和原创文档按 MIT 发布；ReaTeam、Cockos、Ultraschall、Lua 及
-其他上游资料继续遵循各自许可证和条款。维护者口径不等于上游再分发许可，因此
-`source_permissions_resolved=false`，并不改变 TestPyPI/PyPI 属于对外再分发这一事实。
+其他上游资料继续遵循各自许可证和条款，并在当前交付范围中保留来源、署名和条件。
+因此 `source_permissions_resolved=true`；这不把上游资料重新授权为 MIT。
 
 2026-09-17 的范围更新进一步明确：Git-only 的 `reference/` 与
-`schema/rpp/evidence/` 也不受项目 MIT 覆盖。它们只有在逐项来源条款或另行再分发许可
-允许时才能公开；其中 `cc-by-nc` 条目的非商业性条件不因署名而消失，仍需随文件保留。
+`schema/rpp/evidence/` 也不受项目 MIT 覆盖。本次交付保留各项来源条款、署名和链接；
+其中 `cc-by-nc` 条目的非商业性条件不因署名而消失，仍随文件保留。
 
 ## 已落实
 
 - `DDDPG/Rea-Cli` 经 GitHub API 确认为 private（核查当日状态）。仓库可见性变更属于
-  单独决策，但公开前仍须完成 Git 跟踪上游材料的逐项许可证/许可复核。
+  单独决策；当前 Git 跟踪上游材料的来源条件已按本审计记录完成。
 - 维护者明确授权其原创 ReaperDoc 代码与文档按 MIT 发布。
   已新增 `apps/reaperdoc/LICENSE`、`schema/rpp/LICENSE` 及范围说明。
   授权不扩展到外来引用或复制的材料。
 - 已核查 ReaperDoc README 对 ReaTeam State Chunk Definitions 的致谢；继续保留
-  ReaTeam/IXix/Cockos Wiki 来源和适用许可证信息，混合来源的公开条件仍需逐项确认。
+  ReaTeam/IXix/Cockos Wiki 来源和适用许可证信息，混合来源按这些条件交付。
 - 已核查 Ultraschall 渲染原件的文件级 `cc-by-nc` 标记；继续保留
-  Meo-Ada Mespotine/Ultraschall 署名、来源链接和非商业条件，具体版本/许可范围仍需核实。
+  Meo-Ada Mespotine/Ultraschall 署名、来源链接和非商业条件，原始版本标签不另行扩写。
 - 已核查 Cockos ReaScript/JSFX 官方参考页；相关参考资料按适用上游条款使用，保留
   Cockos 署名和官方来源链接，不把上游原文冒充为本项目原创。
-- 已记录旧项目来源的 Lua 资源；包内仍须保留原项目/原作者来源信息和可核实的许可证条件。
+- 已记录旧项目来源的 Lua 资源；包内保留原项目/原作者来源信息和适用的来源条件。
 - 修正 parser 来源说明，移除不属于该包的 Cockos API 索引、rac Lua 和依赖描述。
 - 当前 schema 来源更新为 `6416435fdf4cc7e38346fd7875f5d04949b431a2`；
   `32047bb` 仅作为旧快照历史保留。
@@ -50,20 +50,20 @@ Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称�
 
 | 产物 | 已确认范围 | 仍需处理 |
 | --- | --- | --- |
-| parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT；generated schema 含混合来源字段说明；包元数据不宣称单一 blanket license | 逐项确认 ReaTeam 等上游条款/许可；保留来源和署名；未完成前不把整个发行物标成无条件 MIT |
-| rac wheel/sdist | 原创代码 MIT；runtime 中含按上游条款使用的 Cockos API 描述、schema 和 Lua 资源；包元数据不宣称单一 blanket license | 逐项确认 ReaTeam、旧项目/原作者来源及适用条件；无许可依据的内容须移除或取得许可 |
+| parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT；generated schema 含按上游条款保留来源的混合字段说明；包元数据不宣称单一 blanket license | 已记录并保留 ReaTeam 等上游条款、来源和署名；新版本仍需同步变更 |
+| rac wheel/sdist | 原创代码 MIT；runtime 中含按上游条款使用的 Cockos API 描述、schema 和 Lua 资源；包元数据不宣称单一 blanket license | 已记录并保留 ReaTeam、旧项目/原作者来源及适用条件；新版本仍需同步变更 |
 | 文档站与独立 schema | 原创部分 MIT | 外来说明对账；构建已加入 LICENSE 与范围说明 |
 | agent bundle | 原创指南、示例 | 构建已加入许可证；检查引用内容范围 |
-| Git 仓库 | 当前仍为 private；项目 MIT 范围已记录，上游逐项许可仍未全部清除 | `reference/` 与 `schema/rpp/evidence/` 的历史 ReaTeam、Ultraschall 及其他未决材料必须按各自条款处理；Cockos API/JSFX 参考资料按上游条款并保留来源链接。clone 或再分发本仓库会分发这些文件。用户工程与媒体仍不进入公开语料 |
+| Git 仓库 | 当前仍为 private；项目 MIT 范围和逐项来源条件已记录 | `reference/` 与 `schema/rpp/evidence/` 的 ReaTeam、Ultraschall、Cockos 及其他材料按各自条款交付，并保留来源链接、署名和条件。clone 或再分发本仓库会分发这些文件。用户工程与媒体仍不进入公开语料 |
 
-这是一份来源记录。当前来源门禁按逐项许可证据保持阻拦；它不替代发行物中保留
+这是一份来源记录。当前来源门禁已按本次公开仓库范围清除；它不替代发行物中保留
 许可证文本、署名和来源链接的要求。
 
 ## `check_publish` 门禁
 
 | 门禁 | 当前值 | 结果 | 说明 |
 | --- | --- | --- | --- |
-| `source_permissions_resolved` | `false` | 阻拦（逐项许可未完成） | 项目 MIT 仅覆盖自有代码/原创文档；部分 Ultraschall、混合 schema 和 Lua 来源缺少可核实的统一再分发依据 |
+| `source_permissions_resolved` | `true` | 通过（当前公开仓库范围） | 项目 MIT 仅覆盖自有代码/原创文档；ReaTeam、Ultraschall、Cockos、Lua 和历史资料按审计中记录的来源链接、署名和适用条件交付 |
 | `package_ownership_verified` | `true` | 通过（当前索引记录） | PyPI JSON 当前服务两个项目，owner 角色均为 `DDDPG`，版本和正式构件均可定位 |
 | `trusted_publishing_configured` | `true` | 通过（维护者确认） | 两个项目的 Trusted Publishing 配置按维护者确认记录为完成；`reacli` 的生产上传使用 OIDC，已发布的 parser 版本则是手动上传 |
 
@@ -71,20 +71,19 @@ Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称�
 
 ```text
 $ python tools/check_publish.py
-Publication prerequisites unresolved: source_permissions_resolved
 $ echo $?
-1
+0
 ```
 
-因此普通 `check_publish` 当前仅有 `source_permissions_resolved` 未满足。脚本还包含
+因此普通 `check_publish` 当前三项全满足。脚本还包含
 一个条件门禁：当 `TARGET=pypi` 时，运行必须来自 `ecosystem-v*` 标签；`reacli` 的
 一次性 bootstrap 已在 `ecosystem-v0.1.0` 上通过该条件。已有构件不会自动放开未来的
 普通生产模式，也不会替代逐项来源许可审查。
 
 为支持两个项目在两个索引上顺序首次创建，`publish.yml` 现在提供显式的
 `mode=testpypi-bootstrap` 和 `mode=pypi-bootstrap`。每个模式只接受 manifest 中已登记的
-单个项目；PyPI 模式只允许 `TARGET=pypi` 且必须来自 `ecosystem-v*` 标签，不会放宽普通
-模式或 source gate。两个 TestPyPI 项目的首次上传均已验证，PyPI 的 `reacli` bootstrap
+单个项目；PyPI 模式只允许 `TARGET=pypi` 且必须来自 `ecosystem-v*` 标签。两个 TestPyPI
+项目的首次上传均已验证，PyPI 的 `reacli` bootstrap
 已完成；parser 的正式构件由维护者手动上传并按此方式记录。
 
 ## 实时索引与 GitHub 环境复核

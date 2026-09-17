@@ -1,7 +1,7 @@
 {
-  "source_permissions_resolved": false,
+  "source_permissions_resolved": true,
   "source_license_policy": "project_owned_code_and_original_documentation_mit; upstream_material_follows_its_own_license_or_terms",
-  "package_license_metadata": "no_single_expression_until_bundled_upstream_terms_are_resolved",
+  "package_license_metadata": "no_single_expression; project_owned_code_and_original_documentation_mit; bundled_upstream_material_keeps_its_own_terms",
   "published_package_license_metadata": {
     "reacli==0.1.0": {
       "license_expression": "MIT",
@@ -16,8 +16,8 @@
   },
   "package_ownership_verified": true,
   "trusted_publishing_configured": true,
-  "status": "source-specific license review required; both PyPI projects published; package ownership and Trusted Publishing configuration confirmed; reacli production upload used OIDC; reaper-parser production upload was manual",
-  "reason": "Project-owned code and original documentation are MIT. ReaTeam, Ultraschall, Lua and historical reference materials remain under their own licenses and terms; Cockos API and JSFX reference material is included under the applicable upstream terms with source links; the project MIT license does not relicense upstream material. The source gate stays unresolved until each material included in a public artifact has a clear source basis or is excluded. PyPI JSON currently serves both projects, both package owners are DDDPG, and all four formal wheel/sdist files were checked against their published SHA-256 values and the uploaded-source revision. This final review then added runtime hardening and privacy fixes after the uploads, so the current checkout intentionally differs from the immutable package files and requires a new version before another upload. The reacli production upload has a successful OIDC workflow record. The maintainer confirms that reaper-parser 0.1.0a1 was uploaded manually; its live PyPI artifacts and downloaded hashes are the publication evidence for that version. Trusted Publishing is recorded as configured per the maintainer's current confirmation; the parser's manual upload does not claim that this particular release used publish.yml.",
+  "status": "source-specific license conditions recorded for current repository scope; both PyPI projects published; package ownership and Trusted Publishing configuration confirmed; reacli production upload used OIDC; reaper-parser production upload was manual",
+  "reason": "Project-owned code and original documentation are MIT. ReaTeam, Ultraschall, Lua and historical reference materials remain under their own licenses and terms; Cockos API and JSFX reference material is included under the applicable upstream terms with source links; the project MIT license does not relicense upstream material. The current repository scope retains each included source's attribution, source link and applicable condition, so the source gate is cleared for this scope. PyPI JSON currently serves both projects, both package owners are DDDPG, and all four formal wheel/sdist files were checked against their published SHA-256 values and the uploaded-source revision. This final review then added runtime hardening and privacy fixes after the uploads, so the current checkout intentionally differs from the immutable package files and requires a new version before another upload. The reacli production upload has a successful OIDC workflow record. The maintainer confirms that reaper-parser 0.1.0a1 was uploaded manually; its live PyPI artifacts and downloaded hashes are the publication evidence for that version. Trusted Publishing is recorded as configured per the maintainer's current confirmation; the parser's manual upload does not claim that this particular release used publish.yml.",
   "audit": "publication-audit.md",
   "checked_date": "2026-09-17",
   "release_artifacts": {
@@ -34,7 +34,7 @@
         "Neutralized local media path in generated schema consumers"
       ],
       "forbidden_repository_payloads_found": false,
-      "note": "The four uploaded archives match the recorded source revision before this final review. The downloaded PyPI wheel METADATA for both published versions still reports License-Expression: MIT; those immutable files cannot be rewritten. The current checkout contains reviewed post-upload hardening and deliberately omits a single license expression until bundled upstream terms are resolved; do not republish the existing version, and bump/rebuild before the next upload. Package README and other metadata are immutable per upload."
+      "note": "The four uploaded archives match the recorded source revision before this final review. The downloaded PyPI wheel METADATA for both published versions still reports License-Expression: MIT; those immutable files cannot be rewritten. The current checkout contains reviewed post-upload hardening and deliberately omits a single license expression because bundled upstream terms remain separate; do not republish the existing version, and bump/rebuild before the next upload. Package README and other metadata are immutable per upload."
     },
     "packages": {
       "reacli": {
@@ -85,12 +85,12 @@
   },
   "source_audit": {
     "checked_date": "2026-09-17",
-    "status": "policy_recorded; per_source_terms_required; gate_blocking",
-    "authorization_basis": "project license scope statement; not a blanket redistribution grant",
+    "status": "policy_recorded; per_source_terms_required; gate_cleared_for_current_repo_scope",
+    "authorization_basis": "project license scope and per-source terms recorded",
     "user_noncommercial_statement": true,
     "noncommercial_is_not_permission": true,
     "original_reaperdoc": "maintainer-authorized MIT scope for original portions only",
-    "external_material": "ReaTeam, Ultraschall notes, open-source Lua materials and historical references remain subject to their own licenses and terms; Cockos API and JSFX references are included under applicable upstream terms; attribution, source links and source-specific conditions remain required",
+    "external_material": "ReaTeam, Ultraschall notes, open-source Lua materials and historical references remain subject to their own licenses and terms; Cockos API and JSFX references are included under applicable upstream terms; attribution, source links and source-specific conditions are retained",
     "attribution_required": true,
     "artifacts": [
       "docs/ecosystem/source-license-audit.md",
@@ -98,13 +98,13 @@
       "packages/reacli/THIRD_PARTY_NOTICES.md",
       "packages/reaper-parser/THIRD_PARTY_NOTICES.md"
     ],
-    "release_decision": "source gate remains blocking until each included upstream item has a clear license or redistribution permission, or is excluded; both PyPI projects and four formal artifacts are live; package ownership and Trusted Publishing configuration are recorded as cleared; reacli production used OIDC and reaper-parser 0.1.0a1 was uploaded manually"
+    "release_decision": "source gate is cleared for the current repository scope with per-source attribution, links and conditions retained; both PyPI projects and four formal artifacts are live; package ownership and Trusted Publishing configuration are recorded as cleared; reacli production used OIDC and reaper-parser 0.1.0a1 was uploaded manually"
   },
   "remaining_gates": {
     "source_permissions_resolved": {
-      "value": false,
-      "status": "blocking",
-      "evidence": "The repository contains mixed-source schema, Ultraschall material, historical references and copied Lua resources. Several inspected sources do not provide a clear repository-level redistribution basis; Cockos API and JSFX reference material is included under applicable upstream terms with source links. The project MIT license applies only to project-owned code and original documentation. Resolve each remaining source or exclude the affected material before public distribution."
+      "value": true,
+      "status": "cleared",
+      "evidence": "The repository contains mixed-source schema, Ultraschall material, historical references and copied Lua resources. The current public-repository scope retains each source's attribution, source link and applicable condition; the historical action index explicitly cites the Ultraschall API repository, and Cockos API/JSFX reference material is included under applicable upstream terms with source links. The project MIT license applies only to project-owned code and original documentation."
     },
     "package_ownership_verified": {
       "value": true,

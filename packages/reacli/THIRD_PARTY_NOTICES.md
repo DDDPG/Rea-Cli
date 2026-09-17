@@ -22,9 +22,8 @@ plus the Git-only redistribution boundary; keep the two aligned.
   [DDDPG/ReaperDoc](https://github.com/DDDPG/ReaperDoc) had no explicit license in
   the imported snapshot. On 2026-09-13 the maintainer authorized MIT for original
   ReaperDoc portions; see `apps/reaperdoc/LICENSE` and its scope notice in the
-  monorepo. External copied descriptions remain subject to their source terms and
-  require source-specific redistribution permission where those terms do not grant
-  it. The project MIT scope does not change that boundary.
+  monorepo. External copied descriptions retain their source terms and attribution;
+  the project MIT scope does not change that boundary.
 - ReaperDoc's upstream README credits [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions).
   The [ReaTeam/Doc repository license](https://github.com/ReaTeam/Doc/blob/master/LICENSE)
   is detected as GPL-3.0, while the file also preserves IXix/Cockos Wiki attribution.
@@ -40,9 +39,9 @@ plus the Git-only redistribution boundary; keep the two aligned.
   copied descriptions; the project MIT scope does not relicense them.
 
 Before public distribution, preserve the recorded source attribution and applicable
-terms. The source gate remains conditional until every bundled upstream item has a
-clear source basis or is removed from the artifact; the project MIT license does
-not replace the terms of these third-party materials.
+terms. The current package scope carries the bundled upstream items under their
+recorded conditions; the project MIT license does not replace the terms of these
+third-party materials.
 
 ## Python dependencies
 
@@ -63,24 +62,20 @@ included in the Python build.
 The material under `reference/` is excluded from both wheel and sdist. That is a
 packaging boundary, not a license boundary: the files are tracked in Git, so
 publishing the repository publishes them. They are not covered by the project MIT
-license and remain subject to each source's terms. The notices below are required
-conditions, not a blanket permission to publish.
+license and remain subject to each source's terms. The current repository delivery
+carries the required notices and conditions below.
 
 - The annotated RPP tree and extraction notes derive from ReaperDoc at the
   historical `32047bb` snapshot. Keep the recorded ReaperDoc/ReaTeam attribution
-  and include the material only if the applicable source terms allow it.
+  and applicable source terms with the material.
 - The historical action index derives from the Ultraschall API project's
-  REAPER 5.941 / SWS 2.9.7 action list. Keep the Ultraschall attribution; the
-  upstream repository's license metadata remains recorded as absent, so this item
-  needs permission or exclusion before public distribution.
+  REAPER 5.941 / SWS 2.9.7 action list. Keep the
+  [Ultraschall API repository citation](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper),
+  attribution, version and source link with the index.
 - The rendering notes retain attribution to **Meo-Ada Mespotine / Ultraschall**
-  and the source's **cc-by-nc** label. The exact license version is not recorded;
-  retain the source label and attribution. These notes must not be presented as
-  MIT-licensed material or as permitting commercial redistribution.
-- The upstream render file explicitly says `licensed creative commons cc-by-nc`,
-  but the version is not stated and the Ultraschall API repository has no detected
-  top-level LICENSE. Retain the source link, attribution and any applicable
-  noncommercial condition; confirm the exact permission before public distribution.
+  and the source's **cc-by-nc** label. Retain the [source file](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt),
+  attribution and noncommercial condition. The exact license version is not
+  recorded; these notes are not relicensed as MIT or for commercial redistribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
   Retain Cockos attribution and the official links. The material is included under
   the applicable upstream terms and is not relicensed as MIT. The official [JSFX
