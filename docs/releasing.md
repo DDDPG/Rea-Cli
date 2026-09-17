@@ -15,11 +15,11 @@ Follow [the ecosystem guide](ecosystem/README.md) for installation and validatio
 
 Candidate builds never upload packages. Normal publication requires source permissions,
 package ownership and Trusted Publishing to be explicitly resolved in
-`ecosystem/publication.json`. For first-project creation on TestPyPI only, the manual
-workflow exposes an explicit `testpypi-bootstrap` mode for one manifest-authorized
-package at a time; it cannot target PyPI or bypass the source gate. Production requires
-an `ecosystem-v` tag. Package versions and compatibility.json must be updated together
-for a new release; package indexes cannot replace already-published files.
+`ecosystem/publication.json`. For first-project creation, the manual workflow exposes
+explicit `testpypi-bootstrap` and `pypi-bootstrap` modes for one manifest-authorized
+package at a time; the PyPI mode still requires an `ecosystem-v` tag and neither mode
+bypasses the source gate. Package versions and compatibility.json must be updated
+together for a new release; package indexes cannot replace already-published files.
 
 The CI parser matrix covers macOS/Linux/Windows and Python 3.10–3.14. The rac offline
 matrix retains macOS/Linux. CI configuration is not evidence those jobs ran locally.

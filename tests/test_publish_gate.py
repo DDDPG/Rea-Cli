@@ -12,6 +12,10 @@ def publication():
             "testpypi": {
                 "reacli": {"allowed": True},
                 "reaper-parser": {"allowed": True},
+            },
+            "pypi": {
+                "reacli": {"allowed": True},
+                "reaper-parser": {"allowed": False},
             }
         },
     }
@@ -66,6 +70,45 @@ def test_testpypi_bootstrap_cannot_target_pypi():
             target="pypi",
             package="reacli",
             mode="testpypi-bootstrap",
+        )
+
+
+def test_pypi_bootstrap_requires_release_tag():
+    with pytest.raises(
+        PublicationGateError, match="Production requires an ecosystem-v release tag"
+    ):
+        evaluate(
+            publication(),
+            target="pypi",
+            package="reacli",
+            mode="pypi-bootstrap",
+            ref_type="branch",
+            ref_name="codex/reaper-ecosystem-alpha",
+        )
+
+
+def test_pypi_bootstrap_allows_authorized_package_on_release_tag():
+    evaluate(
+        publication(),
+        target="pypi",
+        package="reacli",
+        mode="pypi-bootstrap",
+        ref_type="tag",
+        ref_name="ecosystem-v0.1.0",
+    )
+
+
+def test_pypi_bootstrap_rejects_parser_until_reacli_is_consumed():
+    with pytest.raises(
+        PublicationGateError, match="PyPI bootstrap not authorized for package"
+    ):
+        evaluate(
+            publication(),
+            target="pypi",
+            package="reaper-parser",
+            mode="pypi-bootstrap",
+            ref_type="tag",
+            ref_name="ecosystem-v0.1.0",
         )
 
 

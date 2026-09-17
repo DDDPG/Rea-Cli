@@ -1,4 +1,4 @@
-"""Check normal publication and explicit first-project TestPyPI bootstrap gates."""
+"""Check normal publication and explicit first-project bootstrap gates."""
 
 from __future__ import annotations
 
@@ -29,13 +29,15 @@ def evaluate(
 ):
     """Validate one workflow invocation against the recorded publication state."""
 
-    if mode not in ("", "normal", "testpypi-bootstrap"):
+    if mode not in ("", "normal", "testpypi-bootstrap", "pypi-bootstrap"):
         raise PublicationGateError("Unknown publication mode: " + mode)
 
-    if mode == "testpypi-bootstrap":
-        if target != "testpypi":
+    if mode in ("testpypi-bootstrap", "pypi-bootstrap"):
+        index = "testpypi" if mode == "testpypi-bootstrap" else "pypi"
+        label = "TestPyPI" if index == "testpypi" else "PyPI"
+        if target != index:
             raise PublicationGateError(
-                "TestPyPI bootstrap requires TARGET=testpypi"
+                f"{label} bootstrap requires TARGET={index}"
             )
         if publication.get("source_permissions_resolved") is not True:
             raise PublicationGateError(
@@ -43,14 +45,18 @@ def evaluate(
             )
         config = (
             publication.get("bootstrap_publish", {})
-            .get("testpypi", {})
+            .get(index, {})
             .get(package, {})
         )
         if not package or config.get("allowed") is not True:
             raise PublicationGateError(
-                "TestPyPI bootstrap not authorized for package: "
+                f"{label} bootstrap not authorized for package: "
                 + (package or "<missing>")
             )
+        if index == "pypi" and (
+            ref_type != "tag" or not ref_name.startswith("ecosystem-v")
+        ):
+            raise PublicationGateError("Production requires an ecosystem-v release tag")
         return
 
     missing = [key for key in REQUIRED if publication.get(key) is not True]

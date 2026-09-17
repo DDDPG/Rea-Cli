@@ -2,8 +2,8 @@
   "source_permissions_resolved": true,
   "package_ownership_verified": false,
   "trusted_publishing_configured": false,
-  "status": "source authorization attested; TestPyPI packages verified; PyPI publication unresolved",
-  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. Both TestPyPI OIDC uploads are verified, while PyPI ownership and Trusted Publisher configuration remain unverified.",
+  "status": "source authorization attested; TestPyPI packages verified; PyPI reacli bootstrap configured",
+  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. Both TestPyPI OIDC uploads are verified, the PyPI environment and reacli publisher are configured, and the first PyPI upload remains pending.",
   "audit": "publication-audit.md",
   "checked_date": "2026-09-17",
   "source_audit": {
@@ -21,7 +21,7 @@
       "packages/reacli/THIRD_PARTY_NOTICES.md",
       "packages/reaper-parser/THIRD_PARTY_NOTICES.md"
     ],
-    "release_decision": "source gate cleared by maintainer attestation; TestPyPI bootstrap evidence recorded; do not publish to PyPI until package ownership and Trusted Publisher gates pass"
+    "release_decision": "source gate cleared by maintainer attestation; TestPyPI bootstrap evidence recorded; PyPI bootstrap requires an authorized publisher record and ecosystem-v tag; normal production publication remains gated by package ownership and Trusted Publisher evidence"
   },
   "remaining_gates": {
     "package_ownership_verified": {
@@ -32,7 +32,7 @@
     "trusted_publishing_configured": {
       "value": false,
       "status": "blocking",
-      "evidence": "GitHub Actions runs 35201286656 and 35202476617 successfully published reacli and reaper-parser to TestPyPI through OIDC. The pypi environment and both production publishers remain unverified."
+      "evidence": "GitHub Actions runs 35201286656 and 35202476617 successfully published both packages to TestPyPI through OIDC. The pypi environment exists and the maintainer reports the PyPI reacli publisher is configured; the first PyPI upload and parser production publisher remain unverified."
     }
   },
   "conditional_gates": {
@@ -61,6 +61,20 @@
         "observed_version": "0.1.0a1",
         "isolated_install": "passed"
       }
+    },
+    "pypi": {
+      "reacli": {
+        "allowed": true,
+        "publisher_status": "maintainer_reported_configured",
+        "first_upload": "pending",
+        "evidence": "The maintainer reports the PyPI reacli publisher is configured and the GitHub pypi environment exists; first production upload remains pending and requires an ecosystem-v tag."
+      },
+      "reaper-parser": {
+        "allowed": false,
+        "publisher_status": "blocked_until_reacli_production_upload",
+        "first_upload": "pending",
+        "evidence": "Enable after the PyPI reacli publisher has been consumed and the parser production publisher is registered."
+      }
     }
   },
   "publisher_checks": [
@@ -77,6 +91,20 @@
       "status": "verified_oidc_upload; first_upload_succeeded",
       "checked_date": "2026-09-17",
       "evidence": "GitHub Actions run 35202476617 build and publish jobs succeeded; TestPyPI JSON returned reaper-parser version 0.1.0a1 and an isolated installation passed."
+    },
+    {
+      "index": "pypi.org",
+      "project": "reacli",
+      "status": "maintainer_reported_configured; first_upload_pending",
+      "checked_date": "2026-09-17",
+      "evidence": "Maintainer reports the PyPI reacli publisher is configured; no production upload has been run yet."
+    },
+    {
+      "index": "pypi.org",
+      "project": "reaper-parser",
+      "status": "blocked_until_reacli_production_upload",
+      "checked_date": "2026-09-17",
+      "evidence": "Register the parser publisher after the PyPI reacli first upload is consumed."
     }
   ],
   "index_checks": [
@@ -114,6 +142,11 @@
         "name": "testpypi",
         "required_reviewers": false,
         "status": "exists; protection_rules=[]; both TestPyPI OIDC uploads verified; pypi publisher unresolved"
+      },
+      {
+        "name": "pypi",
+        "required_reviewers": false,
+        "status": "exists; protection_rules=[]; reacli publisher reported; parser publisher unresolved"
       }
     ],
     "workflow": "publish.yml",

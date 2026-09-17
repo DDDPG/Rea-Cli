@@ -2,7 +2,7 @@
 
 当前状态：私有仓库候选已通过跨平台验收；来源授权已由维护者确认，TestPyPI 的
 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成首次 OIDC 上传并通过隔离安装；
-PyPI 生产发布仍未配置。
+GitHub `pypi` environment 与 PyPI 的 `reacli` publisher 已配置，首次生产上传尚未执行。
 
 2026-09-15 已完成[来源与再分发授权审计](source-license-audit.md)。维护者确认
 ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来源署名；该声明
@@ -48,7 +48,7 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 | --- | --- | --- | --- |
 | `source_permissions_resolved` | `true` | 通过（维护者声明） | 已记录 ReaTeam、Cockos、Ultraschall 和 Lua 来源使用确认 |
 | `package_ownership_verified` | `false` | 阻拦 | TestPyPI 两个项目已返回项目 JSON，但 PyPI 两项及生产项目归属仍未核实 |
-| `trusted_publishing_configured` | `false` | 阻拦 | TestPyPI 两个项目的 OIDC 上传已验证，PyPI 两项尚未核实 |
+| `trusted_publishing_configured` | `false` | 阻拦 | TestPyPI 两个项目的 OIDC 上传已验证，PyPI 的 `reacli` publisher 仅有维护者报告，首次生产上传和 parser publisher 尚未核实 |
 
 2026-09-15 本地实际执行结果：
 
@@ -63,10 +63,11 @@ $ echo $?
 `TARGET=pypi` 时，运行必须来自 `ecosystem-v*` 标签；由于前置布尔门禁尚未通过，
 本次运行尚未进入该条件检查。
 
-为支持两个项目在 TestPyPI 上顺序首次创建，`publish.yml` 现在提供显式的
-`mode=testpypi-bootstrap`。该模式只接受 manifest 中已登记的单个项目、只允许
-`TARGET=testpypi`，不会放宽普通模式或正式 PyPI 的三个全局门禁；当前两个 TestPyPI
-项目的首次上传均已验证。
+为支持两个项目在两个索引上顺序首次创建，`publish.yml` 现在提供显式的
+`mode=testpypi-bootstrap` 和 `mode=pypi-bootstrap`。每个模式只接受 manifest 中已登记的
+单个项目；PyPI 模式只允许 `TARGET=pypi` 且必须来自 `ecosystem-v*` 标签，不会放宽普通
+模式或 source gate。两个 TestPyPI 项目的首次上传均已验证，PyPI 仅登记了 reacli 的待上传
+bootstrap。
 
 ## 实时索引与 GitHub 环境复核
 
@@ -74,15 +75,16 @@ $ echo $?
   `0.1.0`；`https://test.pypi.org/pypi/reaper-parser/json` 返回 HTTP 200，项目版本为
   `0.1.0a1`。PyPI 两个项目仍未提供生产项目证据，索引响应本身不能证明全部包名的账号
   所有权，因此 `package_ownership_verified` 继续保持 `false`。
-- `gh api repos/DDDPG/Rea-Cli/environments` 在 2026-09-15 返回一个 `testpypi`
-  环境，`protection_rules` 为空；响应中没有 `pypi` 环境。GitHub 环境存在本身不等于
-  PyPI/TestPyPI 已登记 Trusted Publisher，故 `trusted_publishing_configured` 继续为
-  `false`。
+- `gh api repos/DDDPG/Rea-Cli/environments` 在 2026-09-17 返回 `testpypi` 和 `pypi`
+  两个 environment，`protection_rules` 均为空。GitHub environment 存在本身不等于
+  PyPI 已登记 Trusted Publisher，故 `trusted_publishing_configured` 继续为 `false`。
 - GitHub Actions run `35201286656` 的 build 和 publish job 均成功，使用 TestPyPI OIDC
   发布了 `reacli==0.1.0`；这证明了 `reacli` pending publisher 已被消费。
 - GitHub Actions run `35202476617` 的 build 和 publish job 均成功，使用 TestPyPI OIDC
   发布了 `reaper-parser==0.1.0a1`；新的隔离虚拟环境已从 TestPyPI 安装并成功导入
-  `reaper_parser`。生产运行仍需使用 `ecosystem-v*` 标签。
+  `reaper_parser`。
+- 维护者报告 PyPI 的 `reacli` publisher 已配置，GitHub `pypi` environment 已创建；首次
+  生产上传仍需使用 `pypi-bootstrap` 和 `ecosystem-v*` 标签。
 
 ## 账号与发布身份
 
@@ -107,10 +109,10 @@ $ echo $?
 
 GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已创建
 `testpypi` 空环境，但未添加保护规则。创建带 DDDPG required reviewer 的保护规则时
-返回 HTTP 422，提示当前账单方案不支持 required reviewers。维护者随后报告已在 TestPyPI 配置 `reacli` pending publisher，并在首次上传成功后配置
-`reaper-parser`；两次 TestPyPI 上传均已验证。当前复核仍未观察到 `pypi` 环境。后续应
-补建 `pypi` environment 并登记正式 publisher；当前工作流仅允许人工触发，生产索引
-另外要求 `ecosystem-v` 标签。
+返回 HTTP 422，提示当前账单方案不支持 required reviewers。维护者随后报告已在 TestPyPI 配置
+`reacli` pending publisher，并在首次上传成功后配置 `reaper-parser`；两次 TestPyPI 上传均已验证。
+当前已创建无保护规则的 `pypi` environment，且维护者报告已在 PyPI 配置 `reacli` publisher；
+生产索引仍需使用 `ecosystem-v` 标签。
 
 [PyPI 官方文档](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/)
 说明 pending publisher 可用于首次创建项目，但登记本身不保留包名。
@@ -125,7 +127,8 @@ GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已
    并验收，旧候选不原地替换。
 3. TestPyPI 的 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成 action、JSON
    和隔离安装验证；保留 runs `35201286656`、`35202476617` 作为证据。
-4. 下一步补建 GitHub `pypi` environment，在 PyPI 为两个项目分别登记正式 publisher；
-   完成生产索引验证后，再将全局布尔门禁改为 `true`，并使用 `ecosystem-v*` 标签发布。
+4. 现在以 `ecosystem-v0.1.0` 标签运行 `target=pypi`、`package=reacli`、
+   `mode=pypi-bootstrap`。成功后验证 PyPI 项目，再注册 `reaper-parser` 的 PyPI publisher，
+   并按同样方式单独上传 parser。
 
 TestPyPI 也是对外上传，不等于私有分发。保持 Git 仓库 private 不会使索引包私有。

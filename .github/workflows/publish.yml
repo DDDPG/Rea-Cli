@@ -15,11 +15,11 @@ on:
         default: reacli
         options: [reacli, reaper-parser]
       mode:
-        description: Normal publication or first-project TestPyPI bootstrap
+        description: Normal publication or first-project index bootstrap
         type: choice
         required: true
         default: normal
-        options: [normal, testpypi-bootstrap]
+        options: [normal, testpypi-bootstrap, pypi-bootstrap]
 permissions:
   contents: read
 jobs:
