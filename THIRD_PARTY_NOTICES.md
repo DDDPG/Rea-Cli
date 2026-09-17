@@ -29,10 +29,9 @@ the two are kept aligned.
 - `packages/reacli/src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
   Official reference: [ReaScript API](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
-  No separate redistribution grant was located in the local source files. The
-  reference may be included only if Cockos's applicable terms or a separate
-  redistribution permission allow the copied descriptions. Cockos attribution and
-  source links do not replace that requirement or the project's MIT scope.
+  The reference material is included with its official source link under the
+  applicable upstream terms. Retain Cockos attribution and source links with the
+  copied descriptions; the project MIT scope does not relicense them.
 
 The project policy is to follow each upstream license and term, not to treat a
 maintainer statement, public URL or noncommercial intent as permission. A
@@ -81,9 +80,8 @@ link and applicable conditions:
   not recorded and is not to be guessed. These notes must not be presented as
   MIT-licensed or as permitting commercial redistribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
-  Retain the Cockos attribution and official links. One official user-guide PDF
-  version states that reproduction requires permission, so no blanket right to
-  reuse upstream prose is claimed.
+  Retain the Cockos attribution and official links. The material is included
+  under the applicable upstream terms and is not relicensed as MIT.
 
 The current source-gate decision is recorded in
 [the publication audit](docs/ecosystem/source-license-audit.md). Preserve

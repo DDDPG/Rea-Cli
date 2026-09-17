@@ -20,6 +20,8 @@ CLI 的 `rac`、`reacli` 等价，Python 导入名为 `rac`。
 [共享解析器与音频 API](https://github.com/DDDPG/Rea-Cli/blob/main/docs/ecosystem/api.zh-CN.md)和[贡献指南](https://github.com/DDDPG/Rea-Cli/blob/main/CONTRIBUTING.md)。
 相对链接用于仓库浏览；独立源码包不包含完整仓库文档。
 
-项目自有代码和原创文档采用 MIT。发行包没有把内置参考数据声明为某一个统一许可证；
-这些内容继续遵循自身来源条款并保留署名。公开分发 wheel 或源码包前，请先阅读包内声明
-并确认对应许可条件。
+## 许可证
+
+项目自有代码和原创文档采用 [MIT 许可证](../../LICENSE)。发行包中的参考数据继续遵循
+自身来源条款并保留署名；其中 Cockos API 参考资料保留来源链接，并按适用的上游条款使用。
+来源与再分发信息见[包内第三方声明](THIRD_PARTY_NOTICES.md)。

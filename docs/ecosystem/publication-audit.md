@@ -33,8 +33,8 @@ Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称�
   ReaTeam/IXix/Cockos Wiki 来源和适用许可证信息，混合来源的公开条件仍需逐项确认。
 - 已核查 Ultraschall 渲染原件的文件级 `cc-by-nc` 标记；继续保留
   Meo-Ada Mespotine/Ultraschall 署名、来源链接和非商业条件，具体版本/许可范围仍需核实。
-- 已核查 Cockos ReaScript/JSFX 官方参考页；项目不把 Cockos 原文冒充为本项目原创，
-  但页面公开和署名不能替代复制/再分发条件。
+- 已核查 Cockos ReaScript/JSFX 官方参考页；相关参考资料按适用上游条款使用，保留
+  Cockos 署名和官方来源链接，不把上游原文冒充为本项目原创。
 - 已记录旧项目来源的 Lua 资源；包内仍须保留原项目/原作者来源信息和可核实的许可证条件。
 - 修正 parser 来源说明，移除不属于该包的 Cockos API 索引、rac Lua 和依赖描述。
 - 当前 schema 来源更新为 `6416435fdf4cc7e38346fd7875f5d04949b431a2`；
@@ -51,10 +51,10 @@ Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称�
 | 产物 | 已确认范围 | 仍需处理 |
 | --- | --- | --- |
 | parser wheel/sdist | 原创 parser 与 ReaperDoc 原创规格 MIT；generated schema 含混合来源字段说明；包元数据不宣称单一 blanket license | 逐项确认 ReaTeam 等上游条款/许可；保留来源和署名；未完成前不把整个发行物标成无条件 MIT |
-| rac wheel/sdist | 原创代码 MIT；runtime 中含 Cockos API 描述、schema 和 Lua 资源；包元数据不宣称单一 blanket license | 逐项确认 Cockos、旧项目/原作者来源及适用条件；无许可依据的内容须移除或取得许可 |
+| rac wheel/sdist | 原创代码 MIT；runtime 中含按上游条款使用的 Cockos API 描述、schema 和 Lua 资源；包元数据不宣称单一 blanket license | 逐项确认 ReaTeam、旧项目/原作者来源及适用条件；无许可依据的内容须移除或取得许可 |
 | 文档站与独立 schema | 原创部分 MIT | 外来说明对账；构建已加入 LICENSE 与范围说明 |
 | agent bundle | 原创指南、示例 | 构建已加入许可证；检查引用内容范围 |
-| Git 仓库 | 当前仍为 private；项目 MIT 范围已记录，上游逐项许可仍未全部清除 | `reference/` 与 `schema/rpp/evidence/` 的历史 ReaTeam、Ultraschall、Cockos 等材料必须按各自条款处理；clone 或再分发本仓库会分发这些文件。用户工程与媒体仍不进入公开语料 |
+| Git 仓库 | 当前仍为 private；项目 MIT 范围已记录，上游逐项许可仍未全部清除 | `reference/` 与 `schema/rpp/evidence/` 的历史 ReaTeam、Ultraschall 及其他未决材料必须按各自条款处理；Cockos API/JSFX 参考资料按上游条款并保留来源链接。clone 或再分发本仓库会分发这些文件。用户工程与媒体仍不进入公开语料 |
 
 这是一份来源记录。当前来源门禁按逐项许可证据保持阻拦；它不替代发行物中保留
 许可证文本、署名和来源链接的要求。
@@ -63,7 +63,7 @@ Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称�
 
 | 门禁 | 当前值 | 结果 | 说明 |
 | --- | --- | --- | --- |
-| `source_permissions_resolved` | `false` | 阻拦（逐项许可未完成） | 项目 MIT 仅覆盖自有代码/原创文档；部分 Cockos、Ultraschall、混合 schema 和 Lua 来源缺少可核实的统一再分发依据 |
+| `source_permissions_resolved` | `false` | 阻拦（逐项许可未完成） | 项目 MIT 仅覆盖自有代码/原创文档；部分 Ultraschall、混合 schema 和 Lua 来源缺少可核实的统一再分发依据 |
 | `package_ownership_verified` | `true` | 通过（当前索引记录） | PyPI JSON 当前服务两个项目，owner 角色均为 `DDDPG`，版本和正式构件均可定位 |
 | `trusted_publishing_configured` | `true` | 通过（维护者确认） | 两个项目的 Trusted Publishing 配置按维护者确认记录为完成；`reacli` 的生产上传使用 OIDC，已发布的 parser 版本则是手动上传 |
 

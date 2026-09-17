@@ -142,11 +142,6 @@ installing from a current checkout gives you the hardened one. The API may
 evolve either way. Path B above installs the newer code. The next upload will use
 the next version numbers (see [releasing](docs/releasing.md)); until then the two
 paths are not byte-identical, and that is expected rather than a bug.
-The existing published wheel metadata still says `License-Expression: MIT`; those
-immutable files cannot be rewritten. The current checkout intentionally documents
-MIT only for project-owned code and does not claim one license for bundled upstream
-materials.
-
 The distribution and CLI are named `reacli`; Python imports use `rac`.
 
 ## Prerequisites
@@ -345,24 +340,6 @@ scripts/     Host bootstrap and distribution checks
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development conventions.
 Virtual environments, REAPER run artifacts and local configuration are ignored by Git.
 
-### Attribution for Git-only reference material
-
-`reference/` and `schema/rpp/evidence/` are excluded from every wheel, sdist,
-documentation site and agent bundle. That is a packaging boundary, not a license
-boundary: the files are tracked in Git, so cloning this repository clones them
-too. They are not covered by the project's MIT license. Each upstream item remains
-under its own license and terms; attribution alone does not broaden those rights.
-Do not include an item in a public artifact unless its source terms or a separate
-redistribution permission allow it. Every retained file keeps its attribution and
-source link.
-
-Two conditions travel with that material and are not discharged by attribution:
-one source is labelled `cc-by-nc`, so **its noncommercial condition still
-applies**, and part of the specification derives from a GPL-3.0 repository. Read
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the
-[source and redistribution audit](docs/ecosystem/source-license-audit.md) before
-redistributing this repository or any part of it, especially for commercial use.
-
 ## Rea-Cli agent skill
 
 The [agent bundle source](integrations/agents/reaper-agent-cli/SKILL.md) packages a
@@ -384,7 +361,23 @@ separately. No checkout or persistent MCP server is required by the installed bu
 
 Project-owned code and original documentation are [MIT licensed](LICENSE).
 Imported reference data and other upstream materials remain under their own
-licenses and terms; the MIT license does not relicense them. See
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for provenance and redistribution
-conditions. REAPER and third-party plugins are not included and remain subject to
-their own licenses. This project is independent of Cockos.
+licenses and terms; the MIT license does not relicense them. `reference/` and
+`schema/rpp/evidence/` are Git-tracked reference material, so they are included
+when this repository is cloned even though they are excluded from wheels, sdists,
+the documentation site and the agent bundle. Retained upstream material keeps
+its attribution and source link.
+
+Cockos API and JSFX reference material is included with its source links under
+the applicable upstream terms. ReaTeam-derived schema material retains the
+applicable ReaTeam, IXix and Cockos Wiki attribution and terms. The Ultraschall
+render note retains Meo-Ada Mespotine/Ultraschall attribution and its source link;
+the `cc-by-nc` condition, including noncommercial use, applies to that material.
+Imported Lua resources likewise retain their original source attribution and
+terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and the
+[source and redistribution audit](docs/ecosystem/source-license-audit.md) for
+the per-source record.
+
+The already-published wheel metadata still carries `License-Expression: MIT` and
+cannot be rewritten. The current checkout keeps the project MIT scope and the
+upstream notices separate; REAPER and third-party plugins are not included and
+remain subject to their own licenses. This project is independent of Cockos.

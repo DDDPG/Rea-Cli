@@ -162,7 +162,7 @@
   <div class="container">
     <header class="section-head reveal">
       <p class="overline">01 — 工作流</p>
-      <h2>三个步骤，一条可信链路</h2>
+      <h2>三个步骤：编写、执行、验证</h2>
       <p class="section-sub"><code>Agent / Python / CLI → RPP 或 Lua 源码 → Rea-Cli 预检查 → REAPER → 另存工程 / 音频 → 验证</code></p>
     </header>
 
@@ -307,8 +307,8 @@ expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num"
   <div class="container">
     <header class="section-head reveal">
       <p class="overline">02 — 能力</p>
-      <h2>为 agent 回合而设计</h2>
-      <p class="section-sub">源码进，隔离执行，产物与验证出。Rea-Cli 是预检查与验证层，不替代 REAPER 的解析器、工程语义或执行环境。</p>
+      <h2>按一次任务来组织</h2>
+      <p class="section-sub">Agent 提交源码，Rea-Cli 做隔离执行，再对另存工程和渲染音频做验证。它是预检查与验证层，不替代 REAPER 的解析器、工程语义或执行环境。</p>
     </header>
 
     <div class="features-grid">
@@ -316,7 +316,7 @@ expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num"
         <div class="feature-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6H8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v6h6M9 14l-2 2 2 2m3-4-2 4m6-2 2 2-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <h3>RPP 即源码</h3>
+        <h3>把 RPP 当源码</h3>
         <p>RPP 被当作工程源码对待：agent 直接编写或修改，Rea-Cli 提供预检查、查询与语义 diff；未触碰的文本与不透明的插件数据原样保留。</p>
         <div class="feature-visual" aria-hidden="true">
           <div class="diff-line diff-del">−&nbsp;&nbsp;NAME "Vocal"</div>
@@ -330,7 +330,7 @@ expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num"
           <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 17V7l6 5-6 5Zm8 0h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>原生 Lua 扩展</h3>
-        <p>保留 Lua/ReaScript 作为逃生舱：轨道、MIDI、效果、发送与标记等宿主原生操作都可由 agent 编写，无需等待每个 API 被封装成工具。仅依赖 REAPER 原生 ReaScript API——不需要 SWS 或 ReaPack。</p>
+        <p>Lua/ReaScript 仍可直接写：轨道、MIDI、效果、发送与标记等宿主操作都可由 agent 编写，不必等每个 API 都先封装成工具。只依赖 REAPER 原生 ReaScript API，不需要 SWS 或 ReaPack。</p>
         <div class="feature-visual" aria-hidden="true">
           <div><span class="c-com">-- create.lua · 由 Rea-Cli 生成</span></div>
           <div><span class="c-kw">local</span> track = reaper.GetTrack(<span class="c-num">0</span>, <span class="c-num">0</span>)</div>
@@ -360,7 +360,10 @@ expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num"
         <h3>接入现有 Agent</h3>
         <p>Python 库、CLI 与仓库 skill 可直接接入 Claude Code、Codex、Qwen Code 等现有 harness——安装项目级 CLI 工具包与 skill 即可，无需 MCP 常驻服务。</p>
         <div class="feature-visual" aria-hidden="true">
-          <span class="chip">Claude Code</span><span class="chip">Codex</span><span class="chip">Qwen Code</span><span class="chip chip-dim">你的 harness</span>
+          <div class="list-row"><span class="list-name">Claude Code</span><span class="list-meta">.claude/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Codex</span><span class="list-meta">.agents/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Qwen Code</span><span class="list-meta">.qwen/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Python / CLI</span><span class="list-meta">import rac · reacli</span></div>
         </div>
       </article>
     </div>
@@ -372,7 +375,7 @@ expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num"
   <div class="container">
     <header class="section-head reveal">
       <p class="overline">03 — 快速开始</p>
-      <h2>跑通第一条链路</h2>
+      <h2>安装并离线试用</h2>
       <p class="section-sub">Python 3.10+。离线 RPP 检查只需要 Python；实时执行需要本机 REAPER 7.x。</p>
     </header>
 
@@ -450,33 +453,6 @@ expect(parse(root / <span class="c-str">"created.rpp"</span>)).track_count(<span
           <p class="qs-note">示例使用上方 CLI 导出的 quickstart 资源；Python 导入包名为 <code>rac</code>。<code>run()</code> 需本机已配置 REAPER。</p>
         </div>
       </div>
-
-      <aside class="qs-side reveal" aria-label="环境要求">
-        <h3 class="qs-side-title">环境要求</h3>
-        <div class="req-row">
-          <span class="req-key">Python 3.10+</span>
-          <span class="req-val">全部功能的基础</span>
-        </div>
-        <div class="req-row">
-          <span class="req-key">REAPER 7.x</span>
-          <span class="req-val">执行与渲染 · macOS / Linux</span>
-        </div>
-        <div class="req-row">
-          <span class="req-key">Lua 5.3 / 5.4 <code>luac</code></span>
-          <span class="req-val">CLI 生成 Lua 的语法预检</span>
-        </div>
-        <div class="req-row">
-          <span class="req-key">SWS / ReaPack / MCP</span>
-          <span class="req-val">无需安装</span>
-        </div>
-        <div class="req-row">
-          <span class="req-key">Windows</span>
-          <span class="req-val">仅离线检查；执行尚未实现</span>
-        </div>
-        <a class="btn btn-ghost btn-block" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/environment.md" target="_blank" rel="noopener">完整环境指南
-          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </aside>
     </div>
   </div>
 </section>
@@ -486,7 +462,7 @@ expect(parse(root / <span class="c-str">"created.rpp"</span>)).track_count(<span
   <div class="container">
     <header class="section-head reveal">
       <p class="overline">04 — 文档</p>
-      <h2>继续深入</h2>
+      <h2>文档</h2>
     </header>
     <div class="docs-grid reveal">
       <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/environment.md" target="_blank" rel="noopener">

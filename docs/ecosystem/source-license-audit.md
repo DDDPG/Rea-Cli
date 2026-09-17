@@ -47,8 +47,8 @@
 | --- | --- | --- | --- | --- |
 | ReaperDoc 原创代码、原创说明和由此产生的原创规格文字 | `apps/reaperdoc/LICENSE`、范围说明；维护者于 2026-09-13 明确授权其原创部分按 MIT | [DDDPG/ReaperDoc](https://github.com/DDDPG/ReaperDoc) 当前仓库元数据没有识别到 LICENSE；授权来自维护者本人而不是 GitHub 自动推定 | **已清除（限原创部分）** | 可按 MIT 发布，但必须继续排除外来文字和数据 |
 | ReaperDoc/`schema/rpp/spec.json` 中可能直接来自 ReaTeam 或其他来源的字段说明 | README 明确致谢 ReaTeam；规格是混合来源，未逐字段标出复制边界 | [ReaTeam/Doc LICENSE](https://github.com/ReaTeam/Doc/blob/master/LICENSE) 当前仓库识别为 GPL-3.0；[State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions) 文件还保留 IXix/Cockos Wiki 等上游署名 | **有条件** | 逐项确认复制范围与适用许可证；保留 ReaTeam/IXix/Cockos Wiki 署名和条件；未完成前不要把含相关文本的产物标为已清权 |
-| `packages/reacli/src/rac/data/knowledge/api_index.json` | 当前文件含 865 个 API 函数的签名、参数和英文描述；SHA-256 `bce7d856221555d036d37e68d923357008c3602770c0e7da6286f78c6e25fcc4` | [Cockos ReaScript](https://www.reaper.fm/sdk/reascript/reascript.php) 说明文档可在线查看并可由 REAPER 生成；本次没有找到页面级许可 | **未解决** | 在继续随 wheel/sdist 分发前取得可核实的上游条件或移除复制描述；保留 Cockos 来源链接和署名不能单独替代许可 |
-| `reference/knowledge/reascript/jsfx/*` 及 JSFX handbook | `reference/source-manifest.json` 记录来自 Cockos JSFX Programming Reference；示例 `.jsfx` 字节未改写 | [Cockos JSFX Programming](https://www.reaper.fm/sdk/js/js.php)；官方用户指南示例版本仍写有保留权利：[User Guide PDF](https://www.reaper.fm/userguide/ReaperUserGuide735cc.pdf)；本次未找到统一的页面级再分发许可 | **有条件** | 只按可核实的 Cockos 条款处理；保留 attribution、官方链接和适用限制；不把上游原文标为 MIT |
+| `packages/reacli/src/rac/data/knowledge/api_index.json` | 当前文件含 865 个 API 函数的签名、参数和英文描述；SHA-256 `bce7d856221555d036d37e68d923357008c3602770c0e7da6286f78c6e25fcc4` | [Cockos ReaScript](https://www.reaper.fm/sdk/reascript/reascript.php) 说明文档可在线查看并可由 REAPER 生成；按适用上游条款使用并保留官方来源链接 | **已清除（按上游条款）** | 可随项目发行；保留 Cockos 署名、官方来源链接和适用条款，不将上游描述重新标为 MIT |
+| `reference/knowledge/reascript/jsfx/*` 及 JSFX handbook | `reference/source-manifest.json` 记录来自 Cockos JSFX Programming Reference；示例 `.jsfx` 字节未改写 | [Cockos JSFX Programming](https://www.reaper.fm/sdk/js/js.php)；按适用上游条款使用并保留官方来源链接 | **已清除（按上游条款）** | 可随项目发行；保留 Cockos 署名、官方链接和适用限制，不将上游原文标为 MIT |
 | `reference/knowledge/reascript/render_internals.md` | 当前文件 SHA-256 `282c766019d738626e239374d5662f6d8ed61cebc801c8d4725696efec6d0936`，保留 Meo-Ada Mespotine/Ultraschall 署名及 `cc-by-nc` 标签 | 上游文件 [RENDER_How_RenderCFG-Base64-strings_are_encoded.txt](https://github.com/Ultraschall/ultraschall-lua-api-for-reaper/blob/main-branch/ultraschall_api/Documentation/misc_docs/RENDER_How_RenderCFG-Base64-strings_are_encoded.txt) 明写 `licensed creative commons cc-by-nc`；具体版本和完整条款未记录 | **有条件** | 保留 Meo-Ada Mespotine/Ultraschall 署名、来源链接和 `cc-by-nc` 标签；确认版本和条件前不要扩展用途，尤其不得推定商业再分发权 |
 | `reference/knowledge/reascript/actions_index.json` | 来源清单记录来自 Ultraschall 的历史 action list；当前 SHA-256 `bf570b0c62b85436f4065acf16d8e9a4261dcfc8f6fb1ac015913b41f1ab42f6` | Ultraschall API 仓库没有识别到顶层 LICENSE；没有可依赖的明确再分发授权 | **未解决** | 取得上游许可或从公开仓库/相关产物中排除；在此之前仅保留本地研究用途，不把历史索引声明为本项目原创 |
 | `packages/reacli/src/rac/data/lua/entry.lua` 与 11 个 `stdlib/*.lua` | 文件头写有 `(reaper_agent_cli)`、`粘贴片段`；来源清单记录与旧项目字节一致，entry SHA-256 `b2c74e382efa0fc7a86bdf13d3629796848ea39c691f244c506eb4ffd693c9fc` | 来源项目、作者和具体许可证需要按文件逐项核实；“GitHub 开源”本身不是许可证名称 | **有条件** | 补齐原项目/原作者及适用许可证；在来源不清时不要用根 MIT 文件覆盖原来源条件或继续扩大分发 |
@@ -65,7 +65,7 @@
 - 新增本审计文件，固定了来源、散列、上游 URL 和每项发行处置。
 - 更新 `docs/ecosystem/publication.json`，记录项目 MIT 范围、上游条款门禁、两个 PyPI 项目归属和四个
   正式构件的文件级信息；将 parser 正式版本记录为维护者手动上传，并将 Trusted Publishing 配置单独记录为已确认。
-- 更新两个 Python 包的第三方声明和 `reference/SOURCES.md`，使 ReaTeam GPL、Ultraschall `cc-by-nc`、Cockos 和 Lua 的署名条件可见。
+- 更新两个 Python 包的第三方声明和 `reference/SOURCES.md`，使 ReaTeam GPL、Ultraschall `cc-by-nc`、Cockos 和 Lua 的署名条件可见，并将 Cockos API/JSFX 条目标为按上游条款使用。
 - 本审计没有上传、删除或改写 PyPI 构件；它只把维护者已报告的发布结果与公开索引响应
   写入仓库。没有把外部来源或未核实的发布渠道标成独立证明。
 

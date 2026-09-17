@@ -21,11 +21,6 @@ project.save("copy.rpp")  # refuses overwrite by default
 
 `fields()` exposes original values and field-level evidence status. Unknown semantics remain raw.
 The raw tree is not an rppxml object. REAPER is required only by the separate reacli execution layer.
-Project-owned parser code and original documentation are MIT. The distribution does
-not claim one blanket license for the bundled reference descriptions; they retain
-their own source terms. See THIRD_PARTY_NOTICES.md before redistribution.
-
-
 ## Source development
 
 From the monorepo root: `python -m pip install -e ./packages/reaper-parser`, then
@@ -41,3 +36,10 @@ Use `raw()` to distinguish missing fields from convenience-property fallbacks.
 requires a verified write contract. Host audio interpretation belongs to `rac.media`.
 The reviewed checkout may contain post-upload parser hardening that is not part of
 the immutable `0.1.0a1` artifact.
+
+## License
+
+Project-owned parser code and original documentation are [MIT licensed](../../LICENSE).
+Bundled reference descriptions retain their own source terms and attribution. See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for provenance and redistribution
+information.

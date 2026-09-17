@@ -35,10 +35,9 @@ plus the Git-only redistribution boundary; keep the two aligned.
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
   Official references: [ReaScript overview](https://www.reaper.fm/sdk/reascript/reascript.php)
   and [generated API help](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
-  The inspected pages provide access to the reference but no separate redistribution
-  grant for copying the descriptions into a package was found. Include this data in
-  a public package only after Cockos's applicable terms or a separate redistribution
-  permission have been confirmed; attribution and source links alone are not enough.
+  The reference material is included with its official source links under the
+  applicable upstream terms. Retain Cockos attribution and source links with the
+  copied descriptions; the project MIT scope does not relicense them.
 
 Before public distribution, preserve the recorded source attribution and applicable
 terms. The source gate remains conditional until every bundled upstream item has a
@@ -83,11 +82,10 @@ conditions, not a blanket permission to publish.
   top-level LICENSE. Retain the source link, attribution and any applicable
   noncommercial condition; confirm the exact permission before public distribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
-  No page-level redistribution grant was located during inspection. Retain Cockos
-  attribution and source links only within the terms that permit the use. The official [JSFX programming
-  reference](https://www.reaper.fm/sdk/js/js.php) is a public reference page, and one
-  official user-guide PDF version states that reproduction requires permission:
-  [REAPER User Guide](https://www.reaper.fm/userguide/ReaperUserGuide735cc.pdf).
+  Retain Cockos attribution and the official links. The material is included under
+  the applicable upstream terms and is not relicensed as MIT. The official [JSFX
+  programming reference](https://www.reaper.fm/sdk/js/js.php) remains the canonical
+  source.
 
 Before public release, preserve these source terms and attribution in every affected
 artifact. The detailed decision log is

@@ -129,9 +129,6 @@ reacli --version
 两者的 API 都可能继续调整。上面的路线 B 安装的是较新的代码，下次上传会使用新的版本号
 （见[发布流程](docs/releasing.md)）；在那之前两条路线的代码并非逐字节一致，这是预期情况
 而不是缺陷。
-已发布 wheel 的元数据仍记录 `License-Expression: MIT`，不可变构件无法回写。当前 checkout
-只将 MIT 用于项目自有代码，并在上游材料条款未逐项解决前不声明发行包具有单一许可证。
-
 安装包与 CLI 名称为 `reacli`，Python 导入名为 `rac`。
 
 ## 前置要求
@@ -309,20 +306,6 @@ scripts/     环境引导与发行包检查
 开发约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 虚拟环境、REAPER 执行产物和本地配置已由 Git 忽略。
 
-### Git-only 参考语料的署名要求
-
-`reference/` 与 `schema/rpp/evidence/` 不进入任何 wheel、sdist、文档站或 agent bundle。
-这是**打包边界，不是授权边界**：这些文件由 Git 跟踪，因此 clone 本仓库就会一并取得。
-它们不受本项目 MIT 许可证覆盖。每项上游内容继续遵循其自身许可证和条款；仅保留署名
-并不会扩大再分发权。除非来源条款或另行取得的再分发许可明确允许，否则不要将其放入公开
-构件。每个保留文件都应继续保留署名与来源链接。
-
-有两项条件随这批材料一同生效，且**不能靠署名满足**：其中一份来源标注为 `cc-by-nc`，
-其**非商业性条件仍然有效**；另有部分规范文本派生自 GPL-3.0 仓库。
-再分发本仓库或其任何部分（尤其是商业用途）之前，请先阅读
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和
-[来源与再分发授权审计](docs/ecosystem/source-license-audit.md)。
-
 ## Rea-Cli Agent skill
 
 [Agent bundle 源码](integrations/agents/reaper-agent-cli/SKILL.md)包含自包含的 skill、
@@ -346,6 +329,16 @@ scripts/     环境引导与发行包检查
 ## 许可证
 
 项目自有代码和原创文档采用 [MIT 许可证](LICENSE)。导入资料及其他上游内容继续遵循
-自身许可证和条款，MIT 不会重新授权这些内容。来源与再分发注意事项见
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。REAPER 和第三方插件不包含在项目中，
-分别遵循自身许可证。本项目独立维护，与 Cockos 无隶属关系。
+自身许可证和条款，MIT 不会重新授权这些内容。`reference/` 与
+`schema/rpp/evidence/` 虽不进入 wheel、sdist、文档站或 agent bundle，但由 Git 跟踪，
+clone 本仓库时会一并取得；保留的上游内容继续带有署名和来源链接。
+
+Cockos API 和 JSFX 参考资料按适用的上游条款使用，并保留来源链接。来自 ReaTeam 的
+schema 内容保留 ReaTeam、IXix 和 Cockos Wiki 的适用署名与条款。Ultraschall 渲染笔记
+保留 Meo-Ada Mespotine/Ultraschall 署名和来源链接，其中 `cc-by-nc` 条件（包括非商业
+使用限制）继续适用。导入的 Lua 资源也保留原始来源署名和条款。详见
+[第三方声明](THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](docs/ecosystem/source-license-audit.md)。
+
+已发布 wheel 的元数据仍记录 `License-Expression: MIT`，不可变构件无法回写；当前 checkout
+将项目 MIT 范围与上游声明分开记录。REAPER 和第三方插件不包含在项目中，分别遵循自身许可证。
+本项目独立维护，与 Cockos 无隶属关系。

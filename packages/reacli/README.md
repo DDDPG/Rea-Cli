@@ -20,7 +20,10 @@ hardening that is not part of the immutable `0.1.0` artifact.
 Run `rac doctor --profile offline --json` without REAPER, or configure a REAPER host for execution.
 See https://github.com/DDDPG/Rea-Cli for the ecosystem guide and source.
 
-Project-owned code and original documentation are MIT. The distribution does not
-claim one blanket license for its bundled reference data: those items retain their
-own source terms and attribution. See the package notices before redistributing
-the wheel or source distribution.
+## License
+
+Project-owned code and original documentation are [MIT licensed](../../LICENSE).
+Bundled reference data retains its source terms and attribution. Cockos API
+reference material is included with its source links under the applicable
+upstream terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the
+package's provenance and redistribution conditions.

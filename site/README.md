@@ -43,10 +43,15 @@ python3 -m http.server 8080 --directory site
 - 首屏工作台与三步流程中的面板内容均为**流程示意**（演示数据），页面上已明确标注；未伪装成真实启动 REAPER 或真实验证结果。
 - 页面不包含外部图片资源；图标为仓库自有 `docs/assets/reacli-icon.png` 的本地拷贝。
 - 文档链接使用 `https://github.com/DDDPG/Rea-Cli/blob/HEAD/...` 指向真实路径：`docs/environment.md`、`docs/api.md`、`docs/validation.md`、`docs/harness/README.zh-CN.md`。
-- 页脚声明：项目自有代码采用 MIT；上游内容遵循各自许可证和条款；项目独立于 Cockos，REAPER® 为 Cockos 商标。
-
 ## 无障碍与交互自查清单
 
 - 选项卡遵循 `tablist` 模式（方向键 / Home / End 可切换）；复制结果经 `aria-live` 区域播报。
 - 全部可交互元素触控区 ≥ 44px；代码块局部横向滚动；360 / 390 / 768 / 1440 宽度无页面级横向溢出。
 - 移动端为纵向流程标签与抽屉菜单（Esc 可关闭）；提供跳转主内容的 skip link。
+
+## 许可证
+
+页面中的项目自有内容采用 [MIT 许可证](../LICENSE)。上游内容继续遵循各自许可证和条款；
+Cockos API 和 JSFX 参考资料保留来源链接并按适用的上游条款使用。Ultraschall 渲染笔记
+保留 Meo-Ada Mespotine/Ultraschall 署名、来源链接和 `cc-by-nc` 非商业条件。详见
+[第三方声明](../THIRD_PARTY_NOTICES.md) 与[来源和再分发审计](../docs/ecosystem/source-license-audit.md)。
