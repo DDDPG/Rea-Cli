@@ -2,7 +2,8 @@
 
 当前状态：私有仓库候选已通过跨平台验收；来源授权已由维护者确认，TestPyPI 的
 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成首次 OIDC 上传并通过隔离安装；
-GitHub `pypi` environment 与 PyPI 的 `reacli` publisher 已配置，首次生产上传尚未执行。
+GitHub `pypi` environment 与 PyPI 的 `reacli` publisher 已配置，`reacli==0.1.0` 已完成首次
+生产 OIDC 上传并通过正式 PyPI 隔离安装；`reaper-parser` 的生产 publisher 与上传仍待完成。
 
 2026-09-15 已完成[来源与再分发授权审计](source-license-audit.md)。维护者确认
 ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来源署名；该声明
@@ -25,9 +26,9 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 - 修正 parser 来源说明，移除不属于该包的 Cockos API 索引、rac Lua 和依赖描述。
 - 当前 schema 来源更新为 `6416435fdf4cc7e38346fd7875f5d04949b431a2`；
   `32047bb` 仅作为旧快照历史保留。
-- PyPI 上 `reacli` 和 `reaper-parser` 的 JSON 接口仍返回 404；TestPyPI 的 `reacli`
-  JSON 已返回版本 `0.1.0`，`reaper-parser` JSON 已返回版本 `0.1.0a1`。索引响应
-  不证明全部包名的账号控制权。
+- PyPI 的 `reacli` JSON 已返回 HTTP 200 和版本 `0.1.0`；`reaper-parser` 仍返回 404。
+  TestPyPI 的 `reacli` JSON 已返回版本 `0.1.0`，`reaper-parser` JSON 已返回版本
+  `0.1.0a1`。索引响应不证明全部包名的账号控制权。
 
 ## 各产物剩余事项
 
@@ -47,8 +48,8 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 | 门禁 | 当前值 | 结果 | 说明 |
 | --- | --- | --- | --- |
 | `source_permissions_resolved` | `true` | 通过（维护者声明） | 已记录 ReaTeam、Cockos、Ultraschall 和 Lua 来源使用确认 |
-| `package_ownership_verified` | `false` | 阻拦 | TestPyPI 两个项目已返回项目 JSON，但 PyPI 两项及生产项目归属仍未核实 |
-| `trusted_publishing_configured` | `false` | 阻拦 | TestPyPI 两个项目的 OIDC 上传已验证，PyPI 的 `reacli` publisher 仅有维护者报告，首次生产上传和 parser publisher 尚未核实 |
+| `package_ownership_verified` | `false` | 阻拦 | PyPI 的 `reacli` 已返回项目 JSON，但 `reaper-parser` 尚未创建，两个项目的完整生产归属仍未核实 |
+| `trusted_publishing_configured` | `false` | 阻拦 | `reacli` 的 PyPI OIDC 上传已验证，`reaper-parser` 的生产 publisher 和上传尚未核实 |
 
 2026-09-15 本地实际执行结果：
 
@@ -59,22 +60,26 @@ $ echo $?
 1
 ```
 
-因此当前 `check_publish` 的未满足项只有后两项。脚本还包含一个条件门禁：当
-`TARGET=pypi` 时，运行必须来自 `ecosystem-v*` 标签；由于前置布尔门禁尚未通过，
-本次运行尚未进入该条件检查。
+因此普通 `check_publish` 的未满足项仍是后两项。脚本还包含一个条件门禁：当
+`TARGET=pypi` 时，运行必须来自 `ecosystem-v*` 标签；`reacli` 的一次性 bootstrap
+已在 `ecosystem-v0.1.0` 上通过该条件，普通生产模式仍不会因此自动放开。
 
 为支持两个项目在两个索引上顺序首次创建，`publish.yml` 现在提供显式的
 `mode=testpypi-bootstrap` 和 `mode=pypi-bootstrap`。每个模式只接受 manifest 中已登记的
 单个项目；PyPI 模式只允许 `TARGET=pypi` 且必须来自 `ecosystem-v*` 标签，不会放宽普通
-模式或 source gate。两个 TestPyPI 项目的首次上传均已验证，PyPI 仅登记了 reacli 的待上传
-bootstrap。
+模式或 source gate。两个 TestPyPI 项目的首次上传均已验证，PyPI 的 `reacli` bootstrap
+已完成，parser 仍需单独登记和上传。
 
 ## 实时索引与 GitHub 环境复核
 
+- `https://pypi.org/pypi/reacli/json` 在 2026-09-17 返回 HTTP 200，项目版本为 `0.1.0`；
+  新建隔离环境从正式 PyPI 下载该 wheel 并成功导入 `rac==0.1.0`（使用 `--no-deps`，
+  因 parser 尚未发布，完整依赖安装暂不宣称通过）。
+- `https://pypi.org/pypi/reaper-parser/json` 仍返回 HTTP 404。
 - `https://test.pypi.org/pypi/reacli/json` 在 2026-09-17 返回 HTTP 200，项目版本为
   `0.1.0`；`https://test.pypi.org/pypi/reaper-parser/json` 返回 HTTP 200，项目版本为
-  `0.1.0a1`。PyPI 两个项目仍未提供生产项目证据，索引响应本身不能证明全部包名的账号
-  所有权，因此 `package_ownership_verified` 继续保持 `false`。
+  `0.1.0a1`。PyPI 的 parser 项目仍未提供生产项目证据，索引响应本身不能证明全部包名的
+  账号所有权，因此 `package_ownership_verified` 继续保持 `false`。
 - `gh api repos/DDDPG/Rea-Cli/environments` 在 2026-09-17 返回 `testpypi` 和 `pypi`
   两个 environment，`protection_rules` 均为空。GitHub environment 存在本身不等于
   PyPI 已登记 Trusted Publisher，故 `trusted_publishing_configured` 继续为 `false`。
@@ -83,8 +88,10 @@ bootstrap。
 - GitHub Actions run `35202476617` 的 build 和 publish job 均成功，使用 TestPyPI OIDC
   发布了 `reaper-parser==0.1.0a1`；新的隔离虚拟环境已从 TestPyPI 安装并成功导入
   `reaper_parser`。
-- 维护者报告 PyPI 的 `reacli` publisher 已配置，GitHub `pypi` environment 已创建；首次
-  生产上传仍需使用 `pypi-bootstrap` 和 `ecosystem-v*` 标签。
+- GitHub Actions run `35206896709` 的 build 和 publish job 均成功，使用 PyPI OIDC 发布了
+  `reacli==0.1.0`；正式 PyPI JSON 和隔离 wheel 安装均已复核。
+- GitHub `pypi` environment 已创建且无保护规则；`reaper-parser` 的 PyPI publisher 尚未
+  通过实际上传消费验证。
 
 ## 账号与发布身份
 
@@ -127,8 +134,11 @@ GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已
    并验收，旧候选不原地替换。
 3. TestPyPI 的 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成 action、JSON
    和隔离安装验证；保留 runs `35201286656`、`35202476617` 作为证据。
-4. 现在以 `ecosystem-v0.1.0` 标签运行 `target=pypi`、`package=reacli`、
-   `mode=pypi-bootstrap`。成功后验证 PyPI 项目，再注册 `reaper-parser` 的 PyPI publisher，
-   并按同样方式单独上传 parser。
+4. `reacli==0.1.0` 已在 `ecosystem-v0.1.0` 上完成 `target=pypi`、
+   `package=reacli`、`mode=pypi-bootstrap`；保留 run `35206896709`、PyPI JSON 和
+   隔离安装作为证据。
+5. 在 PyPI 为 `reaper-parser` 注册同一仓库、workflow 和 `pypi` environment 的 pending
+   publisher；配置完成后更新 manifest，创建新的 `ecosystem-v0.1.0a1` 标签，并以
+   `target=pypi`、`package=reaper-parser`、`mode=pypi-bootstrap` 单独上传 parser。
 
 TestPyPI 也是对外上传，不等于私有分发。保持 Git 仓库 private 不会使索引包私有。
