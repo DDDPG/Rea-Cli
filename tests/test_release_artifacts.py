@@ -49,6 +49,7 @@ def release(tmp_path):
     directory.mkdir()
     source = {
         "src/rac/__init__.py": b'__version__ = "0.1.0"\n',
+        "src/rac/py.typed": b"",
         "src/rac/data/lua/entry.lua": b"local fixture = true\n",
         "src/rac/data/knowledge/api_index.json": b'{"functions": {}}\n',
         "pyproject.toml": b'[project]\nname = "reacli"\ndynamic = ["version"]\n',
@@ -91,7 +92,7 @@ def test_matching_release_reports_verifiable_artifacts(release):
 
     assert report["ok"] is True
     assert report["version"] == "0.1.0"
-    assert report["runtime_files_verified"] == 3
+    assert report["runtime_files_verified"] == 4
     assert report["supplemental_reference_included"] is False
     assert {artifact["file"] for artifact in report["artifacts"]} == {
         release.wheel_path.name, release.sdist_path.name}

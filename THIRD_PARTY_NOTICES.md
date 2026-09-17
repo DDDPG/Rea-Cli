@@ -1,7 +1,9 @@
 # Third-party software and reference data
 
-The [MIT license](LICENSE) covers project-owned code and documentation. It does
-not relicense the third-party reference text and data described below.
+The [MIT license](LICENSE) covers project-owned code and original documentation
+only. It does not relicense the third-party reference text, code or data
+described below. Each upstream item remains under its own license and terms.
+This notice records scope and provenance; it is not a blanket redistribution grant.
 
 REAPER is a Cockos product. This project is independent, is not endorsed by
 Cockos, and includes no REAPER executables, plugins, installers or license keys.
@@ -27,16 +29,17 @@ the two are kept aligned.
 - `packages/reacli/src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
   Official reference: [ReaScript API](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
-  No separate redistribution grant was located in the local source files. On
-  2026-09-15 the maintainer confirmed that this reference may be curated and used
-  with Cockos attribution and source links; the upstream terms are not replaced by
-  the project's MIT license.
+  No separate redistribution grant was located in the local source files. The
+  reference may be included only if Cockos's applicable terms or a separate
+  redistribution permission allow the copied descriptions. Cockos attribution and
+  source links do not replace that requirement or the project's MIT scope.
 
-That 2026-09-15 maintainer attestation is the repository's current source-gate
-record, not independent upstream authorization. A project-level license does not
-grant rights to these third-party materials; preserve their source links, notices
-and applicable terms, and re-run the audit if the scope or distribution context
-changes.
+The project policy is to follow each upstream license and term, not to treat a
+maintainer statement, public URL or noncommercial intent as permission. A
+project-level license does not grant rights to these third-party materials;
+preserve their source links, notices and applicable terms, and re-run the audit if
+the scope or distribution context changes. Unresolved source terms remain a release
+gate for any artifact that contains the affected material.
 
 ## Python dependencies
 
@@ -59,10 +62,10 @@ wheel, sdist, documentation site and agent bundle. That is a packaging boundary,
 not a license boundary: those files are tracked in Git, so cloning or
 redistributing this repository distributes them too.
 
-On 2026-09-17 the maintainer confirmed that this material may be published with
-its sources attributed. It is not covered by the project's MIT license, so
-publishing it means carrying the attribution below rather than relicensing it.
-Keep each item's source link and notice:
+This material is not covered by the project's MIT license. It may be published
+only when each item's source terms or a separate redistribution permission allow
+it, with the attribution and notice below carried along. Keep each item's source
+link and applicable conditions:
 
 - The annotated RPP tree and extraction notes derive from ReaperDoc at the
   historical `32047bb` snapshot. Retain the ReaperDoc and ReaTeam attribution
@@ -86,4 +89,5 @@ The current source-gate decision is recorded in
 [the publication audit](docs/ecosystem/source-license-audit.md). Preserve
 attribution and applicable terms in future releases; the [sources and attribution](reference/SOURCES.md)
 and [reference manifest](reference/source-manifest.json) identify the files and
-their provenance.
+their provenance. The source gate remains conditional until the unresolved items
+are licensed, permitted or excluded from the public artifact.

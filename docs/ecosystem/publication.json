@@ -1,9 +1,11 @@
 {
-  "source_permissions_resolved": true,
+  "source_permissions_resolved": false,
+  "source_license_policy": "project_owned_code_and_original_documentation_mit; upstream_material_follows_its_own_license_or_terms",
+  "package_license_metadata": "no_single_expression_until_bundled_upstream_terms_are_resolved",
   "package_ownership_verified": true,
   "trusted_publishing_configured": false,
-  "status": "source authorization attested; both PyPI projects published; reacli OIDC verified; parser artifact live but upload channel not independently evidenced",
-  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. PyPI JSON currently serves both projects, both package owners are DDDPG, and all four formal wheel/sdist files were checked against their published SHA-256 values and the uploaded-source revision. This final review then added runtime hardening and privacy fixes after the uploads, so the current checkout intentionally differs from the immutable package files and requires a new version before another upload. The reacli production upload has a successful OIDC workflow record. The parser's earlier production publish run failed before its publish steps because of a GitHub billing failure; the current parser artifacts are live, but this review found no successful parser publish-job record, so the global Trusted Publisher gate remains false.",
+  "status": "source-specific license review required; both PyPI projects published; reacli OIDC verified; parser artifact live but upload channel not independently evidenced",
+  "reason": "Project-owned code and original documentation are MIT. Upstream ReaTeam, Cockos, Ultraschall, Lua and historical reference materials remain under their own licenses and terms; the project MIT license does not relicense them. The source gate stays unresolved until each material included in a public artifact has a clear source basis or is excluded. PyPI JSON currently serves both projects, both package owners are DDDPG, and all four formal wheel/sdist files were checked against their published SHA-256 values and the uploaded-source revision. This final review then added runtime hardening and privacy fixes after the uploads, so the current checkout intentionally differs from the immutable package files and requires a new version before another upload. The reacli production upload has a successful OIDC workflow record. The parser's earlier production publish run failed before its publish steps because of a GitHub billing failure; the current parser artifacts are live, but this review found no successful parser publish-job record, so the global Trusted Publisher gate remains false.",
   "audit": "publication-audit.md",
   "checked_date": "2026-09-17",
   "release_artifacts": {
@@ -70,13 +72,13 @@
     }
   },
   "source_audit": {
-    "checked_date": "2026-09-15",
-    "status": "maintainer_attested; attribution_required",
-    "authorization_basis": "maintainer confirmation in conversation on 2026-09-15",
+    "checked_date": "2026-09-17",
+    "status": "policy_recorded; per_source_terms_required; gate_blocking",
+    "authorization_basis": "project license scope statement; not a blanket redistribution grant",
     "user_noncommercial_statement": true,
     "noncommercial_is_not_permission": true,
     "original_reaperdoc": "maintainer-authorized MIT scope for original portions only",
-    "external_material": "maintainer confirms use of ReaTeam, Cockos public references, Ultraschall notes, and open-source Lua materials with attribution; upstream license terms and notices remain recorded",
+    "external_material": "ReaTeam, Cockos public references, Ultraschall notes, open-source Lua materials and historical references remain subject to their own licenses and terms; attribution and source-specific conditions remain required",
     "attribution_required": true,
     "artifacts": [
       "docs/ecosystem/source-license-audit.md",
@@ -84,9 +86,14 @@
       "packages/reacli/THIRD_PARTY_NOTICES.md",
       "packages/reaper-parser/THIRD_PARTY_NOTICES.md"
     ],
-    "release_decision": "source gate cleared by maintainer attestation; both PyPI projects and four formal artifacts are live; reacli production OIDC is verified; parser artifact existence is verified but its upload channel is not independently evidenced; normal future publication remains gated by Trusted Publisher evidence"
+    "release_decision": "source gate remains blocking until each included upstream item has a clear license or redistribution permission, or is excluded; both PyPI projects and four formal artifacts are live; reacli production OIDC is verified; parser artifact existence is verified but its upload channel is not independently evidenced; normal future publication also remains gated by Trusted Publisher evidence"
   },
   "remaining_gates": {
+    "source_permissions_resolved": {
+      "value": false,
+      "status": "blocking",
+      "evidence": "The repository contains mixed-source schema, Cockos reference descriptions, Ultraschall material and copied Lua resources. Several inspected sources do not provide a clear page-level or repository-level redistribution grant; the project MIT license applies only to project-owned code and original documentation. Resolve each source or exclude the affected material before public distribution."
+    },
     "package_ownership_verified": {
       "value": true,
       "status": "cleared",

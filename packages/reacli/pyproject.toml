@@ -9,7 +9,6 @@ description = "REAPER CLI helpers: RPP editing, Lua generation, execution proofs
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name = "reacli contributors"}]
-license = "MIT"
 license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
 keywords = ["reaper", "reascript", "lua", "rpp", "audio", "cli"]
 classifiers = [

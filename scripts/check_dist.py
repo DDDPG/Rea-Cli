@@ -25,7 +25,7 @@ SUPPLEMENTAL_FILES = {
     "source-manifest.json", "inspect_project.body.lua", "build_inspector.py",
     "gain_simple.jsfx", "delay_basic.jsfx", "midi_monitor.jsfx",
 }
-RUNTIME_SUFFIXES = {".py", ".lua", ".json", ".ini", ".rpp"}
+RUNTIME_SUFFIXES = {".py", ".lua", ".json", ".ini", ".rpp", ".typed"}
 
 
 def check_members(names: list[str]) -> None:

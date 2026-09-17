@@ -21,15 +21,17 @@ project.save("copy.rpp")  # refuses overwrite by default
 
 `fields()` exposes original values and field-level evidence status. Unknown semantics remain raw.
 The raw tree is not an rppxml object. REAPER is required only by the separate reacli execution layer.
-Bundled reference descriptions retain their source terms; see THIRD_PARTY_NOTICES.md.
+Project-owned parser code and original documentation are MIT. The distribution does
+not claim one blanket license for the bundled reference descriptions; they retain
+their own source terms. See THIRD_PARTY_NOTICES.md before redistribution.
 
 
 ## Source development
 
 From the monorepo root: `python -m pip install -e ./packages/reaper-parser`, then
 install pytest and run `python -m pytest tests/conformance -q`.
-See the [API and field contracts](../../docs/ecosystem/api.md)
-([中文](../../docs/ecosystem/api.zh-CN.md)) and [contributor guide](../../CONTRIBUTING.md)
+See the [API and field contracts](https://github.com/DDDPG/Rea-Cli/blob/main/docs/ecosystem/api.md)
+([中文](https://github.com/DDDPG/Rea-Cli/blob/main/docs/ecosystem/api.zh-CN.md)) and [contributor guide](https://github.com/DDDPG/Rea-Cli/blob/main/CONTRIBUTING.md)
 in a complete checkout. These relative links target repository browsing; the
 standalone source archive does not include the monorepo documentation.
 

@@ -29,6 +29,21 @@ def test_normal_mode_keeps_global_prerequisite_gate():
         evaluate(publication(), target="testpypi", package="reacli")
 
 
+def test_source_gate_blocks_bootstrap_until_upstream_terms_are_resolved():
+    record = publication()
+    record["source_permissions_resolved"] = False
+    with pytest.raises(
+        PublicationGateError,
+        match="Publication prerequisites unresolved: source_permissions_resolved",
+    ):
+        evaluate(
+            record,
+            target="testpypi",
+            package="reacli",
+            mode="testpypi-bootstrap",
+        )
+
+
 def test_testpypi_bootstrap_allows_manifest_authorized_package():
     evaluate(
         publication(),

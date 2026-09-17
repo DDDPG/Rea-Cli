@@ -131,9 +131,10 @@ folders, checks schema freshness, compares archive runtime bytes to source, and 
 Candidate builds do not upload or change visibility. The current package artifacts are
 already live on PyPI but are immutable; because this checkout includes post-upload runtime
 hardening, a same-version candidate is for review only and the next upload must use a new
-version. The normal future-publication gate remains blocked until Trusted Publisher/channel
-evidence is complete; source authorization is recorded as a maintainer attestation in
-`publication.json`.
+version. The normal future-publication gate remains blocked until both source-specific
+license/permission review and Trusted Publisher/channel evidence are complete;
+`publication.json` records MIT only for project-owned code and keeps upstream terms
+separate.
 
 ## Migration and recovery
 

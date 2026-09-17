@@ -1,8 +1,4 @@
-> **Ecosystem alpha:** Python packages live in `packages/reacli` and `packages/reaper-parser`.
-> Install both together. `apps/reaperdoc` is an integration copy; ReaperDoc remains independently maintained.
-> See [installation and validation boundaries](docs/ecosystem/README.md),
-> [ReaperDoc maintenance](docs/ecosystem/reaperdoc-maintenance.md) and [deferred public entry points](docs/ecosystem/public-entrypoints.md).
-
+<p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli icon"></p>
 <h1 align="center">Rea-Cli</h1>
 
 <p align="center"><strong>REAPER coding. REAPER executing. REAPER verifying.</strong></p>
@@ -31,6 +27,54 @@ Rea-Cli drives REAPER's **native ReaScript API only**. It does not require the
 **SWS extension**, **ReaPack**, or any other REAPER add-on, and it installs none
 of them. Bundled historical references and example projects may mention SWS
 actions; those are lookup data, not runtime dependencies.
+
+## Quick start
+
+If you have not installed Rea-Cli yet, choose a path in [Installation](#installation)
+below and then run the commands that match your workflow.
+
+### Offline quick start (no REAPER)
+
+Inspect a bundled empty project and query the packaged knowledge indexes:
+
+```bash
+reacli doctor --profile offline --json
+reacli resources --output ./quickstart
+reacli rpp validate ./quickstart/minimal.rpp
+reacli knowledge api GetTrack
+```
+
+Validation reports `ok: true` and zero tracks. Resource export protects existing
+files; use a fresh output directory on reruns. This path needs Python only.
+
+### Build a playable session (requires REAPER)
+
+![From blank to a playable REAPER session, 52 numbered build states](https://res.cloudinary.com/ybukqfxy/image/upload/v1789647834/showcase_compressed.gif)
+
+This walkthrough builds a self-contained, playable REAPER session from a blank
+project. After installing from a source checkout and configuring REAPER with the
+[environment guide](docs/environment.md), run from the repository root:
+
+```bash
+reacli init
+reacli doctor --json
+python examples/show_session.py ./demo/my-first-session
+```
+
+Open **`demo/my-first-session/Show-Session.rpp`** in REAPER and press Play. The
+project uses embedded MIDI and REAPER's built-in **ReaSynth**, so it needs no
+audio assets or third-party instruments. Use a new output directory on each run.
+Add `--render` when you also want a local WAV preview. If ReaSynth discovery
+fails, prepare the dedicated VST index as described in the
+[environment guide](docs/environment.md#plugin-discovery-and-macos-window-restoration).
+
+`examples/show_session.py` and `examples/create_project.py` export their own
+resources into the output directory, so they do not need the `quickstart` export
+above. Both need a source checkout, because the examples live in the repository
+rather than in the wheel.
+
+For the session layout, effect settings, verification boundaries and the 52
+build checkpoints behind the GIF, see the [playable show demo guide](examples/README.md#playable-show-demo).
 
 ## Names at a glance
 
@@ -128,52 +172,6 @@ brew install python lua@5.4
 
 See the [environment guide](docs/environment.md) for platform setup, executable
 discovery and troubleshooting.
-
-## Quick start
-
-### Offline quick start (no REAPER)
-
-Inspect a bundled empty project and query the packaged knowledge indexes:
-
-```bash
-reacli doctor --profile offline --json
-reacli resources --output ./quickstart
-reacli rpp validate ./quickstart/minimal.rpp
-reacli knowledge api GetTrack
-```
-
-Validation reports `ok: true` and zero tracks. Resource export protects existing
-files; use a fresh output directory on reruns. This path needs Python only.
-
-### Build a playable session (requires REAPER)
-
-![From blank to a playable REAPER session, 52 numbered build states](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
-
-This walkthrough builds a self-contained, playable REAPER session from a blank
-project. After installing from a source checkout and configuring REAPER with the
-[environment guide](docs/environment.md), run from the repository root:
-
-```bash
-reacli init
-reacli doctor --json
-python examples/show_session.py ./demo/my-first-session
-```
-
-Open **`demo/my-first-session/Show-Session.rpp`** in REAPER and press Play. The
-project uses embedded MIDI and REAPER's built-in **ReaSynth**, so it needs no
-audio assets or third-party instruments. Use a new output directory on each run.
-Add `--render` when you also want a local WAV preview. If ReaSynth discovery
-fails, prepare the dedicated VST index as described in the
-[environment guide](docs/environment.md#plugin-discovery-and-macos-window-restoration).
-
-`examples/show_session.py` and `examples/create_project.py` export their own
-resources into the output directory, so they do not need the `quickstart` export
-above. Both need a source checkout, because the examples live in the repository
-rather than in the wheel.
-
-For the session layout, effect settings, verification boundaries and the 52
-build checkpoints behind the GIF, see the [playable show demo guide](examples/README.md#playable-show-demo).
-
 
 ## A small Python example
 
@@ -348,9 +346,11 @@ Virtual environments, REAPER run artifacts and local configuration are ignored b
 `reference/` and `schema/rpp/evidence/` are excluded from every wheel, sdist,
 documentation site and agent bundle. That is a packaging boundary, not a license
 boundary: the files are tracked in Git, so cloning this repository clones them
-too. They are not covered by the project's MIT license, and the maintainer has
-confirmed they may be published with their sources attributed — every file keeps
-its attribution and source link.
+too. They are not covered by the project's MIT license. Each upstream item remains
+under its own license and terms; attribution alone does not broaden those rights.
+Do not include an item in a public artifact unless its source terms or a separate
+redistribution permission allow it. Every retained file keeps its attribution and
+source link.
 
 Two conditions travel with that material and are not discharged by attribution:
 one source is labelled `cc-by-nc`, so **its noncommercial condition still
@@ -378,8 +378,9 @@ separately. No checkout or persistent MCP server is required by the installed bu
 
 ## License
 
-Project code is [MIT licensed](LICENSE). Imported reference data has separate
-provenance and redistribution considerations in
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). REAPER and third-party plugins
-are not included and remain subject to their own licenses. This project is
-independent of Cockos.
+Project-owned code and original documentation are [MIT licensed](LICENSE).
+Imported reference data and other upstream materials remain under their own
+licenses and terms; the MIT license does not relicense them. See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for provenance and redistribution
+conditions. REAPER and third-party plugins are not included and remain subject to
+their own licenses. This project is independent of Cockos.

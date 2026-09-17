@@ -1,8 +1,4 @@
-> **生态 alpha：** Python 包位于 `packages/reacli` 和 `packages/reaper-parser`，请一并安装。
-> ReaperDoc 继续独立维护；`apps/reaperdoc` 是本仓库的集成副本。
-> 参见[安装与验证边界](docs/ecosystem/README.md)、[ReaperDoc 维护关系](docs/ecosystem/reaperdoc-maintenance.md)
-> 和[对外入口待办](docs/ecosystem/public-entrypoints.md)。
-
+<p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli 图标"></p>
 <h1 align="center">Rea-Cli</h1>
 
 <p align="center"><strong>REAPER coding. REAPER executing. REAPER verifying.</strong></p>
@@ -27,6 +23,49 @@ Python 库用于编程式工作流，CLI 用于检查和隔离执行，仓库内
 Rea-Cli **只使用 REAPER 原生 ReaScript API**，不需要 **SWS 扩展**、**ReaPack**
 或任何其他 REAPER 附加组件，也不会安装它们。仓库内的历史参考资料和示例工程可能
 提到 SWS action，那只是查询数据，不是运行依赖。
+
+## 快速开始
+
+如果还没有安装 Rea-Cli，请先按下面的[安装](#安装)选择合适的路线，再运行与你的工作流
+对应的命令。
+
+### 不启动 REAPER 的快速体验
+
+检查内置空工程并查询包内知识索引：
+
+```bash
+reacli doctor --profile offline --json
+reacli resources --output ./quickstart
+reacli rpp validate ./quickstart/minimal.rpp
+reacli knowledge api GetTrack
+```
+
+校验结果应为 `ok: true`、轨道数为 0。资源导出不会覆盖已有文件，重复运行时请使用新目录。
+这条路径只需要 Python。
+
+### 从零构建可播放工程（需要 REAPER）
+
+![从空白工程开始，逐步构建 REAPER session 的 52 个中间状态](https://res.cloudinary.com/ybukqfxy/image/upload/v1789647834/showcase_compressed.gif)
+
+这个演示会从空白工程构建一个可直接播放的 REAPER session。请先按路线 B 从源码安装，
+并按[环境指南](docs/environment.md)配置 REAPER，再在仓库根目录运行：
+
+```bash
+reacli init
+reacli doctor --json
+python examples/show_session.py ./demo/my-first-session
+```
+
+在 REAPER 中打开 **`demo/my-first-session/Show-Session.rpp`**，按播放即可。
+工程内嵌 MIDI，并使用 REAPER 自带的 **ReaSynth**，不需要音频素材或第三方乐器。
+每次运行请使用新的输出目录；需要 WAV 预览时追加 `--render`。如果找不到 ReaSynth，
+请按[环境指南](docs/environment.md#plugin-discovery-and-macos-window-restoration)准备独立资源的 VST 索引。
+
+`examples/show_session.py` 和 `examples/create_project.py` 会把所需资源导出到输出目录，
+因此**不需要**先执行上面的 `reacli resources`。两者都需要源码 checkout，因为示例位于
+仓库中而不是 wheel 内。
+
+GIF 展示的工程结构、效果器设置、验证边界和 52 个构建中间状态（checkpoint），见[可播放演示指南](examples/README.md#playable-show-demo)。
 
 ## 名称速查
 
@@ -117,46 +156,6 @@ brew install python lua@5.4
 ```
 
 完整的平台配置、程序路径与排错说明见[环境指南](docs/environment.md)。
-
-## 快速开始
-
-### 不启动 REAPER 的快速体验
-
-检查内置空工程并查询包内知识索引：
-
-```bash
-reacli doctor --profile offline --json
-reacli resources --output ./quickstart
-reacli rpp validate ./quickstart/minimal.rpp
-reacli knowledge api GetTrack
-```
-
-校验结果应为 `ok: true`、轨道数为 0。资源导出不会覆盖已有文件，重复运行时请使用新目录。
-这条路径只需要 Python。
-
-### 从零构建可播放工程（需要 REAPER）
-
-![从空白工程开始，逐步构建 REAPER session 的 52 个中间状态](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
-
-这个演示会从空白工程构建一个可直接播放的 REAPER session。请先按路线 B 从源码安装，
-并按[环境指南](docs/environment.md)配置 REAPER，再在仓库根目录运行：
-
-```bash
-reacli init
-reacli doctor --json
-python examples/show_session.py ./demo/my-first-session
-```
-
-在 REAPER 中打开 **`demo/my-first-session/Show-Session.rpp`**，按播放即可。
-工程内嵌 MIDI，并使用 REAPER 自带的 **ReaSynth**，不需要音频素材或第三方乐器。
-每次运行请使用新的输出目录；需要 WAV 预览时追加 `--render`。如果找不到 ReaSynth，
-请按[环境指南](docs/environment.md#plugin-discovery-and-macos-window-restoration)准备独立资源的 VST 索引。
-
-`examples/show_session.py` 和 `examples/create_project.py` 会把所需资源导出到输出目录，
-因此**不需要**先执行上面的 `reacli resources`。两者都需要源码 checkout，因为示例位于
-仓库中而不是 wheel 内。
-
-GIF 展示的工程结构、效果器设置、验证边界和 52 个构建中间状态（checkpoint），见[可播放演示指南](examples/README.md#playable-show-demo)。
 
 ## 一个简短的 Python 示例
 
@@ -312,8 +311,9 @@ scripts/     环境引导与发行包检查
 
 `reference/` 与 `schema/rpp/evidence/` 不进入任何 wheel、sdist、文档站或 agent bundle。
 这是**打包边界，不是授权边界**：这些文件由 Git 跟踪，因此 clone 本仓库就会一并取得。
-它们不受本项目 MIT 许可证覆盖；维护者已确认可在保留来源署名的前提下公开发布，
-每个文件都保留其署名与来源链接。
+它们不受本项目 MIT 许可证覆盖。每项上游内容继续遵循其自身许可证和条款；仅保留署名
+并不会扩大再分发权。除非来源条款或另行取得的再分发许可明确允许，否则不要将其放入公开
+构件。每个保留文件都应继续保留署名与来源链接。
 
 有两项条件随这批材料一同生效，且**不能靠署名满足**：其中一份来源标注为 `cc-by-nc`，
 其**非商业性条件仍然有效**；另有部分规范文本派生自 GPL-3.0 仓库。
@@ -343,6 +343,7 @@ scripts/     环境引导与发行包检查
 
 ## 许可证
 
-项目代码采用 [MIT 许可证](LICENSE)。导入资料的来源与再分发注意事项见
+项目自有代码和原创文档采用 [MIT 许可证](LICENSE)。导入资料及其他上游内容继续遵循
+自身许可证和条款，MIT 不会重新授权这些内容。来源与再分发注意事项见
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。REAPER 和第三方插件不包含在项目中，
 分别遵循自身许可证。本项目独立维护，与 Cockos 无隶属关系。

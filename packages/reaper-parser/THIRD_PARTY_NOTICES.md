@@ -1,7 +1,9 @@
 # Sources and distribution scope
 
-The MIT license covers project-owned parser code. It does not grant rights to
-third-party descriptions in the generated field specification.
+Project-owned parser code and original documentation are MIT. The distribution
+does not claim one blanket license for the generated field specification. It does
+not grant rights to third-party descriptions; each upstream item remains under its
+own license and terms.
 
 ## Bundled specification
 
@@ -12,15 +14,15 @@ The previous rac snapshot used `32047bb`; that is historical provenance, not the
 current schema revision. The imported ReaperDoc snapshot had no explicit license. On 2026-09-13 the
 maintainer authorized MIT for original ReaperDoc portions; the monorepo records
 this in apps/reaperdoc/LICENSE and its scope notice. External copied descriptions
-remain subject to their source terms. On 2026-09-15 the maintainer confirmed that
-the acknowledged sources may be used with attribution. Local builds do not establish
-permission independently of that attestation.
+  remain subject to their source terms. Local builds do not establish permission,
+  and the project MIT scope does not replace any upstream condition.
 
 ReaperDoc's README credits [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions).
 The [ReaTeam/Doc repository](https://github.com/ReaTeam/Doc) is detected as GPL-3.0;
 directly copied prose, if any, remains subject to its applicable terms and is not
-covered by this package's MIT notice. The maintainer confirms use of the mixed-source
-schema; ReaTeam attribution and applicable terms remain required.
+covered by this package's MIT notice. ReaTeam attribution and applicable terms remain
+required; include the mixed-source schema in a public distribution only when those
+terms or separate permission allow it.
 
 ## Package boundaries
 
@@ -31,6 +33,6 @@ REAPER is a Cockos product; this project is independent and not endorsed by Cock
 
 See `../../docs/ecosystem/publication-audit.md` and
 `../../docs/ecosystem/source-license-audit.md` in the source repository for the current
-release checklist and per-source decision log. The source gate is cleared by the
-maintainer attestation; this notice still requires source attribution and applicable
-license terms.
+release checklist and per-source decision log. The source gate remains conditional
+until the included upstream material has a clear license/permission basis or is
+removed; this notice still requires source attribution and applicable license terms.

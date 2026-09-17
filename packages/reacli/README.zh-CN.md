@@ -16,8 +16,10 @@ python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
 CLI 的 `rac`、`reacli` 等价，Python 导入名为 `rac`。
 `rac doctor --profile offline --json` 无需 REAPER；宿主操作需要另外配置 REAPER。
 
-在完整 checkout 中，参见[生态指南](../../docs/ecosystem/README.md)、
-[共享解析器与音频 API](../../docs/ecosystem/api.zh-CN.md)和[贡献指南](../../CONTRIBUTING.md)。
+在完整 checkout 中，参见[生态指南](https://github.com/DDDPG/Rea-Cli/blob/main/docs/ecosystem/README.md)、
+[共享解析器与音频 API](https://github.com/DDDPG/Rea-Cli/blob/main/docs/ecosystem/api.zh-CN.md)和[贡献指南](https://github.com/DDDPG/Rea-Cli/blob/main/CONTRIBUTING.md)。
 相对链接用于仓库浏览；独立源码包不包含完整仓库文档。
 
-内置参考数据保留原来源条款；公开分发仍需遵循对应的来源与许可要求。
+项目自有代码和原创文档采用 MIT。发行包没有把内置参考数据声明为某一个统一许可证；
+这些内容继续遵循自身来源条款并保留署名。公开分发 wheel 或源码包前，请先阅读包内声明
+并确认对应许可条件。

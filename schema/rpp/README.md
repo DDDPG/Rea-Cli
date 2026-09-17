@@ -79,6 +79,7 @@ on a real host and are not executable fixtures. See
 
 Like `reference/`, this directory is excluded from every wheel, sdist,
 documentation site and agent bundle, but it **is** tracked in Git, so cloning the
-repository clones it too. The maintainer has confirmed it may be published with
-its sources attributed; see
+repository clones it too. It is not covered by the project MIT license and may be
+published only when each source's terms or separate redistribution permission
+allow it; see
 [attribution for Git-only reference material](../../README.md#attribution-for-git-only-reference-material).

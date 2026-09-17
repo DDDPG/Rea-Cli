@@ -116,10 +116,12 @@ names mean, how to install, what has to be installed separately, then how to
 run something. Harness- and agent-specific material belongs after that, not
 first.
 
-Prefer linked images over committed ones. No binary screenshot, GIF or icon is
-tracked in this repository; the README links to a hosted copy of the showcase
-animation, and contributors regenerate such assets under the Git-ignored `demo/`
-tree. Do not add new binary assets without a deliberate decision.
+Prefer linked images over committed ones. `docs/assets/reacli-icon.png` is the
+one tracked binary asset: it cannot be hosted externally, so both READMEs
+reference it by relative path and it must stay in the repository. Screenshots and
+the showcase animation are linked from a hosted copy instead, and contributors
+regenerate those under the Git-ignored `demo/` tree. Do not add other binary
+assets without a deliberate decision.
 
 `reference/`, `schema/rpp/evidence/` and `integrations/agents/` must remain
 outside wheels and source distributions. Canonical knowledge and Lua assets
@@ -129,11 +131,12 @@ indexes and 12 Lua files, and link to them from repository notes.
 Record the source and the applicable terms for every new reference item. Public
 availability alone is not redistribution permission, and excluding a file from
 the packages settles nothing: these files are tracked in Git, so they ship with
-every clone. The existing corpus is published under the maintainer's attribution
-decision recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); a new item
-needs equivalent treatment before it is committed. Keep each item's attribution
-and source link, and keep the `cc-by-nc` noncommercial condition on the rendering
-notes rather than treating attribution as sufficient. See
+every clone. The existing corpus is subject to the per-source conditions recorded
+in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); a new item needs an applicable
+license or explicit redistribution permission before it is committed for public
+distribution. Keep each item's attribution and source link, and keep the
+`cc-by-nc` noncommercial condition on the rendering notes rather than treating
+attribution as sufficient. See
 [reference/SOURCES.md](reference/SOURCES.md) for the per-topic records.
 
 Check relative links and run documented examples with a fresh output directory.

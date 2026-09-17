@@ -1,7 +1,9 @@
 # Third-party software and reference data
 
-The [MIT license](LICENSE) covers project-owned code and documentation. It does
-not relicense the third-party reference text and data described below.
+The [MIT license](LICENSE) covers project-owned code and original documentation
+only. It does not relicense the third-party reference text, code or data described
+below. Each upstream item remains under its own license and terms; this notice is
+not a blanket redistribution grant.
 
 REAPER is a Cockos product. This project is independent, is not endorsed by
 Cockos, and includes no REAPER executables, plugins, installers or license keys.
@@ -10,7 +12,7 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
 ## Bundled reference data — attribution and source conditions
 
 This notice ships with the package. The repository's
-[`THIRD_PARTY_NOTICES.md`](../../THIRD_PARTY_NOTICES.md) carries the same wording
+[`THIRD_PARTY_NOTICES.md`](https://github.com/DDDPG/Rea-Cli/blob/main/THIRD_PARTY_NOTICES.md) carries the same wording
 plus the Git-only redistribution boundary; keep the two aligned.
 
 - `src/rac/data/knowledge/rpp_schema.json` is now generated from the canonical
@@ -20,26 +22,28 @@ plus the Git-only redistribution boundary; keep the two aligned.
   [DDDPG/ReaperDoc](https://github.com/DDDPG/ReaperDoc) had no explicit license in
   the imported snapshot. On 2026-09-13 the maintainer authorized MIT for original
   ReaperDoc portions; see `apps/reaperdoc/LICENSE` and its scope notice in the
-  monorepo. On 2026-09-15 the maintainer confirmed that the acknowledged external
-  material may also be used with source attribution; the applicable source terms
-  remain in force.
+  monorepo. External copied descriptions remain subject to their source terms and
+  require source-specific redistribution permission where those terms do not grant
+  it. The project MIT scope does not change that boundary.
 - ReaperDoc's upstream README credits [ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions).
   The [ReaTeam/Doc repository license](https://github.com/ReaTeam/Doc/blob/master/LICENSE)
   is detected as GPL-3.0, while the file also preserves IXix/Cockos Wiki attribution.
-  The maintainer confirmed use of this material; any directly copied prose must retain
-  its applicable terms and the ReaperDoc MIT scope does not turn it into MIT.
+  Any directly copied prose must retain its applicable terms. The ReaperDoc and
+  project MIT scopes do not turn this upstream material into MIT or grant rights
+  beyond the GPL/source conditions.
 - `src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
   Official references: [ReaScript overview](https://www.reaper.fm/sdk/reascript/reascript.php)
   and [generated API help](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
   The inspected pages provide access to the reference but no separate redistribution
-  grant for copying the descriptions into a package was found; the maintainer confirms
-  that the reference can be curated and used with Cockos attribution and source links.
+  grant for copying the descriptions into a package was found. Include this data in
+  a public package only after Cockos's applicable terms or a separate redistribution
+  permission have been confirmed; attribution and source links alone are not enough.
 
 Before public distribution, preserve the recorded source attribution and applicable
-terms. The source gate is marked resolved by the maintainer's 2026-09-15 attestation,
-extended on 2026-09-17 to the Git-only reference material; the project MIT license
-does not replace the terms of these third-party materials.
+terms. The source gate remains conditional until every bundled upstream item has a
+clear source basis or is removed from the artifact; the project MIT license does
+not replace the terms of these third-party materials.
 
 ## Python dependencies
 
@@ -50,8 +54,8 @@ does not replace the terms of these third-party materials.
 
 Lua skeleton/snippets and synthetic test fixtures were copied from the source
 project. Their original bytes and source-project-relative paths are recorded in
-[the source baseline](../../docs/source-baseline.json); changes in the standalone
-copy are described in the [changelog](../../CHANGELOG.md). The source README mentioned
+[the source baseline](https://github.com/DDDPG/Rea-Cli/blob/main/docs/source-baseline.json); changes in the standalone
+copy are described in the [changelog](https://github.com/DDDPG/Rea-Cli/blob/main/CHANGELOG.md). The source README mentioned
 external composition patterns, but no separate third-party Lua source tree is
 included in the Python build.
 
@@ -59,33 +63,34 @@ included in the Python build.
 
 The material under `reference/` is excluded from both wheel and sdist. That is a
 packaging boundary, not a license boundary: the files are tracked in Git, so
-publishing the repository publishes them. On 2026-09-17 the maintainer confirmed
-that this material may be published with its sources attributed, so the notices
-below are standing attribution obligations rather than open blockers.
+publishing the repository publishes them. They are not covered by the project MIT
+license and remain subject to each source's terms. The notices below are required
+conditions, not a blanket permission to publish.
 
 - The annotated RPP tree and extraction notes derive from ReaperDoc at the
-  historical `32047bb` snapshot. The maintainer confirms use with the recorded
-  ReaperDoc/ReaTeam attribution.
+  historical `32047bb` snapshot. Keep the recorded ReaperDoc/ReaTeam attribution
+  and include the material only if the applicable source terms allow it.
 - The historical action index derives from the Ultraschall API project's
-  REAPER 5.941 / SWS 2.9.7 action list. The maintainer confirms use with Ultraschall
-  attribution; the upstream repository's license metadata remains recorded as absent.
+  REAPER 5.941 / SWS 2.9.7 action list. Keep the Ultraschall attribution; the
+  upstream repository's license metadata remains recorded as absent, so this item
+  needs permission or exclusion before public distribution.
 - The rendering notes retain attribution to **Meo-Ada Mespotine / Ultraschall**
   and the source's **cc-by-nc** label. The exact license version is not recorded;
   retain the source label and attribution. These notes must not be presented as
   MIT-licensed material or as permitting commercial redistribution.
 - The upstream render file explicitly says `licensed creative commons cc-by-nc`,
   but the version is not stated and the Ultraschall API repository has no detected
-  top-level LICENSE. The maintainer confirms use; retain the source link, attribution
-  and any applicable noncommercial condition.
+  top-level LICENSE. Retain the source link, attribution and any applicable
+  noncommercial condition; confirm the exact permission before public distribution.
 - The JSFX handbook and structured reference summarize Cockos documentation.
-  No page-level redistribution grant was located during inspection. The maintainer
-  confirms use with Cockos attribution and source links. The official [JSFX programming
+  No page-level redistribution grant was located during inspection. Retain Cockos
+  attribution and source links only within the terms that permit the use. The official [JSFX programming
   reference](https://www.reaper.fm/sdk/js/js.php) is a public reference page, and one
   official user-guide PDF version states that reproduction requires permission:
   [REAPER User Guide](https://www.reaper.fm/userguide/ReaperUserGuide735cc.pdf).
 
 Before public release, preserve these source terms and attribution in every affected
 artifact. The detailed decision log is
-[source-license-audit.md](../../docs/ecosystem/source-license-audit.md).
-[Sources and attribution](../../reference/SOURCES.md) and the [reference manifest](../../reference/source-manifest.json)
+[source-license-audit.md](https://github.com/DDDPG/Rea-Cli/blob/main/docs/ecosystem/source-license-audit.md).
+[Sources and attribution](https://github.com/DDDPG/Rea-Cli/blob/main/reference/SOURCES.md) and the [reference manifest](https://github.com/DDDPG/Rea-Cli/blob/main/reference/source-manifest.json)
 identify the files and their provenance.

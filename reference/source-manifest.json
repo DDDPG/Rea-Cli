@@ -180,7 +180,7 @@
       "comparison": "identical at import",
       "sha256": "98b68a21272fa976ef2b0a42e8c022ee614ceb4d96d8d7c26fb7cb077285865f",
       "canonical_at_import": "src/rac/data/knowledge/rpp_schema.json",
-      "current_sha256": "5025382e4c1206765729f9f46424db963e8c1514c68a8d92b4c9ac1f8cbf4167"
+      "current_sha256": "c3861b2d6c1d76c367437ec895a103532b1337ce3af6f5a47ef1304d81d96ef0"
     },
     {
       "source": "lua/entry.lua",

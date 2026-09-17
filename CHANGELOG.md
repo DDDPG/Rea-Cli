@@ -25,11 +25,12 @@ Runtime behavior is unchanged and `0.1.0`/`0.1.0a1` remain the published version
   table, and an explicit statement that SWS, ReaPack and MCP are not required.
 - Remove the tracked binary images (~10.6 MB) and link the showcase animation
   instead; regenerate such assets under the Git-ignored `demo/` tree.
-- Record the maintainer's 2026-09-17 decision that the Git-only `reference/` and
-  `schema/rpp/evidence/` corpus may be published with its sources attributed,
-  clearing it as a public-release blocker. Those files are unchanged and still
-  tracked in Git, so a clone still distributes them; the `cc-by-nc` entry keeps
-  its noncommercial condition, which attribution does not discharge.
+- Record the project's license scope: project-owned code and original
+  documentation are MIT, while Git-only `reference/` and `schema/rpp/evidence/`
+  material remains under its own source terms. Those files are still tracked in
+  Git, so a clone distributes them; each item needs a source license or explicit
+  redistribution permission, and the `cc-by-nc` entry keeps its noncommercial
+  condition, which attribution does not discharge.
 - Add the PEP 561 `py.typed` marker to the `rac` package with its `package-data`
   and `MANIFEST.in` entries.
 - Add `schema/rpp/README.md`, which explains that `sourceFile` is relative to the
