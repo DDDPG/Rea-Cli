@@ -100,6 +100,9 @@ def resource_dir(explicit: str | os.PathLike | None = None) -> Path | None:
 
 
 def resource_ready(resource: str | os.PathLike) -> bool:
+    requested = Path(resource).expanduser()
+    if requested.is_symlink() or (requested / "reaper.ini").is_symlink():
+        return False
     config = configparser.ConfigParser(interpolation=None, strict=False)
     try:
         config.read(Path(resource) / "reaper.ini", encoding="utf-8")
@@ -116,9 +119,14 @@ def ensure_resource(resource: str | os.PathLike) -> Path:
     空/缺则从平台模板 seed (模板缺失退化写内置最小 ini);
     已有配置但缺关键项则追加补段。"""
     wanted = _resource_settings()
-    resource = Path(resource).expanduser().resolve()
+    requested = Path(resource).expanduser()
+    if requested.is_symlink():
+        raise EnvironmentError(f"REAPER resource directory must not be a symlink: {requested}")
+    resource = requested.resolve()
     resource.mkdir(parents=True, exist_ok=True)
     ini = resource / "reaper.ini"
+    if ini.is_symlink():
+        raise EnvironmentError(f"REAPER resource configuration must not be a symlink: {ini}")
     text = ini.read_text(encoding="utf-8", errors="ignore") if ini.exists() else ""
     config = configparser.ConfigParser(interpolation=None, strict=False)
     if text.strip():

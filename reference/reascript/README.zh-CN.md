@@ -17,7 +17,7 @@ ReaScript 是宿主 API，Lua 是本库执行模板使用的语言。外部 `imp
 | Marker / region | 遍历位置不等于 marker ID，遍历时同时考虑 marker 和 region。 |
 | Send / master | 区分 send/receive 类别及目标；用 `GetMasterTrack` 获取 master，不用 `GetTrack(0, -1)`。 |
 
-生成器仅覆盖[注册表中的操作](../../src/rac/luagen/generator.py)。Folder、任意 take 和 master FX 需在 entry 模板中编写自定义 Lua。[Showcase](../../examples/show_session.lua)展示了该路径，Python 构建器负责验证输出工程。
+生成器仅覆盖[注册表中的操作](../../packages/reacli/src/rac/luagen/generator.py)。Folder、任意 take 和 master FX 需在 entry 模板中编写自定义 Lua。[Showcase](../../examples/show_session.lua)展示了该路径，Python 构建器负责验证输出工程。
 
 ## FX：识别、设置、读回
 

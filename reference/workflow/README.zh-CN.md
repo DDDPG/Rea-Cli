@@ -18,7 +18,7 @@
 
 ## 准备环境
 
-在仓库中用 `python -m pip install -e .` 安装，根据任务选择检查范围：
+在仓库中用 `python -m pip install -e ./packages/reaper-parser -e './packages/reacli[audio,dev]'` 安装，根据任务选择检查范围：
 
 ```bash
 rac doctor --profile offline --json

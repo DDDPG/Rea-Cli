@@ -10,6 +10,11 @@ class RPPParseError(SyntaxError):
     pass
 
 
+MAX_RPP_BYTES = 64 * 1024 * 1024
+MAX_RPP_LINES = 1_000_000
+MAX_RPP_NESTING = 256
+
+
 # ---------------------------------------------------------------------------
 # 行分词 (key + values; values 为语义值, 引号已剥)
 # ---------------------------------------------------------------------------
@@ -214,10 +219,23 @@ def parse(source: str | Path) -> Document:
         and not source.lstrip("\ufeff \t").startswith("<")
     ):
         path = Path(source)
+        if path.stat().st_size > MAX_RPP_BYTES:
+            raise RPPParseError(
+                f"RPP input exceeds the {MAX_RPP_BYTES} byte safety limit"
+            )
         text = path.read_bytes().decode("utf-8", errors="surrogateescape")
     else:
         text = source
+        if len(text.encode("utf-8", errors="surrogateescape")) > MAX_RPP_BYTES:
+            raise RPPParseError(
+                f"RPP input exceeds the {MAX_RPP_BYTES} byte safety limit"
+            )
     bom = "\ufeff" if text.startswith("\ufeff") else ""
+    line_breaks = text.count("\n") + text.count("\r") - text.count("\r\n")
+    if line_breaks > MAX_RPP_LINES:
+        raise RPPParseError(
+            f"RPP input exceeds the {MAX_RPP_LINES} line safety limit"
+        )
     chunks = text[len(bom) :].splitlines(keepends=True)
     lines = []
     endings = []
@@ -251,6 +269,10 @@ def parse(source: str | Path) -> Document:
                 end = i + 1
                 break
         elif stripped.startswith("<"):
+            if len(stack) >= MAX_RPP_NESTING:
+                raise RPPParseError(
+                    f"RPP nesting exceeds the {MAX_RPP_NESTING} level safety limit"
+                )
             toks = tokenize(stripped[1:])
             if not toks:
                 raise RPPParseError(f"empty chunk opener at line {i + 1}")

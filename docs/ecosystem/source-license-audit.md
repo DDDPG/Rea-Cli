@@ -11,13 +11,19 @@
 ReaTeam、Cockos 公开资料、Ultraschall 资料以及 GitHub 开源 Lua 资源均可在本项目中
 使用，并按来源署名。基于这一维护者授权声明，**来源授权门禁已清除**；它仍然是
 维护者声明而非外部机构对本项目发行物的独立背书，来源许可证和署名义务继续保留。
-当前候选仍不能公开发布，原因只剩包名所有权和 Trusted Publisher 配置尚未核实：
+当前来源授权门禁已经按维护者声明记录为通过；两个正式 Python 项目也已在 PyPI
+出现。公开仓库仍需由维护者单独决定，且未来发布流程的 Trusted Publisher/channel
+证据不能仅由“构件已经存在”推导出来：
 
 - 用户已确认其原创 ReaperDoc 代码和文档按 MIT 发布；该授权不覆盖外来引用、复制描述、第三方数据或来源项目中不属于用户的内容。
 - “网页公开可访问”不等于允许复制和再分发。GitHub 的官方说明明确指出，未附许可证时仍适用默认版权，其他人没有自动的复制、分发或改作权。[GitHub licensing guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 - 用户说明目前没有商业盈利，且本次明确确认可以使用相关来源；项目仍须保留署名、来源链接和适用许可证条件，不能把外来内容改称 MIT。TestPyPI/PyPI 上传仍是对外再分发。
-- `source_permissions_resolved` 已按维护者声明更新为 `true`。`package_ownership_verified` 和
-  `trusted_publishing_configured` 仍为 `false`，在这两个门禁通过前不运行公开发布流程。
+- `source_permissions_resolved` 已按维护者声明更新为 `true`；PyPI 当前 JSON 还显示
+  `reacli` 与 `reaper-parser` 的项目归属均为 `DDDPG`，因此
+  `package_ownership_verified` 已记录为 `true`。
+- `trusted_publishing_configured` 仍为 `false`：`reacli` 有成功的生产 OIDC 运行记录，
+  但本次检查未找到成功的 `reaper-parser` 生产 publish-job 记录。该包的 wheel/sdist
+  已在 PyPI 出现，但上传渠道仍单独标为未独立核验。
 
 ## 证据和判定
 
@@ -49,17 +55,20 @@ ReaTeam、Cockos 公开资料、Ultraschall 资料以及 GitHub 开源 Lua 资�
 ## 已完成的仓库动作
 
 - 新增本审计文件，固定了来源、散列、上游 URL 和每项发行处置。
-- 更新 `docs/ecosystem/publication.json`，记录来源授权为维护者确认并将 `source_permissions_resolved` 设为 `true`；包所有权和 Trusted Publisher 仍为 `false`。
+- 更新 `docs/ecosystem/publication.json`，记录来源授权、两个 PyPI 项目归属和四个
+  正式构件的文件级信息；保留 parser 上传渠道未独立核验的状态。
 - 更新两个 Python 包的第三方声明和 `reference/SOURCES.md`，使 ReaTeam GPL、Ultraschall `cc-by-nc`、Cockos 和 Lua 的署名条件可见。
-- 没有上传 PyPI/TestPyPI，没有改包名所有权，也没有把任何未解决项标成已授权。
+- 本审计没有上传、删除或改写 PyPI 构件；它只把维护者已报告的发布结果与公开索引响应
+  写入仓库。没有把外部来源或未核实的发布渠道标成独立证明。
 
 ## 清除路径
 
-接下来只需完成发布身份门禁，并保持来源署名：
+后续如果继续发布新版本，应保持来源署名并补齐发布渠道证据：
 
-1. 在 PyPI 和 TestPyPI 分别确认 `reacli`、`reaper-parser` 的项目归属或首次创建权限。
-2. 在两个索引分别配置 `publish.yml` 对应的 Trusted Publisher；GitHub environment 名称按工作流要求填写。
-3. 重新构建并扫描 wheel/sdist、文档站和 bundle，确认每个来源链接和署名仍随发行物保留。
-4. 先运行 TestPyPI 验证安装，再按发布门禁运行正式流程。
+1. 由维护者确认 `reaper-parser` 的 PyPI publisher/channel，并保留一次成功的
+   `publish.yml` 运行作为独立证据；在此之前不要把全局 Trusted Publisher 门禁改为 `true`。
+2. 内容变化后重新构建并扫描 wheel/sdist、文档站和 bundle，确认每个来源链接和署名
+   仍随发行物保留；已发布文件不可原地替换。
+3. 先运行 TestPyPI 验证新版本，再按发布门禁和 `ecosystem-v*` 标签运行正式流程。
 
 这是一份工程发布门禁记录，不是针对具体司法辖区的法律意见；若要在不清理内容的情况下发行，应该让熟悉版权和开源许可证的律师逐项审阅。

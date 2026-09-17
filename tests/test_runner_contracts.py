@@ -9,9 +9,10 @@ from rac.runner.pool import Pool
 from rac.runner.runner import _validate_proof
 
 
-@pytest.mark.parametrize("workers", [0, -1, True, 1.5])
+@pytest.mark.parametrize("workers", [0, -1, True, 1.5, 33])
 def test_invalid_worker_count_rejected(workers, tmp_path):
-    with pytest.raises(ValueError, match="positive integer"):
+    pattern = "at most" if workers == 33 else "positive integer"
+    with pytest.raises(ValueError, match=pattern):
         Pool(tmp_path, n_workers=workers)
 
 

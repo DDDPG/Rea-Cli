@@ -16,6 +16,8 @@ from rac.resources import read_text
 
 # 默认补全参照: 实机 REAPER 7.62/macOS 保存极简工程的产物
 _DEFAULTS_FIXTURE = "defaults/minimal_after_reaper_save.rpp"
+MAX_SEMANTIC_DIFF_NODES = 1_000_000
+MAX_SEMANTIC_DIFF_DEPTH = 256
 
 
 def _load_defaults() -> dict[str, tuple[str, ...]]:
@@ -77,7 +79,17 @@ def _attrs_eq(a: list[str], b: list[str], strict_guid: bool = False) -> bool:
 
 
 def _diff_children(a: Element, b: Element, path: str, float_tol: float,
-                   defaults: dict, diffs: list, strict_guid: bool):
+                   defaults: dict, diffs: list, strict_guid: bool,
+                   state: list[int], depth: int = 0):
+    if depth > MAX_SEMANTIC_DIFF_DEPTH:
+        raise ValueError(
+            f"semantic diff nesting exceeds the {MAX_SEMANTIC_DIFF_DEPTH} level safety limit"
+        )
+    state[0] += 1
+    if state[0] > MAX_SEMANTIC_DIFF_NODES:
+        raise ValueError(
+            f"semantic diff exceeds the {MAX_SEMANTIC_DIFF_NODES} node safety limit"
+        )
     # chunk 按 (tag, 序号) 配对
     ca = [c for c in a.children if isinstance(c, Element)]
     cb = [c for c in b.children if isinstance(c, Element)]
@@ -90,18 +102,21 @@ def _diff_children(a: Element, b: Element, path: str, float_tol: float,
         if not _attrs_eq(x.attrs, y.attrs, strict_guid):
             diffs.append(f"{path}>{x.tag}[{i}]: attrs {x.attrs} != {y.attrs}")
         _diff_children(x, y, f"{path}>{x.tag}[{i}]", float_tol, defaults, diffs,
-                       strict_guid)
+                       strict_guid, state, depth + 1)
 
     # 行按 key 分组配对 (同 key 多行按出现序)
-    la = [c for c in a.children if isinstance(c, Line) and c.key]
-    lb = [c for c in b.children if isinstance(c, Line) and c.key]
-    keys = []
-    for l in la + lb:
-        if l.key not in keys:
-            keys.append(l.key)
+    la: dict[str, list[Line]] = {}
+    lb: dict[str, list[Line]] = {}
+    for child in a.children:
+        if isinstance(child, Line) and child.key:
+            la.setdefault(child.key, []).append(child)
+    for child in b.children:
+        if isinstance(child, Line) and child.key:
+            lb.setdefault(child.key, []).append(child)
+    keys = list(dict.fromkeys((*la.keys(), *lb.keys())))
     for key in keys:
-        xa = [l for l in la if l.key == key]
-        xb = [l for l in lb if l.key == key]
+        xa = la.get(key, [])
+        xb = lb.get(key, [])
         for i in range(max(len(xa), len(xb))):
             va = xa[i] if i < len(xa) else None
             vb = xb[i] if i < len(xb) else None
@@ -148,5 +163,5 @@ def semantic_diff(doc_a: Document, doc_b: Document, *,
     if not _attrs_eq(doc_a.root.attrs, doc_b.root.attrs, strict_guid):
         diffs.append(f"root attrs: {doc_a.root.attrs} != {doc_b.root.attrs}")
     _diff_children(doc_a.root, doc_b.root, "root", float_tol, defaults, diffs,
-                   strict_guid)
+                   strict_guid, [0])
     return diffs

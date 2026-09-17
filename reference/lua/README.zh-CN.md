@@ -2,7 +2,7 @@
 
 [English](README.md) · [规范首页](../README.zh-CN.md)
 
-以包内 [entry 模板](../../src/rac/data/lua/entry.lua)和 [stdlib](../../src/rac/data/lua/stdlib/)为唯一正本，不在 agent skill 中再复制一套运行时。通过 `rac resources --output ./templates` 导出（不覆盖已有文件），或用 `rac.resources.read_text` 读取。
+以包内 [entry 模板](../../packages/reacli/src/rac/data/lua/entry.lua)和 [stdlib](../../packages/reacli/src/rac/data/lua/stdlib/)为唯一正本，不在 agent skill 中再复制一套运行时。通过 `rac resources --output ./templates` 导出（不覆盖已有文件），或用 `rac.resources.read_text` 读取。
 
 ## 生成操作
 
@@ -15,7 +15,7 @@ script = generate({"ops": [
 ]}, "edit.lua")
 ```
 
-输出父目录需存在。`generate` 会覆盖显式输出文件，验证操作名称与参数类型并运行兼容的 `luac -p`。它只支持 [OP_REGISTRY](../../src/rac/luagen/generator.py)，不覆盖所有 stdlib 函数或 REAPER API。即使 body 完成，也需检查操作返回错误。
+输出父目录需存在。`generate` 会覆盖显式输出文件，验证操作名称与参数类型并运行兼容的 `luac -p`。它只支持 [OP_REGISTRY](../../packages/reacli/src/rac/luagen/generator.py)，不覆盖所有 stdlib 函数或 REAPER API。即使 body 完成，也需检查操作返回错误。
 
 ## 自定义 body
 
@@ -37,7 +37,7 @@ script = generate({"ops": [
 | `render.lua` | 配置/触发渲染 | 确认命令可用并检查实际新输出 |
 | `snapshot.lua` | 有限状态摘要 | 不代表整个工程或声音身份 |
 
-精确签名从 [stdlib](../../src/rac/data/lua/stdlib/)对应文件读取。常见返回为 `{ok=true, value=..., affected=...}` 或 `{ok=false, reason=...}`；使用 `value` 前先检查 `ok`。
+精确签名从 [stdlib](../../packages/reacli/src/rac/data/lua/stdlib/)对应文件读取。常见返回为 `{ok=true, value=..., affected=...}` 或 `{ok=false, reason=...}`；使用 `value` 前先检查 `ok`。
 
 ## 可运行 inspector 与完整示例
 

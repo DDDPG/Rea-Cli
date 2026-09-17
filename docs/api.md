@@ -6,6 +6,12 @@
 The distribution is `reacli`; Python code imports `rac`. This is an alpha API.
 The examples below describe the current implementation and its boundaries.
 
+## Parser and audio workflow APIs
+
+See the [shared parser and media guide](ecosystem/api.md) ([中文](ecosystem/api.zh-CN.md))
+for `reaper_parser`, `document.project`, `fields()`, `set_field()` and `rac.media`.
+The existing `rac.rpp.parse` and `emit` APIs remain compatibility entry points.
+
 ## Bundled resources
 
 Resources are located through `importlib.resources`, independently of the
@@ -35,6 +41,9 @@ from both wheels and sdists.
 `parse(source)` accepts a `Path`, an existing filename string, or RPP text. Prefer
 `Path` when reading files so a missing filename cannot be interpreted as text.
 `emit(doc)` and `doc.text()` return serialized text.
+File and text inputs are bounded to 64 MiB, 1,000,000 logical line breaks and
+256 nested chunks; larger or deeper documents are rejected before unbounded
+parsing work.
 
 ```python
 from pathlib import Path
@@ -175,7 +184,8 @@ creating unique directories under `run_root`.
 `resource=` selects a dedicated REAPER resource directory; setup and precedence
 are documented in [environment configuration](environment.md#configuration).
 Concurrent direct `run` calls must use different resource directories. `Pool`
-handles that allocation for you.
+handles that allocation for you. `Pool` accepts at most 32 workers and 256 jobs
+per `map` call; resource seeds and worker resource trees reject symlinks.
 
 ### Read a Proof
 
@@ -276,7 +286,8 @@ both channels. The frequency estimator is intended for tonal test signals.
 `lufs` is approximate: K weighting and absolute gating, without a relative gate,
 using at most the first 30 seconds. Use a standards-compliant meter for mastering
 or compliance measurements. MP3, floating-point WAV, and multichannel checks
-are outside the current audio reader's scope.
+are outside the current audio reader's scope. The reader rejects files whose
+decoded PCM would exceed 256 MiB.
 
 ## CLI commands and exit codes
 

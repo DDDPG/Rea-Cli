@@ -1,1 +1,11 @@
-{"bundle_version":"0.1.0a1","reacli":"0.1.0","reaper-parser":"0.1.0a1","host":"REAPER 7.48 macOS tested; see candidate live report"}
+{
+  "bundle_version": "0.2.0a1",
+  "reacli": "0.1.0",
+  "reaper-parser": "0.1.0a1",
+  "host": "REAPER 7.48 macOS tested; see candidate live report",
+  "harnesses": {
+    "claude": "2.1.236 inspected",
+    "codex": "0.153.4 inspected",
+    "qwen": "0.23.0 inspected"
+  }
+}

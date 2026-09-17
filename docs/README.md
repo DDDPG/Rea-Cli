@@ -14,6 +14,15 @@ for installation and a working example.
 - [Security policy](../SECURITY.md): execution trust boundaries and vulnerability reporting.
 - [Third-party notices](../THIRD_PARTY_NOTICES.md): imported data and attribution.
 
+- [Harness installation and one-instruction workflows](harness/README.md) ([中文](harness/README.zh-CN.md)).
+
+## Ecosystem components
+
+- [Shared parser and media API](ecosystem/api.md) ([中文](ecosystem/api.zh-CN.md)): document views, field status, raw audio, rendering and import.
+- [Ecosystem installation and demonstration](ecosystem/README.md).
+- [ReaperDoc independent maintenance](ecosystem/reaperdoc-maintenance.md).
+- [Deferred public entry points](ecosystem/public-entrypoints.md).
+
 ## Repository knowledge
 
 The [developer handbook](../reference/README.md) ([中文](../reference/README.zh-CN.md)) defines invocation, RPP, ReaScript, Lua and JSFX development contracts. Each topic has paired English and Chinese guides, with a separate [historical evidence catalog](../reference/knowledge/README.md). Use it to select an implementation path, check units and object identity, and verify results beyond a successful process exit.

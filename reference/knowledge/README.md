@@ -21,4 +21,4 @@ Imported originals and structured records retain their source language, includin
 | [reascript/jsfx/examples/delay_basic.jsfx](reascript/jsfx/examples/delay_basic.jsfx) | Illustrative delay with known zero-delay/tail limitations |
 | [reascript/jsfx/examples/midi_monitor.jsfx](reascript/jsfx/examples/midi_monitor.jsfx) | Illustrative MIDI monitor |
 
-Canonical package copies: [API index](../../src/rac/data/knowledge/api_index.json), [RPP schema](../../src/rac/data/knowledge/rpp_schema.json), [Lua resources](../lua/README.md). See [current validation](../../docs/validation.md), [sources](../SOURCES.md) and [hash manifest](../source-manifest.json). Translated guides do not upgrade historical claims into live guarantees.
+Canonical package copies: [API index](../../packages/reacli/src/rac/data/knowledge/api_index.json), [RPP schema](../../packages/reacli/src/rac/data/knowledge/rpp_schema.json), [Lua resources](../lua/README.md). See [current validation](../../docs/validation.md), [sources](../SOURCES.md) and [hash manifest](../source-manifest.json). Translated guides do not upgrade historical claims into live guarantees.

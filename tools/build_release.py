@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 import argparse, hashlib, importlib.util, json, shutil, subprocess, sys, tarfile, zipfile
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,12 +15,47 @@ def run(*args):
     subprocess.run(args, cwd=ROOT, check=True)
 
 
-def zip_files(path, files):
+def _unsafe_archive_member(name):
+    """Reject traversal and absolute names on both POSIX and Windows."""
+    posix = PurePosixPath(name)
+    windows = PureWindowsPath(name)
+    return (
+        bool(posix.anchor or windows.anchor)
+        or ".." in posix.parts
+        or ".." in windows.parts
+    )
+
+
+def zip_files(path, files, roots=()):
+    raw_roots = tuple(Path(root) for root in roots)
+    if any(root.is_symlink() for root in raw_roots):
+        raise ValueError("ZIP source root must not be a symlink")
+    roots = tuple(root.resolve() for root in raw_roots)
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for name, p in sorted(files):
+            if _unsafe_archive_member(name):
+                raise ValueError(f"Unsafe ZIP member path: {name}")
+            if p.is_symlink() or not p.is_file():
+                raise ValueError(f"ZIP source must be a regular non-symlink file: {p}")
+            resolved = p.resolve()
+            if roots and not any(resolved == root or root in resolved.parents for root in roots):
+                raise ValueError(f"ZIP source escapes its source root: {p}")
             info = zipfile.ZipInfo(name, date_time=(1980, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             z.writestr(info, p.read_bytes())
+
+
+def _source_files(root: Path):
+    """Yield regular files and fail closed on any symlink in a release root."""
+    requested = Path(root)
+    if requested.is_symlink():
+        raise ValueError(f"Release source root must not be a symlink: {requested}")
+    root = requested.resolve()
+    for p in root.rglob("*"):
+        if p.is_symlink():
+            raise ValueError(f"Release source root contains a symlink: {p}")
+        if p.is_file():
+            yield p
 
 
 def verify_parser(directory):
@@ -36,10 +71,7 @@ def verify_parser(directory):
     }
     with zipfile.ZipFile(wheels[0]) as z:
         names = z.namelist()
-        if any(
-            PurePosixPath(n).is_absolute() or ".." in PurePosixPath(n).parts
-            for n in names
-        ):
+        if any(_unsafe_archive_member(n) for n in names):
             raise ValueError("Unsafe wheel path")
         actual = {n: z.read(n) for n in names if n.startswith("reaper_parser/")}
         if actual != runtime:
@@ -52,7 +84,7 @@ def verify_parser(directory):
         prefix = members[0].name.split("/")[0] + "/"
         if any(
             not (m.isfile() or m.isdir())
-            or ".." in PurePosixPath(m.name).parts
+            or _unsafe_archive_member(m.name)
             or not (m.name == prefix[:-1] or m.name.startswith(prefix))
             for m in members
         ):
@@ -102,24 +134,26 @@ def main():
         "reacli": checker.check_dist(out / "reacli", ROOT / "packages/reacli"),
     }
     agent = ROOT / "integrations/agents/reaper-agent-cli"
+    agent_root = agent.resolve()
     files = [
-        ("reaper-agent-cli/" + p.relative_to(agent).as_posix(), p)
-        for p in agent.rglob("*")
-        if p.is_file()
+        ("reaper-agent-cli/" + p.relative_to(agent_root).as_posix(), p)
+        for p in _source_files(agent)
+        if "__pycache__" not in p.parts and p.suffix != ".pyc" and p.name != "runtime.json"
     ]
     files.extend(
         ("reaper-agent-cli/examples/" + name, ROOT / "examples" / name)
         for name in ("create_project.py", "data_roundtrip.py")
     )
-    zip_files(out / "reaper-agent-cli.zip", files)
+    zip_files(out / "reaper-agent-cli.zip", files, [agent, ROOT / "examples"])
     site = ROOT / "apps/reaperdoc/dist"
     if not (site / "index.html").is_file():
         raise ValueError("Build ReaperDoc before building a candidate")
     zip_files(
         out / "reaperdoc-site.zip",
-        [(p.relative_to(site).as_posix(), p) for p in site.rglob("*") if p.is_file()]
+        [(p.relative_to(site).as_posix(), p) for p in _source_files(site)]
         + [(name, ROOT / "apps/reaperdoc" / name)
            for name in ("LICENSE", "THIRD_PARTY_NOTICES.md")],
+        [site, ROOT / "apps/reaperdoc"],
     )
     shutil.copyfile(ROOT / "schema/rpp/generated/runtime.json", out / "rpp-schema.json")
     for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
@@ -144,6 +178,7 @@ def main():
                 ROOT / "examples/create_project.py",
             ]
         ],
+        [ROOT / "examples"],
     )
     if (ROOT / "docs/ecosystem/README.md").exists():
         shutil.copyfile(ROOT / "docs/ecosystem/README.md", out / "README.md")

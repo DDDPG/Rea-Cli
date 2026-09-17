@@ -8,6 +8,7 @@ from __future__ import annotations
 import shutil
 import subprocess
 import threading
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from rac.runner import platform
@@ -19,6 +20,14 @@ IS_LINUX = platform.IS_LINUX
 PLUGIN_CACHE_FILES = ["reaper.ini", "reaper-vstplugins_arm64.ini",
                       "reaper-jsfx.ini", "reaper-clap-macos-aarch64.ini",
                       "reaper-fxtags.ini"]
+MAX_WORKERS = 32
+MAX_JOBS = 256
+
+
+def _reject_tree_symlinks(root: Path, label: str) -> None:
+    for path in root.rglob("*"):
+        if path.is_symlink():
+            raise ValueError(f"{label} contains a symlink: {path}")
 
 
 def _resource_seed(seed_dir: str | Path | None, *destinations: Path) -> Path | None:
@@ -40,11 +49,18 @@ def _make_worker_linux(worker_dir: Path, *, seed_resource_dir: str | Path | None
     """Linux worker: 独立资源目录 (-cfgfile 隔离, 防实例转发/配置互踩)。
     REAPER 二进制共享; xvfb + cfgfile 由 runner 的 platform.build_command 负责。
     返回该 worker 的资源目录 (供 run(resource=...) 使用)。"""
-    worker_dir = Path(worker_dir).expanduser().resolve()
+    raw_worker_dir = Path(worker_dir).expanduser()
+    worker_dir = raw_worker_dir.resolve()
     res = worker_dir / "resource"
     # Check the actual resource target too: an existing resource symlink must
     # not make initialization write through into the seed.
     seed = _resource_seed(seed_resource_dir, worker_dir, res)
+    if raw_worker_dir.is_symlink() or res.is_symlink():
+        raise ValueError("REAPER worker/resource directory must not be a symlink")
+    if seed is not None:
+        _reject_tree_symlinks(seed, "REAPER seed resource directory")
+    if res.exists():
+        _reject_tree_symlinks(res, "REAPER worker resource directory")
     if res.exists() and force_rebuild:
         shutil.rmtree(res)
     if not res.exists():
@@ -82,8 +98,13 @@ def make_worker(worker_dir: str | Path, *,
             force_rebuild=force_rebuild)
     if not platform.IS_MAC:
         raise PoolBlocked("blocked:unsupported_platform")
-    worker_dir = Path(worker_dir).expanduser().resolve()
-    seed = _resource_seed(seed_resource_dir, worker_dir)
+    raw_worker_dir = Path(worker_dir).expanduser()
+    seed = _resource_seed(seed_resource_dir, raw_worker_dir)
+    if raw_worker_dir.is_symlink():
+        raise ValueError("REAPER worker directory must not be a symlink")
+    worker_dir = raw_worker_dir.resolve()
+    if seed is not None:
+        _reject_tree_symlinks(seed, "REAPER seed resource directory")
     source = Path(source_app).expanduser().resolve()
     bin_path = source / "Contents" / "MacOS" / "REAPER"
     if not bin_path.is_file():
@@ -120,6 +141,8 @@ def make_worker(worker_dir: str | Path, *,
             src = Path(seed_config_dir).expanduser() / f
             dst = worker_dir / f
             if src.exists():
+                if src.is_symlink():
+                    raise ValueError(f"REAPER seed cache must not be a symlink: {src}")
                 shutil.copy(src, dst)  # 保留旧缓存覆盖行为; 下方补齐平台配置。
     platform.ensure_resource(worker_dir)
     return bin_path
@@ -133,6 +156,8 @@ class Pool:
                  copy_app: bool = False):
         if isinstance(n_workers, bool) or not isinstance(n_workers, int) or n_workers < 1:
             raise ValueError("n_workers must be a positive integer")
+        if n_workers > MAX_WORKERS:
+            raise ValueError(f"n_workers must be at most {MAX_WORKERS}")
         self.workers_root = Path(workers_root).expanduser().resolve()
         self.source_app = source_app
         self.seed_config_dir = seed_config_dir
@@ -175,9 +200,18 @@ class Pool:
     def map(self, jobs: list[dict], *, timeout: float = 120,
             run_root: str = "runs", state_dir: str = ".state") -> list[Proof]:
         """jobs: [{"project":..., "script":..., "save_as":...(可选)}]"""
+        if not isinstance(jobs, list):
+            raise PoolBlocked("blocked:invalid_jobs")
+        if len(jobs) > MAX_JOBS:
+            raise PoolBlocked(f"blocked:too_many_jobs (maximum {MAX_JOBS})")
+        for job in jobs:
+            if not isinstance(job, dict) or not job.get("project") or not job.get("script"):
+                raise PoolBlocked("blocked:invalid_job")
         outs = [str(Path(j["save_as"]).resolve()) for j in jobs if j.get("save_as")]
         if len(outs) != len(set(outs)):
             raise PoolBlocked("blocked:output_conflict")  # save_as 路径冲突
+        if not jobs:
+            return []
         results: list[Proof | None] = [None] * len(jobs)
 
         def work(i, job):
@@ -201,10 +235,12 @@ class Pool:
             finally:
                 self._checkin((widx, b, res))
 
-        threads = [threading.Thread(target=work, args=(i, j))
-                   for i, j in enumerate(jobs)]
-        for t in threads:
-            t.start()
-        for t in threads:
-            t.join()
+        # Bound waiter threads by the number of REAPER workers. Each submitted
+        # job still has a stable result slot, but a large batch cannot create an
+        # unbounded thread per job while waiting for a worker resource.
+        with ThreadPoolExecutor(max_workers=min(len(self._free), len(jobs)),
+                                thread_name_prefix="reacli-pool") as executor:
+            futures = [executor.submit(work, i, j) for i, j in enumerate(jobs)]
+            for future in futures:
+                future.result()
         return results

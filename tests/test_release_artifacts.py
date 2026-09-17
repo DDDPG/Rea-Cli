@@ -18,6 +18,12 @@ assert SPEC is not None and SPEC.loader is not None
 checker = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(checker)
 
+BUILD_RELEASE_PATH = Path(__file__).resolve().parents[1] / "tools/build_release.py"
+BUILD_SPEC = importlib.util.spec_from_file_location("reacli_build_release", BUILD_RELEASE_PATH)
+assert BUILD_SPEC is not None and BUILD_SPEC.loader is not None
+build_release = importlib.util.module_from_spec(BUILD_SPEC)
+BUILD_SPEC.loader.exec_module(build_release)
+
 
 def _write_sdist(release, extra_member=None):
     with tarfile.open(release.sdist_path, "w:gz") as archive:
@@ -175,6 +181,8 @@ def test_changed_readme_requires_rebuilding_sdist(release):
 @pytest.mark.parametrize("archive_kind,member", [
     ("wheel", "../outside.txt"),
     ("sdist", "reacli-0.1.0/../../outside.txt"),
+    ("wheel", "C:/outside.txt"),
+    ("sdist", "C:/outside.txt"),
 ])
 def test_archive_path_traversal_is_rejected(release, archive_kind, member):
     getattr(release, archive_kind + "_members")[member] = b"outside payload"
@@ -207,3 +215,36 @@ def test_old_artifacts_in_output_directory_are_rejected(release):
 
     with pytest.raises(ValueError, match="exactly one wheel and one sdist"):
         checker.check_dist(release.directory, release.root)
+
+
+def test_release_zip_rejects_symlink_and_unsafe_member(tmp_path):
+    root = tmp_path / "root"
+    root.mkdir()
+    source = root / "source.txt"
+    source.write_text("safe")
+    outside = tmp_path / "outside.txt"
+    outside.write_text("outside")
+    link = root / "link.txt"
+    link.symlink_to(outside)
+
+    with pytest.raises(ValueError, match="non-symlink"):
+        build_release.zip_files(
+            tmp_path / "symlink.zip", [("link.txt", link)], [root]
+        )
+    for name in ("../outside.txt", r"..\outside.txt", r"C:\outside.txt"):
+        with pytest.raises(ValueError, match="Unsafe ZIP member"):
+            build_release.zip_files(tmp_path / "unsafe.zip", [(name, source)], [root])
+    alias = tmp_path / "root-alias"
+    alias.symlink_to(root, target_is_directory=True)
+    with pytest.raises(ValueError, match="source root must not be a symlink"):
+        build_release.zip_files(tmp_path / "root-alias.zip", [("source.txt", source)], [alias])
+
+
+def test_release_source_root_rejects_symlink(tmp_path):
+    root = tmp_path / "root"
+    root.mkdir()
+    alias = tmp_path / "alias"
+    alias.symlink_to(root, target_is_directory=True)
+
+    with pytest.raises(ValueError, match="source root must not be a symlink"):
+        list(build_release._source_files(alias))

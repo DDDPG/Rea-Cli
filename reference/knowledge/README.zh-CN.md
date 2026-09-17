@@ -21,4 +21,4 @@
 | [reascript/jsfx/examples/delay_basic.jsfx](reascript/jsfx/examples/delay_basic.jsfx) | 延迟示例；已知零延迟与尾音限制 |
 | [reascript/jsfx/examples/midi_monitor.jsfx](reascript/jsfx/examples/midi_monitor.jsfx) | MIDI monitor 示例 |
 
-包内唯一正本：[API index](../../src/rac/data/knowledge/api_index.json)、[RPP schema](../../src/rac/data/knowledge/rpp_schema.json)、[Lua 资源](../lua/README.zh-CN.md)。当前验证见[记录](../../docs/validation.md)；来源与哈希见[来源说明](../SOURCES.md)及[清单](../source-manifest.json)。翻译后的规范没有把历史观察升级为实测保证。
+包内唯一正本：[API index](../../packages/reacli/src/rac/data/knowledge/api_index.json)、[RPP schema](../../packages/reacli/src/rac/data/knowledge/rpp_schema.json)、[Lua 资源](../lua/README.zh-CN.md)。当前验证见[记录](../../docs/validation.md)；来源与哈希见[来源说明](../SOURCES.md)及[清单](../source-manifest.json)。翻译后的规范没有把历史观察升级为实测保证。

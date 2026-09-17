@@ -141,8 +141,13 @@ def cmd_pool_exec(args):
     p.add_argument("--workers-root", default=None)
     p.add_argument("--seed-config", default=None)
     a = p.parse_args(args)
-    from rac.runner.pool import Pool
-    jobs = json.loads(Path(a.jobs).read_text(encoding="utf-8"))
+    from rac.runner.pool import MAX_JOBS, Pool, PoolBlocked
+    jobs_path = Path(a.jobs).expanduser().resolve()
+    if jobs_path.stat().st_size > 4 * 1024 * 1024:
+        raise PoolBlocked("blocked:jobs_file_too_large (maximum 4 MiB)")
+    jobs = json.loads(jobs_path.read_text(encoding="utf-8"))
+    if not isinstance(jobs, list) or len(jobs) > MAX_JOBS:
+        raise PoolBlocked(f"blocked:too_many_jobs (maximum {MAX_JOBS})")
     if a.workers_root:
         proofs = Pool(a.workers_root, a.workers, seed_config_dir=a.seed_config).map(jobs, timeout=a.timeout)
     else:
@@ -274,7 +279,7 @@ def main(argv=None):
         return 4
     except (EnvironmentError, OSError, PoolBlocked) as e:
         return _json_out({"ok": False, "error": f"{type(e).__name__}: {e}"}, 4)
-    except (RPPParseError, IndexError, KeyError, ValueError, TypeError) as e:
+    except (RPPParseError, RecursionError, IndexError, KeyError, ValueError, TypeError) as e:
         # Data failures use the same JSON output channel as successful results.
         return _json_out({"ok": False, "error": f"{type(e).__name__}: {e}"}, 2)
 

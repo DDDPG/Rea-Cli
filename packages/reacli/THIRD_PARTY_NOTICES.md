@@ -45,8 +45,8 @@ the project MIT license does not replace the terms of these third-party material
 
 Lua skeleton/snippets and synthetic test fixtures were copied from the source
 project. Their original bytes and source-project-relative paths are recorded in
-[the source baseline](docs/source-baseline.json); changes in the standalone
-copy are described in the [changelog](CHANGELOG.md). The source README mentioned
+[the source baseline](../../docs/source-baseline.json); changes in the standalone
+copy are described in the [changelog](../../CHANGELOG.md). The source README mentioned
 external composition patterns, but no separate third-party Lua source tree is
 included in the Python build.
 
@@ -80,5 +80,5 @@ is not a license grant.
 Before public release, preserve these source terms and attribution in every affected
 artifact. The detailed decision log is
 [source-license-audit.md](../../docs/ecosystem/source-license-audit.md).
-[Sources and attribution](reference/SOURCES.md) and the [reference manifest](reference/source-manifest.json)
+[Sources and attribution](../../reference/SOURCES.md) and the [reference manifest](../../reference/source-manifest.json)
 identify the files and their provenance.

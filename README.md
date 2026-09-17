@@ -1,6 +1,7 @@
-> **Ecosystem alpha:** source packages now live in `packages/reacli` and `packages/reaper-parser`.
-> Install both together. ReaperDoc is in `apps/reaperdoc`; shared specifications are in `schema/rpp`.
-> See [ecosystem installation, data demo and validation boundaries](docs/ecosystem/README.md).
+> **Ecosystem alpha:** Python packages live in `packages/reacli` and `packages/reaper-parser`.
+> Install both together. `apps/reaperdoc` is an integration copy; ReaperDoc remains independently maintained.
+> See [installation and validation boundaries](docs/ecosystem/README.md),
+> [ReaperDoc maintenance](docs/ecosystem/reaperdoc-maintenance.md) and [deferred public entry points](docs/ecosystem/public-entrypoints.md).
 
 <p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli icon"></p>
 <h1 align="center">Rea-Cli</h1>
@@ -27,16 +28,55 @@ Use the Python library for code-driven workflows, the CLI for checks and
 isolated execution, and the repository skill to inject Rea-Cli's project-specific
 knowledge into an agent.
 
-**Status:** 0.1.0 alpha. A PyPI release is being prepared; until it is published,
-install from source. The API may evolve. The distribution and CLI are named
-`reacli`; Python imports use `rac`.
+**Status:** 0.1.0 alpha. `reacli==0.1.0` and `reaper-parser==0.1.0a1` are
+published on PyPI as wheel and source distributions. Install the released pair
+with:
+
+```sh
+python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+```
+
+See [`reacli` on PyPI](https://pypi.org/project/reacli/0.1.0/) and
+[`reaper-parser` on PyPI](https://pypi.org/project/reaper-parser/0.1.0a1/).
+The API may evolve. The distribution and CLI are named `reacli`; Python imports
+use `rac`.
+This reviewed checkout also contains post-publication runtime hardening and
+privacy cleanup that are not in the immutable `0.1.0`/`0.1.0a1` files; bump both
+package versions before the next upload.
+
+## Harness quick start
+
+Already using **Claude Code, Codex or Qwen Code**? Give your agent this instruction:
+
+> Read https://github.com/DDDPG/Rea-Cli and its `docs/harness/README.md` installation guide. Install the ReaCli CLI toolkit and `reaper-agent-cli` skill for the harness I am using into a new `my-reaper-work` project. Check Python, CLI, Lua and local REAPER availability, and tell me how to start using it. If the private repository is inaccessible, ask for my authorized local checkout and install from there.
+
+This installs a project-level **CLI toolkit + skill** using the harness's existing
+shell tools. See the [full installation guide](docs/harness/README.md) for each
+harness's skill location, prerequisites and candidate-bundle installation.
+
+**Prefer installing it yourself?** From a local checkout's root, run with Python 3.10+:
+
+```sh
+python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
+```
+
+Open Claude Code, Codex or Qwen Code in that directory and ask:
+“Use the reaper-agent-cli skill to check my environment, create a new REAPER session,
+save it and verify the rendered audio.” The project-local skill uses shell tools and
+an isolated Python runtime; it requires no MCP service. REAPER/Lua and harness login
+are separate prerequisites. The current private-repository pipeline uses local source
+as the acquisition mock; candidate wheels also work without a checkout.
+
+See the [three-harness quick start](docs/harness/README.md),
+[one-instruction showcase brief](integrations/agents/acceptance/showcase-brief.md),
+and [actual acceptance results](docs/harness/acceptance.md).
 
 ## Quick start: build a playable session
 
 ![From blank to a playable REAPER session, 52 numbered build states](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
 
 This walkthrough builds a self-contained, playable REAPER session from a blank
-project. After [installing from source](#installation) and configuring REAPER
+project. After [installing the package](#installation) and configuring REAPER
 with the [environment guide](docs/environment.md), run from the repository root:
 
 ```bash
@@ -105,7 +145,14 @@ Agent / Python / CLI → RPP or Lua source → rac pre-check → REAPER → save
 
 ## Installation
 
-Use **Python 3.10+** in a virtual environment. From the source directory:
+Use **Python 3.10+** in a virtual environment. For the published release:
+
+```bash
+python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+reacli --version
+```
+
+For source development, install the two local packages from the repository root:
 
 ```bash
 python3 -m venv .venv
@@ -212,6 +259,10 @@ The repository keeps runtime code, examples and research references separate:
 
 ```text
 packages/reacli/src/rac/     Python library, CLI and bundled runtime resources
+packages/reaper-parser/     Host-independent lossless parser
+apps/reaperdoc/             Integration copy of independent ReaperDoc
+schema/rpp/                Versioned specification, evidence and generated data
+tools/                     Cross-component generation and build tools
 examples/    Runnable workflows
 tests/      Offline tests, opt-in live tests and synthetic fixtures
 docs/       Setup, API, validation and release documentation
@@ -232,6 +283,8 @@ self-contained skill, concise reference and examples. Candidate releases include
 separately. No checkout or persistent MCP server is required by the installed bundle.
 
 ## Documentation
+
+- [Shared parser and media API](docs/ecosystem/api.md)
 
 - [Setup and troubleshooting](docs/environment.md)
 - [Python API and CLI behavior](docs/api.md)

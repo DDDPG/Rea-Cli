@@ -12,4 +12,4 @@
 *.wav binary
 
 # Preserve imported Lua snapshots, including their original blank EOF lines.
-src/rac/data/lua/** whitespace=-blank-at-eof
+packages/reacli/src/rac/data/lua/** whitespace=-blank-at-eof

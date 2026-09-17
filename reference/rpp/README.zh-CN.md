@@ -51,4 +51,4 @@ schema 字段位置从 1 开始，Python track/item 索引从 0 开始。`NAME` 
 
 保留 VST/AU/CLAP 状态、JSFX 实例序列化、渲染/录制格式块、编码节拍器数据、SysEx、扩展和未知 source。可复用宿主生成并验证过的完整块，但必须保持标识和引用一致。修改 `PRESETNAME` 不等于应用预设；任意替换 FXID/GUID 可能破坏包络链接。插件修改、复杂路由/folder 和含义不明的数据交给宿主 API。
 
-详细资料：[编辑边界](../knowledge/rpp/blob_denylist.md)、[知识缺口](../knowledge/rpp/gap_registry.md)、[schema](../../src/rac/data/knowledge/rpp_schema.json)、[提取报告](../knowledge/rpp/extract_report.json)。保存样本中的默认值仅反映特定宿主与配置。解析通过不证明媒体可用、路由正确或插件状态有效。
+详细资料：[编辑边界](../knowledge/rpp/blob_denylist.md)、[知识缺口](../knowledge/rpp/gap_registry.md)、[schema](../../packages/reacli/src/rac/data/knowledge/rpp_schema.json)、[提取报告](../knowledge/rpp/extract_report.json)。保存样本中的默认值仅反映特定宿主与配置。解析通过不证明媒体可用、路由正确或插件状态有效。

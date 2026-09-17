@@ -1,6 +1,27 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.0 — 2026-09-17
+
+### Distribution
+
+- Published `reacli==0.1.0` and `reaper-parser==0.1.0a1` to PyPI as both wheel
+  and source distribution. The live artifact names, upload timestamps and
+  SHA-256 values are indexed in [the publication audit](docs/ecosystem/publication-audit.md)
+  and `docs/ecosystem/publication.json`.
+
+### Post-publication maintenance
+
+- The reviewed main candidate adds resource, archive, parser and audio safety guards and
+  removes a local media path from generated public data. These changes are not part of the
+  immutable `0.1.0`/`0.1.0a1` archives; bump versions before the next upload.
+
+### Repository maintenance
+
+- Repair monorepo handbook paths and installation commands; share the contributor guide.
+- Document shared parser/media APIs in English and Chinese, including indexing,
+  fallback values, write verification and source/rendered lineage boundaries.
+- Record independent ReaperDoc maintenance and deferred public entry points.
+- Cover component dependencies and repository documentation/provenance checks.
 
 ### Added
 
@@ -47,4 +68,6 @@
   repository-only payload.
 
 See [validation](docs/validation.md) for tested environments and known limits.
-No package-index release has been published from this project.
+The repository currently records the two PyPI releases above. Package-index
+publication evidence is not a substitute for the repository's source,
+attribution or host-execution limitations.

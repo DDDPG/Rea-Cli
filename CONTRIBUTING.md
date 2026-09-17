@@ -110,7 +110,7 @@ Put detailed API behavior in `docs/api.md`, setup and troubleshooting in
 `docs/environment.md`, and reusable workflow material in `reference/`.
 
 `reference/` must remain outside wheels and source distributions. Canonical
-knowledge and Lua assets belong in `src/rac/data/`: maintain one copy of the two JSON
+knowledge and Lua assets belong in `packages/reacli/src/rac/data/`: maintain one copy of the two JSON
 indexes and 12 Lua files, and link to them from repository notes. Record sources
 and permissions for new reference material. Public availability alone is not
 redistribution permission; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
@@ -148,3 +148,19 @@ Maintain the English and Chinese [developer guides](reference/README.md) togethe
 The [repository skill](integrations/agents/reaper-agent-cli/SKILL.md) uses the installed package and these guides. Update its routing when adding topics, without vendoring rac or Lua templates. Check local links, run affected examples, validate the skill frontmatter, and build distributions to confirm `reference/` and `integrations/agents/` remain Git-only. Documentation checks do not establish new live REAPER validation.
 
 同步维护[双语开发规范](reference/README.zh-CN.md)，将当前调用约定与历史证据分开。保留来源哈希，修改纳入清单的资料后更新目标哈希。Skill 共用包内资源；变更后检查链接、相关示例、skill 格式及分发范围，不将文档检查记为实机测试。
+
+
+## Monorepo documentation and integration checks
+
+Run `python -m pytest tests/test_repository_docs.py -q` for local Markdown file
+links and current provenance targets. This check excludes remote URLs and heading
+fragments; pending branch/site URLs are recorded in
+[the public-entry-point inventory](docs/ecosystem/public-entrypoints.md).
+
+For field changes, edit `schema/rpp/spec.json`, run `python tools/generate_schema.py`,
+then run `python tools/generate_schema.py --check` and `python -m pytest tests/conformance -q`.
+Do not edit generated JSON consumers directly. The ReaperDoc integration copy has
+its own `npm ci --prefix apps/reaperdoc`, `npm run check --prefix apps/reaperdoc`
+and `npm run build --prefix apps/reaperdoc` checks. Read the
+[independent maintenance boundary](docs/ecosystem/reaperdoc-maintenance.md) before
+changing its data flow or assuming updates synchronize to the independent repository.

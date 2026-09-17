@@ -1,0 +1,228 @@
+{
+  "date": "2026-09-17",
+  "platform": "macOS arm64",
+  "host": "REAPER 7.48",
+  "runtime": {
+    "reacli": "0.1.0",
+    "reaper_parser": "0.1.0a1",
+    "bundle": "0.2.0a1"
+  },
+  "brief_sha256": "01e9fabe6020d992b8ab746e0ae19b26bb82acdd66aa1305ad7c55d22ad5cd83",
+  "prompt": "Use the reaper-agent-cli skill to independently implement requirements.md in this workspace, operate local REAPER through the installed CLI toolkit, and deliver the saved session, real audio preview and verified readback evidence.",
+  "acquisition": "local checkout mock; standalone wheel/bundle installation separately passed",
+  "harnesses": {
+    "codex": {
+      "cli_version": "0.153.4",
+      "outcome": "independent_host_and_audio_checks_passed",
+      "initial_prompts": 1,
+      "checks": {
+        "track_names_order": true,
+        "tempo": true,
+        "time_signature": true,
+        "folder": true,
+        "five_synths": true,
+        "pulse_split": true,
+        "instrument_spans": true,
+        "distinct_chord_takes": true,
+        "harmony_both_takes": true,
+        "melody_16_notes": true,
+        "midi_instruments": true,
+        "pan_envelope": true,
+        "volume_envelope": true,
+        "quiet_parallel_send": true,
+        "colors": true,
+        "verb_room": true,
+        "verb_damp": true,
+        "verb_wet": true,
+        "verb_dry": true,
+        "comp_threshold": true,
+        "comp_makeup": true,
+        "comp_auto_off": true,
+        "limit_threshold": true,
+        "limit_ceiling": true,
+        "eq_highpass_100_only": true,
+        "markers_regions": true,
+        "time_selection": true,
+        "notes": true,
+        "no_external_media": true,
+        "audio_layout": true,
+        "audio_finite": true,
+        "audio_audible_unclipped": true
+      },
+      "artifacts": {
+        "Show-Session.rpp": "5d365919c460d40f657d12314f525f8ee240c48d4e180534d63a6fccaa9b306e",
+        "preview.wav": "9bd59d050f668098056491f1db3efc637d4ec225dc5b49a98308c345ab01141d"
+      },
+      "audio": {
+        "frames": 1152000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "peak": 0.890350341796875,
+        "rms": 0.3055349372073922
+      },
+      "model": "Harness default; model identifier not recorded in JSON event stream",
+      "elapsed_seconds": 378
+    },
+    "qwen": {
+      "cli_version": "0.23.0",
+      "outcome": "independent_host_and_audio_checks_passed",
+      "initial_prompts": 1,
+      "checks": {
+        "track_names_order": true,
+        "tempo": true,
+        "time_signature": true,
+        "folder": true,
+        "five_synths": true,
+        "pulse_split": true,
+        "instrument_spans": true,
+        "distinct_chord_takes": true,
+        "harmony_both_takes": true,
+        "melody_16_notes": true,
+        "midi_instruments": true,
+        "pan_envelope": true,
+        "volume_envelope": true,
+        "quiet_parallel_send": true,
+        "colors": true,
+        "verb_room": true,
+        "verb_damp": true,
+        "verb_wet": true,
+        "verb_dry": true,
+        "comp_threshold": true,
+        "comp_makeup": true,
+        "comp_auto_off": true,
+        "limit_threshold": true,
+        "limit_ceiling": true,
+        "eq_highpass_100_only": true,
+        "markers_regions": true,
+        "time_selection": true,
+        "notes": true,
+        "no_external_media": true,
+        "audio_layout": true,
+        "audio_finite": true,
+        "audio_audible_unclipped": true
+      },
+      "artifacts": {
+        "Show-Session.rpp": "328b59e87a4c6aae88ee5a9076b1fcbc0af83b3ecad8c3570cfa5d15b3129bab",
+        "preview.wav": "56a4346baac0bda05f0a8d883c14dfc5f0dc5116c46174be1a900943dfe9c856"
+      },
+      "audio": {
+        "frames": 1152000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "peak": 0.890350341796875,
+        "rms": 0.2761174815560063
+      },
+      "termination": "15-minute limit after all self-checks passed, before final response",
+      "self_report": {
+        "total": 155,
+        "passed": 155,
+        "failed": 0,
+        "failed_ids": [],
+        "ok": true
+      },
+      "model": "deepseek-v4.1-flash-expires-on-0910[1m]",
+      "elapsed_seconds": 900
+    },
+    "claude": {
+      "cli_version": "2.1.236",
+      "outcome": "independent_host_and_audio_checks_passed",
+      "installation_and_cli_doctor": "passed",
+      "checks": {
+        "track_names_order": true,
+        "tempo": true,
+        "time_signature": true,
+        "folder": true,
+        "five_synths": true,
+        "pulse_split": true,
+        "instrument_spans": true,
+        "distinct_chord_takes": true,
+        "harmony_both_takes": true,
+        "melody_16_notes": true,
+        "midi_instruments": true,
+        "pan_envelope": true,
+        "volume_envelope": true,
+        "quiet_parallel_send": true,
+        "colors": true,
+        "verb_room": true,
+        "verb_damp": true,
+        "verb_wet": true,
+        "verb_dry": true,
+        "comp_threshold": true,
+        "comp_makeup": true,
+        "comp_auto_off": true,
+        "limit_threshold": true,
+        "limit_ceiling": true,
+        "eq_highpass_100_only": true,
+        "markers_regions": true,
+        "time_selection": true,
+        "notes": true,
+        "no_external_media": true,
+        "audio_layout": true,
+        "audio_finite": true,
+        "audio_audible_unclipped": true
+      },
+      "artifacts": {
+        "Show-Session.rpp": "734530e317532c183ecbe0b75d70930536451dc2088fde56f574b0f531ce5323",
+        "preview.wav": "ee4ff62aead374181a73245ea1f8647e49ebce837b18b087a37f941c9b616d7c"
+      },
+      "audio": {
+        "frames": 1152000,
+        "sample_rate": 48000,
+        "channels": 2,
+        "peak": 0.5947265625,
+        "rms": 0.14581945291784432
+      },
+      "model": "deepseek-flash",
+      "initial_prompts": 1,
+      "evaluation_budget_seconds": 1800,
+      "prior_attempt": "Gateway HTTP 503 before task execution; retried after user changed backend",
+      "self_report": {
+        "requirements_passed": 17,
+        "requirements_total": 17,
+        "checks_passed": 44,
+        "checks_total": 44,
+        "failed_requirements": [],
+        "skipped_checks": [],
+        "status": "accepted"
+      },
+      "elapsed_seconds": 1209,
+      "termination": "Harness final result received, is_error=false; OS exit code unavailable after supervisor replacement"
+    }
+  },
+  "jsfx_starter": {
+    "ok": true,
+    "checks": {
+      "layout": true,
+      "finite": true,
+      "audible": true,
+      "gain": true
+    },
+    "expected_gain": 0.5011872336272722,
+    "measured_gain": 0.5011775291718356,
+    "host": "7.48/macOS-arm64",
+    "asset_sha256": "c460be0060026ec6453a5dd914228af25eaefc9ffc1dbf7e366a76b976ee681d"
+  },
+  "bundle_sha256": "628765380514f9394060bc76b84309e713ae6c359b764cd5fccfcedb903a6907",
+  "checks": {
+    "offline_suite_passed": 207,
+    "optional_oracle_skipped": 1,
+    "live_tests_deselected": 5,
+    "standalone_wheel_install": true,
+    "skill_validation": true,
+    "markdown_file_targets": true
+  },
+  "trace_audit": {
+    "codex": {
+      "read_or_shell_calls_reviewed": 49,
+      "forbidden_source_matches": []
+    },
+    "qwen": {
+      "read_or_shell_calls_reviewed": 86,
+      "forbidden_source_matches": []
+    },
+    "claude": {
+      "read_or_shell_calls_reviewed": 109,
+      "forbidden_source_matches": []
+    }
+  }
+}

@@ -17,7 +17,7 @@ Use `rac knowledge api GetTrack` for a packaged signature, then check availabili
 | Marker / region | Enumeration position differs from marker ID. Include both markers and regions when iterating. |
 | Send / master | Distinguish send/receive categories and destination. Get master via `GetMasterTrack`, not `GetTrack(0, -1)`. |
 
-The generator only covers its [registered operations](../../src/rac/luagen/generator.py). Folder management, arbitrary takes and master FX require custom Lua in the entry template. The [showcase](../../examples/show_session.lua) demonstrates that path; its Python builder verifies the resulting session.
+The generator only covers its [registered operations](../../packages/reacli/src/rac/luagen/generator.py). Folder management, arbitrary takes and master FX require custom Lua in the entry template. The [showcase](../../examples/show_session.lua) demonstrates that path; its Python builder verifies the resulting session.
 
 ## FX: identify, set, read back
 

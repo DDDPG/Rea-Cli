@@ -20,8 +20,13 @@ Only macOS live results are claimed. GitHub Actions run 34756655368 passed all 2
 including Linux/macOS/Windows parser checks and Linux/macOS rac offline checks. Linux
 candidate wheel isolation and 43 distribution checks passed. The first Windows run
 exposed default-codepage decoding in an evidence test; explicit UTF-8 fixed all five
-Python versions without changing runtime code. Existing
-source attribution and the remaining package-index questions remain explicit in
-publication.json; no package was uploaded.
+Python versions without changing runtime code. Existing source attribution and the
+remaining package-index questions remain explicit in `publication.json`. Both
+`reacli==0.1.0` and `reaper-parser==0.1.0a1` are now live on PyPI; the parser's live
+artifact evidence is recorded separately from its not-yet-independently-proven upload
+channel.
 The public set_field interface refuses fields without a verified write contract; low-level
 set_raw/convenience setters remain raw patches, not claims of verified semantic writes.
+The current checkout also contains post-upload resource, archive, parser and audio guards;
+the immutable PyPI files remain the earlier `5ca1f27` runtime and require a new version for
+future publication.

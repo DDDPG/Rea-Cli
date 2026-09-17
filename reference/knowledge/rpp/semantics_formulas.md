@@ -52,7 +52,7 @@ SOFFS = 源内起始偏移（秒）
 如果要保持相同的工程时间长度，则保留 LENGTH，消耗的源片段长度会变化。
 
 `SOFFS` 等 KEY 在 item 和 take 上下文中的位置需要结合
-[schema](../../../src/rac/data/knowledge/rpp_schema.json)理解，不能只按
+[schema](../../../packages/reacli/src/rac/data/knowledge/rpp_schema.json)理解，不能只按
 字段名字匹配。源记录依据 ReaperDoc 整理；复杂 take、循环、拉伸标记和
 tempo 变化的行为需要另行验证。
 

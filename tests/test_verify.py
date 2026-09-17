@@ -87,6 +87,22 @@ def t_audio_negative():
             raise AssertionError("静音未拦截")
 
 
+def test_audio_decoded_size_guard(tmp_path, monkeypatch):
+    import wave
+    import rac.verify.audio as audio
+
+    path = tmp_path / "guard.wav"
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(8000)
+        w.writeframes(b"\x00\x00" * 2)
+    monkeypatch.setattr(audio, "MAX_AUDIO_DECODE_BYTES", 1)
+
+    with pytest.raises(AudioExpectError, match="safety limit"):
+        expect_audio(path)
+
+
 def t_proof_check():
     good = {"status": "ok", "reason_code": "completed", "duration_ms": 1,
             "log": [{"t_ms": 0, "level": "info", "msg": "x"},

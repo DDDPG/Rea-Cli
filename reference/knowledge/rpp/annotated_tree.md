@@ -7,7 +7,7 @@
 > 来源: ReaperDoc rppStructure.ts @ 32047bb | 生成: 2026-07-30
 > ReaperDoc 注释树样例（上游人工维护的 RPP 结构示例，逐行注释）。
 > 读 RPP 时对照本文件理解结构；字段语义参考
-> [结构化 schema](../../../src/rac/data/knowledge/rpp_schema.json)。
+> [结构化 schema](../../../packages/reacli/src/rac/data/knowledge/rpp_schema.json)。
 > 本文含注释、省略/占位插件数据和示意 GUID，不是可以直接打开的工程 fixture。
 
 ```

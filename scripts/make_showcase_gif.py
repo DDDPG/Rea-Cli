@@ -24,19 +24,38 @@ TITLES = {
 }
 
 
+def _manifest_file(base: Path, value, label: str) -> Path:
+    """Resolve a manifest path only when it stays in the supplied root."""
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"{label} must be a non-empty relative path")
+    base = base.resolve()
+    raw = base / value
+    if any(part.is_symlink() for part in (raw, *raw.parents) if part != base):
+        raise ValueError(f"{label} must not traverse a symlink: {value}")
+    candidate = raw.resolve()
+    if candidate != base and base not in candidate.parents:
+        raise ValueError(f"{label} escapes {base}: {value}")
+    if not candidate.is_file():
+        raise FileNotFoundError(f"{label} is not a file: {candidate}")
+    return candidate
+
+
 def assemble(frames: Path, output: Path, font_path: Path) -> None:
-    entries = [json.loads(line) for line in (frames.parent/'steps/index.jsonl').read_text().splitlines()]
-    records = json.loads((frames/'index.json').read_text())
+    steps = frames.parent / 'steps'
+    entries = [json.loads(line) for line in
+               (steps/'index.jsonl').read_text(encoding='utf-8').splitlines()]
+    records = json.loads((frames/'index.json').read_text(encoding='utf-8'))
     if [r['file'] for r in records] != [e['file'] for e in entries]:
         raise RuntimeError('Capture every RPP in order before assembling the GIF')
     title_font = ImageFont.truetype(str(font_path), 27)
     caption_font = ImageFont.truetype(str(font_path), 18)
     images, durations = [], []
     for i, entry in enumerate(records):
-        project = frames.parent/'steps'/entry['file']
+        project = _manifest_file(steps, entry.get('file'), 'capture project')
         if hashlib.sha256(project.read_bytes()).hexdigest() != entry['rpp_sha256']:
             raise RuntimeError(f"Stale capture: {entry['file']}")
-        with Image.open(frames/entry['image']) as capture:
+        image = _manifest_file(frames, entry.get('image'), 'capture image')
+        with Image.open(image) as capture:
             capture = capture.convert('RGB')
             if entry['main_window']:
                 # Captures are 2x Retina macOS windows; omit the license title bar.
@@ -49,7 +68,8 @@ def assemble(frames: Path, output: Path, font_path: Path) -> None:
                 raise RuntimeError('Recapture FX stages with the DAW context before assembling')
             # Both windows come from the same loaded RPP. Keep the selected
             # track controls visible on the left, with its FX panel on the right.
-            with Image.open(frames/entry['fx_image']) as fx_capture:
+            fx_image = _manifest_file(frames, entry['fx_image'], 'FX capture image')
+            with Image.open(fx_image) as fx_capture:
                 fx_capture = ImageOps.contain(fx_capture.convert('RGB'), (880, 550), Image.Resampling.LANCZOS)
                 x, y = 1264-fx_capture.width, 842-fx_capture.height
                 ImageDraw.Draw(canvas).rectangle((x-3,y-3,x+fx_capture.width+2,y+fx_capture.height+2), fill='#7ceac5')

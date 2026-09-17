@@ -136,3 +136,9 @@ def test_linux_worker_without_seed_uses_isolated_defaults(tmp_path):
     assert resource == worker / "resource"
     assert P.platform.resource_ready(resource)
     assert P.make_worker(worker) == resource
+
+
+def test_pool_map_rejects_unbounded_job_batch():
+    pool = object.__new__(P.Pool)
+    with pytest.raises(P.PoolBlocked, match="too_many_jobs"):
+        pool.map([{}] * (P.MAX_JOBS + 1))

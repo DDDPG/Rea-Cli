@@ -2,7 +2,7 @@
 
 [中文](README.zh-CN.md) · [Handbook](../README.md)
 
-Keep the packaged [entry template](../../src/rac/data/lua/entry.lua) and [stdlib](../../src/rac/data/lua/stdlib/) as the canonical resources. Do not vendor another runtime into an agent skill. Export them with `rac resources --output ./templates` (existing files are not overwritten), or read them through `rac.resources.read_text`.
+Keep the packaged [entry template](../../packages/reacli/src/rac/data/lua/entry.lua) and [stdlib](../../packages/reacli/src/rac/data/lua/stdlib/) as the canonical resources. Do not vendor another runtime into an agent skill. Export them with `rac resources --output ./templates` (existing files are not overwritten), or read them through `rac.resources.read_text`.
 
 ## Generated operations
 
@@ -15,7 +15,7 @@ script = generate({"ops": [
 ]}, "edit.lua")
 ```
 
-The parent directory must exist. `generate` overwrites an explicit output, validates operation names/types and runs a compatible `luac -p`. It supports only [OP_REGISTRY](../../src/rac/luagen/generator.py), not every stdlib function or REAPER API. Check returned operation errors even when the body completed.
+The parent directory must exist. `generate` overwrites an explicit output, validates operation names/types and runs a compatible `luac -p`. It supports only [OP_REGISTRY](../../packages/reacli/src/rac/luagen/generator.py), not every stdlib function or REAPER API. Check returned operation errors even when the body completed.
 
 ## Custom bodies
 
@@ -37,7 +37,7 @@ The snippets define `std_*` tables by text composition; they are not `require()`
 | `render.lua` | render configuration/trigger | Verify command availability and actual new output |
 | `snapshot.lua` | bounded state summary | Not full project or sound identity |
 
-Read the relevant file under [stdlib](../../src/rac/data/lua/stdlib/) for exact signatures. Helpers commonly return `{ok=true, value=..., affected=...}` or `{ok=false, reason=...}`; check `ok` before consuming `value`.
+Read the relevant file under [stdlib](../../packages/reacli/src/rac/data/lua/stdlib/) for exact signatures. Helpers commonly return `{ok=true, value=..., affected=...}` or `{ok=false, reason=...}`; check `ok` before consuming `value`.
 
 ## Working inspector and complete examples
 

@@ -1,0 +1,15 @@
+{
+  "license": "MIT; see ../LICENSE",
+  "sources": [
+    {
+      "asset": "inspect.body.lua",
+      "source": "reference/lua/examples/inspect_project.body.lua",
+      "sha256": "74fb284ee7ebdd5c38a9b03369ddc2b66aa486169c14328d5c7aac88b3b290c4"
+    },
+    {
+      "asset": "gain_simple.jsfx",
+      "source": "reference/knowledge/reascript/jsfx/examples/gain_simple.jsfx",
+      "sha256": "c460be0060026ec6453a5dd914228af25eaefc9ffc1dbf7e366a76b976ee681d"
+    }
+  ]
+}

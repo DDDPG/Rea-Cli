@@ -1,8 +1,16 @@
-# REAPER agent bundle
+# REAPER CLI harness integration
 
-发布候选中的 reaper-agent-cli.zip 可独立解压安装，无需完整源码目录。
-先安装同一候选中的 parser 与 reacli wheel；音频示范另需 NumPy、SoundFile。
-宿主执行需自行安装 REAPER 和 Lua。
+[Quick start](../../docs/harness/README.md) · [中文](../../docs/harness/README.zh-CN.md)
 
-技能入口见 SKILL.md（源码中位于 reaper-agent-cli/SKILL.md），
-精简说明见 reference/quickstart.md。示范与 compatibility.json 会随 bundle 一起交付。
+The shared [skill](reaper-agent-cli/SKILL.md) supports Claude Code, Codex and Qwen Code.
+The project installer binds a Python runtime, checks CLI availability and copies the skill
+into each harness's native discovery directory. It does not configure MCP or global permissions.
+The [requirements-only evaluation](acceptance/showcase-brief.md) contains no solution script.
+
+```sh
+python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
+```
+
+The candidate ZIP includes this installer's code and generic coding assets. It can install
+from candidate wheels without access to the private source repository. See
+[recorded outcomes](../../docs/harness/acceptance.md) for live validation boundaries.

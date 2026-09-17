@@ -55,7 +55,7 @@ RENDER_TRIM 0.000001 0.000001 0 0
 - 旧记录中某些工作流会重置输出模式，因此渲染完成后应检查实际输出位置。
   修改设置成功和预期音频已经生成是两个不同的验证步骤。
 
-[render.lua](../../../src/rac/data/lua/stdlib/render.lua)展示了通过宿主 API
+[render.lua](../../../packages/reacli/src/rac/data/lua/stdlib/render.lua)展示了通过宿主 API
 设置渲染参数的方式。所选格式的完整配置仍需由目标宿主确认。
 
 ## Render presets 与默认配置

@@ -7,9 +7,9 @@ export const RPP_STRUCTURE: RPPNode = {
   children: [
     { key: "TITLE", values: "\"Project Title\"", sectionId: "project" },
     { key: "AUTHOR", values: "KDW", sectionId: "project" },
-    { 
-      key: "<NOTES", 
-      values: "0 0", 
+    {
+      key: "<NOTES",
+      values: "0 0",
       sectionId: "project",
       children: [
         { key: "|This is Project Settings Note", sectionId: "project" }
@@ -81,8 +81,8 @@ export const RPP_STRUCTURE: RPPNode = {
       ]
     },
     { key: "MARKER", values: "1 10.344 \"\" 1 0 1 B {GUID} 0", sectionId: "project" },
-    { 
-      key: "<PROJBAY", 
+    {
+      key: "<PROJBAY",
       sectionId: "project",
       children: []
     },
@@ -125,8 +125,8 @@ export const RPP_STRUCTURE: RPPNode = {
         { key: "LOCK", values: "0", sectionId: "track" },
         { key: "FREEMODE", values: "0", sectionId: "track" },
         { key: "ITEMLANES", values: "8", sectionId: "track" },
-        { 
-          key: "<FXCHAIN", 
+        {
+          key: "<FXCHAIN",
           sectionId: "fx",
           children: [
             { key: "WNDRECT", values: "488 1146 1181 626", sectionId: "fx" },
@@ -134,9 +134,9 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "LASTSEL", values: "1", sectionId: "fx" },
             { key: "DOCKED", values: "0", sectionId: "fx" },
             { key: "BYPASS", values: "1 0 0", sectionId: "fx" },
-            { 
-              key: "<VST", 
-              values: "\"VST3: bx_digital V3 (Plugin Alliance)\" \"bx_digital V3.vst3\" 0 \"\" 1846886468{5653546278643362785F646967697461} \"\"", 
+            {
+              key: "<VST",
+              values: "\"VST3: bx_digital V3 (Plugin Alliance)\" \"bx_digital V3.vst3\" 0 \"\" 1846886468{5653546278643362785F646967697461} \"\"",
               sectionId: "fx",
               children: [
                 { key: "REAVbu5e7f4CAAAAAQAAAAAAAAACAAAAAAAAAAIAAAABAAAAAAAAAAIAAAAAAAAAIBQAAAEAAAD//wAA", sectionId: "fx" },
@@ -147,9 +147,9 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "WET", values: "0.329946 0", sectionId: "fx" },
             { key: "FLOATPOS", values: "421 1163 1024 731", sectionId: "fx" },
             { key: "FXID", values: "{33537175-3F37-6E48-9243-5A83ED47FABD}", sectionId: "fx" },
-            { 
-              key: "<PARMENV", 
-              values: "0:1115254881 0 1 0.5 \"Bypass / bx_digital V3\"", 
+            {
+              key: "<PARMENV",
+              values: "0:1115254881 0 1 0.5 \"Bypass / bx_digital V3\"",
               sectionId: "envelope",
               children: [
                 { key: "EGUID", values: "{4DAEBD23-A6E5-EA41-973A-A17D6336064D}", sectionId: "envelope" },
@@ -159,13 +159,13 @@ export const RPP_STRUCTURE: RPPNode = {
                 { key: "ARM", values: "0", sectionId: "envelope" },
                 { key: "DEFSHAPE", values: "1 -1 -1", sectionId: "envelope" },
                 { key: "PT", values: "4.138 0 1", sectionId: "envelope" }
-              ] 
+              ]
             },
             { key: "WAK", values: "0 0", sectionId: "fx" },
             { key: "BYPASS", values: "0 0 0", sectionId: "fx" },
-            { 
-              key: "<VST", 
-              values: "\"VST3: Pro-Q 4 (FabFilter)\" \"FabFilter Pro-Q 4.vst3\" 0 \"\" 934538646{ED57BD725C60467EA64DD2F400758B6F} \"\"", 
+            {
+              key: "<VST",
+              values: "\"VST3: Pro-Q 4 (FabFilter)\" \"FabFilter Pro-Q 4.vst3\" 0 \"\" 934538646{ED57BD725C60467EA64DD2F400758B6F} \"\"",
               sectionId: "fx",
               children: [
                 { key: "lu2zN+5e7f4EAAAAAQAAAAAAAAACAAAAAAAAAAQAAAAAAAAACAAAAAAAAAACAAAAAQAAAAAAAAACAAAAAAAAAMYKAAABAAAAAAAAAA==", sectionId: "fx" },
@@ -176,9 +176,9 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "PRESETNAME", values: "\"Program 1\"", sectionId: "fx" },
             { key: "FLOATPOS", values: "794 1374 950 623", sectionId: "fx" },
             { key: "FXID", values: "{26C746C5-5741-9F41-A20F-1EFB1A52E098}", sectionId: "fx" },
-            { 
-              key: "<PARMENV", 
-              values: "737:bypass 0 1 0.5 \"Bypass / Pro-Q 4\"", 
+            {
+              key: "<PARMENV",
+              values: "737:bypass 0 1 0.5 \"Bypass / Pro-Q 4\"",
               sectionId: "envelope",
               children: [
                 { key: "EGUID", values: "{F54364D5-ED6E-D84E-BDE0-BFEAA484745E}", sectionId: "envelope" },
@@ -188,7 +188,7 @@ export const RPP_STRUCTURE: RPPNode = {
                 { key: "ARM", values: "0", sectionId: "envelope" },
                 { key: "DEFSHAPE", values: "1 -1 -1", sectionId: "envelope" },
                 { key: "PT", values: "4.138 0 1", sectionId: "envelope" }
-              ] 
+              ]
             },
             { key: "WAK", values: "0 0", sectionId: "fx" }
           ]
@@ -248,14 +248,14 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "GUID", values: "{4BCE0917-FE2F-F24E-8B32-12144D8D0F44}", sectionId: "item" },
             { key: "COLOR", values: "0", sectionId: "item" },
             { key: "TKM", values: "22.24137931034483 take_marker 0 0", sectionId: "item" },
-            { key: "RESOURCEFN", values: "\"/Users/lertoon/Music/test_VAE_pross.mp3\"", sectionId: "item" },
+            { key: "RESOURCEFN", values: "\"media/example.mp3\"", sectionId: "item" },
             { key: "IMGRESOURCEFLAGS", values: "0", sectionId: "item" },
             { key: "GROUP", values: "0", sectionId: "item" },
             { key: "FADEFLAG", values: "0", sectionId: "item" },
             { key: "FADELPF", values: "0", sectionId: "item" },
-            { 
-              key: "<SOURCE", 
-              values: "MP3", 
+            {
+              key: "<SOURCE",
+              values: "MP3",
               sectionId: "source",
               children: [
                  { key: "FILE", values: "\"/path/to/project/audio/test_audio.mp3\" 1", sectionId: "source" }
@@ -278,9 +278,9 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "PLAYRATE", values: "2 1 0 -1 0 0.0025", sectionId: "take" },
             { key: "CHANMODE", values: "0", sectionId: "take" },
             { key: "GUID", values: "{ADC20F9D-1BBD-1F40-B8C8-461BF438D098}", sectionId: "take" },
-            { 
-              key: "<SOURCE", 
-              values: "WAVE", 
+            {
+              key: "<SOURCE",
+              values: "WAVE",
               sectionId: "source",
               children: [
                 { key: "FILE", values: "\"Audio files/test_audio.wav\"", sectionId: "source" }
@@ -308,9 +308,9 @@ export const RPP_STRUCTURE: RPPNode = {
           sectionId: "item",
           comment: "MIDI Item Example",
           children: [
-            { 
-              key: "<NOTES", 
-              values: "0 0", 
+            {
+              key: "<NOTES",
+              values: "0 0",
               sectionId: "item",
               comment: "Item notes chunk",
               children: [
@@ -335,9 +335,9 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "PLAYRATE", values: "1 1 0 -1 0 0.0025", sectionId: "item" },
             { key: "CHANMODE", values: "0", sectionId: "item" },
             { key: "GUID", values: "{61D9AC0A-84AB-924A-9CAA-9C1E5A65A7BF}", sectionId: "item" },
-            { 
-              key: "<SOURCE", 
-              values: "MIDI", 
+            {
+              key: "<SOURCE",
+              values: "MIDI",
               sectionId: "source",
               children: [
                 { key: "HASDATA", values: "1 960 QN", sectionId: "source" },
@@ -438,8 +438,8 @@ export const RPP_STRUCTURE: RPPNode = {
             { key: "PT", values: "4.138 1 0", sectionId: "envelope" }
           ]
         },
-        { 
-          key: "<FXCHAIN", 
+        {
+          key: "<FXCHAIN",
           sectionId: "fx",
           children: [
             { key: "WNDRECT", values: "488 1146 1181 626", sectionId: "fx" },
@@ -454,8 +454,8 @@ export const RPP_STRUCTURE: RPPNode = {
       key: "<EXTENSIONS",
       sectionId: "project",
       children: [
-         { 
-           key: "<SWSAUTOCOLOR", 
+         {
+           key: "<SWSAUTOCOLOR",
            sectionId: "project",
            children: [
              { key: "{00000000-0000-0000-0000-000000000000}", values: "0 \"\" \"\" \"\"", sectionId: "project"},

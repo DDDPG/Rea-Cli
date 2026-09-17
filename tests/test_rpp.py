@@ -6,6 +6,7 @@
 """
 import sys
 from pathlib import Path
+import pytest
 
 ROOT = Path(__file__).parent.parent
 
@@ -59,6 +60,33 @@ def t_unclosed_chunk_raises():
         assert "unclosed" in str(e) and "TRACK" in str(e) and "line 2" in str(e), e
     else:
         raise AssertionError("未闭合 chunk 未报错")
+
+
+def test_parser_safety_limits(monkeypatch):
+    import reaper_parser.parser as parser
+
+    monkeypatch.setattr(parser, "MAX_RPP_BYTES", 5)
+    with pytest.raises(parser.RPPParseError, match="byte safety limit"):
+        parse("<éé>")
+
+    monkeypatch.setattr(parser, "MAX_RPP_BYTES", 64 * 1024 * 1024)
+    monkeypatch.setattr(parser, "MAX_RPP_LINES", 1)
+    with pytest.raises(parser.RPPParseError, match="line safety limit"):
+        parse("<ROOT\r\n>\r\n")
+
+    monkeypatch.setattr(parser, "MAX_RPP_LINES", 1_000_000)
+    monkeypatch.setattr(parser, "MAX_RPP_NESTING", 1)
+    with pytest.raises(parser.RPPParseError, match="level safety limit"):
+        parse("<REAPER_PROJECT 0.1 7.0 0\n<CHILD\n>\n>\n")
+
+
+def test_semantic_diff_safety_limit(monkeypatch):
+    from rac.verify import semantics
+
+    doc = parse(ROOT / "tests" / "fixtures" / "minimal.rpp")
+    monkeypatch.setattr(semantics, "MAX_SEMANTIC_DIFF_NODES", 0)
+    with pytest.raises(ValueError, match="node safety limit"):
+        semantics.semantic_diff(doc, doc)
 
 
 def t_typed_validation():

@@ -26,11 +26,29 @@ for w in ws where (w[kCGWindowOwnerPID as String] as? Int) == pid {
 '''
 
 
+def _manifest_file(base: Path, value, label: str) -> Path:
+    """Resolve a manifest path only when it stays in the supplied root."""
+    if not isinstance(value, str) or not value:
+        raise ValueError(f"{label} must be a non-empty relative path")
+    base = base.resolve()
+    raw = base / value
+    if any(part.is_symlink() for part in (raw, *raw.parents) if part != base):
+        raise ValueError(f"{label} must not traverse a symlink: {value}")
+    candidate = raw.resolve()
+    if candidate != base and base not in candidate.parents:
+        raise ValueError(f"{label} escapes {base}: {value}")
+    if not candidate.is_file():
+        raise FileNotFoundError(f"{label} is not a file: {candidate}")
+    return candidate
+
+
 def capture(root: Path, resource_seed: Path | None, limit: int | None) -> None:
     if sys.platform != 'darwin':
         raise RuntimeError('This capture helper requires macOS')
     root = root.resolve()
-    entries = [json.loads(line) for line in (root/'steps/index.jsonl').read_text().splitlines()]
+    steps = root / 'steps'
+    entries = [json.loads(line) for line in
+               (steps/'index.jsonl').read_text(encoding='utf-8').splitlines()]
     frames = root/'frames'
     frames.mkdir(exist_ok=True)
     resource = root/'capture-resource'
@@ -43,7 +61,11 @@ def capture(root: Path, resource_seed: Path | None, limit: int | None) -> None:
         subprocess.run(['swiftc', str(swift), '-o', str(binary)], check=True)
     captured = 0
     for entry in entries:
-        project = (root/'steps'/entry['file']).resolve()
+        project = _manifest_file(steps, entry.get('file'), 'manifest project')
+        tracks, items = entry.get('tracks'), entry.get('items')
+        if any(isinstance(value, bool) or not isinstance(value, int) or value < 0
+               for value in (tracks, items)):
+            raise ValueError('manifest tracks/items must be nonnegative integers')
         stem = project.stem
         output = frames/(stem+'.png')
         evidence = frames/(stem+'.capture.json')
@@ -61,6 +83,9 @@ def capture(root: Path, resource_seed: Path | None, limit: int | None) -> None:
         done.unlink(missing_ok=True)
         # The script only sets the view, checks the loaded file, and waits for capture.
         fx = entry.get('fx_track')
+        if (fx is not None and fx != 'master' and
+                (isinstance(fx, bool) or not isinstance(fx, int) or fx < 0)):
+            raise ValueError('manifest fx_track must be null, master, or a nonnegative integer')
         show_fx = ''
         if fx is not None:
             tr = 'reaper.GetMasterTrack(0)' if fx == 'master' else f'reaper.GetTrack(0,{fx})'
@@ -72,8 +97,8 @@ def capture(root: Path, resource_seed: Path | None, limit: int | None) -> None:
         script.write_text(f'''
 local _, loaded = reaper.EnumProjects(-1, "")
 assert(loaded == {json.dumps(str(project))}, "Wrong project loaded")
-assert(reaper.CountTracks(0) == {entry['tracks']}, "Wrong track count")
-assert(reaper.CountMediaItems(0) == {entry['items']}, "Wrong item count")
+assert(reaper.CountTracks(0) == {tracks}, "Wrong track count")
+assert(reaper.CountMediaItems(0) == {items}, "Wrong item count")
 reaper.GetSet_ArrangeView2(0,true,0,0,0,17)
 reaper.TrackList_AdjustWindows(false)
 reaper.UpdateArrange()

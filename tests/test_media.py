@@ -15,6 +15,18 @@ def test_source_preserves_channels_and_values(tmp_path):
     assert result.metadata["level"] == "source"
 
 
+def test_source_rejects_excessive_decoded_audio(tmp_path, monkeypatch):
+    import rac.media as media
+
+    path = tmp_path / "large-enough-for-guard.wav"
+    sf.write(path, np.zeros((8, 2), dtype="float32"), 44100, subtype="FLOAT")
+    monkeypatch.setattr(media, "MAX_AUDIO_DECODE_BYTES", 1)
+
+    with pytest.raises(MediaError) as caught:
+        read_source(path)
+    assert caught.value.code == "audio_too_large"
+
+
 def test_foreign_paths_require_explicit_unambiguous_mapping(tmp_path):
     sf.write(tmp_path / "a.wav", np.zeros((8, 1)), 8000)
     assert (

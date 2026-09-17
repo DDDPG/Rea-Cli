@@ -2,7 +2,9 @@
 
 Two independent Python distributions share one lossless RPP document implementation.
 `reaper_parser` has no runtime dependencies. `rac` retains its CLI, patch, runner and proof
-interfaces. ReaperDoc renders generated data from `schema/rpp/spec.json`.
+interfaces. The ReaperDoc integration copy renders generated data from `schema/rpp/spec.json`.
+The independent ReaperDoc repository remains separately maintained; see the
+[maintenance boundary and synchronization gap](reaperdoc-maintenance.md).
 
 ## Install from the monorepo
 
@@ -13,6 +15,23 @@ python tools/generate_schema.py --check
 rac doctor --profile offline --json
 ```
 
+## Published packages
+
+The current PyPI pair is:
+
+```sh
+python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+```
+
+Both projects currently expose the matching wheel and source distribution on
+PyPI. See the [reacli release](https://pypi.org/project/reacli/0.1.0/), the
+[reaper-parser release](https://pypi.org/project/reaper-parser/0.1.0a1/) and
+the [machine-readable publication index](publication.json) for the observed
+files and hashes. The `reacli` production upload has a successful OIDC workflow
+record; this checkout does not have a successful `reaper-parser` production
+publish-job record, so its live artifacts and upload channel are tracked
+separately.
+
 For a candidate release, install BOTH wheels in one command from an unrelated directory:
 
 ```sh
@@ -20,10 +39,11 @@ python -m pip install /path/to/candidate/reaper-parser/*.whl /path/to/candidate/
 ```
 
 Lua and REAPER are external prerequisites for host operations. The tested host is
-REAPER 7.48/macOS-arm64. [Cross-platform CI](https://github.com/DDDPG/Rea-Cli/actions/runs/34756655368)
+REAPER 7.48/macOS-arm64. [The historical cross-platform CI run](https://github.com/DDDPG/Rea-Cli/actions/runs/34756655368)
 passed all 22 jobs: parser on Linux/macOS/Windows (Python 3.10–3.14), rac offline on
 Linux/macOS (3.10/3.12/3.14), and Linux candidate wheel installation. These offline
-results do not establish Linux or Windows REAPER host acceptance. See [validation.json](validation.json).
+results do not establish Linux or Windows REAPER host acceptance, and do not assert that
+the latest post-upload hardening run completed. See [validation.json](validation.json).
 
 ## Document contract
 
@@ -108,9 +128,12 @@ python tools/build_release.py --output dist/new-candidate
 The output contains two wheel/sdist pairs, static website ZIP, standalone agent ZIP,
 examples ZIP, runtime schema and SHA-256 manifest. The builder refuses existing output
 folders, checks schema freshness, compares archive runtime bytes to source, and runs twine.
-Candidate builds do not upload or change visibility. Publication stays blocked while
-index ownership and publishing identity remain unresolved; source authorization is
-currently recorded as a maintainer attestation in `publication.json`.
+Candidate builds do not upload or change visibility. The current package artifacts are
+already live on PyPI but are immutable; because this checkout includes post-upload runtime
+hardening, a same-version candidate is for review only and the next upload must use a new
+version. The normal future-publication gate remains blocked until Trusted Publisher/channel
+evidence is complete; source authorization is recorded as a maintainer attestation in
+`publication.json`.
 
 ## Migration and recovery
 

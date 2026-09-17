@@ -16,7 +16,7 @@ The result printed to stdout includes the execution status and artifact path.
 
 ## Explore without REAPER
 
-The [README quick start](../README.md#quick-start-build-a-playable-session) shows offline validation and
+The [README quick start](../README.md#offline-quick-start) shows offline validation and
 knowledge lookup. The [API guide](../docs/api.md) covers direct RPP edits,
 project assertions, WAV checks, and concurrent workers.
 
@@ -140,4 +140,4 @@ quick start does not capture the screen or require Pillow/Swift.
 
 ## Development contracts / 开发规范
 
-See the [English handbook](../reference/README.md) or [中文规范](../reference/README.zh-CN.md) for RPP, ReaScript, Lua, FX and verification boundaries. The [repository skill](../skills/reaper-agent-cli/SKILL.md) applies the same contracts to new tasks.
+See the [English handbook](../reference/README.md) or [中文规范](../reference/README.zh-CN.md) for RPP, ReaScript, Lua, FX and verification boundaries. The [repository skill](../integrations/agents/reaper-agent-cli/SKILL.md) applies the same contracts to new tasks.

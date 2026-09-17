@@ -18,7 +18,7 @@ Combining offline and host paths is valid. Choose the host when field semantics 
 
 ## Prepare the environment
 
-From a checkout, install with `python -m pip install -e .`. Run the narrowest relevant check:
+From a checkout, install with `python -m pip install -e ./packages/reaper-parser -e './packages/reacli[audio,dev]'`. Run the narrowest relevant check:
 
 ```bash
 rac doctor --profile offline --json

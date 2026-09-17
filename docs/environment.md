@@ -18,7 +18,7 @@ The minimum REAPER minor version has not been certified. Use doctor and the
 smoke test to check your installed version; see [validated environments](validation.md).
 
 Install reacli in an isolated virtual environment using the
-[source installation instructions](../README.md#install-from-source). On Python
+[source installation instructions](../README.md#installation). On Python
 3.13+, `audioop-lts` is installed automatically. A system Python reporting 3.9
 cannot run this package.
 

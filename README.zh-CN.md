@@ -1,6 +1,7 @@
-> **Ecosystem alpha:** source packages now live in `packages/reacli` and `packages/reaper-parser`.
-> Install both together. ReaperDoc is in `apps/reaperdoc`; shared specifications are in `schema/rpp`.
-> See [ecosystem installation, data demo and validation boundaries](docs/ecosystem/README.md).
+> **生态 alpha：** Python 包位于 `packages/reacli` 和 `packages/reaper-parser`，请一并安装。
+> ReaperDoc 继续独立维护；`apps/reaperdoc` 是本仓库的集成副本。
+> 参见[安装与验证边界](docs/ecosystem/README.md)、[ReaperDoc 维护关系](docs/ecosystem/reaperdoc-maintenance.md)
+> 和[对外入口待办](docs/ecosystem/public-entrypoints.md)。
 
 <p align="center"><img src="docs/assets/reacli-icon.png" width="160" alt="Rea-Cli "></p>
 <h1 align="center">Rea-Cli</h1>
@@ -24,14 +25,49 @@ Rea-Cli 本身不是完整的 agent harness，也不是持久化的 REAPER 远�
 Python 库用于编程式工作流，CLI 用于检查和隔离执行，仓库内的 skill 则用于向 agent
 注入 Rea-Cli 相关的工程知识。
 
-**当前状态：** 0.1.0 alpha，正在准备 PyPI 发行；正式发布前请从源码安装，API 后续可能调整。
-安装包与 CLI 名称为 `reacli`，Python 导入名为 `rac`。
+**当前状态：** 0.1.0 alpha；`reacli==0.1.0` 和 `reaper-parser==0.1.0a1`
+已经以 wheel 和源码包形式发布到 PyPI。安装正式版本：
+
+```sh
+python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+```
+
+参见 [`reacli` PyPI 页面](https://pypi.org/project/reacli/0.1.0/) 和
+[`reaper-parser` PyPI 页面](https://pypi.org/project/reaper-parser/0.1.0a1/)。
+API 后续可能调整。安装包与 CLI 名称为 `reacli`，Python 导入名为 `rac`。
+本次审查后的 checkout 还包含发布后加入的运行时加固和隐私清理，这些改动不在不可变的
+`0.1.0`/`0.1.0a1` 构件中；下次上传前需要同时提升两个包的版本。
+
+## Harness quick start：让 agent 安装并开始使用
+
+已经在使用 **Claude Code、Codex 或 Qwen Code**？直接把下面这句话交给 agent：
+
+> 请阅读 https://github.com/DDDPG/Rea-Cli 及其中的 `docs/harness/README.zh-CN.md` 安装指南，将 ReaCli CLI toolkit 和 `reaper-agent-cli` skill 安装到新建的 `my-reaper-work` 项目，适配我正在使用的 harness。检查 Python、CLI、Lua 和本机 REAPER 是否可用，并告诉我如何开始使用。如果无法访问这个私有仓库，请向我询问已授权的本地源码目录，改用本地安装。
+
+接入组件是项目级的 **CLI toolkit + skill**，通过 harness 已有的 shell 工具执行。
+[完整安装指南](docs/harness/README.zh-CN.md)列出了三个 harness 的技能位置、环境要求
+以及候选 bundle 的安装方法。
+
+**也可以自己安装：**在本地仓库根目录用 Python 3.10+ 执行：
+
+```sh
+python integrations/agents/reaper-agent-cli/scripts/install.py --source . --project ../my-reaper-work --harness all
+```
+
+进入新目录打开 Claude Code、Codex 或 Qwen Code，输入：
+“使用 reaper-agent-cli skill 检查环境，在 REAPER 中新建工程，保存并验证实际渲染音频。”
+项目级技能通过 shell 调用绑定的 CLI/Python，无需 MCP 服务；REAPER、Lua 和 harness 登录
+需提前准备。仓库 private 阶段以本地源码模拟获取，也支持无 checkout 的候选 wheel 安装。
+
+详见[三个 harness 的快速接入](docs/harness/README.zh-CN.md)、
+[一句指令 showcase 需求](integrations/agents/acceptance/showcase-brief.md)和
+[实际验收记录](docs/harness/acceptance.md)。
 
 ## 快速开始：从零构建可播放工程
 
 ![从空白工程开始，逐步构建 REAPER session 的 52 个中间状态](https://res.cloudinary.com/ybukqfxy/image/upload/v1788953136/showcase.gif)
 
-这个演示会从空白工程构建一个可直接播放的 REAPER session。请先完成[源码安装](#安装)，
+这个演示会从空白工程构建一个可直接播放的 REAPER session。请先完成[安装](#安装)，
 并按[环境指南](docs/environment.md)配置 REAPER，再在仓库根目录运行：
 
 ```bash
@@ -90,6 +126,15 @@ Agent / Python / CLI → RPP 或 Lua 源码 → rac pre-check → REAPER → 保
 ```
 
 ## 安装
+
+正式发布版本：
+
+```bash
+python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"
+reacli --version
+```
+
+如果要参与源码开发，请在仓库根目录安装本地包：
 
 使用 **Python 3.10+**，在源码目录中创建独立环境：
 
@@ -189,6 +234,10 @@ python scripts/check_dist.py dist/new-candidate/reacli
 
 ```text
 packages/reacli/src/rac/     Python 库、CLI 及内置运行资源
+packages/reaper-parser/     无宿主依赖的保真解析器
+apps/reaperdoc/             独立 ReaperDoc 的生态集成副本
+schema/rpp/                本仓库版本化规格、证据与生成物
+tools/                     跨组件生成与构建工具
 examples/    可运行的工作流示例
 tests/       离线测试、按需启用的实机测试与合成素材
 docs/        环境、API、验证及发布文档
@@ -203,20 +252,13 @@ scripts/     环境引导与发行包检查
 
 ## Rea-Cli Agent skill
 
-仓库包含 [`reaper-agent-cli`](integrations/agents/reaper-agent-cli/SKILL.md)。它更准确的定位是
-“把 Rea-Cli 接入现有 agent harness、并支持围绕 Rea-Cli 进行二次开发的知识与工作流 skill”，
-而不是完整 harness，也不是可以脱离仓库复制使用的通用 REAPER skill。它会引导 AI agent
-遵循 RPP、ReaScript、Lua 和 JSFX 规范，使用 `rac` / `reacli` 预检查、查看和验证工程，
-在已有高层操作无法覆盖需求时编写自定义 Lua，执行独立任务，并检查保存后的工程或渲染音频。
+[Agent bundle 源码](integrations/agents/reaper-agent-cli/SKILL.md)包含自包含的 skill、
+精简参考和示例。候选产物中的 `reaper-agent-cli.zip` 可独立解压安装，无需完整 checkout。
+需要另外安装匹配版本的 Python 包，并配置 REAPER、Lua；音频示范需要 audio 扩展依赖。
 
-这个 skill 并非自包含：使用它需要完整的 Rea-Cli 仓库副本、从该仓库安装的 `reacli`，
-以及可访问仓库中的 `reference/`、`examples/` 和安装包内资源。它不会安装 REAPER，
-也不要求 MCP 服务器。
-
-使用该 skill 时，预期的响应/交付内容包括用户要求的工程或脚本、必要的媒体或合成说明，
-以及简洁的验证结果；相关 REAPER/插件版本和未经测试的行为应明确注明。具体的任务路由
-和边界见 [skill 中文说明](integrations/agents/reaper-agent-cli/GUIDE.zh-CN.md) 及
-[English guide](integrations/agents/reaper-agent-cli/SKILL.md)。
+它把 Rea-Cli 接入已有 agent harness，引导 agent 预检查、执行并验证工程，
+必要时使用原生 Lua/ReaScript；不要求持久化 MCP 服务。完整开发背景仍可查阅本仓库的
+[双语手册](reference/README.zh-CN.md)。
 
 ## 文档入口
 

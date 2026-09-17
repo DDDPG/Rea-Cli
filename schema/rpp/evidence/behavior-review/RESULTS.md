@@ -8,7 +8,7 @@
 
 实验排除项：run1 的 PT 实验误操作初始 shape=0 点，虽 API tension 读回成功但文件未变化，已排除；run2 定位 time=1.5 的 shape=5 点重新验证。run1 fx_wet 负值案例失败（-.5读回0），保留失败记录，不算全通过。master hardware automation API 成功而文件不变，也不算持久字段证据。
 
-机器证据：[results.json](results.json)、[run1 proof](run1/runs/r_000001/proof.json)、[run2 proof](run2/runs/r_000001/proof.json)。scripts/report.mjs 校验关键保存行，保留原始快照供复核。e/E 沿用上一轮独立实验。
+机器证据：[results.json](results.json)、`run1/runs/r_000001/proof.json`、`run2/runs/r_000001/proof.json`（完整运行 proof 仅保留在本地归档，不随仓库分发）。scripts/report.mjs 校验关键保存行，保留原始快照供复核。e/E 沿用上一轮独立实验。
 
 ## D001：部分支持新来源；root 待验证
 

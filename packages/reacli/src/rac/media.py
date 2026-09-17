@@ -10,6 +10,9 @@ import subprocess
 from typing import Any
 
 
+MAX_AUDIO_DECODE_BYTES = 256 * 1024 * 1024
+
+
 class MediaError(RuntimeError):
     def __init__(self, code, message, manifest_path=None):
         super().__init__(message)
@@ -127,7 +130,16 @@ def read_source(source, *, project=None, path_map=None) -> AudioData:
     path = _resolve(source, project, path_map)
     np, sf = _audio()
     try:
+        info = sf.info(path)
+        decoded_bytes = info.frames * info.channels * 4
+        if decoded_bytes > MAX_AUDIO_DECODE_BYTES:
+            raise MediaError(
+                "audio_too_large",
+                f"Decoded audio exceeds the {MAX_AUDIO_DECODE_BYTES} byte safety limit",
+            )
         samples, sr = sf.read(path, dtype="float32", always_2d=True)
+    except MediaError:
+        raise
     except (RuntimeError, ValueError) as exc:
         raise MediaError("decode_failed", str(exc)) from exc
     return AudioData(

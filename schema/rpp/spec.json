@@ -1007,7 +1007,7 @@
               },
               {
                 "key": "RESOURCEFN",
-                "values": "\"/Users/lertoon/Music/test_VAE_pross.mp3\"",
+                "values": "\"media/example.mp3\"",
                 "sectionId": "item"
               },
               {

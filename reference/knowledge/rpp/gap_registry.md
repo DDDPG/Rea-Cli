@@ -47,7 +47,7 @@ MARKER 1 30 example-marker 0 0 1 B {GUID} 0 2
 - **上下文敏感的 KEY：**`VOLPAN`、`SOFFS`、`NAME`、`PLAYRATE`、`LOOP`、
   `COMP`、`SEL`、`GUID`、`BEAT`、`PANMODE`、`<SOURCE>` 和 `<NOTES>` 在
   不同 section 中含义不同。查询
-  [schema](../../../src/rac/data/knowledge/rpp_schema.json)时使用
+  [schema](../../../packages/reacli/src/rac/data/knowledge/rpp_schema.json)时使用
   `<section>:<KEY>`，例如 `track:VOLPAN`。
 - **UTF-8 marker 名称：**源测试中的中文名称可以直接写入、读回。
 - **缺失媒体提示：**REAPER 7.62 / macOS 在使用 `-ignoreerrors` 的源测试中

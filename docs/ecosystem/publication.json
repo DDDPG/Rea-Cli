@@ -1,11 +1,74 @@
 {
   "source_permissions_resolved": true,
-  "package_ownership_verified": false,
+  "package_ownership_verified": true,
   "trusted_publishing_configured": false,
-  "status": "source authorization attested; TestPyPI packages verified; PyPI reacli published; parser bootstrap blocked by GitHub billing",
-  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. Both TestPyPI OIDC uploads and the PyPI reacli upload are verified; the parser publisher is configured, its build passed, and the publish job was blocked before start by a GitHub billing failure.",
+  "status": "source authorization attested; both PyPI projects published; reacli OIDC verified; parser artifact live but upload channel not independently evidenced",
+  "reason": "The maintainer confirmed permission to use the recorded ReaTeam, Cockos and open-source Lua materials with attribution. PyPI JSON currently serves both projects, both package owners are DDDPG, and all four formal wheel/sdist files were checked against their published SHA-256 values and the uploaded-source revision. This final review then added runtime hardening and privacy fixes after the uploads, so the current checkout intentionally differs from the immutable package files and requires a new version before another upload. The reacli production upload has a successful OIDC workflow record. The parser's earlier production publish run failed before its publish steps because of a GitHub billing failure; the current parser artifacts are live, but this review found no successful parser publish-job record, so the global Trusted Publisher gate remains false.",
   "audit": "publication-audit.md",
   "checked_date": "2026-09-17",
+  "release_artifacts": {
+    "index": "pypi.org",
+    "checked_at": "2026-09-17T10:28:10Z",
+    "verification": {
+      "method": "PyPI JSON metadata plus downloaded archive SHA-256 and source/runtime archive audit",
+      "published_files_downloaded": true,
+      "uploaded_source_revision": "5ca1f27858559b41fe3a6c06c705cd65971369a1",
+      "runtime_files_match_uploaded_source_revision": true,
+      "runtime_files_match_current_checkout": false,
+      "post_publication_runtime_changes": [
+        "Security/resource guards in packages/reacli and packages/reaper-parser",
+        "Neutralized local media path in generated schema consumers"
+      ],
+      "forbidden_repository_payloads_found": false,
+      "note": "The four uploaded archives match the recorded source revision before this final review. The current checkout contains reviewed post-upload hardening; do not republish the existing version, and bump/rebuild before the next upload. Package README and other metadata are immutable per upload."
+    },
+    "packages": {
+      "reacli": {
+        "owner": "DDDPG",
+        "version": "0.1.0",
+        "last_serial": 41162991,
+        "project_url": "https://pypi.org/project/reacli/0.1.0/",
+        "json_url": "https://pypi.org/pypi/reacli/json",
+        "archive_audit": "passed against uploaded source revision 5ca1f27; current checkout has post-upload hardening and must be released under a new version",
+        "artifacts": [
+          {
+            "filename": "reacli-0.1.0-py3-none-any.whl",
+            "size_bytes": 162531,
+            "upload_time": "2026-09-17T09:47:33.173519Z",
+            "sha256": "3f55a9d3931bf846bd2435c035eeefe67880db68715f539c90c57ccebfd933d5"
+          },
+          {
+            "filename": "reacli-0.1.0.tar.gz",
+            "size_bytes": 151445,
+            "upload_time": "2026-09-17T09:47:34.480720Z",
+            "sha256": "ca51dfc11848c8c68e719784a881974f026ffed831517306b62f3a75578a7a2f"
+          }
+        ]
+      },
+      "reaper-parser": {
+        "owner": "DDDPG",
+        "version": "0.1.0a1",
+        "last_serial": 41164023,
+        "project_url": "https://pypi.org/project/reaper-parser/0.1.0a1/",
+        "json_url": "https://pypi.org/pypi/reaper-parser/json",
+        "archive_audit": "passed against uploaded source revision 5ca1f27; current checkout has post-upload hardening and must be released under a new version",
+        "artifacts": [
+          {
+            "filename": "reaper_parser-0.1.0a1-py3-none-any.whl",
+            "size_bytes": 31945,
+            "upload_time": "2026-09-17T10:24:23.484416Z",
+            "sha256": "ffbae73843a92d4012fa0bbf2975ba130d5ef7552a21f942f646588975f62bd3"
+          },
+          {
+            "filename": "reaper_parser-0.1.0a1.tar.gz",
+            "size_bytes": 30617,
+            "upload_time": "2026-09-17T10:24:25.362303Z",
+            "sha256": "f9bc7414cc81d483d7738433c7286b08c79e1321d9cc786f081e4985e10b24ce"
+          }
+        ]
+      }
+    }
+  },
   "source_audit": {
     "checked_date": "2026-09-15",
     "status": "maintainer_attested; attribution_required",
@@ -21,25 +84,25 @@
       "packages/reacli/THIRD_PARTY_NOTICES.md",
       "packages/reaper-parser/THIRD_PARTY_NOTICES.md"
     ],
-    "release_decision": "source gate cleared by maintainer attestation; TestPyPI evidence and PyPI reacli bootstrap evidence recorded; the parser publisher is configured and its PyPI bootstrap upload remains pending; normal production publication remains gated by package ownership and Trusted Publisher evidence"
+    "release_decision": "source gate cleared by maintainer attestation; both PyPI projects and four formal artifacts are live; reacli production OIDC is verified; parser artifact existence is verified but its upload channel is not independently evidenced; normal future publication remains gated by Trusted Publisher evidence"
   },
   "remaining_gates": {
     "package_ownership_verified": {
-      "value": false,
-      "status": "blocking",
-      "evidence": "PyPI serves reacli version 0.1.0 after a successful OIDC upload; reaper-parser publisher configuration is reported, but its production project has not been created yet."
+      "value": true,
+      "status": "cleared",
+      "evidence": "PyPI JSON serves reacli 0.1.0 and reaper-parser 0.1.0a1; both project records identify owner DDDPG and both have wheel and source distribution files."
     },
     "trusted_publishing_configured": {
       "value": false,
       "status": "blocking",
-      "evidence": "GitHub Actions run 35206896709 successfully published reacli 0.1.0 to PyPI through OIDC. The parser publisher is configured and run 35207817702 passed build and check_publish, but its publish job did not start because GitHub reported failed recent payments or an insufficient spending limit."
+      "evidence": "GitHub Actions run 35206896709 successfully published reacli 0.1.0 to PyPI through OIDC. The parser artifacts are live, but run 35207817702 is the only captured production parser attempt: build and check_publish passed, while publish did not start because GitHub reported failed recent payments or an insufficient spending limit. No successful parser publish-job record was found in this review."
     }
   },
   "conditional_gates": {
     "production_tag": {
       "condition": "TARGET=pypi",
       "requirement": "GITHUB_REF_TYPE=tag and GITHUB_REF_NAME starts with ecosystem-v",
-      "status": "verified for reacli on ecosystem-v0.1.0; parser bootstrap pending on a new ecosystem-v tag"
+      "status": "verified for reacli on ecosystem-v0.1.0; parser artifact is live as 0.1.0a1, while future parser workflow-channel evidence remains open"
     }
   },
   "bootstrap_publish": {
@@ -73,9 +136,12 @@
       },
       "reaper-parser": {
         "allowed": true,
-        "publisher_status": "maintainer_reported_configured",
-        "first_upload": "blocked_github_billing",
-        "evidence": "The maintainer reports the PyPI reaper-parser publisher is configured. GitHub Actions run 35207817702 passed build and the publication gate on ecosystem-v0.1.0a1, but the publish job did not start because of a GitHub billing/spending-limit failure; PyPI remains unpublished."
+        "publisher_status": "upload_verified_channel_unverified",
+        "first_upload": "succeeded",
+        "observed_version": "0.1.0a1",
+        "attempted_run_url": "https://github.com/DDDPG/Rea-Cli/actions/runs/35207817702",
+        "attempted_run_conclusion": "build_and_gate_passed; publish_job_failed_before_steps",
+        "evidence": "PyPI JSON currently returns reaper-parser version 0.1.0a1 and the two formal artifacts listed in release_artifacts. Run 35207817702 passed build and check_publish on ecosystem-v0.1.0a1 but its publish job did not start because GitHub reported a billing/spending-limit failure. No successful parser production publish-job record was found, so the upload channel is not independently attributed to publish.yml OIDC."
       }
     }
   },
@@ -104,9 +170,9 @@
     {
       "index": "pypi.org",
       "project": "reaper-parser",
-      "status": "publisher_configured; first_upload_blocked_by_github_billing",
+      "status": "upload_verified; channel_unverified",
       "checked_date": "2026-09-17",
-      "evidence": "Run 35207817702 build and check_publish jobs succeeded, but GitHub did not start publish because recent account payments failed or the spending limit needs to be increased; PyPI JSON remains HTTP 404."
+      "evidence": "PyPI JSON returned HTTP 200, version 0.1.0a1, owner DDDPG and both formal artifacts; downloaded files matched the recorded SHA-256 values. Run 35207817702 is a historical failed workflow attempt, not proof of the upload channel."
     }
   ],
   "index_checks": [
@@ -120,7 +186,14 @@
     {
       "index": "pypi.org",
       "name": "reaper-parser",
-      "http": 404
+      "http": 200,
+      "version": "0.1.0a1",
+      "checked_date": "2026-09-17",
+      "owner": "DDDPG",
+      "artifacts": [
+        "reaper_parser-0.1.0a1-py3-none-any.whl",
+        "reaper_parser-0.1.0a1.tar.gz"
+      ]
     },
     {
       "index": "test.pypi.org",
@@ -137,7 +210,7 @@
       "checked_date": "2026-09-17"
     }
   ],
-  "index_check_limit": "HTTP 404 does not prove name availability, ownership or pending publisher configuration",
+  "index_check_limit": "HTTP 200 plus JSON owner/version/artifact data verifies the current public index record, not the historical OIDC provenance of an upload",
   "github": {
     "repository": "DDDPG/Rea-Cli",
     "visibility": "private",
@@ -145,12 +218,12 @@
       {
         "name": "testpypi",
         "required_reviewers": false,
-        "status": "exists; protection_rules=[]; both TestPyPI OIDC uploads verified; pypi publisher unresolved"
+        "status": "exists; protection_rules=[]; both TestPyPI OIDC uploads verified; production records are tracked per package"
       },
       {
         "name": "pypi",
         "required_reviewers": false,
-        "status": "exists; protection_rules=[]; reacli OIDC upload verified; parser publisher reported; parser upload pending"
+        "status": "exists; protection_rules=[]; reacli OIDC upload verified; parser artifact live but production upload channel not independently evidenced"
       }
     ],
     "workflow": "publish.yml",

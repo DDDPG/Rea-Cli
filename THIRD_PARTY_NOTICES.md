@@ -9,7 +9,7 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
 
 ## Bundled reference data — redistribution review required
 
-- `src/rac/data/knowledge/rpp_schema.json` is now generated from the canonical
+- `packages/reacli/src/rac/data/knowledge/rpp_schema.json` is now generated from the canonical
   monorepo `schema/rpp/spec.json`, based on **DDDPG/ReaperDoc** commit
   `6416435fdf4cc7e38346fd7875f5d04949b431a2` and recorded adopted evidence.
   The earlier `constants.ts` snapshot at `32047bb` remains historical provenance.
@@ -17,16 +17,17 @@ Users obtain [REAPER](https://www.reaper.fm/) under its own terms.
   the imported snapshot. On 2026-09-13 the maintainer authorized MIT for original
   ReaperDoc portions; see `apps/reaperdoc/LICENSE` and its scope notice in the
   monorepo. External copied descriptions still require source-specific review.
-- `src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
+- `packages/reacli/src/rac/data/knowledge/api_index.json` was extracted from Cockos's generated
   REAPER v7.77 ReaScript API reference. It includes signatures and descriptions.
   Official reference: [ReaScript API](https://www.reaper.fm/sdk/reascript/reascripthelp.html).
   No separate redistribution grant was established from the local source files.
 
-Before public distribution, the maintainer must establish permission for these
-bundled descriptions/data, or replace them with independently authored data and
-re-run schema/API compatibility tests. A project-level license does not grant
-rights to these third-party materials. This is the outstanding provenance item
-from extracting the internal library; it does not prevent local build/testing.
+The maintainer's 2026-09-15 attestation records permission to use these bundled
+descriptions/data with attribution. That attestation is the repository's current
+source-gate record, not independent upstream authorization. A project-level
+license does not grant rights to these third-party materials; preserve their
+source links, notices and applicable terms, and re-run the audit if the scope or
+distribution context changes.
 
 ## Python dependencies
 
@@ -60,8 +61,8 @@ is not a license grant.
 - The JSFX handbook and structured reference summarize Cockos documentation.
   No independent redistribution grant for upstream descriptions was recorded.
 
-Before public release, resolve these source terms or replace the affected
-material with independently authored references. Preserve attribution and
-record the resolution. [Sources and attribution](reference/SOURCES.md) and the
-[reference manifest](reference/source-manifest.json) identify the files and
+The current source-gate decision is recorded in
+[the publication audit](docs/ecosystem/source-license-audit.md). Preserve
+attribution and applicable terms in future releases; the [sources and attribution](reference/SOURCES.md)
+and [reference manifest](reference/source-manifest.json) identify the files and
 their provenance.

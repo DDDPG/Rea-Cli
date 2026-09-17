@@ -12,6 +12,9 @@ import wave
 from pathlib import Path
 
 
+MAX_AUDIO_DECODE_BYTES = 256 * 1024 * 1024
+
+
 class AudioExpectError(AssertionError):
     pass
 
@@ -23,6 +26,10 @@ def _read_mono(path: str | Path) -> tuple[bytes, int, int]:
     断言场景取较强声道更稳)。"""
     with wave.open(str(path), "rb") as w:
         nch, sw, sr, frames = w.getnchannels(), w.getsampwidth(), w.getframerate(), w.getnframes()
+        if frames * nch * sw > MAX_AUDIO_DECODE_BYTES:
+            raise AudioExpectError(
+                f"decoded audio exceeds the {MAX_AUDIO_DECODE_BYTES} byte safety limit"
+            )
         raw = w.readframes(frames)
         if sw == 3:  # 24-bit (REAPER 默认渲染位深) → 转 16-bit
             raw = audioop.lin2lin(raw, 3, 2)

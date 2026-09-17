@@ -1,25 +1,25 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { 
-  Search, 
-  Menu, 
-  X, 
-  ChevronDown, 
-  ChevronRight, 
-  Copy, 
-  FileCode, 
-  Layers, 
-  Music, 
-  Sliders, 
-  Zap, 
-  Filter, 
-  Info, 
-  CheckCircle2, 
-  Disc, 
-  Piano, 
-  FileJson, 
-  BookOpen, 
-  Code2, 
-  Activity 
+import {
+  Search,
+  Menu,
+  X,
+  ChevronDown,
+  ChevronRight,
+  Copy,
+  FileCode,
+  Layers,
+  Music,
+  Sliders,
+  Zap,
+  Filter,
+  Info,
+  CheckCircle2,
+  Disc,
+  Piano,
+  FileJson,
+  BookOpen,
+  Code2,
+  Activity
 } from 'lucide-react';
 import generated from './generated.json';
 const RPP_STRUCTURE = generated.structure;
@@ -33,13 +33,13 @@ const DOC_DATA: DocSection[] = generated.sections;
 const HighlightText: React.FC<{ text: string | undefined, highlight: string }> = ({ text, highlight }) => {
   if (!text) return null;
   if (!highlight || !highlight.trim()) return <>{text}</>;
-  
+
   const regex = new RegExp(`(${highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
   const parts = text.split(regex);
-  
+
   return (
     <span>
-      {parts.map((part, i) => 
+      {parts.map((part, i) =>
         regex.test(part) ? <span key={i} className="bg-reaper-warn/20 text-reaper-warn font-bold rounded-sm px-0.5">{part}</span> : part
       )}
     </span>
@@ -94,13 +94,13 @@ const SubFields: React.FC<{ items: string[]; highlight?: string }> = ({ items, h
     // Also handles "1 = normal" or "+2 = enable..." or "0-15 = Desc"
     const match = item.match(/^([+-]?[\w\d\&\.]+(?:-[\w\d\.]+)?)[\s]*(?:=|:|-)(?:[\s]*)(.*)$/);
     if (match) {
-      return { 
-        val: match[1], 
+      return {
+        val: match[1],
         desc: match[2].replace(/^['"](.*)['"]$/, '$1'), // remove quotes if present
-        isFlag: match[1].startsWith('+') || match[1].startsWith('-') 
+        isFlag: match[1].startsWith('+') || match[1].startsWith('-')
       };
     }
-    
+
     // Fallback for just notes
     return { val: null, desc: item, isFlag: false };
   };
@@ -125,7 +125,7 @@ const SubFields: React.FC<{ items: string[]; highlight?: string }> = ({ items, h
           </div>
           {mappings.map((m, i) => (
             <React.Fragment key={i}>
-              <div 
+              <div
                 className={`font-mono font-bold text-right cursor-pointer group flex items-center justify-end gap-2 ${m.isFlag ? 'text-reaper-secondary' : 'text-reaper-accent'}`}
                 onClick={(e) => m.val && handleCopy(e, m.val)}
                 title="Click to copy value"
@@ -201,12 +201,12 @@ const EntryCard: React.FC<{ entry: DocEntry; showTodos: boolean; highlight?: boo
   };
 
   return (
-    <div 
+    <div
       ref={cardRef}
       style={{ scrollMarginTop: 110 }}
       className={`mb-4 border rounded-lg transition-all duration-300 ${highlight ? 'ring-2 ring-reaper-accent shadow-[0_0_20px_rgba(0,179,134,0.2)]' : ''} bg-reaper-panel/40 border-gray-800`}
     >
-      <div 
+      <div
         className="flex items-start justify-between p-4"
       >
         <div className="flex items-start gap-3 overflow-hidden">
@@ -224,7 +224,7 @@ const EntryCard: React.FC<{ entry: DocEntry; showTodos: boolean; highlight?: boo
           </div>
         </div>
         <div className="flex items-center gap-2 opacity-100 transition-opacity">
-           <button 
+           <button
              onClick={(e) => copyToClipboard(e, entry.name)}
              className="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white transition-colors"
              title="Copy Name"
@@ -268,19 +268,19 @@ const EntryCard: React.FC<{ entry: DocEntry; showTodos: boolean; highlight?: boo
 };
 
 // --- RPP Viewer Component ---
-const RPPNodeViewer: React.FC<{ 
-  node: RPPNode; 
-  depth: number; 
+const RPPNodeViewer: React.FC<{
+  node: RPPNode;
+  depth: number;
   onNavigate: (key: string, context: string) => void;
   documentedKeys: Set<string>;
   lastChild?: boolean;
 }> = ({ node, depth, onNavigate, documentedKeys, lastChild }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const hasChildren = node.children && node.children.length > 0;
-  
+
   // Format matching the RPP style
   const isChunk = node.key.startsWith('<');
-  
+
   // Check if documented
   const cleanKey = node.key.replace(/[<>]/g, '');
   const isDocumented = documentedKeys.has(cleanKey);
@@ -289,7 +289,7 @@ const RPPNodeViewer: React.FC<{
   const keyColorClass = isChunk
     ? (isDocumented ? 'text-indigo-400' : 'text-red-400')
     : (isDocumented ? 'text-reaper-accent' : 'text-red-400');
-  
+
   const handleKeyClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // Allow navigation if explicit section exists, even if exact key isn't "documented"
@@ -306,7 +306,7 @@ const RPPNodeViewer: React.FC<{
 
   return (
     <div className="font-mono text-sm leading-relaxed whitespace-nowrap">
-      <div 
+      <div
         className={`flex items-start hover:bg-white/5 transition-colors rounded-sm px-1 -mx-1`}
         style={{ paddingLeft: `${depth * 1.5}rem` }}
         onClick={hasChildren ? toggleCollapse : undefined}
@@ -322,14 +322,14 @@ const RPPNodeViewer: React.FC<{
 
         <div className="flex-1 flex gap-3">
           {/* Key */}
-          <span 
+          <span
             className={`${keyColorClass} font-bold ${node.sectionId ? 'hover:underline decoration-dotted cursor-pointer' : 'cursor-default opacity-80'}`}
             onClick={node.sectionId ? handleKeyClick : undefined}
             title={node.sectionId ? `Go to definition` : "Definition not found in API Reference"}
           >
             {node.key}
           </span>
-          
+
           {/* Values */}
           {node.values && (
             <span className="text-gray-300 truncate max-w-md">{node.values}</span>
@@ -339,7 +339,7 @@ const RPPNodeViewer: React.FC<{
           {node.comment && (
             <span className="text-gray-600 italic">// {node.comment}</span>
           )}
-          
+
           {/* Collapsed Indicator */}
           {isCollapsed && hasChildren && (
              <span className="text-gray-600 bg-gray-800 px-1 rounded text-xs self-center">... &gt;</span>
@@ -351,15 +351,15 @@ const RPPNodeViewer: React.FC<{
       {hasChildren && !isCollapsed && (
         <div className="relative">
            {/* Indentation Guide Line */}
-           <div 
-             className="absolute border-l border-gray-800 h-full" 
-             style={{ left: `${(depth * 1.5) + 0.6}rem`, top: 0 }} 
+           <div
+             className="absolute border-l border-gray-800 h-full"
+             style={{ left: `${(depth * 1.5) + 0.6}rem`, top: 0 }}
            />
            {node.children!.map((child, idx) => (
-             <RPPNodeViewer 
-               key={idx} 
-               node={child} 
-               depth={depth + 1} 
+             <RPPNodeViewer
+               key={idx}
+               node={child}
+               depth={depth + 1}
                onNavigate={onNavigate}
                documentedKeys={documentedKeys}
                lastChild={idx === node.children!.length - 1}
@@ -367,7 +367,7 @@ const RPPNodeViewer: React.FC<{
            ))}
            {/* Closing Tag for Chunks */}
            {isChunk && (
-             <div 
+             <div
                className="text-indigo-400/50 hover:text-indigo-400 pl-7"
                style={{ paddingLeft: `${(depth * 1.5) + 1.25}rem` }}
              >
@@ -413,7 +413,7 @@ export default function App() {
 
   const filteredSections = useMemo(() => {
     if (!searchQuery) return DOC_DATA;
-    
+
     return DOC_DATA.map(section => {
       const lowerQuery = searchQuery.toLowerCase();
       // Filter entries deeply
@@ -421,8 +421,8 @@ export default function App() {
         const matchesName = e.name.toLowerCase().includes(lowerQuery);
         const matchesDesc = e.description?.toLowerCase().includes(lowerQuery);
         const matchesTags = e.tags.some(t => t.toLowerCase().includes(lowerQuery));
-        const matchesFields = e.fields.some(f => 
-             f.label.toLowerCase().includes(lowerQuery) || 
+        const matchesFields = e.fields.some(f =>
+             f.label.toLowerCase().includes(lowerQuery) ||
              f.description.toLowerCase().includes(lowerQuery) ||
              (f.type && f.type.toLowerCase().includes(lowerQuery)) ||
              f.subFields?.some(sf => sf.toLowerCase().includes(lowerQuery))
@@ -459,14 +459,14 @@ export default function App() {
     const targetId = baselineSection && hasKey(baselineSection)
       ? contextId : supplementSection?.id ?? contextId;
     setActiveSection(targetId);
-    
+
     // Check if exact key exists or if we should just go to the section
     // If it's an envelope type (e.g. PANENV), and we have a generic entry for it, try to find match
     const exists = documentedKeys.has(key);
-    
+
     // For envelopes, try to find the "Envelope Types" block if exact match fails
     if (contextId === 'envelope' && !exists) {
-       setHighlightedParam(null); 
+       setHighlightedParam(null);
        // Only scroll to section if we don't have a specific param to highlight
        setTimeout(() => {
          const el = document.getElementById(contextId);
@@ -487,7 +487,7 @@ export default function App() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-reaper-dark text-gray-200">
-      
+
       {/* Sidebar - Desktop */}
       <aside className="hidden md:flex flex-col w-72 border-r border-gray-800 bg-[#181818] flex-shrink-0">
         <div className="p-6 border-b border-gray-800 flex items-center gap-3">
@@ -500,14 +500,14 @@ export default function App() {
             <p className="text-xs text-gray-500 font-mono">v0.1 dev</p>
           </div>
         </div>
-        
+
         {activeTab === 'docs' && (
           <div className="p-4 animate-in fade-in slide-in-from-left-4 duration-300">
             <div className="relative group">
               <Search className="absolute left-3 top-2.5 text-gray-500 group-focus-within:text-reaper-accent transition-colors" size={16} />
-              <input 
-                type="text" 
-                placeholder="Search anything (names, tags, fields)..." 
+              <input
+                type="text"
+                placeholder="Search anything (names, tags, fields)..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -547,7 +547,7 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col h-full relative">
-        
+
         {/* Mobile Header */}
         <header className="md:hidden flex items-center justify-between p-4 border-b border-gray-800 bg-[#181818] z-20 sticky top-0">
           <div className="flex items-center gap-2">
@@ -561,14 +561,14 @@ export default function App() {
 
         {/* Tab Switcher (Top Bar) */}
         <div className="flex border-b border-gray-800 bg-[#181818]">
-          <button 
+          <button
             onClick={() => setActiveTab('structure')}
             className={`flex-1 md:flex-none md:w-48 py-3 text-sm font-medium flex items-center justify-center gap-2 border-b-2 transition-colors ${activeTab === 'structure' ? 'border-reaper-accent text-white bg-white/5' : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'}`}
           >
             <Code2 size={16} />
             Project Structure
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('docs')}
             className={`flex-1 md:flex-none md:w-48 py-3 text-sm font-medium flex items-center justify-center gap-2 border-b-2 transition-colors ${activeTab === 'docs' ? 'border-reaper-accent text-white bg-white/5' : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5'}`}
           >
@@ -579,7 +579,7 @@ export default function App() {
 
         {/* Content Area */}
         <div className="flex-1 overflow-hidden relative">
-          
+
           {/* View: DOCS */}
           {activeTab === 'docs' && (
             <div ref={docsScrollRef} className="h-full overflow-y-auto custom-scrollbar p-4 md:p-8 lg:px-12 max-w-7xl mx-auto w-full relative animate-in fade-in zoom-in-95 duration-200">
@@ -596,12 +596,12 @@ export default function App() {
                      </span>
                    </div>
                  </div>
-                 
-                 <button 
+
+                 <button
                    onClick={() => setShowTodos(!showTodos)}
                    className={`group flex items-center gap-3 px-4 py-2 rounded-md text-xs font-bold uppercase tracking-wider border transition-all duration-300 ${
-                     showTodos 
-                       ? 'bg-reaper-accent/10 text-reaper-accent border-reaper-accent/50 shadow-[0_0_15px_rgba(0,179,134,0.2)]' 
+                     showTodos
+                       ? 'bg-reaper-accent/10 text-reaper-accent border-reaper-accent/50 shadow-[0_0_15px_rgba(0,179,134,0.2)]'
                        : 'bg-gray-800/50 text-gray-500 border-gray-700 hover:bg-gray-800 hover:text-gray-300'
                    }`}
                  >
@@ -627,22 +627,22 @@ export default function App() {
                        {section.description && <span className="text-gray-600 text-sm">• {section.description}</span>}
                     </div>
                   </div>
-                  
+
                   {section.introList && (
                     <IntroBlock title={section.introList.title} items={section.introList.items} />
                   )}
 
                   <div className="grid grid-cols-1 gap-4">
                     {section.entries.map((entry, idx) => (
-                      <EntryCard 
-                        key={idx} 
-                        entry={entry} 
-                        showTodos={showTodos} 
+                      <EntryCard
+                        key={idx}
+                        entry={entry}
+                        showTodos={showTodos}
                         searchQuery={searchQuery}
                         highlight={
                           section.id === activeSection && !!highlightedParam && (
-                            highlightedParam === entry.name || 
-                            highlightedParam === entry.name.replace(/[<>]/g, '') || 
+                            highlightedParam === entry.name ||
+                            highlightedParam === entry.name.replace(/[<>]/g, '') ||
                             (entry.name.includes('/') && entry.name.includes(highlightedParam))
                           )
                         }
@@ -679,10 +679,10 @@ export default function App() {
                 </div>
 
                 <div className="font-mono bg-[#181818] p-6 rounded-lg border border-gray-800 shadow-xl overflow-x-auto">
-                   <RPPNodeViewer 
-                      node={RPP_STRUCTURE} 
-                      depth={0} 
-                      onNavigate={handleStructureNavigation} 
+                   <RPPNodeViewer
+                      node={RPP_STRUCTURE}
+                      depth={0}
+                      onNavigate={handleStructureNavigation}
                       documentedKeys={documentedKeys}
                    />
                 </div>

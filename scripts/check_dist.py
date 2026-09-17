@@ -10,7 +10,7 @@ import ast
 from email.parser import BytesParser
 import hashlib
 import json
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 import stat
 import tarfile
 import zipfile
@@ -34,7 +34,9 @@ def check_members(names: list[str]) -> None:
         raise ValueError("Duplicate archive members")
     for name in names:
         path = PurePosixPath(name)
-        if path.is_absolute() or ".." in path.parts or "\\" in name:
+        windows_path = PureWindowsPath(name)
+        if (path.anchor or windows_path.anchor or ".." in path.parts
+                or ".." in windows_path.parts or "\\" in name):
             raise ValueError(f"Unsafe archive path: {name}")
         if (FORBIDDEN_PARTS.intersection(path.parts)
                 or any(part.startswith(".venv") or part.startswith(".env")
