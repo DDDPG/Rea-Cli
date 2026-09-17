@@ -72,6 +72,7 @@ jobs:
       - run: npm ci --prefix apps/reaperdoc
       - run: npm run check --prefix apps/reaperdoc
       - run: npm run build --prefix apps/reaperdoc
+      # Build/check/upload-artifact only; registry publication is workflow_dispatch-only in publish.yml.
       - run: python tools/build_release.py --output dist/candidate
       - name: Validate candidate wheels in isolated environments
         shell: bash

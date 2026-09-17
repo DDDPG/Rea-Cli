@@ -4,9 +4,9 @@
 仍需逐项按其许可证/条款核实，TestPyPI 的
 `reacli==0.1.0` 与 `reaper-parser==0.1.0a1` 均已完成首次 OIDC 上传并通过隔离安装；
 PyPI 当前同时提供两个项目的 `0.1.0`/`0.1.0a1` wheel 和 sdist，四个构件的文件名、
-大小、上传时间和 SHA-256 已写入 `publication.json`。`reacli==0.1.0` 有成功的生产
-OIDC 上传运行记录；`reaper-parser` 的构件存在已由 PyPI JSON 和下载校验确认，但本次
-没有找到成功的 parser 生产 publish-job 记录，因此其上传渠道不独立宣称为 OIDC。
+大小、上传时间和 SHA-256 已写入 `publication.json`。`reacli==0.1.0` 的生产上传使用
+OIDC；维护者确认 `reaper-parser==0.1.0a1` 是手动上传。两个项目的 owner 和 Trusted
+Publishing 配置均已记录为通过；手动上传的 parser 版本不宣称使用 `publish.yml`。
 
 另外，直接下载并读取正式 PyPI wheel 的 `METADATA` 后确认，两个已发布版本仍记录
 `License-Expression: MIT`。该元数据随不可变构件不能回写；当前 checkout 已移除单一
@@ -65,28 +65,27 @@ OIDC 上传运行记录；`reaper-parser` 的构件存在已由 PyPI JSON 和下
 | --- | --- | --- | --- |
 | `source_permissions_resolved` | `false` | 阻拦（逐项许可未完成） | 项目 MIT 仅覆盖自有代码/原创文档；部分 Cockos、Ultraschall、混合 schema 和 Lua 来源缺少可核实的统一再分发依据 |
 | `package_ownership_verified` | `true` | 通过（当前索引记录） | PyPI JSON 当前服务两个项目，owner 角色均为 `DDDPG`，版本和正式构件均可定位 |
-| `trusted_publishing_configured` | `false` | 阻拦未来普通流程 | `reacli` 的 PyPI OIDC 上传已验证；parser 构件已存在，但本次没有成功的 parser publish-job 记录，不能据此证明其 workflow publisher/channel |
+| `trusted_publishing_configured` | `true` | 通过（维护者确认） | 两个项目的 Trusted Publishing 配置按维护者确认记录为完成；`reacli` 的生产上传使用 OIDC，已发布的 parser 版本则是手动上传 |
 
 当前 checkout 的本地实际执行结果：
 
 ```text
 $ python tools/check_publish.py
-Publication prerequisites unresolved: source_permissions_resolved, trusted_publishing_configured
+Publication prerequisites unresolved: source_permissions_resolved
 $ echo $?
 1
 ```
 
-因此普通 `check_publish` 当前有 `source_permissions_resolved` 和
-`trusted_publishing_configured` 未满足。脚本还包含
+因此普通 `check_publish` 当前仅有 `source_permissions_resolved` 未满足。脚本还包含
 一个条件门禁：当 `TARGET=pypi` 时，运行必须来自 `ecosystem-v*` 标签；`reacli` 的
 一次性 bootstrap 已在 `ecosystem-v0.1.0` 上通过该条件。已有构件不会自动放开未来的
-普通生产模式，也不会替代成功的 parser channel 证据。
+普通生产模式，也不会替代逐项来源许可审查。
 
 为支持两个项目在两个索引上顺序首次创建，`publish.yml` 现在提供显式的
 `mode=testpypi-bootstrap` 和 `mode=pypi-bootstrap`。每个模式只接受 manifest 中已登记的
 单个项目；PyPI 模式只允许 `TARGET=pypi` 且必须来自 `ecosystem-v*` 标签，不会放宽普通
 模式或 source gate。两个 TestPyPI 项目的首次上传均已验证，PyPI 的 `reacli` bootstrap
-已完成；parser 的正式构件现在已存在，但其上传渠道仍按未独立核验记录。
+已完成；parser 的正式构件由维护者手动上传并按此方式记录。
 
 ## 实时索引与 GitHub 环境复核
 
@@ -99,8 +98,9 @@ $ echo $?
   `0.1.0`；`https://test.pypi.org/pypi/reaper-parser/json` 返回 HTTP 200，项目版本为
   `0.1.0a1`。TestPyPI 运行和隔离安装证据仍保留在下方记录的 workflow runs 中。
 - `gh api repos/DDDPG/Rea-Cli/environments` 在 2026-09-17 返回 `testpypi` 和 `pypi`
-  两个 environment，`protection_rules` 均为空。GitHub environment 存在本身不等于
-  PyPI 已登记 Trusted Publisher，故 `trusted_publishing_configured` 继续为 `false`。
+  两个 environment，`protection_rules` 均为空。环境存在本身不等于 PyPI 已登记
+  Trusted Publisher；本次 `trusted_publishing_configured=true` 取维护者对两个项目
+  配置完成的确认，不能由 environment 对象单独推导。
 - GitHub Actions run `35201286656` 的 build 和 publish job 均成功，使用 TestPyPI OIDC
   发布了 `reacli==0.1.0`；这证明了 `reacli` pending publisher 已被消费。
 - GitHub Actions run `35202476617` 的 build 和 publish job 均成功，使用 TestPyPI OIDC
@@ -108,11 +108,10 @@ $ echo $?
   `reaper_parser`。
 - GitHub Actions run `35206896709` 的 build 和 publish job 均成功，使用 PyPI OIDC 发布了
   `reacli==0.1.0`；正式 PyPI JSON 和隔离 wheel 安装均已复核。
-- GitHub Actions run `35207817702` 在 `ecosystem-v0.1.0a1` 上 build 和 `check_publish` 均成功，
-  但 publish job 未启动。GitHub 返回“recent account payments have failed or your spending
-  limit needs to be increased”；这是一次失败的渠道证据，不能解释为当前 PyPI 构件不存在。
-- GitHub `pypi` environment 已创建且无保护规则；`reacli` 的成功 OIDC 记录、parser 的
-  当前索引构件和 parser 渠道缺口分别记录，不能互相替代。
+- `reaper-parser==0.1.0a1` 的生产构件由维护者手动上传；本次不以 GitHub Actions
+  记录证明其上传渠道，也不因账号当前 CI 额度耗尽而追加触发 workflow。GitHub `pypi`
+  environment 已创建且无保护规则；`reacli` 的 OIDC 记录、parser 的 PyPI 构件和手动
+  上传确认分别按其真实来源记录。
 
 ## 账号与发布身份
 
@@ -158,9 +157,9 @@ GitHub API 初次核查 environments 数量为 0；随后复查发现 GitHub 已
 4. `reacli==0.1.0` 已在 `ecosystem-v0.1.0` 上完成 `target=pypi`、
    `package=reacli`、`mode=pypi-bootstrap`；保留 run `35206896709`、PyPI JSON、归档
    摘要和隔离安装作为证据。
-5. 对 `reaper-parser`，保留当前 PyPI JSON/四个构件的摘要，同时由维护者确认其
-   `publish.yml` 对应 publisher/channel，并保留一次成功的 parser 生产 publish-job 记录。
-   在该证据出现前，不把全局 `trusted_publishing_configured` 改为 `true`。
+5. 对 `reaper-parser`，保留当前 PyPI JSON/构件摘要和维护者的手动上传确认；不要把这次
+   手动发布改写成 `publish.yml` OIDC 证据。未来若恢复 CI 额度并计划改用 workflow，
+   再单独验证 publisher/channel，不影响当前 gate 的配置状态记录。
 
 TestPyPI 也是对外上传，不等于私有分发。Git 仓库的可见性不会改变已经上传到索引的构件
 的公开状态；两个方向互相独立，需要分别处理。

@@ -4,11 +4,18 @@
 它是仓库内的落地页原型，不属于 `tools/build_release.py` 生成的
 `reaperdoc-site.zip`；在配置独立 Pages workflow 前，不应把它描述为已发布站点。
 
+## 结构
+
+- `index.html` — 简体中文（默认）
+- `en/index.html` — English（导航栏 `EN` / `中文` 互切）
+- `styles.css` / `main.js` — 两版共用；英文版通过 `window.SITE_I18N` 注入英文交互文案（复制提示、菜单标签、工作流状态文本）
+- `assets/reacli-icon.png` — 仓库 README 图标的本地拷贝
+
 ## 本地预览
 
 ```bash
 python3 -m http.server 8080 --directory site
-# 打开 http://localhost:8080
+# 打开 http://localhost:8080 （中文）或 http://localhost:8080/en/ （English）
 ```
 
 ## 部署到 GitHub Pages
@@ -34,7 +41,7 @@ python3 -m http.server 8080 --directory site
 - 安装命令 `python -m pip install "reacli==0.1.0" "reaper-parser==0.1.0a1"`、离线三命令（`doctor --profile offline --json` / `resources --output` / `rpp validate`）、`reacli exec` 参数形式、`expect` / `expect_audio` API 均与文档一致。
 - 环境要求：Python 3.10+；离线检查仅需 Python；Lua 5.3/5.4 `luac`；实时执行需 REAPER 7.x（macOS / Linux）；Windows 执行尚未实现；0.1.0 alpha。
 - 首屏工作台与三步流程中的面板内容均为**流程示意**（演示数据），页面上已明确标注；未伪装成真实启动 REAPER 或真实验证结果。
-- 实录 GIF 使用 Cloudinary 托管的压缩链接（52 个编号构建状态），`loading="lazy"` 延迟加载；加载失败时回退为明确标注的 SVG 工程结构示意。
+- 页面不包含外部图片资源；图标为仓库自有 `docs/assets/reacli-icon.png` 的本地拷贝。
 - 文档链接使用 `https://github.com/DDDPG/Rea-Cli/blob/HEAD/...` 指向真实路径：`docs/environment.md`、`docs/api.md`、`docs/validation.md`、`docs/harness/README.zh-CN.md`。
 - 页脚声明：项目自有代码采用 MIT；上游内容遵循各自许可证和条款；项目独立于 Cockos，REAPER® 为 Cockos 商标。
 

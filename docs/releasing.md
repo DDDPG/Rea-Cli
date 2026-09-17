@@ -22,8 +22,9 @@ unresolved, and carries the scope in `THIRD_PARTY_NOTICES.md`.
 
 `reacli==0.1.0` and `reaper-parser==0.1.0a1` are immutable. The next upload must
 use new version numbers — `reacli==0.1.1` and `reaper-parser==0.1.0a2` are the
-planned pair, since the parser keeps its pre-release marker until its upload
-channel is independently evidenced. Bump both together; `reacli` pins
+planned pair. The parser keeps its explicit pre-release marker as a versioning
+decision; that marker is independent of the manual upload method used for
+`0.1.0a1`. Bump both together; `reacli` pins
 `reaper-parser>=0.1.0a1,<0.2`, so a parser-only bump still satisfies the pin but
 leaves the pair out of step.
 
@@ -55,8 +56,10 @@ metadata stays tied to `rac.__version__`; run them before building.
 
 Candidate builds never upload packages. Normal future publication requires source
 permissions, package ownership and Trusted Publishing to be explicitly resolved in
-`ecosystem/publication.json`; the current record keeps the global Trusted Publishing
-gate closed because the parser upload channel has not been independently evidenced.
+`ecosystem/publication.json`; the current record keeps only the source-permission
+gate closed. The maintainer confirms that `reaper-parser==0.1.0a1` was uploaded
+manually, so this version is not used as evidence for a `publish.yml` workflow
+channel.
 For first-project creation, the manual workflow exposes
 explicit `testpypi-bootstrap` and `pypi-bootstrap` modes for one manifest-authorized
 package at a time; the PyPI mode still requires an `ecosystem-v` tag and neither mode

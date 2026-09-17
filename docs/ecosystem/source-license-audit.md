@@ -20,8 +20,8 @@
 因此，`source_permissions_resolved` 不能因为维护者希望遵循上游协议、因为页面公开，
 或因为构件已经出现在 PyPI，就记录为 blanket 通过。对于没有可确认许可证或再分发条件
 的来源，当前发布门禁保持阻拦；只有逐项确认适用条款、补齐发行物中的许可证/署名，或将
-该材料从对应发行物排除后，才能清除相应门禁。未来发布流程的 Trusted Publisher/channel
-证据也不能仅由“构件已经存在”推导出来：
+该材料从对应发行物排除后，才能清除相应门禁。Trusted Publishing 配置与来源授权是
+两条独立门禁，不能互相替代：
 
 - 用户已确认其原创 ReaperDoc 代码和文档按 MIT 发布；该授权不覆盖外来引用、复制描述、第三方数据或来源项目中不属于用户的内容。
 - “网页公开可访问”不等于允许复制和再分发。GitHub 的官方说明明确指出，未附许可证时仍适用默认版权，其他人没有自动的复制、分发或改作权。[GitHub licensing guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
@@ -29,9 +29,9 @@
 - `source_permissions_resolved` 按逐项许可证据重新记录为 `false`；PyPI 当前 JSON 还显示
   `reacli` 与 `reaper-parser` 的项目归属均为 `DDDPG`，因此
   `package_ownership_verified` 已记录为 `true`。
-- `trusted_publishing_configured` 仍为 `false`：`reacli` 有成功的生产 OIDC 运行记录，
-  但本次检查未找到成功的 `reaper-parser` 生产 publish-job 记录。该包的 wheel/sdist
-  已在 PyPI 出现，但上传渠道仍单独标为未独立核验。
+- `trusted_publishing_configured` 按维护者对两个 PyPI 项目配置完成的确认记录为 `true`。
+  `reacli` 的生产上传使用 OIDC；`reaper-parser` 的正式构件由维护者手动上传，因此
+  该版本不宣称使用 `publish.yml`。
 
 ## 证据和判定
 
@@ -64,19 +64,20 @@
 
 - 新增本审计文件，固定了来源、散列、上游 URL 和每项发行处置。
 - 更新 `docs/ecosystem/publication.json`，记录项目 MIT 范围、上游条款门禁、两个 PyPI 项目归属和四个
-  正式构件的文件级信息；保留 parser 上传渠道未独立核验的状态。
+  正式构件的文件级信息；将 parser 正式版本记录为维护者手动上传，并将 Trusted Publishing 配置单独记录为已确认。
 - 更新两个 Python 包的第三方声明和 `reference/SOURCES.md`，使 ReaTeam GPL、Ultraschall `cc-by-nc`、Cockos 和 Lua 的署名条件可见。
 - 本审计没有上传、删除或改写 PyPI 构件；它只把维护者已报告的发布结果与公开索引响应
   写入仓库。没有把外部来源或未核实的发布渠道标成独立证明。
 
 ## 清除路径
 
-后续如果继续发布新版本，应保持来源署名、逐项补齐上游条款并补齐发布渠道证据：
+后续如果继续发布新版本，应保持来源署名并逐项补齐上游条款；若改用 workflow 发布，再单独核对发布渠道：
 
 1. 对每个进入 wheel、sdist、文档站或公开仓库的上游项目，确认具体许可证/再分发条件，
    或把该材料排除；仅有维护者口径、GitHub 可访问或“目前非商业”不能清除门禁。
-2. 由维护者确认 `reaper-parser` 的 PyPI publisher/channel，并保留一次成功的
-   `publish.yml` 运行作为独立证据；在此之前不要把全局 Trusted Publisher 门禁改为 `true`。
+2. 当前 `reaper-parser` 的正式版本已经由维护者确认手动上传；若未来改用 `publish.yml`，
+   再为新版本确认对应 publisher/channel。这个后续渠道核对不改变当前 Trusted Publishing
+   配置已确认的记录。
 3. 内容变化后重新构建并扫描 wheel/sdist、文档站和 bundle，确认每个来源链接和署名
    仍随发行物保留；已发布文件不可原地替换。
 4. 先运行 TestPyPI 验证新版本，再按发布门禁和 `ecosystem-v*` 标签运行正式流程。

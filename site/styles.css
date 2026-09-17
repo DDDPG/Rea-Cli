@@ -164,7 +164,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
 .nav-links a:hover { color: var(--text); background: rgba(255, 255, 255, 0.04); }
-.nav-github { border: 1px solid var(--line); margin-left: 8px; }
+.nav-lang {
+  border: 1px solid var(--line);
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
 
 .nav-toggle {
   display: none;
@@ -534,15 +539,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   overflow: hidden;
 }
 .daw-item svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.daw-item polyline {
-  stroke: #848b92;
-  stroke-width: 1.3;
-  fill: none;
+.daw-wave path {
+  fill: rgba(255, 255, 255, 0.14);
+  stroke: rgba(255, 255, 255, 0.38);
+  stroke-width: 0.5;
   vector-effect: non-scaling-stroke;
+  transition: fill var(--t-med) var(--ease), stroke var(--t-med) var(--ease);
 }
 .daw-item.is-ghost { background: transparent; border-style: dashed; border-color: rgba(255, 255, 255, 0.14); }
 .daw-item.is-verified { background: var(--accent-soft); border-color: var(--accent-line); }
-.daw-item.is-verified polyline { stroke: var(--accent); }
+.daw-item.is-verified .daw-wave path { fill: rgba(85, 183, 161, 0.2); stroke: var(--accent); }
+.daw-item-tone .daw-wave path { fill: none; stroke-width: 0.9; }
 
 .daw-playhead {
   position: absolute;
@@ -551,6 +558,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: 1px;
   background: var(--accent);
   opacity: 0.85;
+  transition: opacity var(--t-med) var(--ease);
 }
 
 /* ---------- 验证面板 ---------- */
@@ -670,32 +678,77 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .flow-tab-title { display: block; margin-top: 5px; font-size: 15.5px; font-weight: 600; }
 .flow-tab-sub { display: block; margin-top: 3px; font-family: var(--mono); font-size: 11px; color: var(--faint); }
 
-.flow-panel[hidden] { display: none; }
+.flow-body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 20px;
+  align-items: start;
+}
+.flow-main { display: grid; gap: 20px; min-width: 0; }
+.flow-side { display: grid; gap: 20px; }
+
+.flow-text {
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 62em;
+  margin: 0;
+  font-size: 15px;
+}
+.flow-text strong { color: var(--text); font-weight: 600; }
+.flow-text[hidden], .flow-code[hidden], .verify-list[hidden], .verify-note[hidden] { display: none; }
+
 @media (prefers-reduced-motion: no-preference) {
-  .flow-panel.is-active { animation: panel-in 230ms var(--ease) both; }
-  .qs-panel.is-active { animation: panel-in 230ms var(--ease) both; }
+  .flow-code.is-active, .flow-text.is-active, .qs-panel.is-active { animation: panel-in 230ms var(--ease) both; }
 }
 @keyframes panel-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.flow-text {
-  color: var(--muted);
-  line-height: 1.85;
-  max-width: 62em;
-  margin-bottom: 24px;
-  font-size: 15px;
+/* 步骤驱动的工程状态演变 */
+#flow-daw .daw-item {
+  transition: background-color var(--t-med) var(--ease), border-color var(--t-med) var(--ease);
 }
-.flow-text strong { color: var(--text); font-weight: 600; }
+#flow-daw .daw-wave {
+  transition: opacity 200ms var(--ease), transform 300ms var(--ease);
+  transform-origin: left center;
+}
+.flow[data-step="0"] #flow-daw .daw-item {
+  background: transparent;
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.flow[data-step="0"] #flow-daw .daw-wave { opacity: 0; transform: scaleX(0.55); }
+.flow[data-step="0"] #flow-daw .daw-playhead { opacity: 0; }
 
-.flow-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 20px;
-  align-items: start;
+.flow[data-step="1"] #flow-daw .daw-item-vocal .daw-wave { opacity: 1; transform: scaleX(1); transition-delay: 280ms; }
+.flow[data-step="1"] #flow-daw .daw-playhead { opacity: 0.85; transition-delay: 200ms; }
+.flow[data-step="1"] #flow-daw .daw-item-tone {
+  background: transparent;
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.14);
 }
-.flow-side { display: grid; gap: 20px; }
+.flow[data-step="1"] #flow-daw .daw-item-tone .daw-wave { opacity: 0; transform: scaleX(0.55); }
+
+.flow[data-step="2"] #flow-daw .daw-item {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+.flow[data-step="2"] #flow-daw .daw-wave { opacity: 1; transform: scaleX(1); }
+.flow[data-step="2"] #flow-daw .daw-item-tone .daw-wave { transition-delay: 280ms; }
+.flow[data-step="2"] #flow-daw .daw-wave path { fill: rgba(85, 183, 161, 0.2); stroke: var(--accent); }
+.flow[data-step="2"] #flow-daw .daw-playhead { opacity: 0; }
+
+/* 步骤切换时的依次外发光引导 */
+.flow .code-window, .flow .daw, .flow .verify {
+  transition: border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+}
+.flow .is-glow {
+  border-color: var(--accent-line);
+  box-shadow: var(--inset-hi), 0 0 0 3px rgba(85, 183, 161, 0.13),
+    0 10px 30px rgba(0, 0, 0, 0.42), 0 0 28px rgba(85, 183, 161, 0.15);
+}
 
 /* ---------- 能力 ---------- */
 .features-grid {
@@ -760,39 +813,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   white-space: nowrap;
 }
 .chip-dim { border-style: dashed; color: var(--faint); }
-
-/* ---------- 实录演示（位于能力卡片内） ---------- */
-.feature-showcase {
-  margin: 18px 0 0;
-}
-.feature-showcase-cap {
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--dim);
-  line-height: 1.5;
-}
-.showcase-frame {
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--panel);
-  box-shadow: var(--inset-hi), var(--shadow-1);
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  display: grid;
-}
-.showcase-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  background: #141618;
-}
-.showcase-fallback { display: none; place-items: center; }
-.showcase-fallback svg { width: 100%; height: 100%; }
-.showcase-frame.is-broken { aspect-ratio: 16 / 9; }
-.showcase-frame.is-broken img { display: none; }
-.showcase-frame.is-broken .showcase-fallback { display: grid; }
 
 /* ---------- 快速开始 ---------- */
 .qs-grid {
@@ -995,7 +1015,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .bench-panel { opacity: 1 !important; }
   .bench-panel.is-focus { transform: none; }
 
-  .flow-grid { grid-template-columns: minmax(0, 1fr); }
+  .flow-body { grid-template-columns: minmax(0, 1fr); }
   .qs-grid { grid-template-columns: minmax(0, 1fr); }
   .features-grid { grid-template-columns: minmax(0, 1fr); }
 }

@@ -1,3 +1,5 @@
+# Deliberately manual-only: ordinary pushes, including public-preparation pushes,
+# never upload a package to PyPI or TestPyPI.
 name: Publish reviewed ecosystem
 on:
   workflow_dispatch:

@@ -77,7 +77,7 @@
     "Linux": "GitHub Ubuntu parser Python 3.10-3.14; rac 3.10/3.12/3.14 offline passed; candidate wheels isolated installation passed; no new REAPER live acceptance",
     "Windows": "GitHub parser Python 3.10-3.14 offline passed; no runner or REAPER live acceptance"
   },
-  "public_release": "blocked by source-specific license/permission review and Trusted Publisher/channel evidence; package ownership verified",
+  "public_release": "blocked by source-specific license/permission review; package ownership and Trusted Publishing configuration verified; reaper-parser 0.1.0a1 was manually uploaded",
   "github_actions": {
     "run_id": 34756655368,
     "url": "https://github.com/DDDPG/Rea-Cli/actions/runs/34756655368",

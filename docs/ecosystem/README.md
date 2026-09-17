@@ -28,9 +28,9 @@ PyPI. See the [reacli release](https://pypi.org/project/reacli/0.1.0/), the
 [reaper-parser release](https://pypi.org/project/reaper-parser/0.1.0a1/) and
 the [machine-readable publication index](publication.json) for the observed
 files and hashes. The `reacli` production upload has a successful OIDC workflow
-record; this checkout does not have a successful `reaper-parser` production
-publish-job record, so its live artifacts and upload channel are tracked
-separately.
+record; the maintainer confirms that `reaper-parser==0.1.0a1` was uploaded
+manually. The parser release is therefore recorded as a live manual upload, not
+as a `publish.yml` OIDC upload.
 
 For a candidate release, install BOTH wheels in one command from an unrelated directory:
 
@@ -131,10 +131,12 @@ folders, checks schema freshness, compares archive runtime bytes to source, and 
 Candidate builds do not upload or change visibility. The current package artifacts are
 already live on PyPI but are immutable; because this checkout includes post-upload runtime
 hardening, a same-version candidate is for review only and the next upload must use a new
-version. The normal future-publication gate remains blocked until both source-specific
-license/permission review and Trusted Publisher/channel evidence are complete;
-`publication.json` records MIT only for project-owned code, keeps upstream terms
-separate, and records that the existing published wheel metadata cannot be rewritten.
+version. The normal future-publication gate remains blocked by the unresolved
+source-specific license/permission review. Package ownership and Trusted
+Publishing configuration are recorded as cleared; `publication.json` records
+MIT only for project-owned code, keeps upstream terms separate, and records that
+the existing published wheel metadata cannot be rewritten. The manually
+uploaded parser version is not represented as a workflow-channel proof.
 
 ## Migration and recovery
 
