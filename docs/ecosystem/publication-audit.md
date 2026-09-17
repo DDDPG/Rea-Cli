@@ -25,8 +25,9 @@ ReaTeam、Cockos、Ultraschall 及 GitHub 开源 Lua 资料可以使用并按来
 - 修正 parser 来源说明，移除不属于该包的 Cockos API 索引、rac Lua 和依赖描述。
 - 当前 schema 来源更新为 `6416435fdf4cc7e38346fd7875f5d04949b431a2`；
   `32047bb` 仅作为旧快照历史保留。
-- PyPI、TestPyPI 上 `reacli` 和 `reaper-parser` 的 JSON 接口均返回 404。
-  这仅说明未找到公开项目，不证明名称可注册、被保留情况或账号控制权。
+- PyPI 上 `reacli` 和 `reaper-parser` 的 JSON 接口仍返回 404；TestPyPI 的 `reacli`
+  JSON 已返回版本 `0.1.0`，`reaper-parser` 尚待首次上传。索引响应不证明全部包名的
+  账号控制权。
 
 ## 各产物剩余事项
 

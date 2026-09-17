@@ -108,7 +108,7 @@
       {
         "name": "testpypi",
         "required_reviewers": false,
-        "status": "exists; protection_rules=[]; publisher not independently verified"
+        "status": "exists; protection_rules=[]; reacli OIDC upload verified; parser publisher reported"
       }
     ],
     "workflow": "publish.yml",
