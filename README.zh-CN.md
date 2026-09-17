@@ -129,6 +129,8 @@ reacli --version
 两者的 API 都可能继续调整。上面的路线 B 安装的是较新的代码，下次上传会使用新的版本号
 （见[发布流程](docs/releasing.md)）；在那之前两条路线的代码并非逐字节一致，这是预期情况
 而不是缺陷。
+已发布 wheel 的元数据仍记录 `License-Expression: MIT`，不可变构件无法回写。当前 checkout
+只将 MIT 用于项目自有代码，并在上游材料条款未逐项解决前不声明发行包具有单一许可证。
 
 安装包与 CLI 名称为 `reacli`，Python 导入名为 `rac`。
 

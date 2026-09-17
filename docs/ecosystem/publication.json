@@ -2,6 +2,18 @@
   "source_permissions_resolved": false,
   "source_license_policy": "project_owned_code_and_original_documentation_mit; upstream_material_follows_its_own_license_or_terms",
   "package_license_metadata": "no_single_expression_until_bundled_upstream_terms_are_resolved",
+  "published_package_license_metadata": {
+    "reacli==0.1.0": {
+      "license_expression": "MIT",
+      "verified_from": "downloaded PyPI wheel METADATA",
+      "immutable": true
+    },
+    "reaper-parser==0.1.0a1": {
+      "license_expression": "MIT",
+      "verified_from": "downloaded PyPI wheel METADATA",
+      "immutable": true
+    }
+  },
   "package_ownership_verified": true,
   "trusted_publishing_configured": false,
   "status": "source-specific license review required; both PyPI projects published; reacli OIDC verified; parser artifact live but upload channel not independently evidenced",
@@ -22,7 +34,7 @@
         "Neutralized local media path in generated schema consumers"
       ],
       "forbidden_repository_payloads_found": false,
-      "note": "The four uploaded archives match the recorded source revision before this final review. The current checkout contains reviewed post-upload hardening; do not republish the existing version, and bump/rebuild before the next upload. Package README and other metadata are immutable per upload."
+      "note": "The four uploaded archives match the recorded source revision before this final review. The downloaded PyPI wheel METADATA for both published versions still reports License-Expression: MIT; those immutable files cannot be rewritten. The current checkout contains reviewed post-upload hardening and deliberately omits a single license expression until bundled upstream terms are resolved; do not republish the existing version, and bump/rebuild before the next upload. Package README and other metadata are immutable per upload."
     },
     "packages": {
       "reacli": {

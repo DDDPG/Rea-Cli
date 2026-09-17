@@ -13,6 +13,10 @@ immutable; changes to package metadata or README content require a new version.
 The reviewed checkout contains post-upload runtime hardening and generated-data
 privacy cleanup, so its runtime is intentionally newer than those immutable files;
 do not reuse either published version for the next upload.
+The published wheel metadata also still says `License-Expression: MIT` for both
+versions. That metadata cannot be rewritten; the current checkout intentionally
+omits a single license expression while bundled upstream terms remain mixed or
+unresolved, and carries the scope in `THIRD_PARTY_NOTICES.md`.
 
 ### Next release: version bump checklist
 

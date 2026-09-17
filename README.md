@@ -142,6 +142,10 @@ installing from a current checkout gives you the hardened one. The API may
 evolve either way. Path B above installs the newer code. The next upload will use
 the next version numbers (see [releasing](docs/releasing.md)); until then the two
 paths are not byte-identical, and that is expected rather than a bug.
+The existing published wheel metadata still says `License-Expression: MIT`; those
+immutable files cannot be rewritten. The current checkout intentionally documents
+MIT only for project-owned code and does not claim one license for bundled upstream
+materials.
 
 The distribution and CLI are named `reacli`; Python imports use `rac`.
 

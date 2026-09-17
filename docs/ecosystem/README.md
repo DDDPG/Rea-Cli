@@ -133,8 +133,8 @@ already live on PyPI but are immutable; because this checkout includes post-uplo
 hardening, a same-version candidate is for review only and the next upload must use a new
 version. The normal future-publication gate remains blocked until both source-specific
 license/permission review and Trusted Publisher/channel evidence are complete;
-`publication.json` records MIT only for project-owned code and keeps upstream terms
-separate.
+`publication.json` records MIT only for project-owned code, keeps upstream terms
+separate, and records that the existing published wheel metadata cannot be rewritten.
 
 ## Migration and recovery
 

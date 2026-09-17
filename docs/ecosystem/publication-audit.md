@@ -8,6 +8,11 @@ PyPI 当前同时提供两个项目的 `0.1.0`/`0.1.0a1` wheel 和 sdist，四�
 OIDC 上传运行记录；`reaper-parser` 的构件存在已由 PyPI JSON 和下载校验确认，但本次
 没有找到成功的 parser 生产 publish-job 记录，因此其上传渠道不独立宣称为 OIDC。
 
+另外，直接下载并读取正式 PyPI wheel 的 `METADATA` 后确认，两个已发布版本仍记录
+`License-Expression: MIT`。该元数据随不可变构件不能回写；当前 checkout 已移除单一
+许可证表达式，直到发行包中所有上游材料的条款逐项解决或被排除。这个差异已记录在
+`publication.json`，下次上传必须使用新版本。
+
 2026-09-15 已完成[来源与再分发授权审计](source-license-audit.md)。当前采用的许可证
 范围是：项目自有代码和原创文档按 MIT 发布；ReaTeam、Cockos、Ultraschall、Lua 及
 其他上游资料继续遵循各自许可证和条款。维护者口径不等于上游再分发许可，因此
