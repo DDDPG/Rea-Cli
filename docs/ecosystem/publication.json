@@ -214,6 +214,8 @@
   "github": {
     "repository": "DDDPG/Rea-Cli",
     "visibility": "private",
+    "default_branch": "main",
+    "default_branch_note": "main was pushed on 2026-09-17 as a fast-forward of codex/reaper-ecosystem-alpha and set as the default branch. codex/reaper-ecosystem-alpha remains as a non-default branch. The visibility value above is unchanged: the repository is still private.",
     "environments": [
       {
         "name": "testpypi",

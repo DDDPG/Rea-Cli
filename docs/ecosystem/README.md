@@ -137,9 +137,11 @@ evidence is complete; source authorization is recorded as a maintainer attestati
 
 ## Migration and recovery
 
-The `codex/reaper-ecosystem-alpha` branch preserves pre-existing ReaCli work in a separate
-snapshot commit, specification work in a subsequent commit, and directory migration in a
-separate commit. ReaperDoc history was imported without squashing. Original sibling folders
+`main` is the default branch. It was pushed on 2026-09-17 as a fast-forward of
+`codex/reaper-ecosystem-alpha`, which remains as a non-default branch. That branch
+preserves pre-existing ReaCli work in a separate snapshot commit, specification work
+in a subsequent commit, and directory migration in a separate commit. ReaperDoc
+history was imported without squashing. Original sibling folders
 were not deleted. Full baseline archives and binary diffs are held only in a
 local, Git-ignored `.state/ecosystem-baseline-20260913` directory. They are
 **not** in this repository and cannot be downloaded from it; only the summaries
