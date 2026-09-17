@@ -84,7 +84,7 @@ jobs:
           "$RUNNER_TEMP/wheel-only/bin/python" -m pip install dist/candidate/reaper-parser/*.whl dist/candidate/reacli/*.whl pytest numpy soundfile
           "$RUNNER_TEMP/wheel-only/bin/python" -I -m pytest tests/test_distribution.py tests/test_reference_distribution.py tests/conformance/test_document.py tests/test_media.py -q
           (cd "$RUNNER_TEMP" && "$RUNNER_TEMP/wheel-only/bin/python" -I -m rac doctor --profile offline --json)
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: ecosystem-candidate
           path: dist/candidate
