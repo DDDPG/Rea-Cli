@@ -1,0 +1,16 @@
+// gain_simple.jsfx — 最小可用增益插件
+// 知识点: slider 定义 / @slider 做参数换算 / @sample 逐样本处理
+desc:Simple Gain (dB)
+
+// 参数: 默认 0dB, 范围 -60..+12dB, 步进 0.1
+slider1:0<-60,12,0.1>Gain (dB)
+
+@slider
+// dB → 线性增益: 10^(dB/20)
+// 只在参数变化时(@slider)换算, 不要放 @sample 里每样本算幂
+gain = 10 ^ (slider1 / 20);
+
+@sample
+// 双声道同增益; 不修改的 splX 会原样直通, 所以 2 声道以上轨道其余声道不受影响
+spl0 *= gain;
+spl1 *= gain;

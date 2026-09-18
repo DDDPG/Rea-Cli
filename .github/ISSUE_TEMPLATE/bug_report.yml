@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible CLI, Python API, or REAPER execution problem.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        For security issues, follow SECURITY.md. Remove credentials, private media
+        and personal paths from logs and project files before sharing them.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include reacli version or commit, Python, OS/CPU, REAPER and Lua versions where applicable.
+      placeholder: "reacli 0.1.0; Python 3.14; macOS arm64; REAPER 7.62; Lua 5.4"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Include exact commands or a small Python/Lua example and a minimal project if needed.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Include relevant doctor output, exit code, reason_code and redacted proof/log excerpts.

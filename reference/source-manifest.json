@@ -1,0 +1,534 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-09-09",
+  "source_workspace": "reaper_agent_cli",
+  "retrieval": "Scoped rsync import from the supplied source project; source files were not modified",
+  "overview_source": {
+    "source": "README.md",
+    "sha256": "fcfb7f513a5ae1afecbd4039ff8ab5802ed34fb014db99e7c0c0037939a5ea71",
+    "handling": "Architecture summarized in reference/README.md; internal progress and pipeline paths omitted"
+  },
+  "imported": [
+    {
+      "source": "docs/knowledge/reascript/actions_index.json",
+      "destination": "reference/knowledge/reascript/actions_index.json",
+      "source_sha256": "6f8620324fa31b8632ec2525390a336525ac9074bbc39a6b083d22f604eb9092",
+      "destination_sha256": "bf570b0c62b85436f4065acf16d8e9a4261dcfc8f6fb1ac015913b41f1ab42f6",
+      "edits": [
+        "Corrected numeric action-ID validation guidance; retained action records and historical version metadata"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/api_pitfalls.json",
+      "destination": "reference/knowledge/reascript/api_pitfalls.json",
+      "source_sha256": "6dae30f60f9ffaabf31fa62a698844338ede443dc4b3f67b967eedf184fe9399",
+      "destination_sha256": "2d510a463d416ca8b9fef538b27d21aef960b55bbf137f16f3086cb9bf7ac7fd",
+      "edits": [
+        "Replaced internal milestone labels with scoped historical evidence descriptions; removed complete-coverage claim and qualified dirty-state behavior"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/cli_behavior.md",
+      "destination": "reference/knowledge/reascript/cli_behavior.md",
+      "source_sha256": "845b85717635a4a9f171dfd04486d3915c2eed152a3d0e970fe5f2f0611f5bb6",
+      "destination_sha256": "5e19177760cf3ee52f3d29d3f49fa46a3f4dd3f940da78ef87bb02ffb78a811b",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Curated version-specific observations; removed obsolete background/kill recipe and internal tracker references; linked maintained runner guidance and clarified limited proof/hash/default behavior"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/render_internals.md",
+      "destination": "reference/knowledge/reascript/render_internals.md",
+      "source_sha256": "a90dccf14781e7cec8d410a1820f9376f1db014265a41bedc0105d59d8dd7e15",
+      "destination_sha256": "46d0637396a23d797720e900acffe8ec8801d5f458665277c8e967139477f0fa",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Retained Ultraschall attribution and cc-by-nc restriction; distinguished RPP fields from API properties and preset files; corrected numeric action-index inference",
+        "Checked RENDER_FORMAT, RENDER_SRATE and RENDER_FILE against the official ReaScript API documentation on 2026-09-09; no live render validation performed"
+      ],
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "282c766019d738626e239374d5662f6d8ed61cebc801c8d4725696efec6d0936",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/README.md",
+      "destination": "reference/knowledge/reascript/jsfx/README.md",
+      "source_sha256": "191656f4b1b4df60982c03288af98262a985dc28b1b330740f285fac5acdd2cb",
+      "destination_sha256": "4466c708226db7e486620831b5f0c5ec7b0a63dbcbb0c682cf7f1743e3dd62e2",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Added source-example limitations for zero-delay buffering, feedback tails and SVF stability; fixed local navigation and limited serialization/diff claims; example file bytes unchanged"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/jsfx_reference.json",
+      "destination": "reference/knowledge/reascript/jsfx/jsfx_reference.json",
+      "source_sha256": "268545f37a48a1bd93295855c0001cc7d00731609ff10675c2ca2b82d4e64864",
+      "destination_sha256": "53115c0a93137296010f2bebb19b9e1cae8f44b9febd524d544cfe8f462528be",
+      "edits": [
+        "Replaced internal probe identity with historical source observation; fixed repository-local denylist path; qualified sample slot-count and validation claims"
+      ]
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/examples/delay_basic.jsfx",
+      "destination": "reference/knowledge/reascript/jsfx/examples/delay_basic.jsfx",
+      "source_sha256": "4c3ad0cb0283c70f21734d35e0e6ef71b736398254532d41f38e3e2ef57bba8f",
+      "destination_sha256": "4c3ad0cb0283c70f21734d35e0e6ef71b736398254532d41f38e3e2ef57bba8f",
+      "edits": []
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/examples/gain_simple.jsfx",
+      "destination": "reference/knowledge/reascript/jsfx/examples/gain_simple.jsfx",
+      "source_sha256": "c460be0060026ec6453a5dd914228af25eaefc9ffc1dbf7e366a76b976ee681d",
+      "destination_sha256": "c460be0060026ec6453a5dd914228af25eaefc9ffc1dbf7e366a76b976ee681d",
+      "edits": []
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/examples/midi_monitor.jsfx",
+      "destination": "reference/knowledge/reascript/jsfx/examples/midi_monitor.jsfx",
+      "source_sha256": "e3bacf93bea6eb0329344f194359a73b92f3fb75192486c50c25144e3aa7e037",
+      "destination_sha256": "e3bacf93bea6eb0329344f194359a73b92f3fb75192486c50c25144e3aa7e037",
+      "edits": []
+    },
+    {
+      "source": "docs/knowledge/rpp/annotated_tree.md",
+      "destination": "reference/knowledge/rpp/annotated_tree.md",
+      "source_sha256": "59190d47eae097ddfda18750e386a3d54599d5c452594859aa87417aa1ace61e",
+      "destination_sha256": "bf243b90e07909eccc4b0194430bb6aad0b3ae43e1f713605123c4687c8eb137",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Replaced private sample-media absolute path with /path/to/example.mp3",
+        "Linked canonical schema and clarified illustrative annotations/placeholders are not an executable project fixture"
+      ],
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "21d2b35d9e9a05eb013a2ddc232db20b4efdeb4cc9684a7ab73d591d492d9c52",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/blob_denylist.md",
+      "destination": "reference/knowledge/rpp/blob_denylist.md",
+      "source_sha256": "2d6e27166f58f847467c29f955557101038eecb99f847d4406805292a1b6931d",
+      "destination_sha256": "a4df0488b337aa519b95e7b8d8a731233e3b942fba1d4bf8473c1da66c4d230c",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Rewrote as public opaque-block editing guidance; removed internal milestones; clarified GUID references and limits of semantic diff"
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/gap_registry.md",
+      "destination": "reference/knowledge/rpp/gap_registry.md",
+      "source_sha256": "27822febf993034502ce8656df02c0333318c74548702894da7b8c05f4230cc1",
+      "destination_sha256": "a30d9caef37b535e3b75b316ebec0c1174a0602116ebc2f8c4ad49a7a082df3a",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Removed internal tracker and missing-file instructions; retained unresolved schema gaps and scoped observations; corrected document-only JSFX evidence label"
+      ],
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "f7445aba177af2b032f9149a4b53e73a3618ed4ce47e8b7bc4a3f9a1bdd4dd33",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/semantics_formulas.md",
+      "destination": "reference/knowledge/rpp/semantics_formulas.md",
+      "source_sha256": "c92204d35963d09a4bffd2b3458f42b77804417f7ae14d207127bdcb50999461",
+      "destination_sha256": "a84630e8db10e949e284892756bb68c96f2e8651de70c882e9b8c829a7f9368c",
+      "edits": [
+        "Added historical-version banner and current documentation links",
+        "Removed internal milestones; scoped envelope observations to volume, added logarithm domain and fixed constant-source PPQ and playback-rate overgeneralization"
+      ],
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "335e0758a5c8ccd9018882fa73440c882334762a97773d948b09111c060d13e1",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "source": "docs/knowledge/rpp/extract_report.json",
+      "destination": "reference/knowledge/rpp/extract_report.json",
+      "source_sha256": "3c3ae33fbfb26b4af8cd1281d7630ddaf0fec0cbaa01fd2142ebd94ab322d45f",
+      "destination_sha256": "3c3ae33fbfb26b4af8cd1281d7630ddaf0fec0cbaa01fd2142ebd94ab322d45f",
+      "edits": []
+    }
+  ],
+  "already_bundled": [
+    {
+      "source": "docs/knowledge/reascript/api_index.json",
+      "canonical": "packages/reacli/src/rac/data/knowledge/api_index.json",
+      "comparison": "identical at import",
+      "sha256": "bce7d856221555d036d37e68d923357008c3602770c0e7da6286f78c6e25fcc4",
+      "canonical_at_import": "src/rac/data/knowledge/api_index.json",
+      "current_sha256": "bce7d856221555d036d37e68d923357008c3602770c0e7da6286f78c6e25fcc4"
+    },
+    {
+      "source": "docs/knowledge/rpp/rpp_schema.json",
+      "canonical": "packages/reacli/src/rac/data/knowledge/rpp_schema.json",
+      "comparison": "identical at import",
+      "sha256": "98b68a21272fa976ef2b0a42e8c022ee614ceb4d96d8d7c26fb7cb077285865f",
+      "canonical_at_import": "src/rac/data/knowledge/rpp_schema.json",
+      "current_sha256": "0b1d0a22f5f79e5d3827ba3e0956ac436173beb698722f4a39a4720209912e60"
+    },
+    {
+      "source": "lua/entry.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/entry.lua",
+      "comparison": "identical at import",
+      "sha256": "b2c74e382efa0fc7a86bdf13d3629796848ea39c691f244c506eb4ffd693c9fc",
+      "canonical_at_import": "src/rac/data/lua/entry.lua",
+      "current_sha256": "b2c74e382efa0fc7a86bdf13d3629796848ea39c691f244c506eb4ffd693c9fc"
+    },
+    {
+      "source": "lua/stdlib/env.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/env.lua",
+      "comparison": "identical at import",
+      "sha256": "e0fd4c6100eeef98a2454f355b4e57a10c0517aa900f1468df693298a66bc387",
+      "canonical_at_import": "src/rac/data/lua/stdlib/env.lua",
+      "current_sha256": "e0fd4c6100eeef98a2454f355b4e57a10c0517aa900f1468df693298a66bc387"
+    },
+    {
+      "source": "lua/stdlib/fx.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/fx.lua",
+      "comparison": "identical at import",
+      "sha256": "3428714f105513042b0a99e992cdc30c86f3420b6e1558a43eee3f9dbbc0e1e6",
+      "canonical_at_import": "src/rac/data/lua/stdlib/fx.lua",
+      "current_sha256": "3428714f105513042b0a99e992cdc30c86f3420b6e1558a43eee3f9dbbc0e1e6"
+    },
+    {
+      "source": "lua/stdlib/item.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/item.lua",
+      "comparison": "identical at import",
+      "sha256": "40fc14d339cdf0188c5f1876b173efe4baf9d64781e905c33321616fc8c69817",
+      "canonical_at_import": "src/rac/data/lua/stdlib/item.lua",
+      "current_sha256": "40fc14d339cdf0188c5f1876b173efe4baf9d64781e905c33321616fc8c69817"
+    },
+    {
+      "source": "lua/stdlib/marker.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/marker.lua",
+      "comparison": "identical at import",
+      "sha256": "618a7c8206e59ecf9a6723aaab60e4adfb3b6af5d2e2b9396f49de67081a4c4c",
+      "canonical_at_import": "src/rac/data/lua/stdlib/marker.lua",
+      "current_sha256": "618a7c8206e59ecf9a6723aaab60e4adfb3b6af5d2e2b9396f49de67081a4c4c"
+    },
+    {
+      "source": "lua/stdlib/midi.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/midi.lua",
+      "comparison": "identical at import",
+      "sha256": "481b403c3e42927e657029db989bfe1b2d58e0ef236fb4f38104a1cc45ad99d4",
+      "canonical_at_import": "src/rac/data/lua/stdlib/midi.lua",
+      "current_sha256": "481b403c3e42927e657029db989bfe1b2d58e0ef236fb4f38104a1cc45ad99d4"
+    },
+    {
+      "source": "lua/stdlib/project.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/project.lua",
+      "comparison": "identical at import",
+      "sha256": "481ac6c01d3a0ed83de580ad84221efcfbb6343c6c0025add4d26cd076628748",
+      "canonical_at_import": "src/rac/data/lua/stdlib/project.lua",
+      "current_sha256": "481ac6c01d3a0ed83de580ad84221efcfbb6343c6c0025add4d26cd076628748"
+    },
+    {
+      "source": "lua/stdlib/render.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/render.lua",
+      "comparison": "identical at import",
+      "sha256": "08d6070d50cbe12469555166790f08c14c9c79cf28eb480c0e02271d0517ce80",
+      "canonical_at_import": "src/rac/data/lua/stdlib/render.lua",
+      "current_sha256": "08d6070d50cbe12469555166790f08c14c9c79cf28eb480c0e02271d0517ce80"
+    },
+    {
+      "source": "lua/stdlib/routing.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/routing.lua",
+      "comparison": "identical at import",
+      "sha256": "30abee34052731c6661de085d51f5daabaf82d2068e533f7df2881f7b1c916f7",
+      "canonical_at_import": "src/rac/data/lua/stdlib/routing.lua",
+      "current_sha256": "30abee34052731c6661de085d51f5daabaf82d2068e533f7df2881f7b1c916f7"
+    },
+    {
+      "source": "lua/stdlib/snapshot.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/snapshot.lua",
+      "comparison": "identical at import",
+      "sha256": "cf3cb782e36ed2c437cb1b7b3c6a9edf0b680964fae2a9974544281239b4241f",
+      "canonical_at_import": "src/rac/data/lua/stdlib/snapshot.lua",
+      "current_sha256": "cf3cb782e36ed2c437cb1b7b3c6a9edf0b680964fae2a9974544281239b4241f"
+    },
+    {
+      "source": "lua/stdlib/take.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/take.lua",
+      "comparison": "identical at import",
+      "sha256": "b174c85950a837e822a00e596925e7dc5ea262bf4ad52d19cc276db7e78995ea",
+      "canonical_at_import": "src/rac/data/lua/stdlib/take.lua",
+      "current_sha256": "b174c85950a837e822a00e596925e7dc5ea262bf4ad52d19cc276db7e78995ea"
+    },
+    {
+      "source": "lua/stdlib/track.lua",
+      "canonical": "packages/reacli/src/rac/data/lua/stdlib/track.lua",
+      "comparison": "identical at import",
+      "sha256": "c1f0d7ccfe35a5a83dc4acb346b564046d4052dbb5a71a31a2bb4edb3614b38d",
+      "canonical_at_import": "src/rac/data/lua/stdlib/track.lua",
+      "current_sha256": "c1f0d7ccfe35a5a83dc4acb346b564046d4052dbb5a71a31a2bb4edb3614b38d"
+    }
+  ],
+  "not_imported": [
+    {
+      "source": "docs/knowledge/jsfx/JSFX_SDK_Reference.md",
+      "reason": "Full copied SDK prose overlaps the compact JSFX handbook; official URL linked in SOURCES.md"
+    },
+    {
+      "source": "docs/knowledge/reascript/jsfx/raw_official/",
+      "reason": "Raw copies of official pages; canonical URLs retained instead"
+    },
+    {
+      "source": "docs/knowledge/rpp/raw/",
+      "reason": "Raw upstream extraction intermediates overlap the bundled schema and imported annotated tree"
+    },
+    {
+      "source": "docs/knowledge/reascript/extract_api_report.json",
+      "reason": "Generator report adds no knowledge beyond bundled API index"
+    },
+    {
+      "source": "docs/knowledge/mcp_alignment.md",
+      "reason": "Internal integration and development-progress records are outside standalone reacli scope"
+    }
+  ],
+  "editorial_reviewed_on": "2026-09-09",
+  "hash_policy": "source_sha256 is the immutable import baseline; destination_sha256 describes the current curated repository file. Source paths are relative to source_workspace. already_bundled.sha256 and canonical_at_import are immutable import observations; current_sha256 checks the current canonical path. retired_authored records no longer target current files.",
+  "authored": [
+    {
+      "destination": "reference/lua/examples/build_inspector.py",
+      "destination_sha256": "fc2ead3c89737093f95b8f089308d05b4c563998078b633a89f72040834a3704",
+      "description": "Standalone-repository example builder using the installed entry template; syntax validation and exclusive output creation"
+    },
+    {
+      "destination": "reference/lua/examples/inspect_project.body.lua",
+      "destination_sha256": "74fb284ee7ebdd5c38a9b03369ddc2b66aa486169c14328d5c7aac88b3b290c4",
+      "description": "Standalone-repository read-only project inspector body"
+    },
+    {
+      "destination": "reference/README.md",
+      "destination_sha256": "64c41297e49b34c4ed62a12bcb8e38a87cbe4b860686ae70a71228c9ddb2de00",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "65158c0c00065459088a86f68d6e1479a169009bfc9abd6f61ea72742570729d",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        },
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "ae45bb05b3686097af9aa316179e050d4b5bc2e39c04eee018e77d0842ceec1d",
+          "reason": "Point Git-only delivery at integrations/agents instead of a nonexistent skills/ directory."
+        }
+      ]
+    },
+    {
+      "destination": "reference/README.zh-CN.md",
+      "destination_sha256": "b485952b20645bc13906075960e7491000600bb5da4303cdc39bf969cf3b9e34",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "359a977c060d771e9822c4b0bf5a20fe0717d0d105b931a94b63a0ddba425308",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        },
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "027fee5e72fffb9d2ee6183ea55895a2872b3ca93da4bdd92a836ab367ad5ad3",
+          "reason": "Point Git-only delivery at integrations/agents instead of a nonexistent skills/ directory."
+        }
+      ]
+    },
+    {
+      "destination": "reference/jsfx/README.md",
+      "destination_sha256": "6bd5657050a53694893dc7d0ebf3481eb599b430453d4e088fec7b9232f41ea1",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/jsfx/README.zh-CN.md",
+      "destination_sha256": "0845f06e17e6e467b094b6047915bcaa15392c79f742c72fcb793e781db16da9",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed"
+    },
+    {
+      "destination": "reference/knowledge/README.md",
+      "destination_sha256": "82a3c2373383b9b32fb946091c3808e90af319b08638101cca80730b2733f128",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "a5af90ab028622aad302023ccddc9bebc90abcba5edd57208c23a7163184d7fc",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/knowledge/README.zh-CN.md",
+      "destination_sha256": "9d5c6d61739ed8e712156df249d3c713993607b25b56ee30653eabb402ebb284",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "a8d5781beb64d20ea3de615a4851df7f5027fa0dc75655ba4819c0b18b679aee",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/lua/README.md",
+      "destination_sha256": "42566bcad8a4ea69fc5c5c76b25cbf128f2fc7aa1b8ec81d0736db86258d85f5",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "ce4ee6259589ee23b552a8bc093515e93210a92042d06fc7c5e3e1d9de68ea61",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/lua/README.zh-CN.md",
+      "destination_sha256": "b98153b8263116227ec41e489a4631568dfa9d2b29962cb0851915cd049fb084",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "3563f0d3da44076e79e0e05778362127991fa184e4794473389880a9696123b3",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/reascript/README.md",
+      "destination_sha256": "57b9d3919e1c4947bb699a1bcdc0dc5688c1c58e8ff92b9c9ed422d4f79a9f57",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "28e780a5715bfd705722a3eacbb9ea8f41c9be6e9223c318fd1d85bc07ea665a",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/reascript/README.zh-CN.md",
+      "destination_sha256": "05f345c59ae1c2ee9fa8e3067fc6bebe92c5b24e7440fddf63eaa2a56d5d0344",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "318fedb85fb2947260c74e0fb20dbf3676b03fa0f3cd28aa8b0402b5a7fa297a",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/rpp/README.md",
+      "destination_sha256": "bd51f1bc296c6a842875bd45d651c3c63f80cab1eac7479331ac3365f0b14c5b",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "89bea534340edafa07fed1c7d281dfc572131ed7cc23307eda6277dd570513f3",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/rpp/README.zh-CN.md",
+      "destination_sha256": "54ff94ae0dd82ec6851bc3b5d9e440518833634189165e301b3c0ec72e5a3de5",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "fad21cb112c47a1e593f206a3b0998c8f75b2c7b20cfd4f7f535cb91aac0426f",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/workflow/README.md",
+      "destination_sha256": "ccc5afd486d883fa9b399e89d3cc3d87d4b32494c2e7557ee383afb9d047520b",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "e1945ea556bbb7cfeb0196d80e3bdc437872d5910a979686c73a17495c97e926",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "reference/workflow/README.zh-CN.md",
+      "destination_sha256": "4705d982517a3106ce75b7cb3e8d42041be126e820058ef95680e5feffdc2446",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "curation_history": [
+        {
+          "date": "2026-09-17",
+          "previous_destination_sha256": "56b856ac68276cbfdc7991e7afc64a725bc8547d79c7effb3807eeb6cfb30e9b",
+          "reason": "Repair current monorepo navigation and development commands; original source hash retained."
+        }
+      ]
+    },
+    {
+      "destination": "integrations/agents/README.md",
+      "description": "Current standalone agent bundle documentation",
+      "destination_sha256": "01a4314f42042bc001fc71a186ebb06168015dd254d49f3b1c93d0eff106dd41"
+    },
+    {
+      "destination": "integrations/agents/reaper-agent-cli/SKILL.md",
+      "description": "Current standalone agent bundle documentation",
+      "destination_sha256": "2b2f157b947e5c3fce0091e208697c879589b29f66420d2366ea0bd52f047154"
+    },
+    {
+      "destination": "integrations/agents/reaper-agent-cli/reference/quickstart.md",
+      "description": "Current standalone agent bundle documentation",
+      "destination_sha256": "8bb6fe096810f203594ad5d520e1bdceb5fe0bab84c2c1fc41cbed25fa758477"
+    }
+  ],
+  "organization": {
+    "date": "2026-09-09",
+    "guides": "Paired English and Chinese developer contracts under reference/{workflow,rpp,reascript,lua,jsfx}; original imported evidence retained unchanged under knowledge/.",
+    "skill": "integrations/agents/reaper-agent-cli/SKILL.md; standalone bundle. Historical authored skills entries are retained in retired_authored.",
+    "prototype_review": {
+      "source_project": "reaper-agent-cli",
+      "source": "SKILL.md",
+      "source_sha256": "d1208f1b639e07c1d31fed3a072d09064066fed2bd9a9605194b1f22760579c0",
+      "handling": "Reviewed as development input; rewritten against current rac contract. Old scripts/rac_lib and duplicate knowledge/assets not imported."
+    }
+  },
+  "retired_authored": [
+    {
+      "destination": "skills/README.md",
+      "destination_sha256": "28eeee538c691cae2b52c4153e38b10d59d3fa134cdbfd9cffe237e3b925de75",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "retired_reason": "Historical pre-monorepo skill entry; replaced by the independent bundle under integrations/agents. Old destination and hash preserved for provenance."
+    },
+    {
+      "destination": "skills/reaper-agent-cli/GUIDE.zh-CN.md",
+      "destination_sha256": "93d69aaa23eb091d2340742210fa04578e79af5c9151fe52f40e73b110925127",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "retired_reason": "Historical pre-monorepo skill entry; replaced by the independent bundle under integrations/agents. Old destination and hash preserved for provenance."
+    },
+    {
+      "destination": "skills/reaper-agent-cli/SKILL.md",
+      "destination_sha256": "f39b5860476a3cb1183504a916dd6a92e6ca287756c93135d1bd09a78fca0ba4",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "retired_reason": "Historical pre-monorepo skill entry; replaced by the independent bundle under integrations/agents. Old destination and hash preserved for provenance."
+    },
+    {
+      "destination": "skills/reaper-agent-cli/agents/openai.yaml",
+      "destination_sha256": "50c9d4daf13d58e134b6553e5affaaab0aadf5a86ed441d124855c8fb3b9e12b",
+      "description": "Maintained bilingual handbook, navigation or repository skill; current implementation reviewed",
+      "retired_reason": "Historical pre-monorepo skill entry; replaced by the independent bundle under integrations/agents. Old destination and hash preserved for provenance."
+    }
+  ]
+}

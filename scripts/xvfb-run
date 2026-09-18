@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Minimal xvfb-run -a command... for RPM systems. Not a drop-in implementation
+# of every Debian xvfb-run option. Requires Xvfb -displayfd, xauth and od.
+set -euo pipefail
+[ "${1:-}" != '-a' ] || shift
+[ "${1:-}" != '--' ] || shift
+[ "$#" -gt 0 ] || { echo 'Usage: xvfb-run [-a] command [arguments...]' >&2; exit 2; }
+for dependency in Xvfb xauth od; do
+  command -v "$dependency" >/dev/null || { echo "Missing $dependency" >&2; exit 4; }
+done
+work="$(mktemp -d "${TMPDIR:-/tmp}/reacli-xvfb.XXXXXXXX")"
+xvfb_pid=''
+child_pid=''
+cleanup() {
+  if [ -n "$child_pid" ]; then kill "$child_pid" 2>/dev/null || true; wait "$child_pid" 2>/dev/null || true; fi
+  if [ -n "$xvfb_pid" ]; then kill "$xvfb_pid" 2>/dev/null || true; wait "$xvfb_pid" 2>/dev/null || true; fi
+  rm -rf -- "$work"
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+touch "$work/auth"
+cookie="$(od -An -N16 -tx1 /dev/urandom | tr -d ' \n')"
+xauth -f "$work/auth" add :0 MIT-MAGIC-COOKIE-1 "$cookie"
+Xvfb -displayfd 3 -screen 0 1280x1024x24 -nolisten tcp -auth "$work/auth" \
+  3>"$work/display" >"$work/xvfb.log" 2>&1 &
+xvfb_pid=$!
+for ((attempt=0; attempt<100; attempt++)); do
+  [ ! -s "$work/display" ] || break
+  if ! kill -0 "$xvfb_pid" 2>/dev/null; then cat "$work/xvfb.log" >&2; exit 4; fi
+  sleep 0.05
+done
+display_number="$(cat "$work/display")"
+[[ "$display_number" =~ ^[0-9]+$ ]] || { cat "$work/xvfb.log" >&2; exit 4; }
+xauth -f "$work/auth" add ":$display_number" MIT-MAGIC-COOKIE-1 "$cookie"
+DISPLAY=":$display_number" XAUTHORITY="$work/auth" "$@" &
+child_pid=$!
+set +e
+wait "$child_pid"
+status=$?
+child_pid=''
+exit "$status"

@@ -1,0 +1,145 @@
+import pytest
+
+from tools.check_publish import PublicationGateError, evaluate
+
+
+def publication():
+    return {
+        "source_permissions_resolved": True,
+        "package_ownership_verified": False,
+        "trusted_publishing_configured": False,
+        "bootstrap_publish": {
+            "testpypi": {
+                "reacli": {"allowed": True},
+                "reaper-parser": {"allowed": True},
+            },
+            "pypi": {
+                "reacli": {"allowed": True},
+                "reaper-parser": {"allowed": False},
+            }
+        },
+    }
+
+
+def test_normal_mode_keeps_global_prerequisite_gate():
+    with pytest.raises(
+        PublicationGateError,
+        match="package_ownership_verified, trusted_publishing_configured",
+    ):
+        evaluate(publication(), target="testpypi", package="reacli")
+
+
+def test_source_gate_blocks_bootstrap_until_upstream_terms_are_resolved():
+    record = publication()
+    record["source_permissions_resolved"] = False
+    with pytest.raises(
+        PublicationGateError,
+        match="Publication prerequisites unresolved: source_permissions_resolved",
+    ):
+        evaluate(
+            record,
+            target="testpypi",
+            package="reacli",
+            mode="testpypi-bootstrap",
+        )
+
+
+def test_testpypi_bootstrap_allows_manifest_authorized_package():
+    evaluate(
+        publication(),
+        target="testpypi",
+        package="reacli",
+        mode="testpypi-bootstrap",
+    )
+
+
+def test_testpypi_bootstrap_allows_parser_after_registration():
+    evaluate(
+        publication(),
+        target="testpypi",
+        package="reaper-parser",
+        mode="testpypi-bootstrap",
+    )
+
+
+def test_testpypi_bootstrap_rejects_unregistered_package():
+    record = publication()
+    record["bootstrap_publish"]["testpypi"]["unknown"] = {"allowed": False}
+    with pytest.raises(
+        PublicationGateError, match="TestPyPI bootstrap not authorized for package"
+    ):
+        evaluate(
+            record,
+            target="testpypi",
+            package="unknown",
+            mode="testpypi-bootstrap",
+        )
+
+
+def test_testpypi_bootstrap_cannot_target_pypi():
+    with pytest.raises(
+        PublicationGateError, match="TestPyPI bootstrap requires TARGET=testpypi"
+    ):
+        evaluate(
+            publication(),
+            target="pypi",
+            package="reacli",
+            mode="testpypi-bootstrap",
+        )
+
+
+def test_pypi_bootstrap_requires_release_tag():
+    with pytest.raises(
+        PublicationGateError, match="Production requires an ecosystem-v release tag"
+    ):
+        evaluate(
+            publication(),
+            target="pypi",
+            package="reacli",
+            mode="pypi-bootstrap",
+            ref_type="branch",
+            ref_name="codex/reaper-ecosystem-alpha",
+        )
+
+
+def test_pypi_bootstrap_allows_authorized_package_on_release_tag():
+    evaluate(
+        publication(),
+        target="pypi",
+        package="reacli",
+        mode="pypi-bootstrap",
+        ref_type="tag",
+        ref_name="ecosystem-v0.1.0",
+    )
+
+
+def test_pypi_bootstrap_rejects_parser_until_reacli_is_consumed():
+    with pytest.raises(
+        PublicationGateError, match="PyPI bootstrap not authorized for package"
+    ):
+        evaluate(
+            publication(),
+            target="pypi",
+            package="reaper-parser",
+            mode="pypi-bootstrap",
+            ref_type="tag",
+            ref_name="ecosystem-v0.1.0",
+        )
+
+
+def test_normal_pypi_requires_ecosystem_tag_after_prerequisites_pass():
+    record = publication()
+    record.update(
+        package_ownership_verified=True,
+        trusted_publishing_configured=True,
+    )
+    with pytest.raises(
+        PublicationGateError, match="Production requires an ecosystem-v release tag"
+    ):
+        evaluate(
+            record,
+            target="pypi",
+            package="reacli",
+            ref_type="branch",
+            ref_name="main",
+        )

@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rea-Cli — 把工程写成源码，让声音有据可验</title>
+<meta name="description" content="Rea-Cli 是接入现有 agent harness 的 Python 库、CLI 与参考环境：把 RPP 当作工程源码，REAPER 作为权威解析与执行环境，对另存工程与渲染音频做有据可验的检查。">
+<link rel="icon" href="assets/reacli-icon.png" type="image/png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<!-- ======================= 导航 ======================= -->
+<header class="site-header" id="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Rea-Cli 首页">
+      <span class="brand-name">Rea-Cli</span>
+      <span class="brand-ver">0.1.0 α</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#workflow">工作流</a>
+      <a href="#features">能力</a>
+      <a href="#quickstart">快速开始</a>
+      <a href="#docs">文档</a>
+      <a class="nav-lang" href="en/" hreflang="en" lang="en">EN</a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开菜单">
+      <svg class="icon-menu" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航" hidden>
+    <a href="#workflow">工作流</a>
+    <a href="#features">能力</a>
+    <a href="#quickstart">快速开始</a>
+    <a href="#docs">文档</a>
+    <a href="https://github.com/DDDPG/Rea-Cli" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="en/" hreflang="en" lang="en">English</a>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ======================= 首屏 ======================= -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <img class="hero-mark anim-1" src="assets/reacli-icon.png" width="160" height="147" alt="Rea-Cli">
+      <p class="hero-badge anim-1"><span class="pulse-dot" aria-hidden="true"></span>v0.1.0 · Alpha · 项目代码 MIT</p>
+      <h1 class="anim-2">把工程写成源码，<br>让声音有据可验。</h1>
+      <p class="tagline anim-3" lang="en">REAPER coding<span class="tl-dot">.</span> REAPER executing<span class="tl-dot">.</span> REAPER verifying<span class="tl-dot">.</span></p>
+      <p class="hero-sub anim-4">Rea-Cli 是接入现有 agent harness 的 Python 库、CLI 与参考环境。Agent 把 RPP 当作工程源码来编写，Rea-Cli 负责预检查与验证，REAPER 始终是权威的解析与执行环境。</p>
+      <div class="hero-ctas anim-5">
+        <a class="btn btn-primary" href="#quickstart">开始使用
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#workflow">探索工作流</a>
+        <a class="btn btn-ghost" href="https://github.com/DDDPG/Rea-Cli" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- 交互工作台：源码 → REAPER → 验证 -->
+    <div class="bench anim-4" data-stage="0" aria-label="Rea-Cli 工作流工作台（流程示意）">
+      <div class="bench-rail" role="group" aria-label="切换聚焦阶段">
+        <button class="bench-node is-active" data-node="0" aria-pressed="true">
+          <span class="bench-num">01</span><span class="bench-label">源码</span>
+        </button>
+        <span class="bench-link" aria-hidden="true"></span>
+        <button class="bench-node" data-node="1" aria-pressed="false">
+          <span class="bench-num">02</span><span class="bench-label">执行</span>
+        </button>
+        <span class="bench-link" aria-hidden="true"></span>
+        <button class="bench-node" data-node="2" aria-pressed="false">
+          <span class="bench-num">03</span><span class="bench-label">验证</span>
+        </button>
+      </div>
+
+      <div class="bench-stage">
+        <figure class="bench-panel bench-code is-focus" data-panel="0">
+          <figcaption class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-title">session.rpp</span>
+            <span class="code-tag">01</span>
+          </figcaption>
+          <pre class="code-body"><code><span class="c-kw">&lt;REAPER_PROJECT</span> 0.1 <span class="c-str">"7.0/macOS"</span>
+  <span class="c-key">SAMPLERATE</span> 48000 0 0
+  <span class="c-kw">&lt;TRACK</span> <span class="c-dim">{8F3A21-…}</span>
+    <span class="c-key">NAME</span> <span class="c-str">"Vocal"</span>
+    <span class="c-key">VOLPAN</span> 0.7079 0 -1 -1 1
+    <span class="c-kw">&lt;ITEM</span>
+      <span class="c-key">POSITION</span> 0
+      <span class="c-key">LENGTH</span> 4
+      <span class="c-kw">&lt;SOURCE WAV</span>
+        <span class="c-key">FILE</span> <span class="c-str">"vocal-take.wav"</span>
+      <span class="c-dim">&gt;</span>
+    <span class="c-dim">&gt;</span>
+  <span class="c-dim">&gt;</span>
+<span class="c-dim">&gt;</span></code></pre>
+        </figure>
+
+        <figure class="bench-panel bench-daw" data-panel="1">
+          <figcaption class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-title">REAPER — created.rpp</span>
+            <span class="code-tag">02</span>
+          </figcaption>
+          <div class="daw-body">
+            <div class="daw-row">
+              <span class="daw-label">Vocal</span>
+              <div class="daw-lane">
+                <div class="daw-item" style="left:4%;width:44%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="11" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+                <span class="daw-playhead" style="left:58%" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="daw-row">
+              <span class="daw-label">Drums</span>
+              <div class="daw-lane">
+                <div class="daw-item" style="left:12%;width:30%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="29" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+                <div class="daw-item" style="left:52%;width:30%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="47" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="daw-row">
+              <span class="daw-label">Bass</span>
+              <div class="daw-lane">
+                <div class="daw-item" style="left:26%;width:38%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="73" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="bench-panel bench-verify" data-panel="2">
+          <figcaption class="verify-head">
+            <span class="verify-title">VERIFICATION</span>
+            <span class="code-tag">03</span>
+            <span class="verify-badge">流程示意</span>
+          </figcaption>
+          <ul class="verify-list">
+            <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>rpp validate</strong> — ok: true，0 错误</span></li>
+            <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>proof</strong> — status: ok · completed</span></li>
+            <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>音频</strong> — 时长 · 静音 · 削波 · 主频</span></li>
+          </ul>
+        </figure>
+      </div>
+      <p class="bench-caption">流程示意 · 面板为演示数据，未真实启动 REAPER 或执行验证</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 工作流 ======================= -->
+<section class="section" id="workflow">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">01 — 工作流</p>
+      <h2>三个步骤：编写、执行、验证</h2>
+      <p class="section-sub"><code>Agent / Python / CLI → RPP 或 Lua 源码 → Rea-Cli 预检查 → REAPER → 另存工程 / 音频 → 验证</code></p>
+    </header>
+
+    <div class="flow reveal" id="flow" data-step="0">
+      <div class="flow-tabs" role="tablist" aria-label="工作流步骤">
+        <button class="flow-tab is-active" role="tab" id="tab-w0" aria-controls="flow-body" aria-selected="true" tabindex="0">
+          <span class="flow-tab-num">01</span>
+          <span class="flow-tab-title">源码编写</span>
+          <span class="flow-tab-sub" lang="en">RPP as code</span>
+        </button>
+        <button class="flow-tab" role="tab" id="tab-w1" aria-controls="flow-body" aria-selected="false" tabindex="-1">
+          <span class="flow-tab-num">02</span>
+          <span class="flow-tab-title">REAPER 执行</span>
+          <span class="flow-tab-sub" lang="en">isolated run</span>
+        </button>
+        <button class="flow-tab" role="tab" id="tab-w2" aria-controls="flow-body" aria-selected="false" tabindex="-1">
+          <span class="flow-tab-num">03</span>
+          <span class="flow-tab-title">工程与音频验证</span>
+          <span class="flow-tab-sub" lang="en">verification</span>
+        </button>
+      </div>
+
+      <div class="flow-body" role="tabpanel" id="flow-body" aria-labelledby="tab-w0" tabindex="0">
+        <div class="flow-main">
+          <div class="flow-texts">
+            <p class="flow-text is-active" data-text="0">Agent 直接编写或修改 <strong>RPP 工程源码</strong>——可 diff、可评审、可版本化。写入前，Rea-Cli 离线预检查语法与结构；未触碰的文本与插件数据原样保留。REAPER 仍是权威解析器。</p>
+            <p class="flow-text" data-text="1" hidden><strong>单次隔离执行</strong>：<code>reacli exec</code> 在独立资源目录中启动 REAPER 运行脚本，另存工程副本而不动原始文件。输入快照、脚本、日志与 proof 一并留存，可随时复查。</p>
+            <p class="flow-text" data-text="2" hidden>对<strong>另存的工程</strong>断言轨道、媒体项与标记属性；对渲染的 <strong>PCM WAV</strong> 检查时长、静音、削波与测试音主频。验证不通过，结果就不算数。</p>
+          </div>
+
+          <figure class="code-window flow-code is-active" data-code="0">
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">session.rpp · agent 编写</span>
+              <button class="copy-btn" data-copy="#code-w0" aria-label="复制代码">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-w0"><span class="c-kw">&lt;REAPER_PROJECT</span> 0.1 <span class="c-str">"7.0/macOS"</span> 1758000000
+  <span class="c-key">RIPPLE</span> 0
+  <span class="c-key">SAMPLERATE</span> 48000 0 0
+  <span class="c-kw">&lt;TRACK</span> <span class="c-dim">{8F3A21-4C2E-…}</span>
+    <span class="c-key">NAME</span> <span class="c-str">"Vocal"</span>
+    <span class="c-key">VOLPAN</span> 0.7079 0 -1 -1 1
+    <span class="c-kw">&lt;ITEM</span>
+      <span class="c-key">POSITION</span> 0
+      <span class="c-key">LENGTH</span> 4
+      <span class="c-kw">&lt;SOURCE WAV</span>
+        <span class="c-key">FILE</span> <span class="c-str">"vocal-take.wav"</span>
+      <span class="c-dim">&gt;</span>
+    <span class="c-dim">&gt;</span>
+  <span class="c-dim">&gt;</span>
+<span class="c-dim">&gt;</span></code></pre>
+          </figure>
+
+          <figure class="code-window flow-code" data-code="1" hidden>
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">terminal · 隔离执行</span>
+              <button class="copy-btn" data-copy="#code-w1" aria-label="复制代码">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-w1"><span class="c-com"># 由 Rea-Cli 生成的 create.lua 先就位，再执行：</span>
+<span class="c-kw">reacli exec</span> --project ./quickstart/minimal.rpp \
+  --script ./quickstart/create.lua \
+  --save-as ./quickstart/created.rpp \
+  --run-root ./quickstart/runs</code></pre>
+          </figure>
+
+          <figure class="code-window flow-code" data-code="2" hidden>
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">verify.py · 断言</span>
+              <button class="copy-btn" data-copy="#code-w2" aria-label="复制代码">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-w2"><span class="c-kw">from</span> rac.rpp <span class="c-kw">import</span> parse
+<span class="c-kw">from</span> rac.verify <span class="c-kw">import</span> expect, expect_audio
+
+expect(parse(<span class="c-str">"created.rpp"</span>)).track_count(<span class="c-num">1</span>) \
+    .track(<span class="c-num">0</span>).name(<span class="c-str">"Vocal"</span>).volume(<span class="c-num">10</span> ** (-<span class="c-num">6</span> / <span class="c-num">20</span>))
+expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num">1.0</span>, tol=<span class="c-num">0.05</span>) \
+    .not_silent().no_clipping().dominant_freq(<span class="c-num">440</span>, tol=<span class="c-num">5</span>)</code></pre>
+          </figure>
+        </div>
+
+        <div class="flow-side">
+          <div class="daw" id="flow-daw">
+            <div class="daw-head"><span>REAPER 工程</span><span class="daw-state" id="flow-daw-state">草稿 · 待执行</span></div> <div class="daw-body">
+              <div class="daw-row">
+                <span class="daw-label">Vocal</span>
+                <div class="daw-lane">
+                  <div class="daw-item daw-item-vocal" style="left:4%;width:44%">
+                    <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="11" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                  </div>
+                  <span class="daw-playhead" style="left:58%" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="daw-row">
+                <span class="daw-label daw-label-dim" id="flow-label2">Track 2</span>
+                <div class="daw-lane">
+                  <div class="daw-item daw-item-tone" style="left:12%;width:30%">
+                    <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="sine" aria-hidden="true"><path d="M0,12 Q4,5 8,12 T16,12 T24,12 T32,12 T40,12 T48,12 T56,12 T64,12 T72,12 T80,12 T88,12 T96,12 T104,12 T112,12 T120,12"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="verify" id="flow-verify">
+            <div class="verify-head"><span class="verify-title" id="flow-verify-title">Rea-Cli 预检查 · 离线</span><span class="verify-badge">流程示意</span></div>
+            <ul class="verify-list is-on" data-vl="0">
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>reacli rpp validate</strong> — ok: true</span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>语法与结构 — <strong>0 错误</strong></span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>仅需 Python，<strong>无需 REAPER</strong></span></li>
+            </ul>
+            <ul class="verify-list" data-vl="1" hidden>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>status: ok</strong> · reason: completed</span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>另存副本 — <strong>created.rpp</strong></span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>留存 — 输入快照 · 脚本 · 日志</span></li>
+            </ul>
+            <ul class="verify-list" data-vl="2" hidden>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>轨道数 = 1 · 名称 <strong>"Vocal"</strong> · −6 dB</span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>音频时长 1.00s（容差 0.05）· <strong>非静音</strong></span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>无削波 · 测试音主频 <strong>440 Hz</strong>（容差 5）</span></li>
+            </ul>
+            <p class="verify-note" data-vn="1" hidden>进程结束 ≠ 结果符合要求，仍需下一步独立断言。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 能力 ======================= -->
+<section class="section" id="features">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">02 — 能力</p>
+      <h2>按一次任务来组织</h2>
+      <p class="section-sub">Agent 提交源码，Rea-Cli 做隔离执行，再对另存工程和渲染音频做验证。它是预检查与验证层，不替代 REAPER 的解析器、工程语义或执行环境。</p>
+    </header>
+
+    <div class="features-grid">
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6H8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v6h6M9 14l-2 2 2 2m3-4-2 4m6-2 2 2-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>把 RPP 当源码</h3>
+        <p>RPP 被当作工程源码对待：agent 直接编写或修改，Rea-Cli 提供预检查、查询与语义 diff；未触碰的文本与不透明的插件数据原样保留。</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="diff-line diff-del">−&nbsp;&nbsp;NAME "Vocal"</div>
+          <div class="diff-line diff-add">+&nbsp;&nbsp;NAME "Vocal-Lead"</div>
+          <div class="diff-line diff-meta">reacli rpp diff before.rpp after.rpp</div>
+        </div>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 17V7l6 5-6 5Zm8 0h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>原生 Lua 扩展</h3>
+        <p>Lua/ReaScript 仍可直接写：轨道、MIDI、效果、发送与标记等宿主操作都可由 agent 编写，不必等每个 API 都先封装成工具。只依赖 REAPER 原生 ReaScript API，不需要 SWS 或 ReaPack。</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div><span class="c-com">-- create.lua · 由 Rea-Cli 生成</span></div>
+          <div><span class="c-kw">local</span> track = reaper.GetTrack(<span class="c-num">0</span>, <span class="c-num">0</span>)</div>
+          <div>reaper.SetMediaTrackInfo_Value(track, <span class="c-str">"D_VOL"</span>, <span class="c-num">10</span> ^ (-<span class="c-num">6</span>/<span class="c-num">20</span>))</div>
+        </div>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5L15.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>隔离执行，证据留存</h3>
+        <p>每次运行在独立资源目录中进行，输入快照、脚本、日志与 proof 一并留存；另存的工程与渲染音频可随时再验证。进程结束不等于结果符合要求。</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="tree-line">runs/20260917-200900-a1b2/</div>
+          <div class="tree-line"><span class="c-dim">├─</span> input.rpp&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-com">输入快照</span></div>
+          <div class="tree-line"><span class="c-dim">├─</span> script.lua&nbsp;&nbsp;&nbsp;<span class="c-com">执行脚本</span></div>
+          <div class="tree-line"><span class="c-dim">├─</span> proof.json&nbsp;&nbsp;&nbsp;<span class="c-com">执行证明</span></div>
+          <div class="tree-line"><span class="c-dim">└─</span> reaper.log&nbsp;&nbsp;&nbsp;<span class="c-com">完整日志</span></div>
+        </div>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-6 0h6m-6 0H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 13h.01M15 13h.01M9 16.5c.8.6 1.9 1 3 1s2.2-.4 3-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>接入现有 Agent</h3>
+        <p>Python 库、CLI 与仓库 skill 可直接接入 Claude Code、Codex、Qwen Code 等现有 harness——安装项目级 CLI 工具包与 skill 即可，无需 MCP 常驻服务。</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="list-row"><span class="list-name">Claude Code</span><span class="list-meta">.claude/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Codex</span><span class="list-meta">.agents/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Qwen Code</span><span class="list-meta">.qwen/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Python / CLI</span><span class="list-meta">import rac · reacli</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 快速开始 ======================= -->
+<section class="section" id="quickstart">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">03 — 快速开始</p>
+      <h2>安装并离线试用</h2>
+      <p class="section-sub">Python 3.10+。离线 RPP 检查只需要 Python；实时执行需要本机 REAPER 7.x。</p>
+    </header>
+
+    <div class="qs-grid">
+      <div class="qs-main reveal">
+        <figure class="code-window">
+          <figcaption class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-title">安装 · PyPI</span>
+            <button class="copy-btn" data-copy="#code-install" aria-label="复制安装命令">
+              <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </figcaption>
+          <pre class="code-body"><code id="code-install"><span class="c-kw">python</span> -m pip install <span class="c-str">"reacli==0.1.0"</span> <span class="c-str">"reaper-parser==0.1.0a1"</span>
+<span class="c-com"># WAV / 渲染检查需要可选 audio extra：</span>
+<span class="c-kw">python</span> -m pip install <span class="c-str">"reacli[audio]==0.1.0"</span></code></pre>
+        </figure>
+
+        <div class="seg" role="tablist" aria-label="示例类型">
+          <button class="seg-btn is-active" role="tab" id="tab-q0" aria-controls="pq0" aria-selected="true" tabindex="0">CLI</button>
+          <button class="seg-btn" role="tab" id="tab-q1" aria-controls="pq1" aria-selected="false" tabindex="-1">Python</button>
+        </div>
+
+        <div class="qs-panel is-active" role="tabpanel" id="pq0" aria-labelledby="tab-q0" tabindex="0">
+          <figure class="code-window">
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">离线体验 · 无需 REAPER</span>
+              <button class="copy-btn" data-copy="#code-cli" aria-label="复制 CLI 命令">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-cli"><span class="c-com"># 环境自检（离线画像，JSON 输出）</span>
+<span class="c-kw">reacli</span> doctor --profile offline --json
+
+<span class="c-com"># 导出示例资源（重复运行请换全新目录）</span>
+<span class="c-kw">reacli</span> resources --output ./quickstart
+
+<span class="c-com"># 校验导出的最小工程 → ok: true，0 条轨道</span>
+<span class="c-kw">reacli</span> rpp validate ./quickstart/minimal.rpp</code></pre>
+          </figure>
+        </div>
+
+        <div class="qs-panel" role="tabpanel" id="pq1" aria-labelledby="tab-q1" tabindex="0" hidden>
+          <figure class="code-window">
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">create_vocal.py</span>
+              <button class="copy-btn" data-copy="#code-py" aria-label="复制 Python 示例">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-py"><span class="c-kw">from</span> pathlib <span class="c-kw">import</span> Path
+<span class="c-kw">from</span> rac.luagen <span class="c-kw">import</span> generate
+<span class="c-kw">from</span> rac.rpp <span class="c-kw">import</span> parse
+<span class="c-kw">from</span> rac.runner <span class="c-kw">import</span> run
+<span class="c-kw">from</span> rac.verify <span class="c-kw">import</span> expect
+
+root = Path(<span class="c-str">"quickstart"</span>)
+script = generate({<span class="c-str">"ops"</span>: [
+    {<span class="c-str">"op"</span>: <span class="c-str">"track.create"</span>, <span class="c-str">"args"</span>: [<span class="c-num">0</span>, <span class="c-str">"Vocal"</span>]},
+    {<span class="c-str">"op"</span>: <span class="c-str">"track.set_volume_db"</span>, <span class="c-str">"args"</span>: [<span class="c-num">0</span>, -<span class="c-num">6.0</span>]},
+]}, root / <span class="c-str">"create.lua"</span>)
+
+proof = run(root / <span class="c-str">"minimal.rpp"</span>, script,
+            save_as=root / <span class="c-str">"created.rpp"</span>,
+            run_root=root / <span class="c-str">"runs"</span>)
+<span class="c-kw">assert</span> proof.ok, proof.to_dict()
+expect(parse(root / <span class="c-str">"created.rpp"</span>)).track_count(<span class="c-num">1</span>) \
+    .track(<span class="c-num">0</span>).name(<span class="c-str">"Vocal"</span>).volume(<span class="c-num">10</span> ** (-<span class="c-num">6</span> / <span class="c-num">20</span>))</code></pre>
+          </figure>
+          <p class="qs-note">示例使用上方 CLI 导出的 quickstart 资源；Python 导入包名为 <code>rac</code>。<code>run()</code> 需本机已配置 REAPER。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 文档 ======================= -->
+<section class="section section-tight" id="docs">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">04 — 文档</p>
+      <h2>文档</h2>
+    </header>
+    <div class="docs-grid reveal">
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/environment.md" target="_blank" rel="noopener">
+        <div>
+          <h3>环境与安装</h3>
+          <p>平台配置、可执行文件发现与排障</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/api.md" target="_blank" rel="noopener">
+        <div>
+          <h3>API 与 CLI</h3>
+          <p>Python API、CLI 命令与退出码</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/validation.md" target="_blank" rel="noopener">
+        <div>
+          <h3>验证记录</h3>
+          <p>已测试的系统与边界</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/harness/README.zh-CN.md" target="_blank" rel="noopener">
+        <div>
+          <h3>Harness 接入</h3>
+          <p>接入 Claude Code / Codex / Qwen Code</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ======================= 页脚 ======================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="回到顶部">
+          <span class="brand-name">Rea-Cli</span>
+        </a>
+        <p class="footer-tagline" lang="en">REAPER coding. REAPER executing. REAPER verifying.</p>
+      </div>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href="#workflow">工作流</a>
+        <a href="#features">能力</a>
+        <a href="#quickstart">快速开始</a>
+        <a href="#docs">文档</a>
+        <a href="https://github.com/DDDPG/Rea-Cli" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://pypi.org/project/reacli/0.1.0/" target="_blank" rel="noopener">PyPI</a>
+      </nav>
+      <p class="footer-env">Python 3.10+ · 离线检查仅需 Python · Lua 5.3 / 5.4 <code>luac</code> · 执行需 REAPER 7.x（macOS / Linux）· Windows 执行尚未实现</p>
+    </div>
+    <div class="footer-legal">
+      <span>项目自有代码以 <a href="https://github.com/DDDPG/Rea-Cli/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a> 许可发布；上游内容遵循各自条款，见 <a href="https://github.com/DDDPG/Rea-Cli/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener">第三方声明</a> · v0.1.0 Alpha</span>
+      <span>Rea-Cli 是独立项目，与 Cockos Incorporated 无关；REAPER® 为 Cockos 的商标，需另行获取与授权。页面中标注「流程示意」的内容均为演示数据。</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+  - package-ecosystem: pip
+    directories:
+      - /packages/reacli
+      - /packages/reaper-parser
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+  - package-ecosystem: npm
+    directory: /apps/reaperdoc
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5

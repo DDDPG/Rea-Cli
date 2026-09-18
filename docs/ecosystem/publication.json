@@ -1,0 +1,19 @@
+{
+  "source_permissions_resolved": true,
+  "package_ownership_verified": true,
+  "trusted_publishing_configured": true,
+  "published": {
+    "reacli": "0.1.0",
+    "reaper-parser": "0.1.0a1"
+  },
+  "bootstrap_publish": {
+    "testpypi": {
+      "reacli": {"allowed": true},
+      "reaper-parser": {"allowed": true}
+    },
+    "pypi": {
+      "reacli": {"allowed": true},
+      "reaper-parser": {"allowed": true}
+    }
+  }
+}

@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reacli"
+dynamic = ["version"]
+description = "REAPER CLI helpers: RPP editing, Lua generation, execution proofs and audio checks"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "reacli contributors"}]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+keywords = ["reaper", "reascript", "lua", "rpp", "audio", "cli"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: MacOS",
+  "Topic :: Multimedia :: Sound/Audio",
+]
+dependencies = ["reaper-parser>=0.1.0a1,<0.2", "audioop-lts>=0.2.1; python_version >= '3.13'"]
+
+[project.optional-dependencies]
+audio = ["numpy>=1.24", "soundfile>=0.12"]
+oracle = ["rpp>=0.5"]
+dev = ["pytest>=8", "build>=1.2", "twine>=6", "rpp>=0.5"]
+
+[project.urls]
+Repository = "https://github.com/DDDPG/Rea-Cli"
+Documentation = "https://github.com/DDDPG/Rea-Cli/blob/main/docs/README.md"
+Issues = "https://github.com/DDDPG/Rea-Cli/issues"
+Changelog = "https://github.com/DDDPG/Rea-Cli/blob/main/CHANGELOG.md"
+
+[project.scripts]
+reacli = "rac.__main__:main"
+rac = "rac.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "rac.__version__"}
+
+[tool.setuptools.package-data]
+rac = ["py.typed", "data/lua/*.lua", "data/lua/stdlib/*.lua", "data/knowledge/*.json",
+       "data/defaults/*.rpp", "data/examples/*.rpp", "runner/assets/*.ini"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_functions = ["test_*", "t_*"]
+markers = ["live: requires an installed REAPER and RAC_TEST_LIVE=1"]
+addopts = "-ra --strict-markers --strict-config"

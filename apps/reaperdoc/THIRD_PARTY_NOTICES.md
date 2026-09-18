@@ -1,0 +1,16 @@
+# License scope
+
+On 2026-09-13 the maintainer confirmed ownership/authority and authorized MIT
+licensing for their original ReaperDoc code and documentation. The accompanying
+LICENSE applies to those original portions, including original specification text.
+It does not relicense upstream quotations, copied descriptions, or third-party data.
+Historical sources and evidence retain their provenance and applicable conditions.
+See [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md) in the
+repository for the recorded per-artifact review. Each acknowledged source remains
+under its own license and terms; attribution and source links are carried with the
+Git-only reference corpus. Each upstream item keeps its own license, unaffected by
+this MIT scope.
+ReaperDoc's README credits
+[ReaTeam State Chunk Definitions](https://github.com/ReaTeam/Doc/blob/master/State%20Chunk%20Definitions),
+whose repository is detected as GPL-3.0; that source remains outside this MIT scope
+and its attribution and applicable terms remain required.

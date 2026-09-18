@@ -1,0 +1,6 @@
+interface:
+  display_name: "REAPER CLI Toolkit"
+  short_description: "Code, run and verify local REAPER projects"
+  default_prompt: "Use $reaper-agent-cli to inspect my REAPER environment and perform the requested project edit."
+policy:
+  allow_implicit_invocation: true

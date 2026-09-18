@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rea-Cli — Write the session as source. Make the sound verifiable.</title>
+<meta name="description" content="Rea-Cli is a Python library, CLI, and reference environment that plugs into existing agent harnesses: RPP is treated as project source, REAPER stays the authoritative parser and execution environment, and the saved project and rendered audio are checked with evidence.">
+<link rel="icon" href="../assets/reacli-icon.png" type="image/png">
+<link rel="stylesheet" href="../styles.css">
+<link rel="alternate" hreflang="zh-CN" href="../">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ======================= Nav ======================= -->
+<header class="site-header" id="site-header">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Rea-Cli home">
+      <span class="brand-name">Rea-Cli</span>
+      <span class="brand-ver">0.1.0 α</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#workflow">Workflow</a>
+      <a href="#features">Capabilities</a>
+      <a href="#quickstart">Quickstart</a>
+      <a href="#docs">Docs</a>
+      <a class="nav-lang" href="../" hreflang="zh-CN" lang="zh-CN">中文</a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <svg class="icon-menu" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+    <a href="#workflow">Workflow</a>
+    <a href="#features">Capabilities</a>
+    <a href="#quickstart">Quickstart</a>
+    <a href="#docs">Docs</a>
+    <a href="https://github.com/DDDPG/Rea-Cli" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="../" hreflang="zh-CN" lang="zh-CN">中文</a>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ======================= Hero ======================= -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <img class="hero-mark anim-1" src="../assets/reacli-icon.png" width="160" height="147" alt="Rea-Cli">
+      <p class="hero-badge anim-1"><span class="pulse-dot" aria-hidden="true"></span>v0.1.0 · Alpha · MIT-licensed code</p>
+      <h1 class="anim-2">Write the session as source.<br>Make the sound verifiable.</h1>
+      <p class="tagline anim-3" lang="en">REAPER coding<span class="tl-dot">.</span> REAPER executing<span class="tl-dot">.</span> REAPER verifying<span class="tl-dot">.</span></p>
+      <p class="hero-sub anim-4">Rea-Cli is a Python library, CLI, and reference environment that plugs into existing agent harnesses. Agents author RPP as project source, Rea-Cli pre-checks and verifies, and REAPER remains the authoritative parser and execution environment.</p>
+      <div class="hero-ctas anim-5">
+        <a class="btn btn-primary" href="#quickstart">Get started
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#workflow">Explore the workflow</a>
+        <a class="btn btn-ghost" href="https://github.com/DDDPG/Rea-Cli" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Interactive workbench: source → REAPER → verification -->
+    <div class="bench anim-4" data-stage="0" aria-label="Rea-Cli workflow workbench (illustrative)">
+      <div class="bench-rail" role="group" aria-label="Focus a stage">
+        <button class="bench-node is-active" data-node="0" aria-pressed="true">
+          <span class="bench-num">01</span><span class="bench-label">Source</span>
+        </button>
+        <span class="bench-link" aria-hidden="true"></span>
+        <button class="bench-node" data-node="1" aria-pressed="false">
+          <span class="bench-num">02</span><span class="bench-label">Execute</span>
+        </button>
+        <span class="bench-link" aria-hidden="true"></span>
+        <button class="bench-node" data-node="2" aria-pressed="false">
+          <span class="bench-num">03</span><span class="bench-label">Verify</span>
+        </button>
+      </div>
+
+      <div class="bench-stage">
+        <figure class="bench-panel bench-code is-focus" data-panel="0">
+          <figcaption class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-title">session.rpp</span>
+            <span class="code-tag">01</span>
+          </figcaption>
+          <pre class="code-body"><code><span class="c-kw">&lt;REAPER_PROJECT</span> 0.1 <span class="c-str">"7.0/macOS"</span>
+  <span class="c-key">SAMPLERATE</span> 48000 0 0
+  <span class="c-kw">&lt;TRACK</span> <span class="c-dim">{8F3A21-…}</span>
+    <span class="c-key">NAME</span> <span class="c-str">"Vocal"</span>
+    <span class="c-key">VOLPAN</span> 0.7079 0 -1 -1 1
+    <span class="c-kw">&lt;ITEM</span>
+      <span class="c-key">POSITION</span> 0
+      <span class="c-key">LENGTH</span> 4
+      <span class="c-kw">&lt;SOURCE WAV</span>
+        <span class="c-key">FILE</span> <span class="c-str">"vocal-take.wav"</span>
+      <span class="c-dim">&gt;</span>
+    <span class="c-dim">&gt;</span>
+  <span class="c-dim">&gt;</span>
+<span class="c-dim">&gt;</span></code></pre>
+        </figure>
+
+        <figure class="bench-panel bench-daw" data-panel="1">
+          <figcaption class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-title">REAPER — created.rpp</span>
+            <span class="code-tag">02</span>
+          </figcaption>
+          <div class="daw-body">
+            <div class="daw-row">
+              <span class="daw-label">Vocal</span>
+              <div class="daw-lane">
+                <div class="daw-item" style="left:4%;width:44%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="11" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+                <span class="daw-playhead" style="left:58%" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="daw-row">
+              <span class="daw-label">Drums</span>
+              <div class="daw-lane">
+                <div class="daw-item" style="left:12%;width:30%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="29" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+                <div class="daw-item" style="left:52%;width:30%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="47" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="daw-row">
+              <span class="daw-label">Bass</span>
+              <div class="daw-lane">
+                <div class="daw-item" style="left:26%;width:38%">
+                  <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="73" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="bench-panel bench-verify" data-panel="2">
+          <figcaption class="verify-head">
+            <span class="verify-title">VERIFICATION</span>
+            <span class="code-tag">03</span>
+            <span class="verify-badge">illustrative</span>
+          </figcaption>
+          <ul class="verify-list">
+            <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>rpp validate</strong> — ok: true, 0 errors</span></li>
+            <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>proof</strong> — status: ok · completed</span></li>
+            <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>audio</strong> — duration · silence · clipping · dominant freq</span></li>
+          </ul>
+        </figure>
+      </div>
+      <p class="bench-caption">Illustrative — panels show sample data; REAPER is not launched and no checks are run.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Workflow ======================= -->
+<section class="section" id="workflow">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">01 — Workflow</p>
+      <h2>Three steps: author, execute, verify</h2>
+      <p class="section-sub"><code>Agent / Python / CLI → RPP or Lua source → Rea-Cli pre-check → REAPER → saved project / audio → verification</code></p>
+    </header>
+
+    <div class="flow reveal" id="flow" data-step="0">
+      <div class="flow-tabs" role="tablist" aria-label="Workflow steps">
+        <button class="flow-tab is-active" role="tab" id="tab-w0" aria-controls="flow-body" aria-selected="true" tabindex="0">
+          <span class="flow-tab-num">01</span>
+          <span class="flow-tab-title">Author source</span>
+          <span class="flow-tab-sub" lang="en">RPP as code</span>
+        </button>
+        <button class="flow-tab" role="tab" id="tab-w1" aria-controls="flow-body" aria-selected="false" tabindex="-1">
+          <span class="flow-tab-num">02</span>
+          <span class="flow-tab-title">Execute in REAPER</span>
+          <span class="flow-tab-sub" lang="en">isolated run</span>
+        </button>
+        <button class="flow-tab" role="tab" id="tab-w2" aria-controls="flow-body" aria-selected="false" tabindex="-1">
+          <span class="flow-tab-num">03</span>
+          <span class="flow-tab-title">Verify project &amp; audio</span>
+          <span class="flow-tab-sub" lang="en">verification</span>
+        </button>
+      </div>
+
+      <div class="flow-body" role="tabpanel" id="flow-body" aria-labelledby="tab-w0" tabindex="0">
+        <div class="flow-main">
+          <div class="flow-texts">
+            <p class="flow-text is-active" data-text="0">Agents author or modify <strong>RPP project source</strong> directly — diffable, reviewable, versionable. Before anything runs, Rea-Cli checks syntax and structure offline; untouched text and opaque plugin data are preserved. REAPER remains the authoritative parser.</p>
+            <p class="flow-text" data-text="1" hidden><strong>One-shot isolated execution</strong>: <code>reacli exec</code> starts REAPER inside an isolated resource directory, runs the script, and saves a copy without touching the original. Input snapshots, the script, logs, and a proof are kept for review.</p>
+            <p class="flow-text" data-text="2" hidden>Assert tracks, items, and marker properties on the <strong>saved project</strong>; check duration, silence, clipping, and the dominant frequency of a test tone in rendered <strong>PCM WAV</strong>. If verification fails, the result doesn't count.</p>
+          </div>
+
+          <figure class="code-window flow-code is-active" data-code="0">
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">session.rpp · authored by the agent</span>
+              <button class="copy-btn" data-copy="#code-w0" aria-label="Copy code">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-w0"><span class="c-kw">&lt;REAPER_PROJECT</span> 0.1 <span class="c-str">"7.0/macOS"</span> 1758000000
+  <span class="c-key">RIPPLE</span> 0
+  <span class="c-key">SAMPLERATE</span> 48000 0 0
+  <span class="c-kw">&lt;TRACK</span> <span class="c-dim">{8F3A21-4C2E-…}</span>
+    <span class="c-key">NAME</span> <span class="c-str">"Vocal"</span>
+    <span class="c-key">VOLPAN</span> 0.7079 0 -1 -1 1
+    <span class="c-kw">&lt;ITEM</span>
+      <span class="c-key">POSITION</span> 0
+      <span class="c-key">LENGTH</span> 4
+      <span class="c-kw">&lt;SOURCE WAV</span>
+        <span class="c-key">FILE</span> <span class="c-str">"vocal-take.wav"</span>
+      <span class="c-dim">&gt;</span>
+    <span class="c-dim">&gt;</span>
+  <span class="c-dim">&gt;</span>
+<span class="c-dim">&gt;</span></code></pre>
+          </figure>
+
+          <figure class="code-window flow-code" data-code="1" hidden>
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">terminal · isolated run</span>
+              <button class="copy-btn" data-copy="#code-w1" aria-label="Copy code">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-w1"><span class="c-com"># create.lua is generated by Rea-Cli first, then executed:</span>
+<span class="c-kw">reacli exec</span> --project ./quickstart/minimal.rpp \
+  --script ./quickstart/create.lua \
+  --save-as ./quickstart/created.rpp \
+  --run-root ./quickstart/runs</code></pre>
+          </figure>
+
+          <figure class="code-window flow-code" data-code="2" hidden>
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">verify.py · assertions</span>
+              <button class="copy-btn" data-copy="#code-w2" aria-label="Copy code">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-w2"><span class="c-kw">from</span> rac.rpp <span class="c-kw">import</span> parse
+<span class="c-kw">from</span> rac.verify <span class="c-kw">import</span> expect, expect_audio
+
+expect(parse(<span class="c-str">"created.rpp"</span>)).track_count(<span class="c-num">1</span>) \
+    .track(<span class="c-num">0</span>).name(<span class="c-str">"Vocal"</span>).volume(<span class="c-num">10</span> ** (-<span class="c-num">6</span> / <span class="c-num">20</span>))
+expect_audio(<span class="c-str">"tone.wav"</span>).duration(<span class="c-num">1.0</span>, tol=<span class="c-num">0.05</span>) \
+    .not_silent().no_clipping().dominant_freq(<span class="c-num">440</span>, tol=<span class="c-num">5</span>)</code></pre>
+          </figure>
+        </div>
+
+        <div class="flow-side">
+          <div class="daw" id="flow-daw">
+            <div class="daw-head"><span>REAPER project</span><span class="daw-state" id="flow-daw-state">draft · pending</span></div>
+            <div class="daw-body">
+              <div class="daw-row">
+                <span class="daw-label">Vocal</span>
+                <div class="daw-lane">
+                  <div class="daw-item daw-item-vocal" style="left:4%;width:44%">
+                    <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="11" aria-hidden="true"><path d="M0,12 Q4,7 8,10 T16,15 T24,6 T32,16 T40,8 T48,14 T56,5 T64,17 T72,9 T80,15 T88,7 T96,14 T104,10 T112,13 T120,12"/></svg>
+                  </div>
+                  <span class="daw-playhead" style="left:58%" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="daw-row">
+                <span class="daw-label daw-label-dim" id="flow-label2">Track 2</span>
+                <div class="daw-lane">
+                  <div class="daw-item daw-item-tone" style="left:12%;width:30%">
+                    <svg class="daw-wave" viewBox="0 0 120 24" preserveAspectRatio="none" data-seed="sine" aria-hidden="true"><path d="M0,12 Q4,5 8,12 T16,12 T24,12 T32,12 T40,12 T48,12 T56,12 T64,12 T72,12 T80,12 T88,12 T96,12 T104,12 T112,12 T120,12"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="verify" id="flow-verify">
+            <div class="verify-head"><span class="verify-title" id="flow-verify-title">Rea-Cli pre-check · offline</span><span class="verify-badge">illustrative</span></div>
+            <ul class="verify-list is-on" data-vl="0">
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>reacli rpp validate</strong> — ok: true</span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>syntax &amp; structure — <strong>0 errors</strong></span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Python only — <strong>no REAPER needed</strong></span></li>
+            </ul>
+            <ul class="verify-list" data-vl="1" hidden>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>status: ok</strong> · reason: completed</span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>saved copy — <strong>created.rpp</strong></span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>retained — input snapshot · script · logs</span></li>
+            </ul>
+            <ul class="verify-list" data-vl="2" hidden>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>track count = 1 · name <strong>"Vocal"</strong> · −6 dB</span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>duration 1.00s (tol 0.05) · <strong>not silent</strong></span></li>
+              <li><svg class="verify-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>no clipping · test-tone dominant <strong>440 Hz</strong> (tol 5)</span></li>
+            </ul>
+            <p class="verify-note" data-vn="1" hidden>A finished process ≠ the expected result. Assert it independently in the next step.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Capabilities ======================= -->
+<section class="section" id="features">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">02 — Capabilities</p>
+      <h2>Organized around one task</h2>
+      <p class="section-sub">The agent submits source, Rea-Cli runs it in isolation, then checks the saved project and rendered audio. It is the pre-check and verification layer; it does not replace REAPER's parser, project semantics, or execution environment.</p>
+    </header>
+
+    <div class="features-grid">
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6H8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v6h6M9 14l-2 2 2 2m3-4-2 4m6-2 2 2-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>RPP as source</h3>
+        <p>RPP is treated as project source: agents author or modify it directly, and Rea-Cli provides pre-checks, queries, and semantic diffs; untouched text and opaque plugin data are preserved.</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="diff-line diff-del">−&nbsp;&nbsp;NAME "Vocal"</div>
+          <div class="diff-line diff-add">+&nbsp;&nbsp;NAME "Vocal-Lead"</div>
+          <div class="diff-line diff-meta">reacli rpp diff before.rpp after.rpp</div>
+        </div>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 17V7l6 5-6 5Zm8 0h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Native Lua still available</h3>
+        <p>Agents can write track, MIDI, effect, send, and marker operations in Lua/ReaScript without waiting for every API to be wrapped as a tool. Only REAPER's native ReaScript API — no SWS or ReaPack required.</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div><span class="c-com">-- create.lua · generated by Rea-Cli</span></div>
+          <div><span class="c-kw">local</span> track = reaper.GetTrack(<span class="c-num">0</span>, <span class="c-num">0</span>)</div>
+          <div>reaper.SetMediaTrackInfo_Value(track, <span class="c-str">"D_VOL"</span>, <span class="c-num">10</span> ^ (-<span class="c-num">6</span>/<span class="c-num">20</span>))</div>
+        </div>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3l8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5L15.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Isolated runs, retained evidence</h3>
+        <p>Each run executes in an isolated resource directory; input snapshots, the script, logs, and a proof are retained, and the saved project or rendered audio can be re-verified later. A finished process does not prove the result is correct.</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="tree-line">runs/20260917-200900-a1b2/</div>
+          <div class="tree-line"><span class="c-dim">├─</span> input.rpp&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-com">input snapshot</span></div>
+          <div class="tree-line"><span class="c-dim">├─</span> script.lua&nbsp;&nbsp;&nbsp;<span class="c-com">executed script</span></div>
+          <div class="tree-line"><span class="c-dim">├─</span> proof.json&nbsp;&nbsp;&nbsp;<span class="c-com">execution proof</span></div>
+          <div class="tree-line"><span class="c-dim">└─</span> reaper.log&nbsp;&nbsp;&nbsp;<span class="c-com">full log</span></div>
+        </div>
+      </article>
+
+      <article class="feature reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-6 0h6m-6 0H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 13h.01M15 13h.01M9 16.5c.8.6 1.9 1 3 1s2.2-.4 3-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Plugs into your agent</h3>
+        <p>The Python library, CLI, and repository skill plug into existing harnesses like Claude Code, Codex, or Qwen Code — install the project-level CLI toolkit and skill, with no persistent MCP server required.</p>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="list-row"><span class="list-name">Claude Code</span><span class="list-meta">.claude/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Codex</span><span class="list-meta">.agents/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Qwen Code</span><span class="list-meta">.qwen/skills/reaper-agent-cli</span></div>
+          <div class="list-row"><span class="list-name">Python / CLI</span><span class="list-meta">import rac · reacli</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Quickstart ======================= -->
+<section class="section" id="quickstart">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">03 — Quickstart</p>
+      <h2>Install and try it offline</h2>
+      <p class="section-sub">Python 3.10+. Offline RPP checks need Python only; live execution needs REAPER 7.x on this machine.</p>
+    </header>
+
+    <div class="qs-grid">
+      <div class="qs-main reveal">
+        <figure class="code-window">
+          <figcaption class="code-head">
+            <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-title">Install · PyPI</span>
+            <button class="copy-btn" data-copy="#code-install" aria-label="Copy install command">
+              <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </figcaption>
+          <pre class="code-body"><code id="code-install"><span class="c-kw">python</span> -m pip install <span class="c-str">"reacli==0.1.0"</span> <span class="c-str">"reaper-parser==0.1.0a1"</span>
+<span class="c-com"># WAV / render checks need the optional audio extra:</span>
+<span class="c-kw">python</span> -m pip install <span class="c-str">"reacli[audio]==0.1.0"</span></code></pre>
+        </figure>
+
+        <div class="seg" role="tablist" aria-label="Example type">
+          <button class="seg-btn is-active" role="tab" id="tab-q0" aria-controls="pq0" aria-selected="true" tabindex="0">CLI</button>
+          <button class="seg-btn" role="tab" id="tab-q1" aria-controls="pq1" aria-selected="false" tabindex="-1">Python</button>
+        </div>
+
+        <div class="qs-panel is-active" role="tabpanel" id="pq0" aria-labelledby="tab-q0" tabindex="0">
+          <figure class="code-window">
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">Offline tour · no REAPER needed</span>
+              <button class="copy-btn" data-copy="#code-cli" aria-label="Copy CLI commands">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-cli"><span class="c-com"># environment self-check (offline profile, JSON output)</span>
+<span class="c-kw">reacli</span> doctor --profile offline --json
+
+<span class="c-com"># export sample resources (use a fresh directory on reruns)</span>
+<span class="c-kw">reacli</span> resources --output ./quickstart
+
+<span class="c-com"># validate the exported minimal project → ok: true, 0 tracks</span>
+<span class="c-kw">reacli</span> rpp validate ./quickstart/minimal.rpp</code></pre>
+          </figure>
+        </div>
+
+        <div class="qs-panel" role="tabpanel" id="pq1" aria-labelledby="tab-q1" tabindex="0" hidden>
+          <figure class="code-window">
+            <figcaption class="code-head">
+              <span class="code-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="code-title">create_vocal.py</span>
+              <button class="copy-btn" data-copy="#code-py" aria-label="Copy Python example">
+                <svg class="icon-copy" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                <svg class="icon-done" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </figcaption>
+            <pre class="code-body"><code id="code-py"><span class="c-kw">from</span> pathlib <span class="c-kw">import</span> Path
+<span class="c-kw">from</span> rac.luagen <span class="c-kw">import</span> generate
+<span class="c-kw">from</span> rac.rpp <span class="c-kw">import</span> parse
+<span class="c-kw">from</span> rac.runner <span class="c-kw">import</span> run
+<span class="c-kw">from</span> rac.verify <span class="c-kw">import</span> expect
+
+root = Path(<span class="c-str">"quickstart"</span>)
+script = generate({<span class="c-str">"ops"</span>: [
+    {<span class="c-str">"op"</span>: <span class="c-str">"track.create"</span>, <span class="c-str">"args"</span>: [<span class="c-num">0</span>, <span class="c-str">"Vocal"</span>]},
+    {<span class="c-str">"op"</span>: <span class="c-str">"track.set_volume_db"</span>, <span class="c-str">"args"</span>: [<span class="c-num">0</span>, -<span class="c-num">6.0</span>]},
+]}, root / <span class="c-str">"create.lua"</span>)
+
+proof = run(root / <span class="c-str">"minimal.rpp"</span>, script,
+            save_as=root / <span class="c-str">"created.rpp"</span>,
+            run_root=root / <span class="c-str">"runs"</span>)
+<span class="c-kw">assert</span> proof.ok, proof.to_dict()
+expect(parse(root / <span class="c-str">"created.rpp"</span>)).track_count(<span class="c-num">1</span>) \
+    .track(<span class="c-num">0</span>).name(<span class="c-str">"Vocal"</span>).volume(<span class="c-num">10</span> ** (-<span class="c-num">6</span> / <span class="c-num">20</span>))</code></pre>
+          </figure>
+          <p class="qs-note">The example uses the quickstart resources exported by the CLI above; the Python import package is named <code>rac</code>. <code>run()</code> requires a configured local REAPER.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Docs ======================= -->
+<section class="section section-tight" id="docs">
+  <div class="container">
+    <header class="section-head reveal">
+      <p class="overline">04 — Docs</p>
+      <h2>Docs</h2>
+    </header>
+    <div class="docs-grid reveal">
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/environment.md" target="_blank" rel="noopener">
+        <div>
+          <h3>Environment &amp; setup</h3>
+          <p>Platform setup, executable discovery, troubleshooting</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/api.md" target="_blank" rel="noopener">
+        <div>
+          <h3>API &amp; CLI</h3>
+          <p>Python API, CLI commands, exit codes</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/validation.md" target="_blank" rel="noopener">
+        <div>
+          <h3>Validation records</h3>
+          <p>Tested systems and boundaries</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="doc-card" href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/docs/harness/README.md" target="_blank" rel="noopener">
+        <div>
+          <h3>Harness integration</h3>
+          <p>Claude Code, Codex, Qwen Code</p>
+        </div>
+        <svg class="doc-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ======================= Footer ======================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <span class="brand-name">Rea-Cli</span>
+        </a>
+        <p class="footer-tagline" lang="en">REAPER coding. REAPER executing. REAPER verifying.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#workflow">Workflow</a>
+        <a href="#features">Capabilities</a>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#docs">Docs</a>
+        <a href="https://github.com/DDDPG/Rea-Cli" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://pypi.org/project/reacli/0.1.0/" target="_blank" rel="noopener">PyPI</a>
+      </nav>
+      <p class="footer-env">Python 3.10+ · offline checks need Python only · Lua 5.3 / 5.4 <code>luac</code> · execution needs REAPER 7.x (macOS / Linux) · Windows execution not implemented yet</p>
+    </div>
+    <div class="footer-legal">
+      <span>Project code is <a href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/LICENSE" target="_blank" rel="noopener">MIT</a>-licensed; upstream material keeps its own terms — see <a href="https://github.com/DDDPG/Rea-Cli/blob/HEAD/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener">Third-Party Notices</a> · v0.1.0 Alpha</span>
+      <span>Rea-Cli is an independent project, unaffiliated with Cockos Incorporated; REAPER® is a trademark of Cockos, obtained and licensed separately. Content marked "illustrative" is sample data.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+window.SITE_I18N = {
+  copied: "Copied to clipboard",
+  copyFail: "Copy failed — select the text manually",
+  menuOpen: "Open menu",
+  menuClose: "Close menu",
+  stepState: ["draft · pending", "isolated instance · running", "verified"],
+  stepLabel2: ["Track 2", "Track 2", "tone 440Hz"],
+  stepVerify: ["Rea-Cli pre-check · offline", "PROOF.JSON · execution proof", "Project & audio checks"]
+};
+</script>
+<script src="../main.js" defer></script>
+</body>
+</html>

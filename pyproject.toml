@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_functions = ["test_*", "t_*"]
+markers = ["live: requires an installed REAPER and RAC_TEST_LIVE=1"]
+addopts = "-ra --strict-markers --strict-config"
